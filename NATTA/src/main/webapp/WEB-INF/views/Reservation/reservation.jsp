@@ -10,15 +10,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a8e5007416460a5bee56aaba2bb1ea6d&libraries=services"></script>
+<style>
+	#preview  img{
+	width : 350px; 
+	height: 350px;
+	}
+	
+#btnr {
+   height: 55px;
+   width: 972px;
+   text-align: center;
+}
+</style>
 </head>
 <body>
 	<header></header>
 	<section>
 		<article  id="article0">
 		
-			<img align="center" height=150px; width="150px" src="../resources/reservationImages/ttugccat.png">
-			
-			<img align="center" height=150px; width="150px" src="../resources/reservationImages/tugcat.png">
+			<img align="center" height=150px; width="150px" src="../resources/images/reservationImages/ttugccat.png">
+
 		</article>
 		<article>
 		<h1 align="center">예약 페이지</h1>
@@ -30,13 +41,13 @@
 				
 				
 				<span><input type="radio" name="part" value="팔">
-					<img height=150px; width="150px" src="../resources/reservationImages/arm.jpg">
+					<img height=150px; width="150px" src="../resources/images/reservationImages/arm.jpg">
 				</span>
 				<span><input type="radio" name="part" value="등">
-					<img height=150px; width="150px" src="../resources/reservationImages/back.jpg">
+					<img height=150px; width="150px" src="../resources/images/reservationImages/back.jpg">
 				</span>
 				<span><input type="radio" name="part" value="다리">
-					<img height=150px; width="150px" src="../resources/reservationImages/leg.jpg">
+					<img height=150px; width="150px" src="../resources/images/reservationImages/leg.jpg">
 				</span>
 				<br><br><br>
 				
@@ -50,20 +61,27 @@
 				
 				<input type="date">
 				<br><br><br><br><br><br>
-				<div id="map" style="width: 350px; height: 350px; margin-top: 10px; float: left;"></div>
+				<div id="map" style="width: 350px; height: 350px; margin-top: 10px; float: left;">
+				</div>
 				
-				<input type="file" id="upload" name="upload"/>
-				<div id="preview">
+				<div id="preview" style="margin-top: 10px; float: left;">
 				<!-- 미리보기 공간 -->
 				</div>
+				<br>
+				<input type="button" id="upfile" value="도안업로드">
+				<input type="file" id="upload" name="upload" style="display:none">
+				
 						
 				
 				
-				
-				<input type="submit" value="예약하기">
+				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+				<input id="btnr" type="submit" value="예약하기">
 			</form>
 		</article>
 		<script>
+			$("#upfile").click(function(){
+				$("#upload").trigger('click');
+			});
 		    var upload = document.querySelector('#upload');
 		    var upload2 = document.querySelector('#upload2');
 		 

@@ -1,3 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
-<configuration></configuration>
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"></setting>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.kh.natta.reservation.domain.Reservation" alias="Reservation"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappers/reservation-mapper.xml"></mapper>
+	</mappers>
+
+</configuration>
