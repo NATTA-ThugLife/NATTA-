@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
-<configuration></configuration>
+<configuration>
+
+   <typeAliases>
+		<typeAlias type="com.kh.natta.artist.domain.Artist" alias="Artist"/>
+		<typeAlias type="com.kh.natta.customer.domain.Customer" alias="Customer"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappers/artist-mapper.xml"></mapper>
+		<mapper resource="mappers/customer-mapper.xml"></mapper>
+	</mappers>
+	
+</configuration>

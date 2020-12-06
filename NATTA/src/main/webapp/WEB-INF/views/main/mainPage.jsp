@@ -71,7 +71,7 @@
           <li><a href="#about">ARTIST</a></li>
           <li></li>
           <li></li>
-          <li><a href="#" style="text-align: center">Customized<br>Tatto</a></li>
+          <li><a href="#" style="text-align: center">Customized<br>Tattoo</a></li>
           <li></li>
           <li></li>
           <li><a href="#">NOTICE</a></li>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="BoardMapper">
+
+	<resultMap type="Board" id="boardResultMap">
+		<result property="originalFilename" column="ORIGINAL_FILENAME"/>
+		<result property="renameFilename" column="RENAME_FILENAME"/>
+		<result property="bCreateDate" column="B_CREATE_DATE"/>
+		<result property="bModifyDate" column="B_MODIFY_DATE"/>
+		<result property="bStatus" column="B_STATUS"/>
+	</resultMap>
+	
+	<resultMap type="Reply" id="replyResultMap">
+		<result property="refBid" column="REF_BID"/>
+		<result property="rCreateDate" column="R_CREATE_DATE"/>
+		<result property="rModifyDate" column="R_MODIFY_DATE"/>
+		<result property="rStatus" column="R_STATUS"/>
+	</resultMap>
+	
+	<insert id="insertBoard">
+		INSERT INTO BOARD
+		VALUES(SEQ_BID.NEXTVAL,#{bTitle},#{bWriter},#{bContent},#{originalFilename},#{renameFilename},#{bCount},SYSDATE,SYSDATE,DEFAULT)
+	</insert>
+	
+	<select id="selectList" resultMap="boardResultMap">
+		SELECT * FROM BOARD
+		WHERE B_STATUS = 'Y'
+		ORDER BY BID DESC
+	</select>
+	<select id="getListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM BOARD
+		WHERE B_STATUS = 'Y'
+	</select>
+	
+	<select id="selectOne" resultMap="boardResultMap"> 
+		SELECT * FROM BOARD
+		WHERE BID = #{bId}
+		AND B_STATUS = 'Y'
+	</select>
+	
+	<insert id="insertReply">
+		INSERT INTO REPLY
+		VALUES(SEQ_RID.NEXTVAL, #{rContent},#{refBid},#{rWriter},SYSDATE,SYSDATE,DEFAULT)
+	</insert>
+	
+	<select id="selectReplyList" resultMap="replyResultMap">
+		SELECT * FROM REPLY
+		WHERE REF_BID = #{bId}
+		ORDER BY REF_BID DESC
+	</select>
+	
+	<update id="updateCount">
+		UPDATE BOARD
+		SET BCOUNT = BCOUNT + 1
+		WHERE BID = #{bId}
+	</update>
+	
+	<update id="deleteBoard">
+		UPDATE BOARD
+		SET B_STATUS = 'N'
+		WHERE BID = #{bId}
+	</update>
+	
+	<update id="updateBoard">
+		UPDATE BOARD
+		SET BTITLE = #{bTitle}, BCONTENT = #{bContent}, ORIGINAL_FILENAME = #{originalFilename},
+		B_MODIFY_DATE = SYSDATE
+		WHERE BID = #{bId}
+	</update>
+</mapper>
