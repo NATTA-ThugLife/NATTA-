@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="NoticeMapper">
+	
+	<resultMap type="Notice" id="noticeResultMap">
+		<result property="nCreateDate" column="N_CREATE_DATE"/>
+		<result property="nModifyDate" column="N_MODIFY_DATE"/>
+		<result property="filepath"		column="FILE_PATH"/>
+	</resultMap>
+
+	<insert id="insertNotce">
+      INSERT INTO NOTICE
+      VALUES(SEQ_NID.NEXTVAL,#{nTitle},#{nWriter},#{nContent},SYSDATE,SYSDATE,#{filepath})
+   </insert>
+   
+   <select id="selectList" resultMap="noticeResultMap">
+	   	SELECT * FROM NOTICE
+	   	ORDER BY N_CREATE_DATE DESC
+   </select>
+   
+   <select id="searchList" resultMap="noticeResultMap">
+   	SELECT * FROM NOTICE
+   	<where>
+   		<if test="searchCondition.toString() == 'title'">
+   			NTITLE LIKE '%' || #{searchValue} || '%'
+   		</if>
+   		<if test="searchCondition.toString() == 'writer'">
+   			NWRITER LIKE '%' || #{searchValue} || '%'
+   		</if>
+   		<if test="searchCondition.toString() == 'content'">
+   			NCONTENT LIKE '%' || #{searchValue} || '%'
+   		</if>
+   		<if test="searchCondition.toString() == 'all'">
+   			NTITLE LIKE '%' || #{searchValue} || '%'
+   			OR NWRITER LIKE '%' || #{searchValue} || '%'
+   			OR NCONTENT LIKE '%' || #{searchValue} || '%'
+   		</if>
+   	</where>
+   </select>
+   
+   <select id="selectOne" resultMap="noticeResultMap">
+   	SELECT * FROM NOTICE
+   	WHERE NID = #{nId}
+   </select>
+   
+   <delete id="deleteNotice">
+   	DELETE NOTICE
+   	WHERE NID = #{nId}
+   </delete>
+   
+   <update id="updateNotice">
+   	UPDATE NOTICE
+   	SET NTITLE=#{nTitle}, NCONTENT=#{nContent},
+   	FILE_PATH=#{filepath}, N_MODIFY_DATE=SYSDATE
+   	WHERE NID=#{nId}
+   </update>
+</mapper>

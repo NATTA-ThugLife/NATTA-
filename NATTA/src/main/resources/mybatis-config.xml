@@ -2,14 +2,22 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"></setting>
+	</settings>
+
    <typeAliases>
 		<typeAlias type="com.kh.natta.artist.domain.Artist" alias="Artist"/>
 		<typeAlias type="com.kh.natta.customer.domain.Customer" alias="Customer"/>
+		<typeAlias type="com.kh.natta.reservation.domain.Reservation" alias="Reservation"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/artist-mapper.xml"></mapper>
 		<mapper resource="mappers/customer-mapper.xml"></mapper>
+		<mapper resource="mappers/reservation-mapper.xml"></mapper>
 	</mappers>
 	
+
+
 </configuration>
