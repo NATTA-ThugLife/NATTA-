@@ -21,14 +21,14 @@
 </style>
 </head>
 <body>
-	<jsp:include page="../common/menubar.jsp"></jsp:include>
+	<%-- <jsp:include page="../common/menubar.jsp"></jsp:include> --%>
 	<h1 align="center">회원가입</h1>
 	<div class="centerText">
 	<form action="artistRegister.na" method="post">
 		<table width="650" cellspacing="5">
 				<tr>
 					<td>* 아이디</td>
-					<td><input type="text" name="userId" id="userId">
+					<td><input type="text" name="artistId" id="artistId">
 						<span class="guide ok">이 아이디는 사용 가능합니다.</span>
 						<span class="guide error">이 아이디는 사용할 수 없습니다.</span>
 						<input type="hidden" id="idDuplicateCheck" value="0">
@@ -122,7 +122,7 @@
 				<tr>
 					<td colspan="2" align="center">
 						<button onclick="return validate();">가입하기</button>
-						<button type="button" onclick="location.href='home.do';">홈으로</button>
+						<button type="button" onclick="location.href='home.na';">홈으로</button>
 					</td>
 				</tr>
 			</table>
@@ -137,7 +137,7 @@
 			// 이 태그의 value값이 0이면 가입X, 1이면 가입0
 			if($("#idDuplicateCheck").val() == 0){
 				alert("사용 가능한 아이디를 입력해주세요.")
-				$("#userId").focus();
+				$("#artistId").focus();
 				return false;
 			}else {
 				return true;
@@ -145,9 +145,9 @@
 		}	
 	
 		//아이디 중복 검사(Ajax)
-		$("#userId").on("blur",function(){
+		$("#artistId").on("blur",function(){
 			// this는  <input type="text" name="userId" id="userId" value="admin">를 의미함
-			var userId = $(this).val();
+			var artistId = $(this).val();
 			
 			// 아이디가 4글자 미만인 경우
 			if(userId.length < 4){
@@ -158,7 +158,7 @@
 			}
 			$.ajax({
 				url : "dupId.kh",
-				data : {"userId" : userId},
+				data : {"artistId" : artistId},
 				success : function(result) {
 					// result가 true이면 사용할 수 있습니다.
 					// result가 false이면 사용할 수 없습니다.

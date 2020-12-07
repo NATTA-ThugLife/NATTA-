@@ -45,15 +45,15 @@ public class ArtistController {
 		return "redirect:home.na";
 	}
 	// 회원가입 페이지 뷰
-	@RequestMapping(value="artistEnrollView.na",method=RequestMethod.GET)
+	@RequestMapping(value="artistJoinView.na",method={RequestMethod.GET, RequestMethod.POST})
 	public String enrollView() {
 		return "artist/artistjoin";
 	}
 	
 	@RequestMapping(value="artistRegister.na",method=RequestMethod.POST)
-	public String artistRegister(Model model, Artist artist,String post, String address1, String address2) {
+	public String artistRegister(Model model, Artist artist,String post, String address, String workAddress) {
 		
-		artist.setAddress(post+","+address1+","+address2);
+		artist.setAddress(post+","+address+","+workAddress);
 		int result = service.registerArtist(artist);
 		System.out.println(result);
 		if(result > 0) {
@@ -71,13 +71,13 @@ public class ArtistController {
 	
 	// 아티스트 정보 수정
 	@RequestMapping(value="artistModify.na",method=RequestMethod.POST)
-	public String modifyMember(@ModelAttribute Artist artist,
+	public String modifyArtist(@ModelAttribute Artist artist,
 								@RequestParam("post") String post,
-								@RequestParam("address1") String address1,
-								@RequestParam("address2") String address2,
+								@RequestParam("address") String address,
+								@RequestParam("workAddress") String workAddress,
 								Model model,HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		artist.setAddress(post+","+address1+","+address2);
+		artist.setAddress(post+","+address+","+workAddress);
 		int result = service.modifyArtist(artist);
 		if(result>0) {
 			session.setAttribute("loginUser", artist);

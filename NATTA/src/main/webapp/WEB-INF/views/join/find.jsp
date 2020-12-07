@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<div class="login-area">
+		<form action="find.na" method="post">
+			<table align="center">
+				<tr>
+					id/pw 찾기
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 </html>

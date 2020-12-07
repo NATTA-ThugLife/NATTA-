@@ -22,14 +22,15 @@ public class CustomerController {
 	@Autowired
 	private CustomerService service;
 	
-	@RequestMapping(value="customereLogin.na", method=RequestMethod.POST)
+	// 로그인
+	@RequestMapping(value="customereLogin.na", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView customerLogin(String customerId, String password, ModelAndView mv, HttpServletRequest request) {
 	
 		HttpSession session = request.getSession();
 		Customer customer = new Customer(customerId,password);
 		Customer loginCustomer = service.loginCustomer(customer);
 		if(loginCustomer != null) {
-			session.setAttribute("loginUser", loginCustomer);
+			session.setAttribute("loginCustomer", loginCustomer);
 			mv.setViewName("home");
 		}else {	
 			mv.addObject("msg","로그인 실패!");
@@ -42,20 +43,20 @@ public class CustomerController {
 	public String customerLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "redirect:home.na";
+		return "redirect:main.na";
 	}
 	// 회원가입 페이지 뷰
-	@RequestMapping(value="customereErollView.na",method=RequestMethod.GET)
+	@RequestMapping(value="customereJoinView.na",method=RequestMethod.GET)
 	public String enrollView() {
 		return "customer/customerjoin";
 	}
 	
-	@RequestMapping(value="customerRegister.na",method=RequestMethod.POST)
+	// 가입버튼
+	@RequestMapping(value="customerRegister.na",method={RequestMethod.GET, RequestMethod.POST})
 	public String customerRegister(Model model, Customer customer,String post, String address) {
-		
 		customer.setAddress(post+","+address);
 		int result = service.registerCustomer(customer);
-		System.out.println(result);
+		//System.out.println(result);
 		if(result > 0) {
 			return "redirect:home.na";
 		}else {
@@ -87,7 +88,7 @@ public class CustomerController {
 		}
 	}
 	
-	@RequestMapping(value="customerDelete.kh",method=RequestMethod.GET)
+	@RequestMapping(value="customerDelete.na",method=RequestMethod.GET)
 	public String deleteCustomer(String customerId,HttpServletRequest request,Model model) {
 		HttpSession session = request.getSession();
 		int result = service.deleteCustomer(customerId);

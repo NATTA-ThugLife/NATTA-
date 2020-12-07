@@ -43,13 +43,15 @@
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
-        <i class="icofont-phone"></i> +1 5589 55488 55
-        <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM</span>
+<!--         <i class="icofont-phone"></i> +1 5589 55488 55
+        <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM</span> -->
       </div>
       <div class="languages">
         <ul>
-          <li>En</li>
-          <li><a href="#">De</a></li>
+        <li><a href="/login.na">LOGIN</a></li>
+        <li><a href="/joinOption.na">SIGNUP</a></li>
+          <!-- <li>En</li>
+          <li><a href="#">De</a></li> -->
         </ul>
       </div>
     </div>
@@ -65,7 +67,7 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"> <a href="index.html">Home</a></li>
+          <li class="active"> <a href="/main.na">Home</a></li>
           <li></li>
           <li></li>
           <li><a href="#about">ARTIST</a></li>
@@ -78,9 +80,9 @@
           <li></li>
           <li></li>
           <li><a href="#">Q&A</a></li>
-          <li></li>
-          <li></li>
-          <li class="book-a-table text-center"><a href="#book-a-table">LOGIN / SIGNUP</a></li>
+          <!-- <li></li>
+          <li></li> -->
+          <!-- <li class="book-a-table text-center"><a href="/login.na">LOGIN / SIGNUP</a></li> -->
         </ul>
       </nav><!-- .nav-menu -->
 
