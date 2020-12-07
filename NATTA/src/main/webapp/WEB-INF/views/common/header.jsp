@@ -97,26 +97,18 @@ header{
   </header><!-- End Header -->
   
   
-  <!-- ======= 섹션 ( 사진 부분 )======= -->
-<!--   <section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
-      <div class="row">
-        <div class="col-lg-8">
-          <h1>NATTA <span>MainPage</span></h1>
-          <h2>We Are ThugLife</h2>
+  <!-- Vendor JS Files -->
+  <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="resources/assets/vendor/php-email-form/validate.js"></script>
+  <script src="resources/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="resources/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="resources/assets/vendor/venobox/venobox.min.js"></script>
+  <script src="resources/assets/vendor/aos/aos.js"></script>
 
-          <div class="btns">
-            <a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Menu</a>
-            <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Book a Table</a>
-          </div>
-        </div>
-        <div class="col-lg-4 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="200">
-          <a href="https://www.youtube.com/watch?v=GlrxcuEDyF8" class="venobox play-btn" data-vbtype="video" data-autoplay="true"></a>
-        </div>
-
-      </div>
-    </div>
-  </section>End Hero -->
+  <!-- Template Main JS File -->
+  <script src="resources/assets/js/main.js"></script>
   </header>
 </body>
 </html>
