@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,21 +19,25 @@
 	}
 	span.ok{color:green}
 	span.error{color:red}
+
 </style>
 </head>
 <body>
-	<%-- <jsp:include page="../common/menubar.jsp"></jsp:include> --%>
+	<header>
+
+		<jsp:include page="../common/header.jsp"></jsp:include>
+	</header>
+	<section>
 	<h1 align="center">회원가입</h1>
 	<div class="centerText">
-	<form action="artistRegister.na" method="post">
-		<table width="650" cellspacing="5">
+		<form action="artistRegister.na" method="post">
+			<table width="650" cellspacing="5">
 				<tr>
 					<td>* 아이디</td>
 					<td><input type="text" name="artistId" id="artistId">
-						<span class="guide ok">이 아이디는 사용 가능합니다.</span>
-						<span class="guide error">이 아이디는 사용할 수 없습니다.</span>
-						<input type="hidden" id="idDuplicateCheck" value="0">
-					</td>
+						<span class="guide ok">이 아이디는 사용 가능합니다.</span> <span
+						class="guide error">이 아이디는 사용할 수 없습니다.</span> <input type="hidden"
+						id="idDuplicateCheck" value="0"></td>
 				</tr>
 				<tr>
 					<td>* 비밀번호</td>
@@ -41,17 +46,15 @@
 				<tr>
 					<td>* 이름</td>
 					<td><input type="text" name="userName"></td>
-				</tr>				
+				</tr>
 				<tr>
 					<td>* 나이</td>
 					<td><input type="number" min="20" max="100" name="age"></td>
 				</tr>
 				<tr>
 					<td>* 성별</td>
-					<td>
-						<input type="radio" name="gender" value="M">남
-						<input type="radio" name="gender" value="F">여
-					</td>
+					<td><input type="radio" name="gender" value="M">남 <input
+						type="radio" name="gender" value="F">여</td>
 				</tr>
 				<tr>
 					<td>* 전화번호</td>
@@ -60,65 +63,65 @@
 				<tr>
 					<td>* 이메일</td>
 					<td><input type="email" name="email"></td>
-				</tr>				
+				</tr>
 				<tr>
 					<td>우편번호</td>
-					<td>
-						<input type="text" name="post" class="postcodify_postcode5" size="6">
-						<button type="button" id="postcodify_search_button">검색</button>
-					</td>
+					<td><input type="text" name="post"
+						class="postcodify_postcode5" size="6">
+						<button type="button" id="postcodify_search_button">검색</button></td>
 				</tr>
 				<tr>
 					<td>자택 주소</td>
-					<td><input type="text" name="address1" class="postcodify_address"></td>
+					<td><input type="text" name="address1"
+						class="postcodify_address"></td>
 				</tr>
 				<tr>
 					<td>상세 주소</td>
-					<td><input type="text" name="address2" class="postcodify_extra_info"></td>
+					<td><input type="text" name="address2"
+						class="postcodify_extra_info"></td>
 				</tr>
-				
+
 				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 				<script>
 					$(function() {
 						$("#postcodify_search_button").postcodifyPopUp();
 					})
 				</script>
-				
+
 				<tr>
 					<td>우편번호</td>
-					<td>
-						<input type="text" name="post" class="postcodify_postcode5" size="6">
-						<button type="button" id="postcodify_search_button">검색</button>
-					</td>
+					<td><input type="text" name="post"
+						class="postcodify_postcode5" size="6">
+						<button type="button" id="postcodify_search_button">검색</button></td>
 				</tr>
 				<tr>
 					<td>근무지 주소</td>
-					<td><input type="text" name="address1" class="postcodify_address"></td>
+					<td><input type="text" name="address1"
+						class="postcodify_address"></td>
 				</tr>
 				<tr>
 					<td>상세 주소</td>
-					<td><input type="text" name="address2" class="postcodify_extra_info"></td>
+					<td><input type="text" name="address2"
+						class="postcodify_extra_info"></td>
 				</tr>
-				
+
 				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 				<script>
 					$(function() {
 						$("#postcodify_search_button").postcodifyPopUp();
 					})
 				</script>
-				
+
 				<tr>
 					<td>자격증</td>
 					<td><input type="text" name="license"></td>
-				</tr>				
-				<tr>				
+				</tr>
+				<tr>
 				<tr>
 					<td>사업자 등록증</td>
 					<td><input type="text" name="businessNo"></td>
-				</tr>				
+				</tr>
 				<tr>
-				
-				
 				<tr>
 					<td colspan="2" align="center">
 						<button onclick="return validate();">가입하기</button>
@@ -126,7 +129,7 @@
 					</td>
 				</tr>
 			</table>
-	</form>
+		</form>
 	</div>
 	<script>
 		// 사용할 수 있는 아이디인지 체크해서 가입하기 버튼이 동작하도록 함.
@@ -175,6 +178,9 @@
 			});
 		});
 	</script>
-	
+	</section>
+	<footer>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>
