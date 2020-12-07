@@ -8,7 +8,7 @@
 </head>
 <body>
 	<header>
-		<jsp:include page="../common/header2.jsp"></jsp:include>
+		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 	<section>
 	<div class="login-area">
