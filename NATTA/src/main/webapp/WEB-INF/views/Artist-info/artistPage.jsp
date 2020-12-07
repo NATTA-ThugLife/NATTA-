@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,81 +34,10 @@
 </head>
 
 <body>
+	<header>
+		<jsp:include page="../common/artistHeader.jsp"/>
+	</header>
 
-  <!-- ======= Top Bar ======= -->
-  <div id="topbar" class="d-flex align-items-center fixed-top">
-    <div class="container d-flex">
-      <div class="contact-info mr-auto">
-        <i class="icofont-phone"></i> +1 5589 55488 55
-        <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM</span>
-      </div>
-      <div class="languages">
-        <ul>
-          <li>En</li>
-          <li><a href="#">De</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-      <h1 class="logo mr-auto"><a href="index.html">NATTA!</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-      <nav class="nav-menu d-none d-lg-block">
-        <ul>
-          <li class="active"> <a href="main.na">Home</a></li>
-          <li></li>
-          <li></li>
-          <li><a href="#menu">ARTIST</a></li>
-          <li></li>
-          <li></li>
-          <li><a href="#" style="text-align: center">Customized<br>Tatto</a></li>
-          <li></li>
-          <li></li>
-          <li><a href="#">NOTICE</a></li>
-          <li></li>
-          <li></li>
-          <li><a href="#">Q&A</a></li>
-          <li></li>
-          <li></li>
-          <li class="book-a-table text-center"><a href="#book-a-table">LOGIN / SIGNUP</a></li>
-        </ul>
-      </nav><!-- .nav-menu -->
-    </div>
-    
-    	<!-- 아티스트 헤더! -->
-       <div class="profile container d-flex align-items-center" style="float:left;">
-       <div style="width:380px; float:left;"></div>
-        <img 
-        src="resources/assets/img/artistPage/profile-img.jpg" alt="" class="img-fluid rounded-circle" 
-        style="margin-left: 15px auto; display: block; width: 120px; border: 8px solid #2c2f3f;">
-  	<nav class="nav-menu d-none d-lg-block" data-aos="fade-in">
-        <h2 class="text-light" style="margin-left:25px;">Artist Info Page</h2>
-  	    <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>    
-       	
-        <ul style="list-style : none;">
-          	<li class="active"><a href="index.html"><i class="bx bx-home"></i> <span>Home</span></a></li>
-          	<li><a href="#about"><i class="bx bx-user"></i><span>About</span></a></li>
-          	<li><a href="#resume"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
-          	<li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
-          	<li><a href="#services"><i class="bx bx-server"></i> Services</a></li>
-          	<li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
-        </ul>            
-        </nav><!-- .nav-menu -->
-      </div>      
-  </header>
-  <!-- End Header -->
-
-
-  
-  
-
-  
-  
-  
   
 
   <!-- ======= Hero Section ======= -->
@@ -115,8 +45,8 @@
     <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
       <div class="row">
         <div class="col-lg-8">
-          <h1>Welcome to <span>Restaurantly</span></h1>
-          <h2>Delivering great food for more than 18 years!</h2>
+          <h1>WE ARE <span>THUG TEAM</span></h1>
+          <h2>내 파트다</h2>
 
           <div class="btns">
             <a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Menu</a>
@@ -131,7 +61,7 @@
     </div>
   </section><!-- End Hero -->
 
-  <main id="main">
+  <!-- <main id="main"> -->
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
@@ -879,96 +809,12 @@
       </div>
     </section><!-- End Contact Section -->
 
-  </main><!-- End #main -->
+  <!-- </main --><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
 
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-info">
-              <h3>Restaurantly</h3>
-              <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
-              </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Restaurantly</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="resources/assets/vendor/php-email-form/validate.js"></script>
-  <script src="resources/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="resources/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="resources/assets/vendor/venobox/venobox.min.js"></script>
-  <script src="resources/assets/vendor/aos/aos.js"></script>
-  <!-- Template Main JS File -->
-  <script src="resources/assets/js/main.js"></script>
-  <!-- <script src="resources/assets/vendor/typed.js/typed.min.js"></script> -->
-
+  	<footer>
+		<jsp:include page="../common/footer.jsp"/>  	
+  	</footer>
 </body>
 
 </html>

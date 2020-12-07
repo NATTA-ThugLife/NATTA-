@@ -24,8 +24,7 @@
 </head>
 <body>
 	<header>
-
-		<jsp:include page="../common/header.jsp"></jsp:include>
+		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 	<section>
 	<h1 align="center">회원가입</h1>
@@ -182,5 +181,6 @@
 	<footer>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	</footer>
+	
 </body>
 </html>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-																			<!-- 헤더밑에 배경있는 JSP -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+																	<!-- 헤더밑에 배경없는 JSP !!   -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,23 +29,13 @@
 
   <!-- Template Main CSS File -->
   <link href="resources/assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Restaurantly - v1.1.0
-  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
   <style>
      header {
         height: 70px;
      }
-     
   </style>
 </head>
-
 <body>
-
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex">
@@ -82,36 +72,15 @@
           <li><a href="#">NOTICE</a></li>
           <li></li>
           <li></li>
-          <li><a href="#">Q&A</a></li>
-<!--           <li></li>
+          <li><a href="#">QnA</a></li>
           <li></li>
+<!--           <li></li>
           <li class="book-a-table text-center"><a href="#book-a-table">LOGIN / SIGNUP</a></li> -->
         </ul>
       </nav><!-- .nav-menu -->
     </div>
   </header><!-- End Header -->
-  
-  
-  <!-- ======= 섹션 ( 사진 부분 )======= -->
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
-      <div class="row">
-        <div class="col-lg-8">
-          <h1>NATTA <span>MainPage</span></h1>
-          <h2>We Are ThugLife</h2>
 
-          <div class="btns">
-            <a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Menu</a>
-            <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Book a Table</a>
-          </div>
-        </div>
-        <div class="col-lg-4 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="200">
-          <a href="https://www.youtube.com/watch?v=GlrxcuEDyF8" class="venobox play-btn" data-vbtype="video" data-autoplay="true"></a>
-        </div>
-
-      </div>
-    </div>
-  </section><!-- End Hero -->
     <!-- Vendor JS Files -->
   <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
   <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

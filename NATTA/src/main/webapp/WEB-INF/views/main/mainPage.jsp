@@ -1,5 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="utf-8">
@@ -9,8 +12,6 @@
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
-  <!-- Favicons 맨위 아이콘 바꾸기-->
-<!--  <link href="cat2.png" rel="icon">-->
 
   <link href="resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -48,10 +49,8 @@
       </div>
       <div class="languages">
         <ul>
-        <li><a href="/login.na">LOGIN</a></li>
-        <li><a href="/joinOption.na">SIGNUP</a></li>
-          <!-- <li>En</li>
-          <li><a href="#">De</a></li> -->
+	        <li><a href="/login.na">LOGIN</a></li>
+	        <li><a href="/joinOption.na">SIGNUP</a></li>
         </ul>
       </div>
     </div>
@@ -61,7 +60,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">NATTA!</a></h1>
+      <h1 class="logo mr-auto"><a href="main.na">NATTA!</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -70,7 +69,7 @@
           <li class="active"> <a href="/main.na">Home</a></li>
           <li></li>
           <li></li>
-          <li><a href="#about">ARTIST</a></li>
+          <li><a href="#artistRank">ARTIST</a></li>
           <li></li>
           <li></li>
           <li><a href="#" style="text-align: center">Customized<br>Tattoo</a></li>
@@ -110,7 +109,7 @@
     </div>
   </section><!-- End Hero -->
 
-  <main id="main">
+  <!-- <main id="main"> -->
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
@@ -185,7 +184,7 @@
     </section><!-- End Why Us Section -->
 
     <!-- ======= Menu Section ======= -->
-    <section id="menu" class="menu section-bg">
+    <section id="artistRank" class="menu section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -209,10 +208,10 @@
           <div class="col-lg-6 menu-item filter-starters">
             <img src="resources/assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">Lobster Bisque</a><span>$5.95</span>
+              <a href="artistPage.na">윤현모당</a><span>호에에엥</span>
             </div>
             <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
+              호에ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅇ
             </div>
           </div>
 
@@ -852,7 +851,7 @@
       </div>
     </section><!-- End Contact Section -->
 
-  </main><!-- End #main -->
+  <!-- </main -->><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
