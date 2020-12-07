@@ -21,7 +21,11 @@
 </style>
 </head>
 <body>
-	<h1 align="center">회원가입</h1>
+    <header>
+		<jsp:include page="../common/header2.jsp"></jsp:include>
+	</header>
+	<section>
+	<h1 align="center">일반 회원 회원가입</h1>
 	<div class="centerText">
 	<form action="customerRegister.na" method="post">
 		<table width="650" cellspacing="5">
@@ -91,7 +95,7 @@
 			</table>
 	</form>
 	</div>
-	<script>
+<!--	<script>
 		// 사용할 수 있는 아이디인지 체크해서 가입하기 버튼이 동작하도록 함.
 		function validate() {
 			//return false; // 가입하기 아무리 눌러도 절대넘어가지 않음
@@ -136,7 +140,10 @@
 				}
 			});
 		});
-	</script>
-	
+	</script> -->
+	</section>
+	<footer>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

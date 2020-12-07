@@ -7,15 +7,22 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<header>
+		<jsp:include page="../common/header2.jsp"></jsp:include>
+	</header>
+	<section>
 	<div class="login-area">
-		<!-- <form action="joinOption.na" method="get"> -->
 			<table align="center">
-			    <tr>회원가입 구분 페이지</tr>
 				<tr>
 					<td><button onClick="location.href='customereJoinView.na'">일반 회원</button></td>
 					<td><button onClick="location.href='artistJoinView.na'">타투이스트</button></td>
 				</tr>
 			</table>
 	</div>
+		</section>
+
+	<footer>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

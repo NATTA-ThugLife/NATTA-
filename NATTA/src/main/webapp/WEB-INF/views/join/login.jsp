@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<header>
+		<jsp:include page="../common/header2.jsp"></jsp:include>
+	</header>
+	<section>
 <div class="login-area">
 		<c:if test="${ empty sessionScope.loginUser }">
 		<form action="/login.na" method="post">
@@ -44,6 +48,9 @@
 			</table>
 		</c:if>
 	</div>
-
+	</section>
+	<footer>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>
