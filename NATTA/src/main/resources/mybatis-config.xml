@@ -10,12 +10,14 @@
 		<typeAlias type="com.kh.natta.artist.domain.Artist" alias="Artist"/>
 		<typeAlias type="com.kh.natta.customer.domain.Customer" alias="Customer"/>
 		<typeAlias type="com.kh.natta.reservation.domain.Reservation" alias="Reservation"/>
+		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistInfo" alias="ArtistInfo"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/artist-mapper.xml"></mapper>
 		<mapper resource="mappers/customer-mapper.xml"></mapper>
 		<mapper resource="mappers/reservation-mapper.xml"></mapper>
+		<mapper resource="mappers/artistInfo-mapper.xml"></mapper>
 	</mappers>
 	
 
