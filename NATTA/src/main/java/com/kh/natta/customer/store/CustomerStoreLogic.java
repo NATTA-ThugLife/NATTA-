@@ -14,34 +14,20 @@ public class CustomerStoreLogic implements CustomerStore{
 	
 	@Override
 	public Customer selectOneCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return null;
+		Customer loginCustomer = sqlSession.selectOne("customerMapper.selectOne",customer);
+		return loginCustomer;
 	}
 
 	@Override
 	public int checkIdDup(String customerId) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.selectOne("customerMapper.checkIdDup",customerId);
+		return result;
 	}
 
 	@Override
 	public int insertCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert("customerMapper.insertCustomer",customer);
+		return result;
 	}
-
-	@Override
-	public int updateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteCustomer(String customerId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	
 
 }

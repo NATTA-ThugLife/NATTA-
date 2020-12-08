@@ -22,7 +22,8 @@ public class ArtistController {
 	@Autowired
 	private ArtistService service;
 	
-	@RequestMapping(value="artistLogin.na", method=RequestMethod.POST)
+	//로그인
+	@RequestMapping(value="artistLogin.na")
 	public ModelAndView artistLogin(String artistId, String password, ModelAndView mv, HttpServletRequest request) {
 	
 		HttpSession session = request.getSession();
@@ -30,7 +31,7 @@ public class ArtistController {
 		Artist loginArtist = service.loginArtist(artist);
 		if(loginArtist != null) {
 			session.setAttribute("loginArtist", loginArtist);
-			mv.setViewName("home");
+			mv.setViewName("main/mainPage");
 		}else {	
 			mv.addObject("msg","로그인 실패!");
 			mv.setViewName("common/errorPage");
@@ -42,72 +43,35 @@ public class ArtistController {
 	public String artistLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "redirect:home.na";
+		return "main/mainPage";
 	}
 	// 회원가입 페이지 뷰
 	@RequestMapping(value="artistJoinView.na",method={RequestMethod.GET, RequestMethod.POST})
 	public String enrollView() {
-		return "artist/artistjoin";
+		return "join/artistjoin";
 	}
 	
+	//가입
 	@RequestMapping(value="artistRegister.na",method=RequestMethod.POST)
 	public String artistRegister(Model model, Artist artist,String post, String address, String workAddress) {
-		
 		artist.setAddress(post+","+address+","+workAddress);
+		System.out.println(artist);
 		int result = service.registerArtist(artist);
 		System.out.println(result);
 		if(result > 0) {
-			return "redirect:home.na";
+			return "redirect:main.na";
 		}else {
 			model.addAttribute("msg", "회원 가입 실패");
 			return "common/errorPage";
 		}
 	}
-	// 마이페이지 뷰
-//	@RequestMapping(value="myInfo.na",method=RequestMethod.GET)
-//	public String myInfoView() {
-//		return "artist/artistMyPage";
-//	}
 	
-	// 아티스트 정보 수정
-	@RequestMapping(value="artistModify.na",method=RequestMethod.POST)
-	public String modifyArtist(@ModelAttribute Artist artist,
-								@RequestParam("post") String post,
-								@RequestParam("address") String address,
-								@RequestParam("workAddress") String workAddress,
-								Model model,HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		artist.setAddress(post+","+address+","+workAddress);
-		int result = service.modifyArtist(artist);
-		if(result>0) {
-			session.setAttribute("loginUser", artist);
-			return "redirect:home.na";
-		}else {
-			model.addAttribute("msg","정보 수정 실패!");
-			return "common/errorPage";
-		}
-	}
 	
-	@RequestMapping(value="artistDelete.na",method=RequestMethod.GET)
-	public String deleteArtist(String artistId,HttpServletRequest request,Model model) {
-		HttpSession session = request.getSession();
-		int result = service.deleteArtist(artistId);
-		if(result>0) {
-			session.invalidate();
-			model.addAttribute("msg", "회원 탈퇴 성공");
-			return "redirect:home.na";
-		}else {
-			model.addAttribute("msg", "회원 탈퇴 실패!");
-			return "common/errorPage";
-		}
-	}
-	
-	// 아이디 중복검사
-	@ResponseBody
-	@RequestMapping(value="dupId.kh", method=RequestMethod.GET)
-	public String idDuplicateCheck(String userId) {
-		boolean isUsable = service.checkIdDup(userId) == 0 ? true : false;
-		return isUsable+"";
-	}
+	  // 아이디 중복검사	  
+	  @ResponseBody	  
+	  @RequestMapping(value="dupId.kh", method=RequestMethod.GET) public String
+	  idDuplicateCheck(String artistId) { boolean isUsable =
+	  service.checkIdDup(artistId) == 0 ? true : false; return isUsable+""; }
+	 
 
 }

@@ -43,13 +43,24 @@
         <i class="icofont-phone"></i> +1 5589 55488 55
         <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM</span>
       </div>
-      <div class="languages">
-        <ul>
-			<li><a href="/login.na">LOGIN</a></li>
-			<li><a href="/joinOption.na">SIGNUP</a></li>
-        </ul>
-      </div>
-    </div>
+			<div class="languages">
+				<ul>
+					<c:if test="${empty sessionScope.loginCustomer }">
+						<li><a href="/login.na">LOGIN</a></li>
+						<li><a href="/joinOption.na">SIGNUP</a></li>
+					</c:if>
+
+					<c:if test="${!empty sessionScope.loginCustomer }">
+						<li>${loginCustomer.customerName }님 환영합니다.</li>
+						<!-- <li><button onclick="location.href='#'">마이페이지</button></li>
+						<li><button onclick="location.href='main.na'">로그아웃</button></li> -->
+						<li><a href="#">MyPage&nbsp;&nbsp;</li>
+						<li><a href="/customerLogout.na">LogOut</li>
+					</c:if>
+			
+				</ul>
+			</div>
+		</div>
   </div>
 
   <!-- ======= Header ======= -->

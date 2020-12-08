@@ -49,9 +49,18 @@
       </div>
       <div class="languages">
         <ul>
-	        <li><a href="/login.na">LOGIN</a></li>
-	        <li><a href="/joinOption.na">SIGNUP</a></li>
-        </ul>
+					<c:if test="${empty sessionScope.loginCustomer }">
+						<li><a href="/login.na">LOGIN</a></li>
+						<li><a href="/joinOption.na">SIGNUP</a></li>
+					</c:if>
+
+					<c:if test="${!empty sessionScope.loginCustomer }">
+						<li>${loginCustomer.customerName }님 환영합니다.</li>
+						<li><a href="#">MyPage&nbsp;&nbsp;</li>
+						<li><a href="/customerLogout.na">LogOut</li>
+					</c:if>
+					
+				</ul>
       </div>
     </div>
   </div>

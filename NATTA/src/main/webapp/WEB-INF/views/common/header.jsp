@@ -54,11 +54,21 @@
         <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM</span>
       </div>
       <div class="languages">
-        <ul>
-			<li><a href="/login.na">LOGIN</a></li>
-			<li><a href="/joinOption.na">SIGNUP</a></li>
-        </ul>
-      </div>
+				<ul>
+					<c:if test="${empty sessionScope.loginCustomer }">
+						<li><a href="/login.na">LOGIN</a></li>
+						<li><a href="/joinOption.na">SIGNUP</a></li>
+					</c:if>
+
+					<c:if test="${!empty sessionScope.loginCustomer }">
+						<li>${loginCustomer.customerName }님 환영합니다.</li>
+						<li><a href="#">MyPage&nbsp;&nbsp;</li>
+						<li><a href="/customerLogout.na">LogOut</li>
+					</c:if>
+					
+				</ul>
+			</div>
+      
     </div>
   </div>
 

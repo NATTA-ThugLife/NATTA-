@@ -15,32 +15,17 @@ public class ArtistServiceImpl implements ArtistService{
 
 	@Override
 	public Artist loginArtist(Artist artist) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectOneArtist(artist);
 	}
 
-	@Override
-	public int checkIdDup(String artistId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
+	  @Override public int checkIdDup(String artistId) { return
+	  store.checkIdDup(artistId); }
+	 
 
 	@Override
 	public int registerArtist(Artist artist) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int modifyArtist(Artist artist) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteArtist(String artistId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.insertArtist(artist);
 	}
 
 }

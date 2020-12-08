@@ -6,7 +6,7 @@ public class Customer {
 
 	private String customerId;
 	private String password;
-	private String name;
+	private String customerName;
 	private int age;
 	private String gender;
 	private String phone;
@@ -29,12 +29,12 @@ public class Customer {
 
 
 
-	public Customer(String customerId, String password, String name, int age, String gender, String phone, String email,
+	public Customer(String customerId, String password, String customerName, int age, String gender, String phone, String email,
 			String address, Date enrollDate) {
 		super();
 		this.customerId = customerId;
 		this.password = password;
-		this.name = name;
+		this.customerName = customerName;
 		this.age = age;
 		this.gender = gender;
 		this.phone = phone;
@@ -45,7 +45,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", password=" + password + ", name=" + name + ", age=" + age
+		return "Customer [customerId=" + customerId + ", password=" + password + ", customerName=" + customerName + ", age=" + age
 				+ ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", address=" + address
 				+", enrollDate=" + enrollDate + "]";
 	}
@@ -66,12 +66,12 @@ public class Customer {
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 	public int getAge() {

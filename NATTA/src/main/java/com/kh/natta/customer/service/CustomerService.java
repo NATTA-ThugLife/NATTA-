@@ -9,8 +9,5 @@ public interface CustomerService {
 	public int checkIdDup(String customerId);
 	
 	public int registerCustomer(Customer customer);
-	
-	public int modifyCustomer(Customer customer);
-	
-	public int deleteCustomer(String customerId);
+
 }
