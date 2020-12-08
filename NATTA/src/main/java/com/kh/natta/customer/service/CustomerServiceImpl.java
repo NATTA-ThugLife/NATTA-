@@ -5,42 +5,27 @@ import org.springframework.stereotype.Service;
 
 import com.kh.natta.artist.store.ArtistStore;
 import com.kh.natta.customer.domain.Customer;
+import com.kh.natta.customer.store.CustomerStore;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
-	private ArtistStore store;
+	private CustomerStore store;
 
 	@Override
 	public Customer loginCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectOneCustomer(customer);
 	}
 
 	@Override
 	public int checkIdDup(String customerId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.checkIdDup(customerId);
 	}
 
 	@Override
 	public int registerCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.insertCustomer(customer);
 	}
-
-	@Override
-	public int modifyCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteCustomer(String customerId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 
 }

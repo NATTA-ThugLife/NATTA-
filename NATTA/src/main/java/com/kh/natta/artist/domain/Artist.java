@@ -6,7 +6,7 @@ public class Artist {
 	
 	private String artistId;
 	private String password;
-	private String name;
+	private String artistName;
 	private int age;
 	private String gender;
 	private String phone;
@@ -14,7 +14,6 @@ public class Artist {
 	private String address;
 	private String workAddress;
 	private Date enrollDate;
-	private String license;
 	private String businessNo;
 	private int enrollStatus;
 	
@@ -34,13 +33,13 @@ public class Artist {
 	}
 
 
-	public Artist(String artistId, String password, String name, int age, String gender, String phone, String email,
-			String address, String workAddress, Date enrollDate, String license, String businessNo,
+	public Artist(String artistId, String password, String artistname, int age, String gender, String phone, String email,
+			String address, String workAddress, Date enrollDate, String businessNo,
 			int enrollStatus) {
 		super();
 		this.artistId = artistId;
 		this.password = password;
-		this.name = name;
+		this.artistName = artistname;
 		this.age = age;
 		this.gender = gender;
 		this.phone = phone;
@@ -48,7 +47,6 @@ public class Artist {
 		this.address = address;
 		this.workAddress = workAddress;
 		this.enrollDate = enrollDate;
-		this.license = license;
 		this.businessNo = businessNo;
 		this.enrollStatus = enrollStatus;
 	}
@@ -56,10 +54,9 @@ public class Artist {
 
 	@Override
 	public String toString() {
-		return "Artist [artistId=" + artistId + ", password=" + password + ", name=" + name + ", age=" + age
+		return "Artist [artistId=" + artistId + ", password=" + password + ", artistName=" + artistName + ", age=" + age
 				+ ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", address=" + address
-				+ ", workAddress=" + workAddress + ", enrollDate=" + enrollDate + ", license=" + license
-				+ ", businessNo=" + businessNo + ", enrollStatus=" + enrollStatus + "]";
+				+ ", workAddress=" + workAddress + ", enrollDate=" + enrollDate + ", businessNo=" + businessNo + ", enrollStatus=" + enrollStatus + "]";
 	}
 
 
@@ -83,13 +80,13 @@ public class Artist {
 	}
 
 
-	public String getName() {
-		return name;
+	public String getArtistName() {
+		return artistName;
 	}
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setArtistName(String artistName) {
+		this.artistName = artistName;
 	}
 
 
@@ -160,16 +157,6 @@ public class Artist {
 
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
-	}
-
-
-	public String getLicense() {
-		return license;
-	}
-
-
-	public void setLicense(String license) {
-		this.license = license;
 	}
 
 

@@ -10,8 +10,4 @@ public interface CustomerStore {
 	
 	public int insertCustomer(Customer customer);
 	
-	public int updateCustomer(Customer customer);
-	
-	public int deleteCustomer(String customerId);
-	
 }

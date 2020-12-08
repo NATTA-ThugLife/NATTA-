@@ -14,32 +14,21 @@ public class ArtistStoreLogic implements ArtistStore{
 
 	@Override
 	public Artist selectOneArtist(Artist artist) {
-		// TODO Auto-generated method stub
-		return null;
+		Artist loginArtist = sqlSession.selectOne("artistMapper.selectOne",artist);
+		return loginArtist;
 	}
 
-	@Override
-	public int checkIdDup(String artistId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
+	  @Override public int checkIdDup(String artistId) { int result =
+	  sqlSession.selectOne("artistMapper.checkIdDup",artistId);
+	  return result; 
+	  }
+	 
 
 	@Override
 	public int insertArtist(Artist artist) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateArtist(Artist artist) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteArtist(String artistId) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert("artistMapper.insertArtist",artist);
+		return result;
 	}
 
 }

@@ -6,12 +6,8 @@ public interface ArtistStore {
 	
 	public Artist selectOneArtist(Artist artist);
 	
-    public int checkIdDup(String artistId);
+	 public int checkIdDup(String artistId); 
 	
 	public int insertArtist(Artist artist);
-	
-	public int updateArtist(Artist artist);
-	
-	public int deleteArtist(String artistId);
 
 }
