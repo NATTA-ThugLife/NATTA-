@@ -3,6 +3,7 @@ package com.kh.natta.ArtistInfo.domain;
 import java.sql.Date;
 
 public class ArtistInfo {
+	private String name;
 	private String style;
 	private String myProfile;
 	private String myReProfile;
@@ -14,9 +15,10 @@ public class ArtistInfo {
 
 	public ArtistInfo() {}
 
-	public ArtistInfo(String style, String myProfile, String myReProfile, String myInfo, Date createDate,
+	public ArtistInfo(String name, String style, String myProfile, String myReProfile, String myInfo, Date createDate,
 			Date modifyDate, String workAddress, String artistId) {
 		super();
+		this.name = name;
 		this.style = style;
 		this.myProfile = myProfile;
 		this.myReProfile = myReProfile;
@@ -25,6 +27,14 @@ public class ArtistInfo {
 		this.modifyDate = modifyDate;
 		this.workAddress = workAddress;
 		this.artistId = artistId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getStyle() {
@@ -93,12 +103,10 @@ public class ArtistInfo {
 
 	@Override
 	public String toString() {
-		return "ArtistInfo [style=" + style + ", myProfile=" + myProfile + ", myReProfile=" + myReProfile + ", myInfo="
-				+ myInfo + ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", workAddress=" + workAddress
-				+ ", artistId=" + artistId + "]";
+		return "ArtistInfo [name=" + name + ", style=" + style + ", myProfile=" + myProfile + ", myReProfile="
+				+ myReProfile + ", myInfo=" + myInfo + ", createDate=" + createDate + ", modifyDate=" + modifyDate
+				+ ", workAddress=" + workAddress + ", artistId=" + artistId + "]";
 	}
 
-	
-	
-	
+		
 	}

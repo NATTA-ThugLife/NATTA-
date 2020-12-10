@@ -41,10 +41,11 @@ public class CustomerController {
 		return mv;
 	}
 	// 로그아웃
-	  @RequestMapping(value="customerLogout.na",method=RequestMethod.GET) public String
-	  customerLogout(HttpServletRequest request) { HttpSession session =
-	  request.getSession(); session.invalidate();
-	  return "main/mainPage"; }
+	  @RequestMapping(value="customerLogout.na",method=RequestMethod.GET)
+	  public String customerLogout(HttpServletRequest request) { 
+		  HttpSession session = request.getSession(); session.invalidate();
+		  return "main/mainPage"; 
+	  }
 	 
 	
 	// 회원가입 페이지 뷰

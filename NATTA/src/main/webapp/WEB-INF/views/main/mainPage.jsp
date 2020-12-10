@@ -26,16 +26,9 @@
   <link href="resources/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="resources/assets/vendor/venobox/venobox.css" rel="stylesheet">
   <link href="resources/assets/vendor/aos/aos.css" rel="stylesheet">
-
   <!-- Template Main CSS File -->
   <link href="resources/assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Restaurantly - v1.1.0
-  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -44,23 +37,32 @@
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
-<!--         <i class="icofont-phone"></i> +1 5589 55488 55
-        <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM</span> -->
+        <i class="icofont-phone"></i> +82 010 1234 5678
+        <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sun: 24-hour clock</span> 
       </div>
       <div class="languages">
         <ul>
-					<c:if test="${empty sessionScope.loginCustomer }">
-						<li><a href="/login.na">LOGIN</a></li>
-						<li><a href="/joinOption.na">SIGNUP</a></li>
-					</c:if>
-
-					<c:if test="${!empty sessionScope.loginCustomer }">
-						<li>${loginCustomer.customerName }님 환영합니다.</li>
-						<li><a href="#">MyPage&nbsp;&nbsp;</li>
-						<li><a href="/customerLogout.na">LogOut</li>
-					</c:if>
-					
-				</ul>
+	        <!--로그인 세션 비어있을 때 -->
+			<c:if test="${empty sessionScope.loginCustomer && empty sessionScope.loginArtist  }">
+				<li><a href="/login.na">LOGIN</a></li>
+				<li><a href="/joinOption.na">SIGNUP</a></li>
+			</c:if>
+			<!-- 회원 로그인시 -->
+			<c:if test="${!empty sessionScope.loginCustomer }">
+				<li>${loginCustomer.customerName }님 환영합니다.</li>
+				<li><a href="#">MyPage&nbsp;&nbsp;</a></li>
+				<li><a href="/customerLogout.na">LogOut</a></li>
+			</c:if>
+			<!-- 아티스트 로그인시 -->
+			<c:if test="${!empty sessionScope.loginArtist }">
+			<c:url var="artistInfoPage" value="artistInfoPage.na">
+			 	 <c:param name="artistId" value="${ loginArtist.artistId }"/>
+			</c:url>			
+				<li>${loginArtist.artistName }님 환영합니다.</li>
+				<li><a href="${ artistInfoPage }">ArtistMyPage&nbsp;&nbsp;</a></li>
+				<li><a href="artistLogout.na">LogOut</a></li>						
+			</c:if>
+		</ul>
       </div>
     </div>
   </div>
@@ -88,9 +90,6 @@
           <li></li>
           <li></li>
           <li><a href="#">Q&A</a></li>
-          <!-- <li></li>
-          <li></li> -->
-          <!-- <li class="book-a-table text-center"><a href="/login.na">LOGIN / SIGNUP</a></li> -->
         </ul>
       </nav><!-- .nav-menu -->
 
@@ -208,19 +207,19 @@
               <li data-filter=".filter-starters">Starters</li>
               <li data-filter=".filter-salads">Salads</li>
               <li data-filter=".filter-specialty">Specialty</li>
+              <li><a href="artistList.na">ArtistList</a></li>
             </ul>
           </div>
         </div>
-
+		
         <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
-
           <div class="col-lg-6 menu-item filter-starters">
             <img src="resources/assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
             <div class="menu-content">
               <a href="artistPage.na">윤현모당</a><span>호에에엥</span>
             </div>
             <div class="menu-ingredients">
-              호에ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅇ
+              
             </div>
           </div>
 
@@ -633,7 +632,7 @@
       <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row no-gutters">
-
+			<!-- 훔치기2 -->
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
               <a href="resources/assets/img/gallery/gallery-1.jpg" class="venobox" data-gall="gallery-item">
@@ -862,6 +861,15 @@
 
   <!-- </main -->><!-- End #main -->
 
+
+
+
+
+
+
+
+
+
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
@@ -938,7 +946,6 @@
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
-
   <!-- Vendor JS Files -->
   <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
   <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -948,10 +955,7 @@
   <script src="resources/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="resources/assets/vendor/venobox/venobox.min.js"></script>
   <script src="resources/assets/vendor/aos/aos.js"></script>
-
   <!-- Template Main JS File -->
-  <script src="resources/assets/js/main.js"></script>
-
+  <script src="resources/assets/js/main.js"></script>  
 </body>
-
 </html>

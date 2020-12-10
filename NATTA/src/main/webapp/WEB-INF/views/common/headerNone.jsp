@@ -44,21 +44,28 @@
         <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM</span>
       </div>
 			<div class="languages">
-				<ul>
-					<c:if test="${empty sessionScope.loginCustomer }">
-						<li><a href="/login.na">LOGIN</a></li>
-						<li><a href="/joinOption.na">SIGNUP</a></li>
-					</c:if>
-
-					<c:if test="${!empty sessionScope.loginCustomer }">
-						<li>${loginCustomer.customerName }님 환영합니다.</li>
-						<!-- <li><button onclick="location.href='#'">마이페이지</button></li>
-						<li><button onclick="location.href='main.na'">로그아웃</button></li> -->
-						<li><a href="#">MyPage&nbsp;&nbsp;</li>
-						<li><a href="/customerLogout.na">LogOut</li>
-					</c:if>
-			
-				</ul>
+        <ul>
+	        <!--로그인 세션 비어있을 때 -->
+			<c:if test="${empty sessionScope.loginCustomer && empty sessionScope.loginArtist  }">
+				<li><a href="/login.na">LOGIN</a></li>
+				<li><a href="/joinOption.na">SIGNUP</a></li>
+			</c:if>
+			<!-- 회원 로그인시 -->
+			<c:if test="${!empty sessionScope.loginCustomer }">
+				<li>${loginCustomer.customerName }님 환영합니다.</li>
+				<li><a href="#">MyPage&nbsp;&nbsp;</a></li>
+				<li><a href="/customerLogout.na">LogOut</a></li>
+			</c:if>
+			<!-- 아티스트 로그인시 -->
+			<c:if test="${!empty sessionScope.loginArtist }">
+			<c:url var="artistInfoPage" value="artistInfoPage.na">
+			 	 <c:param name="artistId" value="${ loginArtist.artistId }"/>
+			</c:url>			
+				<li>${loginArtist.artistName }님 환영합니다.</li>
+				<li><a href="${ artistInfoPage }">ArtistMyPage&nbsp;&nbsp;</a></li>
+				<li><a href="artistLogout.na">LogOut</a></li>						
+			</c:if>
+		</ul>
 			</div>
 		</div>
   </div>
