@@ -6,10 +6,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,10 +23,11 @@ public class ArtistController {
 	//로그인
 	@RequestMapping(value="artistLogin.na")
 	public ModelAndView artistLogin(String artistId, String password, ModelAndView mv, HttpServletRequest request) {
-	
+		
 		HttpSession session = request.getSession();
 		Artist artist = new Artist(artistId,password);
 		Artist loginArtist = service.loginArtist(artist);
+		System.out.println(loginArtist);
 		if(loginArtist != null) {
 			session.setAttribute("loginArtist", loginArtist);
 			mv.setViewName("main/mainPage");
