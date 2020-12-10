@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-
 <title>회원가입</title>
 <style type="text/css">
 	.centerText table{
@@ -19,6 +18,22 @@
 	}
 	span.ok{color:green}
 	span.error{color:red}
+	
+	#join {
+	background: #cda45e;
+	border: 0;
+	padding: 10px 35px;
+	color: #fff;
+	transition: 0.4s;
+	border-radius: 50px;
+	top: 50%;
+	left: 50%;
+	}
+
+    #join:hover {
+	background: #d3af71;
+}
+
 </style>
 </head>
 <body>
@@ -27,6 +42,13 @@
 	</header>
 	
 	<section>
+	
+	<div class="container" data-aos="fade-up" style="width: 100%; margin: 0 auto;">
+			<div class="section-title">
+				<h2>Customer Join</h2>
+				<p>일반 회원가입</p>
+	</div>
+	
 	<div class="centerText">
 	<form action="customerRegister.na" method="post">
 		<table width="650" cellspacing="5">
@@ -38,6 +60,7 @@
 						<input type="hidden" id="idDuplicateCheck" value="0">
 					</td>
 				</tr>
+				
 				<tr>
 					<td>* 비밀번호</td>
 					<td><input type="password" name="password"></td>
@@ -58,13 +81,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>* 전화번호</td>
+					<td>* 휴대폰 번호</td>
 					<td><input type="text" name="phone"></td>
 				</tr>
 				<tr>
 					<td>* 이메일</td>
 					<td><input type="email" name="email"></td>
-				</tr>
+				</tr>				
 				<tr>
 					<td>우편번호</td>
 					<td>
@@ -87,15 +110,19 @@
 						$("#postcodify_search_button").postcodifyPopUp();
 					})
 				</script>
-
 				<tr>
 					<td colspan="2" align="center">
-						<button onclick="return validate();">가입하기</button>
+						<button id="join" onclick="return validate();">가입하기</button>
 					</td>
 				</tr>
 			</table>
 	</form>
 	</div>
+	</section>
+	
+	<footer>
+		<jsp:include page="../common/footer.jsp"></jsp:include>
+	</footer>
 	
 	<script>
 		function validate() {
@@ -109,7 +136,7 @@
 		}	
 	
 		//아이디 중복 검사(Ajax)
-		$("#customerId").on("blur",function(){
+		$("#customerId").on("blur",function(){			
 			var customerId = $(this).val();
 			
 			if(customerId.length < 4){
@@ -135,21 +162,6 @@
 			});
 		});
 	</script>
-	</section>
 	
-	
-<section id="book-a-table" class="book-a-table">
-      <div class="container" data-aos="fade-up">
-        <form action="resources/forms/book-a-table.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-          <div class="text-center"><button type="submit">Book a Table</button></div>
-        </form>
-      </div>
-     </section>
-	
-	
-	
-	<footer>
-	<jsp:include page="../common/footer.jsp"></jsp:include>
-	</footer>
 </body>
 </html>

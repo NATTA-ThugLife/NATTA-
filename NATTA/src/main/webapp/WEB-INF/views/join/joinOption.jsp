@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
+
 #button {
 	background: #cda45e;
 	border: 0;
@@ -19,6 +20,7 @@
 #button:hover {
 	background: #d3af71;
 }
+
 </style>
 <title>Insert title here</title>
 </head>
@@ -37,7 +39,7 @@
 				<form action="resources/forms/book-a-table.php" method="post"
 					role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
 					<br>
-					<input id="button" type="button" onClick="location.href='customereJoinView.na'" value="일반 회원입니다"
+					<input id="button" type="button" onClick="location.href='customerJoinView.na'" value="일반 회원입니다"
 						style="margin-right: 30px;">
 					<input id="button" type="button" onClick="location.href='artistJoinView.na'"
 						value="아티스트입니다" style="margin-left: 30px">

@@ -15,9 +15,7 @@ public class Artist {
 	private String workAddress;
 	private Date enrollDate;
 	private String businessNo;
-	private int enrollStatus;
-	
-	
+	private int enrollStatus;	
 	
 	
 	public Artist(String artistId, String password) {

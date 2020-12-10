@@ -87,10 +87,10 @@
           <li><a href="customDesignList.na" style="text-align: center">Customized<br>Tatto</a></li>
           <li></li>
           <li></li>
-          <li><a href="#">NOTICE</a></li>
+          <li><a href="/notice.na">NOTICE</a></li>
           <li></li>
           <li></li>
-          <li><a href="#">QnA</a></li>
+          <li><a href="/qna.na">QnA</a></li>
           <li></li>
 <!--           <li></li>
           <li class="book-a-table text-center"><a href="#book-a-table">LOGIN / SIGNUP</a></li> -->

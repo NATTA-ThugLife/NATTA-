@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>    
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,25 +18,49 @@
 	}
 	span.ok{color:green}
 	span.error{color:red}
+	
+	#join {
+	background: #cda45e;
+	border: 0;
+	padding: 10px 35px;
+	color: #fff;
+	transition: 0.4s;
+	border-radius: 50px;
+	top: 50%;
+	left: 50%;
+	}
+
+    #join:hover {
+	background: #d3af71;
+}
 
 </style>
 </head>
 <body>
-	<header>
+    <header>
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 	
-	<section>	
+	<section>
+	
+	<div class="container" data-aos="fade-up" style="width: 100%; margin: 0 auto;">
+			<div class="section-title">
+				<h2>Artist Join</h2>
+				<p>아티스트 회원가입</p>
+	</div>
+	
 	<div class="centerText">
-		<form action="artistRegister.na" method="post">
-			<table width="650" cellspacing="5">
+	<form action="artistRegister.na" method="post">
+		<table width="650" cellspacing="5">
 				<tr>
 					<td>* 아이디</td>
 					<td><input type="text" name="artistId" id="artistId">
-						<span class="guide ok">이 아이디는 사용 가능합니다.</span> <span
-						class="guide error">이 아이디는 사용할 수 없습니다.</span> <input type="hidden"
-						id="idDuplicateCheck" value="0"></td>
+						<span class="guide ok">이 아이디는 사용 가능합니다.</span>
+						<span class="guide error">이 아이디는 사용할 수 없습니다.</span>
+						<input type="hidden" id="idDuplicateCheck" value="0">
+					</td>
 				</tr>
+				
 				<tr>
 					<td>* 비밀번호</td>
 					<td><input type="password" name="password"></td>
@@ -44,85 +68,99 @@
 				<tr>
 					<td>* 이름</td>
 					<td><input type="text" name="artistName"></td>
-				</tr>
+				</tr>				
 				<tr>
 					<td>* 나이</td>
 					<td><input type="number" min="20" max="100" name="age"></td>
 				</tr>
 				<tr>
 					<td>* 성별</td>
-					<td><input type="radio" name="gender" value="M">남 <input type="radio" name="gender" value="F">여</td>
+					<td>
+						<input type="radio" name="gender" value="M">남
+						<input type="radio" name="gender" value="F">여
+					</td>
 				</tr>
 				<tr>
-					<td>* 전화번호</td>
+					<td>* 휴대폰 번호</td>
 					<td><input type="text" name="phone"></td>
 				</tr>
 				<tr>
 					<td>* 이메일</td>
 					<td><input type="email" name="email"></td>
-				</tr>
+				</tr>	
+				<tr>
+				<td>자택 주소</td>
+				</tr>			
 				<tr>
 					<td>우편번호</td>
-					<td><input type="text" name="post"
-						class="postcodify_postcode5" size="6">
-						<button type="button" id="postcodify_search_button">검색</button></td>
-				</tr>
+					<td>
+						<input type="text" name="post" class="postcodify_postcode5" size="6">
+						<button type="button" id="postcodify_search_button">검색</button>
+					</td>
+				</tr>				
 				<tr>
-					<td>자택 주소</td>
-					<td><input type="text" name="address1"
-						class="postcodify_address"></td>
+					<td>도로명 주소</td>
+					<td><input type="text" name="address1" class="postcodify_address"></td>
 				</tr>
 				<tr>
 					<td>상세 주소</td>
-					<td><input type="text" name="address2"
-						class="postcodify_extra_info"></td>
+					<td><input type="text" name="address2" class="postcodify_extra_info"></td>
 				</tr>
-
+				
 				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 				<script>
 					$(function() {
 						$("#postcodify_search_button").postcodifyPopUp();
 					})
 				</script>
-
+				
 				<tr>
-					<td>우편번호</td>
-					<td><input type="text" name="post"
-						class="postcodify_postcode5" size="6">
-						<button type="button" id="postcodify_search_button2">검색</button></td>
+				<td>근무지 주소</td>
 				</tr>
 				<tr>
-					<td>근무지 주소</td>
-					<td><input type="text" name="address1"
-						class="postcodify_address"></td>
+					<td>우편번호</td>
+					<td>
+						<input type="text" name="post" class="postcodify_postcode5" size="6">
+						<button type="button" id="postcodify_search_button">검색</button>
+					</td>
+				</tr>
+				<tr>
+					<td>도로명 주소</td>
+					<td><input type="text" name="address1" class="postcodify_address"></td>
 				</tr>
 				<tr>
 					<td>상세 주소</td>
-					<td><input type="text" name="address2"
-						class="postcodify_extra_info"></td>
+					<td><input type="text" name="address2" class="postcodify_extra_info"></td>
 				</tr>
-
+				
+				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 				<script>
 					$(function() {
-						$("#postcodify_search_button2").postcodifyPopUp();
+						$("#postcodify_search_button").postcodifyPopUp();
 					})
 				</script>
-
+				
 				<tr>
 					<td>사업자 등록증</td>
 					<td><input type="text" name="businessNo"></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<button onclick="return validate();">가입하기</button>
+						<button id="join" onclick="return validate();">가입하기</button>
 					</td>
 				</tr>
+				
 			</table>
-		</form>
+	</form>
 	</div>
-	<script>
+	</section>
+        
+	<footer>
+		<jsp:include page="../common/footer.jsp"></jsp:include>
+	</footer>
 	
-    function validate() {
+	<script>
+		function validate() {
 			if($("#idDuplicateCheck").val() == 0){
 				alert("사용 가능한 아이디를 입력해주세요.")
 				$("#artistId").focus();
@@ -133,7 +171,7 @@
 		}	
 	
 		//아이디 중복 검사(Ajax)
-		$("#artistId").on("blur",function(){
+		$("#artistId").on("blur",function(){			
 			var artistId = $(this).val();
 			
 			if(artistId.length < 4){
@@ -159,21 +197,6 @@
 			});
 		});
 	</script>
-	</section> 
-	
-	
-	 <section id="book-a-table" class="book-a-table">
-      <div class="container" data-aos="fade-up">
-        <form action="resources/forms/book-a-table.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-          <div class="text-center"><button type="submit">Book a Table</button></div>
-        </form>
-      </div>
-     </section>
-	
-	
-	<footer>
-	<jsp:include page="../common/footer.jsp"></jsp:include>
-	</footer>
 	
 </body>
 </html>

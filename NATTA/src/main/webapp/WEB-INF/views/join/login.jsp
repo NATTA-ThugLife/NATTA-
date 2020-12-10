@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
+
 #button {
 	background: #cda45e;
 	border: 0;
@@ -64,7 +65,7 @@
 			<div class="section-title">
 				<h2>Log In</h2>
 				<p>로그인</p>
-			</div>
+		</div>
 
 			<table align="center">
 				<tr>
