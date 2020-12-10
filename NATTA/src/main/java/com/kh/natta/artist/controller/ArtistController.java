@@ -71,7 +71,6 @@ public class ArtistController {
 	  @ResponseBody	  
 	  @RequestMapping(value="dupId.kh", method=RequestMethod.GET) public String
 	  idDuplicateCheck(String artistId) { boolean isUsable =
-	  service.checkIdDup(artistId) == 0 ? true : false; return isUsable+""; }
-	 
+	  service.checkIdDup(artistId) == 0 ? true : false; return isUsable+""; }	 
 
 }

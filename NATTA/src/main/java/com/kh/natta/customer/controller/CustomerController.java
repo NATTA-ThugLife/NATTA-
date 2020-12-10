@@ -40,6 +40,7 @@ public class CustomerController {
 		}
 		return mv;
 	}
+	
 	// 로그아웃
 	  @RequestMapping(value="customerLogout.na",method=RequestMethod.GET) public String
 	  customerLogout(HttpServletRequest request) { HttpSession session =
@@ -48,7 +49,7 @@ public class CustomerController {
 	 
 	
 	// 회원가입 페이지 뷰
-	@RequestMapping(value="customereJoinView.na",method=RequestMethod.GET)
+	@RequestMapping(value="customerJoinView.na",method=RequestMethod.GET)
 	public String enrollView() {
 		return "join/customerjoin";
 	}

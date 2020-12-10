@@ -11,6 +11,9 @@
 		<typeAlias type="com.kh.natta.customer.domain.Customer" alias="Customer"/>
 		<typeAlias type="com.kh.natta.reservation.domain.Reservation" alias="Reservation"/>
 		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistInfo" alias="ArtistInfo"/>
+		<typeAlias type="com.kh.natta.notice.domain.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.natta.qna.domain.Qna" alias="Qna"/>
+<!-- 		<typeAlias type="com.kh.natta.qna.domain.QnaComment" alias="QnaComment"/> -->
 	</typeAliases>
 	
 	<mappers>
@@ -18,6 +21,8 @@
 		<mapper resource="mappers/customer-mapper.xml"></mapper>
 		<mapper resource="mappers/reservation-mapper.xml"></mapper>
 		<mapper resource="mappers/artistInfo-mapper.xml"></mapper>
+		<mapper resource="mappers/notice-mapper.xml"></mapper>
+		<mapper resource="mappers/qna-mapper.xml"></mapper>
 	</mappers>
 	
 

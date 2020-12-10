@@ -1,71 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="BoardMapper">
+<mapper namespace="qnaMapper">
 
-	<resultMap type="Board" id="boardResultMap">
-		<result property="originalFilename" column="ORIGINAL_FILENAME"/>
-		<result property="renameFilename" column="RENAME_FILENAME"/>
-		<result property="bCreateDate" column="B_CREATE_DATE"/>
-		<result property="bModifyDate" column="B_MODIFY_DATE"/>
-		<result property="bStatus" column="B_STATUS"/>
+	<resultMap type="QNA" id="qnaResultMap">
+	    <result property="qnaCode" column="QNA_CODE"/>
+		<result property="qnaTitle" column="QNA_TITLE"/>
+		<result property="qnaContents" column="QNA_CONTENTS"/>
+		<result property="qnaWriter" column="QNA_WRITER"/>
+		<result property="qnaCreateDate" column="QNA_CREATEDATE"/>
+		<result property="qnaModifyDate" column="QNA_MODIFYDATE"/>
+		<result property="qnaHits" column="QNA_HITS"/>
+		<result property="onOff" column="ON_OFF"/>
+		<result property="artistId" column="ARTIST_ID"/>
+		<result property="customerId" column="CUSTOMER_ID"/>
 	</resultMap>
 	
-	<resultMap type="Reply" id="replyResultMap">
-		<result property="refBid" column="REF_BID"/>
-		<result property="rCreateDate" column="R_CREATE_DATE"/>
-		<result property="rModifyDate" column="R_MODIFY_DATE"/>
-		<result property="rStatus" column="R_STATUS"/>
-	</resultMap>
+<!-- 	<resultMap type="QnaComment" id="qnacommentResultMap">
+		<result property="qcCode" column="QC_CODE"/>
+		<result property="qcTitle" column="QC_TITLE"/>
+		<result property="qcContents" column="QC_CONTENTS"/>
+		<result property="qcWriter" column="QC_CONTENTS"/>
+		<result property="qcCreateDate" column="QC_CREATEDATE"/>
+		<result property="qcModifyDate" column="QC_MODIFYDATE"/>
+		<result property="onOff" column="ON_OFF"/>
+		<result property="qnaCode" column="QNA_CODE"/>
+	</resultMap> -->
 	
-	<insert id="insertBoard">
-		INSERT INTO BOARD
-		VALUES(SEQ_BID.NEXTVAL,#{bTitle},#{bWriter},#{bContent},#{originalFilename},#{renameFilename},#{bCount},SYSDATE,SYSDATE,DEFAULT)
+<!-- 	<insert id="insertQna">
+		INSERT INTO QNA
+		VALUES(SEQ_QNA_CODE.NEXTVAL,#{qnaTitle},#{qnaContents},#{qnaWriter},SYSDATE,SYSDATE,#{qnaHits},#{onOff},#{artistId},#{customerId})
 	</insert>
 	
-	<select id="selectList" resultMap="boardResultMap">
-		SELECT * FROM BOARD
+	<select id="selectList" resultMap="qnaResultMap">
+		SELECT * FROM QNA
 		WHERE B_STATUS = 'Y'
 		ORDER BY BID DESC
 	</select>
 	<select id="getListCount" resultType="int">
 		SELECT COUNT(*)
-		FROM BOARD
+		FROM QNA
 		WHERE B_STATUS = 'Y'
 	</select>
 	
-	<select id="selectOne" resultMap="boardResultMap"> 
-		SELECT * FROM BOARD
+	<select id="selectOne" resultMap="qnaResultMap"> 
+		SELECT * FROM QNA
 		WHERE BID = #{bId}
 		AND B_STATUS = 'Y'
 	</select>
 	
-	<insert id="insertReply">
-		INSERT INTO REPLY
+	<insert id="insertQnacomment">
+		INSERT INTO QNA_COMMENT
 		VALUES(SEQ_RID.NEXTVAL, #{rContent},#{refBid},#{rWriter},SYSDATE,SYSDATE,DEFAULT)
 	</insert>
 	
-	<select id="selectReplyList" resultMap="replyResultMap">
-		SELECT * FROM REPLY
+	<select id="selectQnacommentList" resultMap="qnacommentResultMap">
+		SELECT * FROM QNA_COMMENT
 		WHERE REF_BID = #{bId}
 		ORDER BY REF_BID DESC
 	</select>
 	
 	<update id="updateCount">
-		UPDATE BOARD
+		UPDATE QNA
 		SET BCOUNT = BCOUNT + 1
 		WHERE BID = #{bId}
 	</update>
 	
-	<update id="deleteBoard">
-		UPDATE BOARD
+	<update id="deleteQna">
+		UPDATE QNA
 		SET B_STATUS = 'N'
 		WHERE BID = #{bId}
 	</update>
 	
-	<update id="updateBoard">
-		UPDATE BOARD
+	<update id="updateQna">
+		UPDATE QNA
 		SET BTITLE = #{bTitle}, BCONTENT = #{bContent}, ORIGINAL_FILENAME = #{originalFilename},
 		B_MODIFY_DATE = SYSDATE
 		WHERE BID = #{bId}
-	</update>
+	</update> -->
 </mapper>
