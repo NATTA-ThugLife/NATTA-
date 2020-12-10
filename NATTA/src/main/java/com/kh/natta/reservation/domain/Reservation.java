@@ -8,7 +8,8 @@ public class Reservation {
 	private String artistName;
 	private Date reservationDate;
 	private String address;
-	private String designPath;
+	private String originalFilename;
+	private String renameFilename;
 	private String tattooSize;
 	private String request;
 	private String style;
@@ -18,32 +19,7 @@ public class Reservation {
 	private String customerId;
 	private String artistId;
 	
-	public Reservation(int reservationCode, String artistName, Date reservationDate, String address, String designPath,
-			String tattooSize, String request, String style, String part, String price, int status, String customerId,
-			String artistId) {
-		super();
-		this.reservationCode = reservationCode;
-		this.artistName = artistName;
-		this.reservationDate = reservationDate;
-		this.address = address;
-		this.designPath = designPath;
-		this.tattooSize = tattooSize;
-		this.request = request;
-		this.style = style;
-		this.part = part;
-		this.price = price;
-		this.status = status;
-		this.customerId = customerId;
-		this.artistId = artistId;
-	}
-
-	@Override
-	public String toString() {
-		return "Reservation [reservationCode=" + reservationCode + ", artistName=" + artistName + ", reservationDate="
-				+ reservationDate + ", address=" + address + ", designPath=" + designPath + ", tattooSize=" + tattooSize
-				+ ", request=" + request + ", style=" + style + ", part=" + part + ", price=" + price + ", status="
-				+ status + ", customerId=" + customerId + ", artistId=" + artistId + "]";
-	}
+	public Reservation() {}
 
 	public int getReservationCode() {
 		return reservationCode;
@@ -77,12 +53,20 @@ public class Reservation {
 		this.address = address;
 	}
 
-	public String getDesignPath() {
-		return designPath;
+	public String getOriginalFilename() {
+		return originalFilename;
 	}
 
-	public void setDesignPath(String designPath) {
-		this.designPath = designPath;
+	public void setOriginalFilename(String originalFilename) {
+		this.originalFilename = originalFilename;
+	}
+
+	public String getRenameFilename() {
+		return renameFilename;
+	}
+
+	public void setRenameFilename(String renameFilename) {
+		this.renameFilename = renameFilename;
 	}
 
 	public String getTattooSize() {
@@ -148,6 +132,41 @@ public class Reservation {
 	public void setArtistId(String artistId) {
 		this.artistId = artistId;
 	}
+
+	@Override
+	public String toString() {
+		return "Reservation [reservationCode=" + reservationCode + ", artistName=" + artistName + ", reservationDate="
+				+ reservationDate + ", address=" + address + ", originalFilename=" + originalFilename
+				+ ", renameFilename=" + renameFilename + ", tattooSize=" + tattooSize + ", request=" + request
+				+ ", style=" + style + ", part=" + part + ", price=" + price + ", status=" + status + ", customerId="
+				+ customerId + ", artistId=" + artistId + "]";
+	}
+
+	public Reservation(int reservationCode, String artistName, Date reservationDate, String address,
+			String originalFilename, String renameFilename, String tattooSize, String request, String style,
+			String part, String price, int status, String customerId, String artistId) {
+		super();
+		this.reservationCode = reservationCode;
+		this.artistName = artistName;
+		this.reservationDate = reservationDate;
+		this.address = address;
+		this.originalFilename = originalFilename;
+		this.renameFilename = renameFilename;
+		this.tattooSize = tattooSize;
+		this.request = request;
+		this.style = style;
+		this.part = part;
+		this.price = price;
+		this.status = status;
+		this.customerId = customerId;
+		this.artistId = artistId;
+	}
+	
+	
+	
+	
+
+	
 	
 	
 }

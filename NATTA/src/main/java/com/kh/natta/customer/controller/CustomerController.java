@@ -76,7 +76,7 @@ public class CustomerController {
 		return isUsable+""; 
 	}
 	
-	@RequestMapping(value = "login.na", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "login.na", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
 		return "join/login";
 	}

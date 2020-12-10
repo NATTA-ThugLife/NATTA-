@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CustomDesignMapper">
+	
+	<resultMap type="CustomDesign" id="customDesignResultMap">
+		<result property="customCode" column="CUSTOM_CODE"/>
+		<result property="onOff" column="ON_OFF"/>
+		<result property="customTitle" column="CUSTOM_TITLE"/>
+		<result property="tattooType" column="TATTOO_TYPE"/>
+		<result property="cCreateDate" column="C_CREATE_DATE"/>
+		<result property="cModifyDate" column="C_MODIFY_DATE"/>
+		<result property="customHits" column="CUSTOM_HITS"/>
+		<result property="customerId" column="CUSTOMER_ID"/>
+	</resultMap>
+	
+	<resultMap type="CustomComment" id="customCommentResultMap">
+		<result property="customCCode" column="CUSTOM_C_CODE"/>
+		<result property="artistId" column="ARTIST_ID"/>
+		<result property="cContents" column="C_CONTENTS"/>
+		<result property="ccCreateDate" column="CC_CREATE_DATE"/>
+		<result property="ccModifyDate" column="CC_MODIFY_DATE"/>
+		<result property="cOnOff" column="C_ON_OFF"/>
+		<result property="customCode" column="CUSTOM_CODE"/>
+	</resultMap>
+	
+	<!-- 맞춤도안 -->
+	
+	<insert id="insertCustomDesign">
+		INSERT INTO CUSTOM_DESIGN
+		VALUES(CUSTOM_DESIGN_SEQ.NEXTVAL,'0',#{customTitle},#{contents},#{tattooType},SYSDATE,SYSDATE,'0',#{customerId})
+	</insert>
+	
+	<select id="selectListCustomDesign" resultMap="customDesignResultMap">
+		SELECT * FROM CUSTOM_DESIGN
+		ORDER BY CUSTOM_CODE
+	</select>
+	
+	<select id="selectOneCustomDesign" resultMap="customDesignResultMap">
+		SELECT * FROM CUSTOM_DESIGN
+		WHERE CUSTOM_CODE = #{customCode}
+	</select>
+	
+	<update id="updateCustomDesign">
+		UPDATE CUSTOM_DESIGN
+		SET CUSTOM_TITLE=#{customTitle}, TATTOO_TYPE=#{tattooType}, CONTENTS=#{contents}, C_MODIFY_DATE=SYSDATE
+		WHERE CUSTOM_CODE=#{customCode}
+	</update>
+	
+	<!-- 댓글 -->
+	
+	<insert id="insertComment">
+		INSERT INTO CUSTOM_COMMENT
+		VALUES(C_COMMENT_SEQ.NEXTVAL,#{artistId},#{cContents},SYSDATE,SYSDATE,'0',#{customCode})
+	</insert>
+	
+	<select id="selectListComment" resultMap="customCommentResultMap">
+		SELECT * FROM CUSTOM_COMMENT
+		WHERE CUSTOM_CODE=#{customCode}
+		ORDER BY CUSTOM_C_CODE DESC
+	</select>	
+	
+	<update id="updateCustomComment">
+		UPDATE CUSTOM_COMMENT
+		SET  C_CONTENTS=#{cContents}, CC_MODIFY_DATE=SYSDATE
+		WHERE CUSTOM_C_CODE=#{customCCode}	
+	</update>
+	
+	<delete id="deleteCustomComment">
+		DELETE CUSTOM_COMMENT
+		WHERE CUSTOM_C_CODE=#{customCCode}
+	</delete>
+	
+</mapper>

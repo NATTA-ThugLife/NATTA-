@@ -77,7 +77,7 @@
           <li><a href="#menu">ARTIST</a></li>
           <li></li>
           <li></li>
-          <li><a href="#" style="text-align: center">Customized<br>Tatto</a></li>
+          <li><a href="customDesignList.na" style="text-align: center">Customized<br>Tatto</a></li>
           <li></li>
           <li></li>
           <li><a href="#">NOTICE</a></li>
