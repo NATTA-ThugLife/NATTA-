@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="chatMapper">
+	<resultMap type="ChattingRoom" id="resultMapChattingRoom">
+	 <result property="roomCode" column="ROOM_CODE"/>
+	 <result property="artistId" column="artist_Id"/>
+	 <result property="customerId" column="customer_Id"/>
+	</resultMap>
+	
+	<resultMap type="Chat" id="resultMapChat">
+		<result property="roomCode" column="ROOM_CODE"></result>
+		<result property="chatContent" column="CHAT_CONTENT"></result>
+		<result property="chatImgPath" column="CHAT_IMGPATH"></result>
+		<result property="chatChatDate" column="CHAT_CHATDATE"></result>
+		<result property="chatChatDateFormat" column="CHAT_CHATDATEFORMAT"></result>
+	</resultMap>
+	<select id="checkChattingRoom" resultMap="resultMapChattingRoom">
+		select * from CHATTINGROOM where (ARTIST_ID = #{artistId} AND CUSTOMER_ID = #{customerId}) OR (ARTIST_ID = #{customerId} AND CUSTOMER_ID = #{artistId})
+	</select>
+	
+	<insert id="insertChattingRoom">
+		INSERT INTO CHATTINGROOM VALUES(ROOM_SEQ.NEXTVAL,#{artistId},#{customerId})
+	</insert>
+	
+	<select id="viewChat" resultMap="resultMapChat">
+	select CHAT.*,TO_CHAR(chat_chatdate, 'YY/MM/DD HH24:MI:SS') AS CHAT_CHATDATEFORMAT from chat
+ 	WHERE ROOM_CODE= #{roomCode} ORDER BY CHAT_CHATDATEFORMAT	</select>
+	
+	<insert id="insertChat">
+		INSERT INTO CHAT VALUES(#{roomCode},#{chatContent},#{chatImgPath},SYSDATE,#{sender},#{reciver})
+	</insert>
+	
+	<select id="chataddList" resultMap="resultMapChat">
+	select CHAT.*,TO_CHAR(chat_chatdate, 'YY/MM/DD HH24:MI:SS') AS CHAT_CHATDATEFORMAT from chat 
+	where TO_CHAR(chat_chatdate, 'YY/MM/DD HH24:MI:SS') > #{chatChatDateFormat} AND ROOM_CODE = #{roomCode}
+	ORDER BY CHAT_CHATDATEFORMAT
+	</select>
+	
+	<select id="selectListChattingRoom" resultMap="resultMapChat">
+		select * from (select * from chat where (room_code, chat_chatDate) in (select room_code, max(chat_chatDate) as chat_chatDate from chat group by room_code) order by chat_chatDate desc) where sender = #{userId} or reciver = #{userId}
+	</select>
+	
+	
+</mapper>
