@@ -13,6 +13,8 @@
 		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistInfo" alias="ArtistInfo"/>
 		<typeAlias type="com.kh.natta.customDesign.domain.CustomDesign" alias="CustomDesign"/>
 		<typeAlias type="com.kh.natta.customDesign.domain.CustomComment" alias="CustomComment"/>
+		<typeAlias type="com.kh.natta.chat.domain.Chat" alias="Chat"/>
+		<typeAlias type="com.kh.natta.chat.domain.ChattingRoom" alias="ChattingRoom"/>
 	</typeAliases>
 	
 	<mappers>
@@ -21,6 +23,7 @@
 		<mapper resource="mappers/reservation-mapper.xml"></mapper>
 		<mapper resource="mappers/artistInfo-mapper.xml"></mapper>
 		<mapper resource="mappers/customdesign-mapper.xml"></mapper>
+		<mapper resource="mappers/chat-mappers.xml"></mapper>
 	</mappers>
 	
 
