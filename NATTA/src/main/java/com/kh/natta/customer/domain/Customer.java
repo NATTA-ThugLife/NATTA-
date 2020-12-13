@@ -13,6 +13,7 @@ public class Customer {
 	private String email;
 	private String address;
 	private Date enrollDate;
+	private String customerProfile;
 	
 	public Customer() {
 		super();
@@ -20,6 +21,16 @@ public class Customer {
 	}
 	
 	
+
+	
+	
+	public String getCustomerProfile() {
+		return customerProfile;
+	}
+
+	public void setCustomerProfile(String customerProfile) {
+		this.customerProfile = customerProfile;
+	}
 
 	public Customer(String customerId, String password) {
 		super();
@@ -43,12 +54,18 @@ public class Customer {
 		this.enrollDate = enrollDate;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", password=" + password + ", customerName=" + customerName + ", age=" + age
-				+ ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", address=" + address
-				+", enrollDate=" + enrollDate + "]";
+		return "Customer [customerId=" + customerId + ", password=" + password + ", customerName=" + customerName
+				+ ", age=" + age + ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", address="
+				+ address + ", enrollDate=" + enrollDate + ", customerProfile=" + customerProfile + "]";
 	}
+
+
+
+
 
 	public String getCustomerId() {
 		return customerId;

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="customerInfoMapper">
+
+	<resultMap type="Customer" id="customerResultMap">
+		<result property="customerId" column="CUSTOMER_ID"></result>
+		<result property="customerName" column="CUSTOMER_NAME"></result>
+		<result property="enrollDate" column="ENROLL_DATE"></result>
+		<result property="customerProfile" column="CUSTOMER_PROFILE"></result>
+	</resultMap>
+	
+	<update id="modifyCusotmer">
+		UPDATE CUSTOMER
+		<set>
+		<if test="password != ''">
+			PASSWORD = #{password},
+		</if>
+		<if test="email != null">
+			EMAIL = #{email},
+		</if>
+		<if test="address != ',,,'">
+			ADDRESS = #{address},
+		</if>
+		<if test="customerProfile != null">
+			CUSTOMER_PROFILE = #{customerProfile},
+		</if>
+		
+		<if test="phone != null">
+			PHONE = #{phone}
+		</if>
+		</set>
+		WHERE CUSTOMER_ID = #{customerId}
+	</update>
+	
+	<select resultMap="customerResultMap" id="dupPwd">
+		SELECT * FROM CUSTOMER
+		WHERE CUSTOMER_ID = #{customerId} AND PASSWORD = #{password}
+	</select>
+</mapper>

@@ -28,6 +28,7 @@
 		<mapper resource="mappers/chat-mappers.xml"></mapper>
 		<mapper resource="mappers/notice-mapper.xml"></mapper>
 		<mapper resource="mappers/qna-mapper.xml"></mapper>
+		<mapper resource="mappers/customerInfo-mapper.xml"></mapper>
 	</mappers>
 	
 

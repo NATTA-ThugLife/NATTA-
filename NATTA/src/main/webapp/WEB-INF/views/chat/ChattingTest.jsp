@@ -17,8 +17,6 @@
 body {
 /*    background-color: #74EBD5;
    background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);  */
-   background : lightgray;
-
   min-height: 100vh;
 }
 
@@ -44,7 +42,7 @@ body {
 
 .messages-box,
 .chat-box {
-  height: 510px;
+  height: 700px;
   overflow-y: scroll;
 }
 
@@ -60,6 +58,11 @@ input::placeholder {
     </style>
 </head>
 <body>
+    <header>
+    	<jsp:include page="../common/headerNone.jsp"></jsp:include>
+    </header>
+    
+    <br><br>
 <div class="container py-5 px-4">
   <!-- Start -->
 	<!-- 아티스트가 채팅방 로그인시 jsp를 그대로 이용할 수 있도록 보내는사람과 받는 사람을 바꿔주는작업 -->
@@ -252,12 +255,16 @@ input::placeholder {
 			alert("내용을 입력해주세요");
 			return false;
 		}
-		var roomCode = ${roomCode };
+		if($("#roomCode").val() != null){
+		var roomCode = $("#roomCode").val();
+		}
 		var reciver = $("#reciver").val();
+		var sender = $("#loginUser").val();
 		
  		formData.append("chatContent", chatContent);
 		formData.append("roomCode", roomCode);
 		formData.append("reciver", reciver);
+		formData.append("sender", sender);
 		
 		
 		$.ajax({
@@ -280,7 +287,9 @@ input::placeholder {
 	
 	function getChatList(){
 
-			var roomCode = ${roomCode };
+			if($("#roomCode").val() != null){
+			var roomCode = $("#roomCode").val();
+
 			// 마지막 시간보다 늦은것들을 가져옴
 			var lastChatTime = $("#lastChatTime").val();
 			$.ajax({
@@ -324,6 +333,7 @@ input::placeholder {
 					}
 				}
 			});
+		}
 	}
 </script>
 </body>

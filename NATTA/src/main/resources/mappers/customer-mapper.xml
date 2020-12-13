@@ -6,6 +6,7 @@
 		<result property="customerId" column="CUSTOMER_ID"></result>
 		<result property="customerName" column="CUSTOMER_NAME"></result>
 		<result property="enrollDate" column="ENROLL_DATE"></result>
+		<result property="customerProfile" column="CUSTOMER_PROFILE"></result>
 	</resultMap>
 
 	<select id="selectOne" resultMap="customerResultMap">

@@ -26,9 +26,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.chat.domain.Chat;
 import com.kh.natta.chat.domain.ChattingRoom;
 import com.kh.natta.chat.service.ChatService;
+import com.kh.natta.customer.domain.Customer;
 
 @Controller
 public class ChatController {
@@ -40,14 +42,23 @@ public class ChatController {
 	// 테스트용
 	@RequestMapping(value="/chat.na",method = RequestMethod.GET)
 	public String ChatView(Model model,HttpServletRequest request) {
+		ArrayList<String> artists = new ArrayList<String>();
 		HttpSession session = request.getSession();
-		ArrayList<String> artist = new ArrayList<String>();
+		String loginUser = null;
 		
-		artist.add("TEST1");
-		artist.add("TEST2");
-		artist.add("TEST3");
-		session.setAttribute("loginUser", "test1");
-		model.addAttribute("artist",artist);
+		if(session.getAttribute("loginCustomer") != null) {
+			Customer customer = (Customer)session.getAttribute("loginCustomer");
+			 loginUser = customer.getCustomerId();
+		}else {
+			Artist artist = (Artist)session.getAttribute("loginArtist");
+			 loginUser = artist.getArtistId();
+		}
+		
+		artists.add("TEST1");
+		artists.add("TEST2");
+		artists.add("TEST3");
+		model.addAttribute("loginUser",loginUser);
+		model.addAttribute("artist",artists);
 		return"chat/ChatTest";
 	}
 	
@@ -55,8 +66,8 @@ public class ChatController {
 	@RequestMapping(value="/artistChat.na",method=RequestMethod.GET)
 	public String ArtistChatView(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		session.setAttribute("loginUser", "TEST1");
-		String loginUser = (String)session.getAttribute("loginUser");
+		Artist artist = (Artist)session.getAttribute("loginArtist");
+		String loginUser = artist.getArtistId();
 		ArrayList<Chat> roomList = service.selectListChattingRoom(loginUser);
 		model.addAttribute("roomList",roomList);
 		return "chat/ChattingArtist";
@@ -68,14 +79,23 @@ public class ChatController {
 		
 		// 현재 로그인한 유저 set
 		HttpSession session = request.getSession();
-		String loginUser = (String)session.getAttribute("loginUser");
+		String loginUser = null;
+		if(session.getAttribute("loginCustomer") != null) {
+			Customer customer = (Customer)session.getAttribute("loginCustomer");
+			 loginUser = customer.getCustomerId();
+		}else {
+			Artist artist = (Artist)session.getAttribute("loginArtist");
+			 loginUser = artist.getArtistId();
+		}
+		//채팅방 만들때 loginUser를 너무 많이 사용해서 수정을 위해서는 너무 많은 시간과 노력이 필요.. 그냥 loginUser세션 하나를 추가하는것으로 타협..
+		session.setAttribute("loginUser", loginUser);
 		//채팅방 체크를 위해서  set
 		chattingRoom.setCustomerId(loginUser);
 		// 채팅방이 있는지 없는지 체크
+		if(chattingRoom.getArtistId() != null) {
 		ChattingRoom check = service.checkChattingRoom(chattingRoom);
 		// 채팅방들을 가져와서 jsp에 넣기위한 List
 		ArrayList<Chat> chatList = null;
-
 		if(check == null) {
 			// 채팅방이 없을때
 			int result = service.insertChattingRoom(chattingRoom);
@@ -107,6 +127,10 @@ public class ChatController {
 			chatList = service.viewChatContent(check.getRoomCode());
 			model.addAttribute("chatList",chatList);
 			model.addAttribute("roomCode",check.getRoomCode());
+			
+		}
+		}else {
+			
 		}
 		return "chat/ChattingTest";
 	}
@@ -139,11 +163,6 @@ public class ChatController {
 				chat.setChatImgPath(renameFileName);
 			}
 		}
-		
-		
-		HttpSession session = request.getSession();
-		String sender = (String)session.getAttribute("loginUser");
-		chat.setSender(sender);
 		int result = service.insertChat(chat);
 		if(result > 0) {
 			return "success";
@@ -182,6 +201,8 @@ public class ChatController {
 	
 	@RequestMapping(value = "chatList.na", method = RequestMethod.GET)
 	public void addList(int roomCode , String lastChatTime , HttpServletResponse response) throws Exception {
+		
+		if(roomCode != 0) {
 		// 마지막 채팅 기록
 		Chat chat = new Chat();
 		chat.setRoomCode(roomCode);
@@ -201,5 +222,6 @@ public class ChatController {
 			Gson gson = new Gson();
 			gson.toJson("nodata", response.getWriter());
 		}
+	}
 	}
 }

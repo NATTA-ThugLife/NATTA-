@@ -50,7 +50,7 @@
 			<!-- 회원 로그인시 -->
 			<c:if test="${!empty sessionScope.loginCustomer }">
 				<li>${loginCustomer.customerName }님 환영합니다.</li>
-				<li><a href="#">MyPage&nbsp;&nbsp;</a></li>
+				<li><a href="/customerInfo.na?customerId=${loginCustomer.customerId }">MyPage&nbsp;&nbsp;</a></li>
 				<li><a href="/customerLogout.na">LogOut</a></li>
 			</c:if>
 			<!-- 아티스트 로그인시 -->

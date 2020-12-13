@@ -13,7 +13,7 @@
 채팅방 들어갔을때 회원 채팅 리스트 출력 <br><br>
 	${roomCode }번방<br>
 	유저네임 : ${loginUser } 
-	<input id="loginUser" value="${loginUser }">
+	<input type="text" id="loginUser" value="${loginUser }">
 	<br>
 	
 	<!-- 아티스트가 채팅방 로그인시 jsp를 그대로 이용할 수 있도록 보내는사람과 받는 사람을 바꿔주는작업 -->
@@ -81,14 +81,16 @@
 		
 		var form = $("#uploadForm")[0];
 		var formData = new FormData(form);
-
+		
 		var chatContent = $("#chatContent").val();
 		var roomCode = ${roomCode };
 		var reciver = $("#reciver").val();
+		var sender = $("#loginUser").val();
 		
  		formData.append("chatContent", chatContent);
 		formData.append("roomCode", roomCode);
 		formData.append("reciver", reciver);
+		formData.append("sender",sender);
 
 		
 		$.ajax({
