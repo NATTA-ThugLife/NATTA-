@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>회원가입</title>
+<title>아티스트 회원가입</title>
 <style type="text/css">
 	.centerText table{
 	margin : auto;
@@ -51,68 +51,46 @@
 	
 	<div class="centerText">
 	<form action="artistRegister.na" method="post">
-		<table width="650" cellspacing="5">
+		<table align="center">
 				<tr>
-					<td>* 아이디</td>
+					<td>아이디</td>
 					<td><input type="text" name="artistId" id="artistId">
 						<span class="guide ok">이 아이디는 사용 가능합니다.</span>
 						<span class="guide error">이 아이디는 사용할 수 없습니다.</span>
 						<input type="hidden" id="idDuplicateCheck" value="0">
 					</td>
-				</tr>
-				
+				</tr>				
 				<tr>
-					<td>* 비밀번호</td>
+					<td>비밀번호</td>
 					<td><input type="password" name="password"></td>
 				</tr>
 				<tr>
-					<td>* 이름</td>
+					<td>비밀번호 확인</td>
+					<td><input type="password" name="password"></td>
+				</tr>
+				<tr>
+					<td>이름</td>
 					<td><input type="text" name="artistName"></td>
 				</tr>				
 				<tr>
-					<td>* 나이</td>
+					<td>나이</td>
 					<td><input type="number" min="20" max="100" name="age"></td>
 				</tr>
 				<tr>
-					<td>* 성별</td>
+					<td>성별</td>
 					<td>
 						<input type="radio" name="gender" value="M">남
 						<input type="radio" name="gender" value="F">여
 					</td>
 				</tr>
 				<tr>
-					<td>* 휴대폰 번호</td>
+					<td>휴대폰 번호</td>
 					<td><input type="text" name="phone"></td>
 				</tr>
 				<tr>
-					<td>* 이메일</td>
+					<td>이메일</td>
 					<td><input type="email" name="email"></td>
 				</tr>	
-				<tr>
-				<td>자택 주소</td>
-				</tr>			
-				<tr>
-					<td>우편번호</td>
-					<td>
-						<input type="text" name="post" class="postcodify_postcode5" size="6">
-						<button type="button" id="postcodify_search_button">검색</button>
-					</td>
-				</tr>				
-				<tr>
-					<td>도로명 주소</td>
-					<td><input type="text" name="address1" class="postcodify_address"></td>
-				</tr>
-				<tr>
-					<td>상세 주소</td>
-					<td><input type="text" name="address2" class="postcodify_extra_info"></td>
-				</tr>
-				
-				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-				<script>
-					$(function() {
-						$("#postcodify_search_button").postcodifyPopUp();
-					})
-				</script>
 				
 				<tr>
 				<td>근무지 주소</td>

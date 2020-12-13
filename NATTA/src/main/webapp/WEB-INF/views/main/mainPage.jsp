@@ -86,7 +86,7 @@
           <li><a href="customDesignList.na" style="text-align: center">Customized<br>Tattoo</a></li>
           <li></li>
           <li></li>
-          <li><a href="/notice.na">NOTICE</a></li>
+          <li><a href="notice.na">NOTICE</a></li>
           <li></li>
           <li></li>
           <li><a href="/qna.na">Q&A</a></li>

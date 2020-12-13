@@ -12,15 +12,13 @@ public class Qna {
 	private Date qnaModifyDate;
 	private int qnaHits;
 	private int onOff;
-	private String artistId;
-	private String customerId;
 	
 	public Qna() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Qna(int qnaCode, String qnaTitle, String qnaContents, String qnaWriter, Date qnaCreateDate,
-			Date qnaModifyDate, int qnaHits, int onOff, String artistId, String customerId) {
+			Date qnaModifyDate, int qnaHits, int onOff) {
 		super();
 		this.qnaCode = qnaCode;
 		this.qnaTitle = qnaTitle;
@@ -30,14 +28,12 @@ public class Qna {
 		this.qnaModifyDate = qnaModifyDate;
 		this.qnaHits = qnaHits;
 		this.onOff = onOff;
-		this.artistId = artistId;
-		this.customerId = customerId;
 	}
 	@Override
 	public String toString() {
 		return "Qna [qnaCode=" + qnaCode + ", qnaTitle=" + qnaTitle + ", qnaContents=" + qnaContents + ", qnaWriter="
 				+ qnaWriter + ", qnaCreateDate=" + qnaCreateDate + ", qnaModifyDate=" + qnaModifyDate + ", qnaHits="
-				+ qnaHits + ", onOff=" + onOff + ", artistId=" + artistId + ", customerId=" + customerId + "]";
+				+ qnaHits + ", onOff=" + onOff + "]";
 	}
 	public int getQnaCode() {
 		return qnaCode;
@@ -86,18 +82,6 @@ public class Qna {
 	}
 	public void setOnOff(int onOff) {
 		this.onOff = onOff;
-	}
-	public String getArtistId() {
-		return artistId;
-	}
-	public void setArtistId(String artistId) {
-		this.artistId = artistId;
-	}
-	public String getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
 	}
 	
 	

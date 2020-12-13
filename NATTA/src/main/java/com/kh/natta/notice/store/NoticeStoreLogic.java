@@ -18,33 +18,38 @@ public class NoticeStoreLogic implements NoticeStore{
 
 	@Override
 	public Notice selectOne(int noticeCode) {
-		return sqlSession.selectOne("NoticeMapper.selectOne",noticeCode);
+		return sqlSession.selectOne("noticeMapper.selectOne",noticeCode);
 	}
 
 	@Override
 	public ArrayList<Notice> selectList() {
-		return (ArrayList)sqlSession.selectList("NoticeMapper.selectList");
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectList");
 	}
 
 	@Override
 	public int insertNotice(Notice notice) {
-		return sqlSession.insert("NoticeMapper.insertNotce",notice);
+		return sqlSession.insert("noticeMapper.insertNotce",notice);
 	}
 
 	@Override
 	public int updateNotice(Notice notice) {
-		int result = sqlSession.update("NoticeMapper.updateNotice", notice);
+		int result = sqlSession.update("noticeMapper.updateNotice", notice);
 		return result;
 	}
 
 	@Override
 	public int deleteNotice(int noticeCode) {
-		return sqlSession.delete("NoticeMapper.deleteNotice",noticeCode);
+		return sqlSession.delete("noticeMapper.deleteNotice",noticeCode);
 	}
 
 	@Override
 	public ArrayList<Notice> selectSearchList(Search search) {
-		return (ArrayList)sqlSession.selectList("NoticeMapper.searchList",search);
+		return (ArrayList)sqlSession.selectList("noticeMapper.searchList",search);
+	}
+
+	@Override
+	public int addReadCount(int noticeCode) {
+		return sqlSession.update("noticeMapper.updateCount",noticeCode);
 	}
 
 	

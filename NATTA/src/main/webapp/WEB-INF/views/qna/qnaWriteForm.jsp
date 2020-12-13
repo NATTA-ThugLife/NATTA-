@@ -13,7 +13,6 @@
 	
 	<section>
 	
-	<!-- boardWriteView.kh -> boardInsertForm.jsp를 볼 수 있도록 컨트롤러 작성 -->
 	<section id="book-a-table" class="book-a-table">
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
@@ -23,34 +22,31 @@
 		</div>
 	    </section>
 	<br>
-	<form action="boardInsert.kh" method="post" enctype="multipart/form-data">
+	<form action="qnaInsert.na" method="post">
 		<table align="center" id="tb">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="bTitle"></td>
+				<td><input type="text" name="qnaTitle"></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="bWriter" value="${loginUser.userId }" readonly></td>
+				<td><input type="text" name="qnaWriter" value="${loginCustomer.customerId }" readonly></td>
 			</tr>		
 			<tr>
 				<td>내용</td>
-				<td><textarea cols="50" rows="7" name="bContent"></textarea></td>
-			</tr>
-			<tr>
-				<td>첨부파일</td>
-				<td><input type="file" name="uploadFile"></td>
+				<td><textarea cols="50" rows="7" name="qnaContents"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="등록하기"> &nbsp;
-					<a href="#">목록으로</a>
+					<input type="submit" value="등록"> &nbsp;
+					<a href="qna.na">목록</a>
 				</td>
 			</tr>
 		</table>
 	</form>
 	
 	</section>
+	<br><br>
         
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>

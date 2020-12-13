@@ -40,28 +40,23 @@
 			<td>${notice.noticeContents }</td>
 		</tr>
 		
-		<c:if test="${loginUser.customerId eq notice.noticeWriter }">
+		<c:if test="${loginCustomer.customerId eq notice.noticeWriter }">
 		<tr>
 			<td colspan="2" align="center">
-				<c:url var="nUpdate" value="noticeUpdateView.na">
+				<c:url var="nUpdate" value="noticeUpdateForm.na">
 					<c:param name="noticeCode" value="${notice.noticeCode }"></c:param>
 				</c:url>
 				<c:url var="nDelete" value="noticeDelete.na">
 					<c:param name="noticeCode" value="${notice.noticeCode } "></c:param>
 				</c:url>
+				<c:url var="nList" value="notice.na"></c:url>
 				<a href="${nUpdate }">수정</a>
 				<a href="${nDelete}">삭제</a>
+				<a href="${nList }">목록</a>
 			</td>
 		</tr>
 		</c:if>
 	</table>
-	
-	<p align="center">
-		<c:url var="home" value="main.na"></c:url>
-		<c:url var="nList" value="noticeList.na"></c:url>
-		<a href="${home }">시작페이지로 이동</a>
-		<a href="${nList }">목록 전체보기</a>
-	</p>
 	
 	</section>
         

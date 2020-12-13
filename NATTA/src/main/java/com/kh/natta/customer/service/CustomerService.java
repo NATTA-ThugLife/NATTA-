@@ -10,4 +10,6 @@ public interface CustomerService {
 	
 	public int registerCustomer(Customer customer);
 
+	public Customer findIdEmail(Customer customer);
+
 }

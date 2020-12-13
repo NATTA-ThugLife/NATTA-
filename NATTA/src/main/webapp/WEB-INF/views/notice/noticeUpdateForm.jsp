@@ -24,15 +24,15 @@
 
 	<br><br>
 	<table align="center" border="1" cellspacing="0">
-		<form action="noticeUpdate.na" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="nId" value="${notice.noticeCode }">
+		<form action="noticeUpdate.na" method="post">
+			<input type="hidden" name="noticeCode" value="${notice.noticeCode }">
 			<tr>
 				<td>제목</td>
 				<td><input type="text" size="50" name="nTitle" value="${notice.noticeTitle }"></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="7" cols="5" name="nContent">${notice.noticeContents }</textarea></td>
+				<td><textarea rows="7" cols="50" name="nContent">${notice.noticeContents }</textarea></td>
 			</tr>			
 			<tr>
 				<td colspan="2" align="center">
@@ -43,8 +43,8 @@
 	</table>
 	
 	<p align="center">
-		<c:url var="home" value="main.ma"></c:url>
-		<c:url var="nList" value="noticeList.na"></c:url>
+		<c:url var="home" value="main.na"></c:url>
+		<c:url var="nList" value="notice.na"></c:url>
 		<c:url var="back" value="${header.referer }"></c:url>
 		<a href="${home }">Home</a>
 		<a href="${nList }">목록</a>

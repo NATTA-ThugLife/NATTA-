@@ -24,7 +24,7 @@
 	    </section>
 	
 	<h5 align="center">
-		<button onclick="location.href='qnaWriteView.na'">글쓰기</button>
+		<button onclick="location.href='qnaWriteForm.na'">새글 작성</button>
 	</h5>
 	
 	<table align="center" border="1" cellspacing="0" width="800">
@@ -37,9 +37,9 @@
 		</tr>
 		<c:forEach items="${qList }" var="qna">
 		<tr>
-			<td align="center">${board.qnaCode }</td>
+			<td align="center">${qna.qnaCode }</td>
 			<td align="center">
-				<c:url var="qDetail" value="boardDetail.na">
+				<c:url var="qDetail" value="qnaDetailView.na">
 					<c:param name="qnaCode" value="${qna.qnaCode }"></c:param>
 					<c:param name="page" value="${pi.currentPage }"></c:param>
 				</c:url>
@@ -91,7 +91,7 @@
 	</table>
 	
 	</section>
-
+	<br><br>
         
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>

@@ -17,6 +17,7 @@
 		<typeAlias type="com.kh.natta.chat.domain.ChattingRoom" alias="ChattingRoom"/>
 		<typeAlias type="com.kh.natta.notice.domain.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.natta.qna.domain.Qna" alias="Qna"/>
+		<typeAlias type="com.kh.natta.qna.domain.QnaComment" alias="QnaComment"/>
 	</typeAliases>
 	
 	<mappers>

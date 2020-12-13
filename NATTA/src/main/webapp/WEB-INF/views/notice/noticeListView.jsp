@@ -21,10 +21,10 @@
 			</div>
 		</div>
 	    </section>
-	
-	<c:if test="${loginUser.customerId == 'admin' }">
+
+	<c:if test="${loginCustomer.customerId eq 'admin' }">
 		<div align="center">
-			<button onclick="location.href='nWriteView.na'">글쓰기</button>
+			<button onclick="location.href='noticeWriteForm.na'">글쓰기</button>
 		</div>
 	</c:if>
 	<br style="clear:both">
@@ -43,17 +43,16 @@
 			로그인 상태가 아닌 경우 공지사항 제목만 출력
 			 -->
 			<td>
-				<c:if test="${!empty loginUser }">
-					<c:url var="noticeDetail" value="noticeContents.na">
+				<c:if test="${!empty loginCustomer }">
+					<c:url var="noticeDetail" value="noticeDetailView.na">
 						<c:param name="noticeCode" value="${notice.noticeCode }"></c:param>	<!-- 쿼리스트링 -->
 					</c:url>
 					<a href="${noticeDetail }">${notice.noticeTitle }</a>
 				</c:if>
-				<c:if test="${empty loginUser }">
+				<c:if test="${empty loginCustomer }">
 					${notice.noticeTitle }
 				</c:if>
 			</td>
-			<td align="center">${notice.noticeWriter }</td>
 			<td align="center">${notice.noticeCreateDate }</td>
 			<td align="center">${notice.noticeHits }</td>
 		</tr>
@@ -61,6 +60,7 @@
 	</table>
 	
 	<!-- 게시물 검색 -->
+	
 	<div id="searchArea" align="center">
 		<form action="noticeSearch.na" method="get">
 			<select id="searchCondition" name="searchCondition">
@@ -73,14 +73,8 @@
 			<input type="submit" value="검색">
 		</form>
 	</div>
-	<p align="center">
-		<c:url var="home" value="main.na"></c:url>
-		<c:url var="nList" value="noticeList.na"></c:url>
-		<a href="${home }">시작페이지로 이동</a>
-		<a href="${nList }">목록 전체보기</a>
-	</p>
 	
-		</section>
+	</section>
         
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>

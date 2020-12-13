@@ -52,8 +52,8 @@ public class ArtistController {
 	
 	//가입
 	@RequestMapping(value="artistRegister.na",method=RequestMethod.POST)
-	public String artistRegister(Model model, Artist artist,String post, String address, String workAddress) {
-		artist.setAddress(post+","+address+","+workAddress);
+	public String artistRegister(Model model, Artist artist,String post, String workAddress) {
+		artist.setWorkAddress(post+","+workAddress);
 		System.out.println(artist);
 		int result = service.registerArtist(artist);
 		System.out.println(result);
@@ -68,8 +68,9 @@ public class ArtistController {
 	
 	  // 아이디 중복검사	  
 	  @ResponseBody	  
-	  @RequestMapping(value="dupId.kh", method=RequestMethod.GET) public String
-	  idDuplicateCheck(String artistId) { boolean isUsable =
-	  service.checkIdDup(artistId) == 0 ? true : false; return isUsable+""; }	 
+	  @RequestMapping(value="artistdupId.na", method=RequestMethod.GET)
+	  public String idDuplicateCheck(String artistId) { boolean isUsable =
+	  service.checkIdDup(artistId) == 0 ? true : false; return isUsable+""; 
+	  }	 
 
 }

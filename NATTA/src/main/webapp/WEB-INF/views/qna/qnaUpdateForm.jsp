@@ -24,49 +24,38 @@
 
 	<br>
 	
-	<form action="boardUpdate.kh" method="post" enctype="multipart/form-data">
+	<form action="qnaUpdate.na" method="post">
 		<input type="hidden" name="page" value="${currentPage }">
-		<input type="hidden" name="bId" value="${board.bId }">
-		<input type="hidden" name="originalFilename" value="${board.originalFilename }">
-		
+		<input type="hidden" name="qnaCode" value="${qna.qnaCode }">
+				
 		<table align="center" id="tb" border="1" cellspacing="0">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="bTitle" value="${board.bTitle }"></td>
+				<td><input type="text" name="qnaTitle" value="${qna.qnaTitle }"></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" readonly name="bWriter" value="${board.bWriter }"></td>
+				<td><input type="text" readonly name="qnaWriter" value="${qna.qnaWriter }"></td>
 			</tr>		
 			<tr>
 				<td>내용</td>
-				<td><textarea cols="50" rows="7" name="bContent">${board.bContent }</textarea></td>
-			</tr>
-			<tr>
-				<td>첨부파일</td>
-				<td>
-					<input type="file" name="reloadFile">
-						<c:if test="${ !empty board.originalFilename }">
-							<br>현재 업로드한 파일 : 
-							<a href="/resources/buploadFiles/${board.originalFilename }" download>${board.originalFilename }</a>
-						</c:if>
-						
-				</td>
+				<td><textarea cols="50" rows="7" name="qnaContents">${qna.qnaContents }</textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
 					<input type="submit" value="수정"> &nbsp;
-					<c:url var="bList" value="boardList.kh">
+					<%-- <c:url var="qnaList" value="qnaList.na">
 						<c:param name="page" value="${currentPage }"></c:param>
 					</c:url>
-					<a href="${bList }">목록으로</a>
-					<a href="javascript:history.go(-1);">이전페이지로</a>
+					<a href="${qnaList }">목록으로</a>
+					<a href="javascript:history.go(-1);">이전페이지로</a> --%>
 				</td>
 			</tr>
 		</table>
 	</form>
 	
 	</section>
+	<br><br>
         
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>

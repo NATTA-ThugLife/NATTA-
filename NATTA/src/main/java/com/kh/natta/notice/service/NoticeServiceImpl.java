@@ -45,4 +45,9 @@ public class NoticeServiceImpl implements NoticeService{
 		return store.selectSearchList(search);
 	}
 
+	@Override
+	public int addReadCount(int noticeCode) {
+		return store.addReadCount(noticeCode);
+	}
+
 }

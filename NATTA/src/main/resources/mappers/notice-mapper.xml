@@ -12,30 +12,36 @@
 		<result property="noticeHits"		column="NOTICE_HITS"/>
 	</resultMap>
 
-<!-- 	<insert id="insertNotce">
+	<insert id="insertNotce">
       INSERT INTO NOTICE
-      VALUES(SEQ_NOTICE_CODE.NEXTVAL,#{noticeTitle},#{noticeContents},#{noticeWriter},SYSDATE,SYSDATE,#{noticeHits})
+      VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContents},#{noticeWriter},SYSDATE,SYSDATE,#{noticeHits})
    </insert>
    
    <select id="selectList" resultMap="noticeResultMap">
 	   	SELECT * FROM NOTICE
-	   	ORDER BY N_CREATE_DATE DESC
+	   	ORDER BY NOTICE_CREATEDATE DESC
    </select>
    
    <select id="selectOne" resultMap="noticeResultMap">
    	SELECT * FROM NOTICE
-   	WHERE NID = #{nId}
+   	WHERE NOTICE_CODE = #{noticeCode}
    </select>
    
    <delete id="deleteNotice">
    	DELETE NOTICE
-   	WHERE NID = #{nId}
+   	WHERE NOTICE_CODE = #{noticeCode}
    </delete>
    
    <update id="updateNotice">
    	UPDATE NOTICE
-   	SET NTITLE=#{nTitle}, NCONTENT=#{nContent},
-   	FILE_PATH=#{filepath}, N_MODIFY_DATE=SYSDATE
-   	WHERE NID=#{nId}
-   </update> -->
+   	SET NOTICE_TITLE=#{noticeTitle}, NOTICE_CONTENTS=#{noticeContents}, NOTICE_MODIFYDATE=SYSDATE
+   	WHERE NOTICE_CODE=#{noticeCode}
+   </update>
+   
+   <update id="updateCount">
+		UPDATE NOTICE
+		SET NOTICE_HITS = NOTICE_HITS + 1
+		WHERE NOTICE_CODE = #{noticeCode}
+	</update>
+	
 </mapper>
