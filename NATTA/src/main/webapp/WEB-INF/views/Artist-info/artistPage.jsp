@@ -11,7 +11,7 @@
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
   <link href="resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-    <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
+<!--     <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
   <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
   <script src="resources/assets/vendor/php-email-form/validate.js"></script>
@@ -19,9 +19,9 @@
   <script src="resources/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="resources/assets/vendor/venobox/venobox.min.js"></script>
   <script src="resources/assets/vendor/aos/aos.js"></script>
-  <!-- Template Main JS File -->
-  <script src="resources/assets/js/main.js"></script>  
-
+  Template Main JS File
+  <script src="resources/assets/js/main.js"></script>   -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
    header {
       height: 180px;
@@ -36,7 +36,7 @@
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
-        <i class="icofont-phone"></i> +1 5589 55488 55
+        <i class="icofont-phone"></i> +82 010 1234 5678
         <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM</span>
       </div>
       <div class="languages">
@@ -98,22 +98,87 @@
   	    <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>    
        	<!-- 아티스트 프로필 메뉴바 -->
         <ul style="list-style : none;">
-        <c:if test="${ artistInfo.artistId eq loginArtist.artistId }">
-          	<li class="active"><a href="#modalInfo" data-toggle="modal"><i class="bx bx-user"></i><span>INFO INSERT</span></a></li>
-          	<li><a href="#modalWork" data-toggle="modal"><i class="bx bx-book-content"></i>Work INSERT</a></li>
-		</c:if>       
-          	<!-- <script>
-          	function artistIdCheck(){
-          		$.ajax({ 하다말았다 현모야 나중에 해라
-          		onclick="artistIdCheck();"
-          			url : "InfoIdCheck.na",
-          			type : "POST",
-          			data :
-          		});
-          	}
-          	</script> -->
-          	<li><a href="#"><i class="bx bx-home"></i><span>About</span></a></li>
-          	<li><a href="#resume"><i class="bx bx-file-blank"></i><span>Resume</span></a></li>
+        <c:if test="${ artistPageId eq loginArtist.artistId }">
+          	<li class="active"><a href="#" data-toggle="modal" id="insertInfo"><i class="bx bx-home"></i><span> 타투숍 소개</span></a></li>
+          	<li><a href="#modalArtistWork" data-toggle="modal" id="artistInfoWork"><i class="bx bx-book-content"></i> 내 작품등록하기</a></li>
+          	<li><a href="#modalArtistPrice" data-toggle="modal" id="artistInfoPrice"><i class="bx bx-file-blank"></i><span> 스타일별 가격</span></a></li>
+		</c:if>
+		<script>
+ 		$(document).ready(function(){
+ 			$(".tattoStyle").on("change", function(){
+				var artistId = "${ loginArtist.artistId }";
+				var tattoStyleOptionValue = $(this).find(":selected").val();
+				if( tattoStyleOptionValue == 'pleaseSelect' ) {
+					$('.tattolayer').css("display","none");
+				}else{
+					$('.tattolayer').css("display","block");
+						console.log(tattoStyleOptionValue);
+						$.ajax({
+							url : "artistPriceChecking.na",
+							type : "post",
+							data : { 
+								"artistId" : artistId,
+								"pStyle" : tattoStyleOptionValue 
+								},
+							dataType : "json",
+							success : function(checkPrice) {
+								if( checkPrice != null ){
+									$("input[name=pSize1]").prop("value", checkPrice.pSize1);
+									$("input[name=pSize2]").prop("value", checkPrice.pSize2);
+									$("input[name=pSize3]").prop("value", checkPrice.pSize3);
+									$("input[name=pSize4]").prop("value", checkPrice.pSize4);
+									$("input[name=pSize5]").prop("value", checkPrice.pSize5);
+									$("input[name=pSize6]").prop("value", checkPrice.pSize6);
+									$("input[name=pSize7]").prop("value", checkPrice.pSize7);
+									$(".priceActionCheck").prop("action", "updateArtistPrice.na");
+									$(".artistPriceButton").html("Tatto Price Update");
+								} else {
+									alert("저장된 정보가 없습니다.");
+									$("input[name=pSize1]").prop("value", "");
+									$("input[name=pSize2]").prop("value", "");
+									$("input[name=pSize3]").prop("value", "");
+									$("input[name=pSize4]").prop("value", "");
+									$("input[name=pSize5]").prop("value", "");
+									$("input[name=pSize6]").prop("value", "");
+									$("input[name=pSize7]").prop("value", "");									
+									$(".priceActionCheck").prop("action", "insertArtistPrice.na");
+									$(".artistPriceButton").html("Tatto Price Insert");
+								}
+							}
+						});
+				}
+			});
+		});
+			
+			
+			
+			$("#insertInfo").on("click", function(){
+				var artistId = "${ loginArtist.artistId }";
+				$.ajax({
+					url : "artistChecking.na",
+					type : "post",
+					data :{ "artistId" : artistId },
+					dataType : "json",
+					success : function(check) {
+							if( check != null ){
+								$(".artistShopName").prop("value", decodeURIComponent(check.name.replace(/\+/g," ")));
+								$(".artistmodalProfileName").prop("name", "reloadFile");
+								$(".artistmodalInfo").prop("value", decodeURIComponent(check.myInfo.replace(/\+/g," ")));
+								$(".modalActionCheck").prop("action", "UpdateArtistInfo.na");
+								$(".artistInfoButton").html("MyInfo Update");
+								$("#modalInfo").modal();
+							}else {
+								$(".modalActionCheck").prop("action", "InsertArtistInfo.na");
+								$(".artistmodalProfileName").prop("name", "uploadFile");
+								$(".artistInfoButton").html("MyInfo Insert");
+								$("#modalInfo").modal();
+							}				
+					}
+				});
+			});
+
+        </script>          	
+          	<li><a href="#resume"><i class="bx bx-user"></i><span>Resume</span></a></li>
           	<li><a href="#services"><i class="bx bx-server"></i> Services</a></li>
           	<li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
         </ul>            
@@ -394,42 +459,30 @@
 					</div>
 					<div class="modal-body book-a-table">
 						<form action="InsertArtistInfo.na" 
-						method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
+						method="post" role="form" class="php-email-form modalActionCheck" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
 				          <div>
-				         	<!-- 이름 -->
+				         	<!-- 타투샵이름 -->
 				            <div class="col-lg-4 col-md-6 form-group">
-				              ARTIST NAME 
-				              <input type="text" value="${ loginArtist.artistName }" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-				              <div class="validate"></div>
-				            </div>
-				            <!-- 스타일 -->
-				            <div class="col-lg-4 col-md-6 form-group">
-				              ARTIST STYLE
-				             <input type="text" name="style" class="form-control" id="name" placeholder="Tatto Style" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+				              ARTIST SHOP NAME 
+				              <input type="text" value="" name="name" class="form-control artistShopName" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="1글자 이상 입력해주세요.">
 				              <div class="validate"></div>
 				            </div>
 				            <!-- 프로필사진 업로드-->
 				            <div class="col-lg-4 col-md-6 form-group">
 				              MY PROFILE 
-				              <input type="file" class="form-control" name="uploadFile">  
-				            </div>
-				            <!-- 근무지주소 -->
-				            <div class="col-lg-4 col-md-6 form-group">
-				              WORK ADDRESS
-				              <input type="text" name="workAddress" class="form-control" id="name" placeholder="Your WorkAddress" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-				              <div class="validate"></div>
+				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile"> 
 				            </div>
 				            <!-- 자기소개  -->
 				            <div class="form-group">
 				               INFO 
-				               <textarea class="form-control" name="myInfo" cols="600" rows="5"  placeholder="Your Info" style="resize: none;"></textarea>
+				               <textarea class="form-control artistmodalInfo" name="myInfo" cols="600" rows="5"  placeholder="Your Info" style="resize: none;"></textarea>
 				               <div class="validate"></div>
-				            </div>			            			            				            				            
+				            </div>				            				            
 				          </div>
 				          <div class="mb-3">
 				            <div class="loading">Loading</div>
 				          </div>
-				          <div class="text-center"><button type="submit">INFO UPDATE</button></div>
+				          <div class="text-center"><button type="submit" class="artistInfoButton"></button></div>
  				          <input type="hidden" name="artistId" value="${ loginArtist.artistId }">
 				        </form>
 					</div>
@@ -506,7 +559,7 @@
 				          <div class="mb-3">
 				            <div class="loading">Loading</div>
 				          </div>
-				          <div class="text-center"><button type="submit">INFO UPDATE</button></div>
+				          <div class="text-center"><button type="submit" class="artistWorkButton"></button></div>
  				          <input type="hidden" name="artistId" value="${ loginArtist.artistId }">
 				        </form>
 					</div>
@@ -516,7 +569,67 @@
 				</div>
 			</div>
 		</div> 		
+		
+		
+	<!-- 아티스트 가격등록 -->
+  	<div class="modal fade" id="modalArtistPrice" tabindex="-1" role="dialog"
+			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
+				<!-- 센터모달창 추가  modal-dialog-centered -->
+				<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
+					<div class="modal-header">
+						<h5 class="modal-title" id="TEST">
+							<b>ARTIST WORK Price</b>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body book-a-table">
+						<form action="updateArtistPrice.na" 
+						method="post" role="form" class="php-email-form priceActionCheck" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
+				          <div>
+				            <!-- 스타일 -->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              Tatto Style
+				              <select name="pStyle" class="form-control tattoStyle" id="name">
+				              	<option value="pleaseSelect" selected>등록할 타투스타일</option>
+				              	<option value="올드스쿨">올드스쿨</option>
+				              	<option value="이레즈미">이레즈미</option>
+				              	<option value="트라이벌">트라이벌</option>
+				              	<option value="리얼리스틱">리얼리스틱</option>
+				              	<option value="레터링">레터링</option>
+				              	<option value="치카노">치카노</option>
+				              </select>
+				              <div class="validate"></div>
+				            </div>
 
+				         	<!-- 사이즈에 따른 가격 -->
+				            <div class="col-lg-4 col-md-6 form-group tattolayer" style="display:none;">
+				              38x38mm <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="pSize1" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1" data-msg="가격을 정해주세요"><br>
+				              38x64mm <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="pSize2" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1" data-msg="가격을 정해주세요"><br>
+				              65x76mm <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="pSize3" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1" data-msg="가격을 정해주세요"><br>
+				              102x127mm <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"name="pSize4" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1" data-msg="가격을 정해주세요"><br>
+				              152x152mm <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="pSize5" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1" data-msg="가격을 정해주세요"><br>
+				              203x152mm <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="pSize6" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1" data-msg="가격을 정해주세요"><br>
+				              210x297mm <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="pSize7" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1" data-msg="가격을 정해주세요"><br>
+				              <div class="validate"></div>
+				            </div>				            		            			            				            				            
+				          </div>
+				          <div class="mb-3">
+				            <div class="loading">Loading</div>
+				          </div>
+				          <div class="text-center"><button type="submit" class="artistPriceButton"></button></div>
+ 				          <input type="hidden" name="artistId" value="${ loginArtist.artistId }">
+				        </form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+					</div>
+				</div>
+			</div>
+		</div> 				
   	<footer>
 		 <jsp:include page="../common/footer.jsp"/>  	 
   	</footer>

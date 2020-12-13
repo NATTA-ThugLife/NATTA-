@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ArtistInfoPriceMapper">
+	<resultMap type="ArtistInfoPrice" id="artistInfoPriceMap">
+		<result property="pStyle" column="P_STYLE"/>
+		<result property="pSize1" column="P_SIZE1"/>
+		<result property="pSize2" column="P_SIZE2"/>
+		<result property="pSize3" column="P_SIZE3"/>
+		<result property="pSize4" column="P_SIZE4"/>
+		<result property="pSize5" column="P_SIZE5"/>
+		<result property="pSize6" column="P_SIZE6"/>
+		<result property="pSize7" column="P_SIZE7"/>
+		<result property="artistId" column="ARTIST_ID"/>
+	</resultMap>
+	
+	<!-- 아티스트 스타일별 가격 검색(ajax)  -->
+	<select id="selectArtistPrice" resultMap="artistInfoPriceMap">
+		SELECT *
+		FROM PRICE
+		WHERE ARTIST_ID = #{artistId} AND P_STYLE = #{pStyle}
+	</select>
+	
+	<!-- 아티스트 스타일별 가격 업데이트  -->
+	<update id="updateArtistPrice">
+		UPDATE PRICE 
+		SET P_SIZE1 = #{pSize1}, P_SIZE2 = #{pSize2}
+		 		, P_SIZE3 = #{pSize3}, P_SIZE4 = #{pSize4} , P_SIZE5 = #{pSize5}
+		 			, P_SIZE6 = #{pSize6}, P_SIZE7 = #{pSize7}
+		WHERE P_STYLE = #{pStyle} AND ARTIST_ID = #{artistId}
+	</update>
+	
+	<!-- 아티스트 스타일별 가격 등록  -->
+	<insert id="insertArtistPrice">
+		INSERT INTO PRICE
+		VALUES( #{pStyle}, #{pSize1}, #{pSize2}, #{pSize3}, #{pSize4}
+				, #{pSize5}, #{pSize6}, #{pSize7}, #{artistId} )
+	</insert>
+</mapper>
