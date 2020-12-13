@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ArtistInfoMapper">
 	<resultMap type="ArtistInfo" id="artistInfoMap">
-		
 		<result property="myProfile" column="MY_PROFILE"/>
 		<result property="myReProfile" column="MY_REPROFILE"/>
 		<result property="myInfo" column="MY_INFO"/>
@@ -16,7 +15,7 @@
 	<!-- 아티스트정보 입력 -->
 	<insert id="insertArtistInfo">
 		INSERT INTO ARTISTINFO
-		VALUES(#{name}, #{style}, #{myProfile}, #{myReProfile}, #{myInfo}, SYSDATE, SYSDATE, #{workAddress}, #{artistId})
+		VALUES(#{name}, #{myProfile}, #{myReProfile}, #{myInfo}, SYSDATE, SYSDATE, #{artistId})
 	</insert>
 	
 	
@@ -30,6 +29,14 @@
 	<select id="selectOneArtist" resultMap="artistInfoMap">
 		SELECT * FROM ARTISTINFO WHERE ARTIST_ID = #{artistId}
 	</select>
+	<!-- 아티스트 소개 업데이트 -->
+	<update id="updateArtistInfo">
+		UPDATE ARTISTINFO
+		SET NAME=#{name}, MY_PROFILE=#{myProfile}, MY_REPROFILE=#{myReProfile}, MY_INFO=#{myInfo},
+		CREATE_DATE = SYSDATE, MODIFY_DATE = SYSDATE
+		WHERE ARTIST_ID = #{artistId}
+	</update>
+	
 	
 	
 </mapper>

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
+import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
+import com.kh.natta.artist.domain.Artist;
 
 @Repository
 public class ArtistInfoStoreLogic implements ArtistInfoStore {
@@ -29,5 +31,22 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 	public ArtistInfo selectOneArtist(String artistId) {
 		return sqlSession.selectOne("ArtistInfoMapper.selectOneArtist", artistId);
 	}
+
+	@Override
+	public Artist selectArtist(String artistId) {
+		return sqlSession.selectOne("artistMapper.selectArtistInfo", artistId);
+	}
+
+	@Override
+	public int updateArtistInfo(ArtistInfo artistInfo) {
+		return sqlSession.update("ArtistInfoMapper.updateArtistInfo",artistInfo);
+	}
+
+	@Override
+	public ArtistInfoPrice selectStylePrice(ArtistInfoPrice ap) {
+		return sqlSession.selectOne("ArtistInfoMapper.insertArtistPrice", ap);
+	}
+
+	
 
 }

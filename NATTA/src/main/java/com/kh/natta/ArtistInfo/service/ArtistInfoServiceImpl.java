@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
+import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.store.ArtistInfoStore;
+import com.kh.natta.artist.domain.Artist;
 
 @Service
 public class ArtistInfoServiceImpl implements ArtistInfoService{
@@ -29,6 +31,20 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 	public ArtistInfo selectOneArtist(String artistId) {
 		return infoStore.selectOneArtist(artistId);
 	}
+
+	@Override
+	public Artist selectArtist(String artistId) {
+		return infoStore.selectArtist(artistId);
+	}
+
+	@Override
+	public int updateArtistInfo(ArtistInfo artistInfo) {
+		return infoStore.updateArtistInfo(artistInfo);
+	}
+
+
+
+
 	
 	
 	

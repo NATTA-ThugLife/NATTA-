@@ -1,31 +1,27 @@
 package com.kh.natta.ArtistInfo.domain;
 
 import java.sql.Date;
-
+// artist Info 테이블 domain
 public class ArtistInfo {
 	private String name;
-	private String style;
 	private String myProfile;
 	private String myReProfile;
 	private String myInfo;
 	private Date createDate;
 	private Date modifyDate;
-	private String workAddress;
 	private String artistId;
 
 	public ArtistInfo() {}
 
-	public ArtistInfo(String name, String style, String myProfile, String myReProfile, String myInfo, Date createDate,
-			Date modifyDate, String workAddress, String artistId) {
+	public ArtistInfo(String name, String myProfile, String myReProfile, String myInfo, Date createDate,
+			Date modifyDate, String artistId) {
 		super();
 		this.name = name;
-		this.style = style;
 		this.myProfile = myProfile;
 		this.myReProfile = myReProfile;
 		this.myInfo = myInfo;
 		this.createDate = createDate;
 		this.modifyDate = modifyDate;
-		this.workAddress = workAddress;
 		this.artistId = artistId;
 	}
 
@@ -37,13 +33,7 @@ public class ArtistInfo {
 		this.name = name;
 	}
 
-	public String getStyle() {
-		return style;
-	}
 
-	public void setStyle(String style) {
-		this.style = style;
-	}
 
 	public String getMyProfile() {
 		return myProfile;
@@ -85,14 +75,6 @@ public class ArtistInfo {
 		this.modifyDate = modifyDate;
 	}
 
-	public String getWorkAddress() {
-		return workAddress;
-	}
-
-	public void setWorkAddress(String workAddress) {
-		this.workAddress = workAddress;
-	}
-
 	public String getArtistId() {
 		return artistId;
 	}
@@ -103,9 +85,9 @@ public class ArtistInfo {
 
 	@Override
 	public String toString() {
-		return "ArtistInfo [name=" + name + ", style=" + style + ", myProfile=" + myProfile + ", myReProfile="
+		return "ArtistInfo [name=" + name + ", myProfile=" + myProfile + ", myReProfile="
 				+ myReProfile + ", myInfo=" + myInfo + ", createDate=" + createDate + ", modifyDate=" + modifyDate
-				+ ", workAddress=" + workAddress + ", artistId=" + artistId + "]";
+				+ ", artistId=" + artistId + "]";
 	}
 
 		
