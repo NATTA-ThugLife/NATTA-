@@ -44,17 +44,30 @@
         	</tr>
             <tr>
             	<td colspan="2" align="center">
-				<a href="#">목록으로</a>
+            	<c:url var="cList" value="customDesignList.na">
+            		<c:param name="page" value="${currentPage }"></c:param>
+            	</c:url>
+				<a href="${cList }">목록으로</a>
 				
 				<c:if test="${customDesign.customerId eq loginCustomer.customerId}">
 				<c:url var="cModify" value="customDesignModifyView.na">
 					<c:param name="customCode" value="${customDesign.customCode }"></c:param>
+					<c:param name="page" value="${currentPage }"></c:param>					
+				</c:url>
+				<c:url var="cDelete" value="customDesignDelete.na">
+					<c:param name="customCode" value="${customDesign.customCode }"></c:param>
 				</c:url>
 				<a href="${cModify }">수정하기</a>
+				<a href="${cDelete }" onclick="return deleteCustom();">삭제하기</a>
 				</c:if>
             	</td>
             </tr>
 		</table>
+		<script>
+		function deleteCustom() {
+		       return confirm("게시글을 삭제하시겠습니까?");
+		    }
+		</script>
     </section>
     <section class="replyList">
     	<!-- 댓글 목록 -->
@@ -69,22 +82,41 @@
 	
     </section>
     <section>
-   		<!-- 댓글 등록 -->
-    	<table align="center" cellpadding="10"  width="1000">
-		<tr>
-     	 	<td><textarea id = "cContents" name = "cContents"></textarea><td>
-			<script>CKEDITOR.replace('cContents',{filebrowserUploadUrl:'/mine/imageUpload.na'});</script>
-		</tr>
-		<tr>
-			<td><button id="cSubmit">댓글 등록</button></td>
-		</tr>
-	</table>
+    	<c:if test="${loginArtist ne null }">
+  		<!-- 댓글 등록 -->
+
+		<table align="center" cellpadding="10" width="1000">
+			<tr>
+				<td><input type="radio" name="cOnOff" value="0" checked><span>공개</span>
+					<input type="radio" name="cOnOff" value="1"><span>비공개</span>
+				</td>
+			</tr>
+			<tr>
+				<td><textarea id="cContents" name="cContents"></textarea>
+				<td><script>
+					CKEDITOR.replace('cContents', {
+						filebrowserUploadUrl : '/mine/imageUpload.na'
+					});
+				</script>
+			</tr>
+			<tr>
+				<td align="right"><button id="cSubmit">댓글 등록</button></td>
+			</tr>
+		</table>
+
+	</c:if>
 	<input type="hidden" id="sessionArtist" value="${loginArtist.artistId}">
+	<input type="hidden" id="sessionCustomer" value="${loginCustomer.customerId }">
+	<input type="hidden" id="Writer" value="${customDesign.customerId }">
 	
+	<!-- 댓글수정 모달창 -->
 	<div class="replyModal">
 	
 		<div class="modalContent">
-		 
+		<div>
+			<input type="radio" name="cOnOffModify" value="0" checked><span style="color:black;'">공개</span>
+			<input type="radio" name="cOnOffModify" value="1"><span style="color:black;'">비공개</span>
+		</div>
 		<div>
 		 <textarea class="modal_repCon" name="cContentsModify"></textarea>
 		 <script>CKEDITOR.replace('cContentsModify',{filebrowserUploadUrl:'/mine/imageUpload.na'});</script>
@@ -98,7 +130,6 @@
 		</div>
 		
 		<div class="modalBackground"></div>
-	 
 	</div>
 	<script>
 		
@@ -117,11 +148,12 @@
 				// 댓글 등록 ajax
 				var cContents = CKEDITOR.instances.cContents.getData();
 				var customCode = ${customDesign.customCode};
+				var cOnOff = $('input:radio[name=cOnOff]:checked').val( );
 				
 				$.ajax({
 					url : "addComment.na",
 					type :"post",
-					data : {"cContents" : cContents, "customCode" : customCode },
+					data : {"cContents" : cContents, "customCode" : customCode, "cOnOff" : cOnOff },
 					success : function(data) {
 						if ( data == "success") {
 							getCommentList() 
@@ -154,13 +186,9 @@
 					var $ccCreateDate;
 					var $modify;
 					var sessionArtist = $("#sessionArtist").val();
-					
-					 
-					 
-					  
-					  
-					  
-					
+					var sessionCustomer = $("#sessionCustomer").val();
+					var Writer = $("#Writer").val();
+					var secret;
 					$("#cCount").text("댓글 (" + data.length + ")"); // 댓글의 갯수 표시
 					if (data.length > 0) {
 						for ( var i in data ) {
@@ -172,6 +200,10 @@
 							$ccCreateDate = $("<td> width='150'>").text(data[i].ccCreateDate);
 						
 							$modify = $("<td><button class='modify' data-customCCode='"+data[i].customCCode+"'>수정</button> <button class='delete' data-customCCode='"+data[i].customCCode+"'>삭제</button>");
+							
+							$secret = $("<td align='center' colspan='4'>").text('비밀글입니다.');
+							
+							if((data[i].cOnOff == 1 && ((sessionArtist == data[i].artistId) || (Writer == sessionCustomer))) || (data[i].cOnOff == 0)){
 							$tr.append($artistId);
 							$tr.append($cContents);
 							$tr.append($ccCreateDate);
@@ -179,6 +211,10 @@
 								$tr.append($modify);
 							}
 							$tableBody.append($tr);
+							}else{
+								$tr.append($secret);
+								$tableBody.append($tr);
+							}
 						}
 					}else{
 						$tr = $("<tr>");
@@ -231,11 +267,14 @@
 			if(modifyConfirm) {
 				var cContents = CKEDITOR.instances.cContentsModify.getData();
 				var customCCode = $(this).attr("customCCode");
-				
+				var cOnOffModify = $('input:radio[name=cOnOffModify]:checked').val( );
+				console.log(cOnOffModify)
+				console.log(cContents)
+				console.log(customCCode)
 			$.ajax({
 				url : "customCommentModify.na",
 				type : "post",
-				data : {"cContents" : cContents, "customCCode" : customCCode },
+				data : {"cContents" : cContents, "customCCode" : customCCode,"cOnOff" : cOnOffModify},
 				success : function(data){
 					
 					if ( data == "success") {

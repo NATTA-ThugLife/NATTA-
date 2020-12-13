@@ -35,8 +35,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.natta.artist.domain.Artist;
+import com.kh.natta.common.PageInfo;
+import com.kh.natta.common.Pagination;
 import com.kh.natta.customDesign.domain.CustomComment;
 import com.kh.natta.customDesign.domain.CustomDesign;
+import com.kh.natta.customDesign.domain.Search;
 import com.kh.natta.customDesign.service.CustomDesignService;
 import com.kh.natta.customer.domain.Customer;
 
@@ -53,28 +56,30 @@ public class CustomDesignController {
 	
 	// 상세조회
 	@RequestMapping(value="customDesignDetail.na",method=RequestMethod.GET)
-	public String customDetail(int customCode,Model model, HttpServletRequest request) {
+	public ModelAndView customDetail(int customCode,ModelAndView mv, Integer page) {
 		
+		int currentPage = page != null ? page : 1;
+		// 조회수 증가
+		cService.addHits(customCode);
+		// 상세조회
 		CustomDesign customDesign = cService.selectcustomDesign(customCode);
 		if(customDesign!=null) {
-			model.addAttribute("customDesign",customDesign);
-			return "customDesign/customDesignDetailView";
+			mv.addObject("customDesign",customDesign).addObject("currentPage",currentPage)
+			.setViewName("customDesign/customDesignDetailView");
 		}else {
-			model.addAttribute("msg","도안게시판 상세조회 실패");
-			return "common/errorPage";
+			mv.addObject("msg","도안게시판 상세조회 실패");
+			mv.setViewName("common/errorPage");
 		}
+		return mv;
 	}
 	
 	// 게시글 등록
 	@RequestMapping(value="customDesignInsert.na",method=RequestMethod.POST)
 	public String customDesignInsert(CustomDesign customDesign, Model model,HttpServletRequest request) {
 		
-		
-		
-		
 		int result = cService.insertCustomDesign(customDesign);
 		if(result>0) {
-			return "redirect:main.na";
+			return "redirect:customDesignList.na";
 		}else {
 			model.addAttribute("msg","게시글 등록 실패");
 			return "common/errorPage";
@@ -84,23 +89,42 @@ public class CustomDesignController {
 	
 	// 게시글 리스트
 	@RequestMapping(value="customDesignList.na", method=RequestMethod.GET)
-	public ModelAndView customList(ModelAndView mv) {
+	public ModelAndView customList(ModelAndView mv,@RequestParam(value="page", required=false) Integer page) {
 		
-		ArrayList<CustomDesign> cList = cService.selectList();
+		int currentPage = (page != null) ? page : 1;
 		
+		int listCount = cService.getListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<CustomDesign> cList = cService.selectList(pi);
 		if(!cList.isEmpty()) {
 			mv.addObject("cList",cList);
+			mv.addObject("pi",pi);
 			mv.setViewName("customDesign/customDesignListView");
 		}else {
 			mv.setViewName("customDesign/customDesignListView");
 		}
 		return mv;
 	}
+	// 게시글 검색
+	@RequestMapping(value="customSearch.na",method=RequestMethod.GET)
+	public String customSearch(Search search, Model model) {
+		ArrayList<CustomDesign> searchList = cService.selectListSearch(search);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("cList",searchList);
+			model.addAttribute("search",search);
+			return "customDesign/customDesignListView";
+		}else {
+			return "customDesign/customDesignListView";
+		}
+	}
 	
 	// 게시판 수정화면
 	@RequestMapping(value="customDesignModifyView.na",method=RequestMethod.GET)
-	public String customDesignModifyView(int customCode, Model model) {
+	public String customDesignModifyView(int customCode, Model model,Integer page) {
+		int currentPage = page != null ? page : 1;
 		model.addAttribute("customDesign",cService.selectcustomDesign(customCode));
+		model.addAttribute("currentPage",currentPage);
 		return "customDesign/customDesignModifyForm";
 	}
 	
@@ -115,6 +139,21 @@ public class CustomDesignController {
 			model.addAttribute("msg","맞춤도안 수정 실패");
 			return "common/errorPage";
 		}
+	}
+	
+	// 게시판 삭제
+	@RequestMapping(value="customDesignDelete.na",method=RequestMethod.GET)
+	public String customDesignDelete(int customCode, Model model,Integer page) {
+		int currentPage = page != null ? page : 1;
+		
+		int result = cService.deleteCustomDesign(customCode);
+		if(result>0) {
+			model.addAttribute("currentPage",currentPage);
+			return "redirect:customDesignList.na";
+		}else {
+			return "common/errorPage";
+		}
+		
 	}
 	
 	// 이미지저장
@@ -237,7 +276,6 @@ public class CustomDesignController {
     	Artist loginArtist = (Artist)session.getAttribute("loginArtist");
     	String artistId = loginArtist.getArtistId();
     	customComment.setArtistId(artistId);
-    	System.out.println(customComment);
     	int result = cService.insertCustomComment(customComment);
     	if(result>0) {
     		return "success";
@@ -247,9 +285,11 @@ public class CustomDesignController {
     }
     
     // 댓글 조회
+    @ResponseBody
     @RequestMapping(value="commentList.na", method=RequestMethod.GET)
     public void getCommentList(HttpServletResponse response, int customCode)throws Exception{
     	ArrayList<CustomComment> ccList = cService.selectListComment(customCode);
+    	
     	
     	for(CustomComment c : ccList) {
     		c.setcContents(URLEncoder.encode(c.getcContents(),"utf-8"));
@@ -263,6 +303,7 @@ public class CustomDesignController {
     @ResponseBody
     @RequestMapping(value="customCommentModify.na",method=RequestMethod.POST)
 	public String customCommentModify(CustomComment customComment) {
+    	System.out.println(customComment);
     	int result = cService.modifyCustomComment(customComment);
     	if(result>0) {
     		return "success";

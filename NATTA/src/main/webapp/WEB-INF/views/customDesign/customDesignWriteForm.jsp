@@ -25,7 +25,19 @@
         	</tr>
         	<tr>
         		<td>타투스타일</td>
-        		<td><input type="text" name="tattooType"></td>
+        		<td>
+        		<select name="tattooType">
+        		<option value="올드스쿨">올드스쿨</option>
+        		<option value="이레즈미">이레즈미</option>
+        		</select>
+        		</td>
+        	</tr>
+        	<tr>
+        		<td>공개/비공개</td>
+        		<td>	
+        			<input type="radio" name="onOff" value="0" checked><span>공개</span>
+        			<input type="radio" name="onOff" value="1"><span>비공개</span>
+        		</td>
         	</tr>
         	<tr>
         		<td>내용</td>
