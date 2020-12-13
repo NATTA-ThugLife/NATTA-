@@ -24,50 +24,42 @@ public class QnaServiceImpl implements QnaService{
 
 	@Override
 	public ArrayList<Qna> selectList(Paging pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectList(pi);
 	}
 
 	@Override
 	public int addReadCount(int qnaCode) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.addReadCount(qnaCode);
 	}
 
 	@Override
 	public Qna selectQna(int qnaCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectQna(qnaCode);
 	}
 
 	@Override
 	public int registerQna(Qna qna) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.insertQna(qna);
 	}
 
 	@Override
 	public int modifyQna(Qna qna) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.updateQna(qna);
 	}
 
 	@Override
 	public int deleteQna(int qnaCode) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.deleteQna(qnaCode);
 	}
 
 	@Override
-	public int insertQnaComment(QnaComment reply) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertQnaComment(QnaComment qnaComment) {
+		return store.insertQnaComment(qnaComment);
 	}
 
 	@Override
 	public ArrayList<QnaComment> selectQnaCommentList(int qnaCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectQnaCommentList(qnaCode);
 	}
 
 	

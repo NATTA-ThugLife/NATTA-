@@ -11,7 +11,6 @@
 		<typeAlias type="com.kh.natta.customer.domain.Customer" alias="Customer"/>
 		<typeAlias type="com.kh.natta.reservation.domain.Reservation" alias="Reservation"/>
 		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistInfo" alias="ArtistInfo"/>
-		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistInfoPrice" alias="ArtistInfoPrice"/>
 		<typeAlias type="com.kh.natta.customDesign.domain.CustomDesign" alias="CustomDesign"/>
 		<typeAlias type="com.kh.natta.customDesign.domain.CustomComment" alias="CustomComment"/>
 		<typeAlias type="com.kh.natta.chat.domain.Chat" alias="Chat"/>
@@ -19,6 +18,7 @@
 		<typeAlias type="com.kh.natta.notice.domain.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.natta.qna.domain.Qna" alias="Qna"/>
 		<typeAlias type="com.kh.natta.artistWork.domain.ArtistWork" alias="ArtistWork"/>
+		<typeAlias type="com.kh.natta.qna.domain.QnaComment" alias="QnaComment"/>
 	</typeAliases>
 	
 	<mappers>

@@ -19,4 +19,6 @@ public interface NoticeStore {
 	
 	public ArrayList<Notice> selectSearchList(Search search);
 
+	public int addReadCount(int noticeCode);
+
 }

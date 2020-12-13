@@ -52,7 +52,7 @@
 
 </style>
 
-<title>Insert title here</title>
+<title>로그인</title>
 </head>
 <body>
 	<header>
@@ -69,32 +69,34 @@
 
 			<table align="center">
 				<tr>
-					<td><input type="radio" id="customer" name="loginOption"
-						value="A" onchange="setDisplay()" checked>일반 회원&nbsp;&nbsp;</td>
-					<td><input type="radio" id="artist" name="loginOption"
-						value="B" onchange="setDisplay()">아티스트</td>
+					<td><input type="radio" id="customer" name="loginOption" onchange="setDisplay()" checked>일반 회원&nbsp;&nbsp;</td>
+					<td><input type="radio" id="artist" name="loginOption" onchange="setDisplay()">아티스트</td>
 				</tr>
 
 				<form action="customerLogin.na" method="post" id="formId">
 					<table align="center">
 						<tr>
-							<!-- <td>아이디 :</td> -->
 							<td><input type="text" name="customerId" id="id" class="form-control"
 							            placeholder="아이디를 입력하세요" data-rule="minlen:4"
 										data-msg="올바른 아이디를 입력하세요"
 										style="height: 44px; border-radius: 0; box-shadow: none; font-size: 14px; background: #0c0b09; border-color: #625b4b; color: white;">
 							</td>
 							<br>
-							<td rowspan="2">
+							<td>
 								<button id="button" class="btn btn-login" style="margin-right: 30px;">로그인</button>
 							</td>
+							
 						</tr>
 						<tr>
-							<!-- <td>비밀번호 :</td> -->
 							<td><input type="password" name="password" class="form-control"
 							           placeholder="비밀번호를 입력하세요" data-rule="minlen:4"
 										data-msg="올바른 비밀번호를 입력하세요"
 										style="height: 44px; border-radius: 0; box-shadow: none; font-size: 14px; background: #0c0b09; border-color: #625b4b; color: white;"></td>
+						
+						<td>
+							<input id="button" type="button" onClick="location.href='joinOption.na'" value="회원가입"
+										style="margin-right: 30px;"> 
+							</td>
 						</tr>
 						<!-- <tr>
 							<td colspan="3"><a href="/joinOption.na">회원가입</a>&nbsp; <a
@@ -105,18 +107,17 @@
 								<!-- <form action="/login.na" method="post" role="form"
 									class="php-email-form" data-aos="fade-up" data-aos-delay="100"> -->
 									<br> 
-									<input id="button" type="button"
-										onClick="location.href='joinOption.na'" value="회원가입"
-										style="margin-right: 30px;"> 
-									<input id="button"
-										type="button" onClick="location.href='find.na'"
-										value="ID & PW 찾기" style="margin-left: 30px">
+									<!-- <input id="button" type="button" onClick="location.href='joinOption.na'" value="회원가입"
+										style="margin-right: 30px;">  -->
+									<input id="button" type="button" onClick="location.href='findId.na'"
+										value="ID 찾기" style="margin-left: 30px">
+								    <input id="button" type="button" onClick="location.href='findPwd.na'"
+										value="PW 찾기" style="margin-left: 30px">
 								<!-- </form> -->
 							</td>
 							</tr>
 					</table>
 				</form>
-
 			</table>
 			</div>
 	</section>
@@ -135,7 +136,7 @@
         
         
         
-        <section id="book-a-table" class="book-a-table">
+<!--         <section id="book-a-table" class="book-a-table">
 					<div class="container" data-aos="fade-up">
 						<form action="/login.na" method="post" role="form"
 							class="php-email-form" data-aos="fade-up" data-aos-delay="100">
@@ -157,7 +158,7 @@
 							</div>
 						</form>
 					</div>
-				</section>
+				</section> -->
         
 
 	<footer>

@@ -29,5 +29,15 @@ public class CustomerStoreLogic implements CustomerStore{
 		int result = sqlSession.insert("customerMapper.insertCustomer",customer);
 		return result;
 	}
+	
+	@Override
+	public Customer selectTwoCustomer(Customer customer) {		
+	Customer findIdEmail = sqlSession.selectOne("customerMapper.selectTwo",customer);
+	return findIdEmail;		
+}
+	
+	
+	
+	
 
 }

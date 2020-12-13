@@ -28,4 +28,9 @@ public class CustomerServiceImpl implements CustomerService{
 		return store.insertCustomer(customer);
 	}
 
+	@Override
+	public Customer findIdEmail(Customer customer) {
+		return store.selectTwoCustomer(customer);
+	}
+
 }

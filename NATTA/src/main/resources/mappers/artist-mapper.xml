@@ -18,7 +18,7 @@
 	
 	<insert id="insertArtist">
 		INSERT INTO ARTIST
-	 	VALUES (#{artistId},#{password},#{artistName},#{age},#{gender},#{phone},#{email},#{address},#{workAddress},SYSDATE,#{businessNo},#{enrollStatus})
+	 	VALUES (#{artistId},#{password},#{artistName},#{age},#{gender},#{phone},#{email},#{workAddress},SYSDATE,#{businessNo},#{enrollStatus})
 	</insert>
 	 
 	 <select id="checkIdDup" resultType="int">

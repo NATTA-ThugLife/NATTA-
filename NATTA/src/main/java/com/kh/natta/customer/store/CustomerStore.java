@@ -9,5 +9,7 @@ public interface CustomerStore {
 	public int checkIdDup(String customerId);
 	
 	public int insertCustomer(Customer customer);
+
+	Customer selectTwoCustomer(Customer customer);
 	
 }

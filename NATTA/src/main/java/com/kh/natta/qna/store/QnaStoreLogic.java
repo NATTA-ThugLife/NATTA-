@@ -2,6 +2,7 @@ package com.kh.natta.qna.store;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,56 +19,50 @@ public class QnaStoreLogic implements QnaStore{
 
 	@Override
 	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.selectOne("qnaMapper.getListCount");
+		return result;
 	}
 
 	@Override
 	public ArrayList<Qna> selectList(Paging pi) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage() -1) * pi.getQnaLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getQnaLimit());
+		return (ArrayList)sqlSession.selectList("qnaMapper.selectList",null,rowBounds);
 	}
 
 	@Override
 	public int addReadCount(int qnaCode) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("qnaMapper.updateCount",qnaCode);
 	}
 
 	@Override
 	public Qna selectQna(int qnaCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("qnaMapper.selectOne",qnaCode);
 	}
 
 	@Override
 	public int insertQna(Qna qna) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("qnaMapper.insertQna",qna);
 	}
 
 	@Override
 	public int updateQna(Qna qna) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("qnaMapper.updateQna",qna);
 	}
 
 	@Override
 	public int deleteQna(int qnaCode) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("qnaMapper.deleteQna",qnaCode);
 	}
 
 	@Override
 	public int insertQnaComment(QnaComment qnacomment) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("qnaMapper.insertQnaComment",qnacomment);
 	}
 
 	@Override
 	public ArrayList<QnaComment> selectQnaCommentList(int qnaCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("qnaMapper.selectQnaCommentList",qnaCode);
 	}
 
 	

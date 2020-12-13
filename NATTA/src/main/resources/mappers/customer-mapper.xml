@@ -23,5 +23,10 @@
 	 	SELECT COUNT(*) FROM CUSTOMER
 	 	WHERE CUSTOMER_ID = #{customerId}
 	 </select>
+	 
+	 <select id="selectTwo" resultMap="customerResultMap">
+		SELECT * FROM CUSTOMER
+		WHERE CUSTOMER_NAME=#{customerName} AND EMAIL=#{email}
+	</select>
 	
 </mapper>

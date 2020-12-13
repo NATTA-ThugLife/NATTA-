@@ -25,10 +25,14 @@ public interface QnaService {
 	 * @param qnaCode
 	 * @return
 	 */
-	public int addReadCount(int qnaCode);
+	public int addReadCount(int qnaCode); 
+	
 	public Qna selectQna(int qnaCode);
+	
 	public int registerQna(Qna qna);
+	
 	public int modifyQna(Qna qna);
+	
 	public int deleteQna(int qnaCode);
 	
 	/**
@@ -36,7 +40,7 @@ public interface QnaService {
 	 * @param qnacomment
 	 * @return
 	 */
-	public int insertQnaComment(QnaComment reply);
+	public int insertQnaComment(QnaComment qnaComment);
 	
 	/**
 	 * 게시글 댓글 조회

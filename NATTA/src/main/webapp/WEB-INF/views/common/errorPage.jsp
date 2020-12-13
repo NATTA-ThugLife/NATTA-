@@ -38,8 +38,8 @@
 	    <section id="book-a-table" class="book-a-table">
       <div class="container" data-aos="fade-up" style="width: 100%; margin: 0 auto;">
         <div class="section-title">
-          <h2>Log In Error</h2>
-          <p>로그인 실패</p>
+          <h2>Errorrrrrrrrrrrrrrrr</h2>
+          <p>노노ㅗ노노노노노</p>
         </div>
         <div style="text-align: center;">
         <form action="resources/forms/book-a-table.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100"><br>

@@ -22,7 +22,7 @@
 }
 
 </style>
-<title>Insert title here</title>
+<title>회원가입 옵션</title>
 </head>
 <body>
 	<header>
@@ -44,6 +44,7 @@
 					<input id="button" type="button" onClick="location.href='artistJoinView.na'"
 						value="아티스트입니다" style="margin-left: 30px">
 				</form>
+				
 			</div>
 		</div>
 	</section>

@@ -20,9 +20,13 @@ public interface QnaStore {
 	 * @return
 	 */
 	public int addReadCount(int qnaCode);
+	
 	public Qna selectQna(int qnaCode);
+	
 	public int insertQna(Qna qna);
+	
 	public int updateQna(Qna qna);
+	
 	public int deleteQna(int qnaCode);
 	
 	/**

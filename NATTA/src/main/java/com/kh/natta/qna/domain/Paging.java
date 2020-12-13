@@ -2,13 +2,13 @@ package com.kh.natta.qna.domain;
 
 public class Paging {
 	
-	private int currentPage;
-	private int qnaLimit;
-	private int pageLimit;
-	private int startPage;
-	private int endPage;
-	private int listCount;
-	private int maxPage;
+	private int currentPage; //현재 페이지
+	private int qnaLimit;    //게시글 개수
+	private int pageLimit;   //네비 개수
+	private int startPage;   //네비 첫번째값
+	private int endPage;     //네비 마지막값
+	private int listCount;   //전체 게시글 개수
+	private int maxPage;     //페이지 마지막 번호
 	
 	public Paging() {}
 

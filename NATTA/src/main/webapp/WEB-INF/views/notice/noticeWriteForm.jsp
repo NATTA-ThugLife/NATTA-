@@ -22,7 +22,7 @@
 		</div>
 	 </section>
 	
-	<form action="noticeInsert.na" method="post" enctype="multipart/form-data">
+	<form action="noticeWrite.na" method="post" enctype="multipart/form-data">
 		<table align="center" border="1" cellspacing="0">
 			<tr>
 				<td>제목</td>

@@ -11,7 +11,6 @@ public class Artist {
 	private String gender;
 	private String phone;
 	private String email;
-	private String address;
 	private String workAddress;
 	private Date enrollDate;
 	private String businessNo;
@@ -32,7 +31,7 @@ public class Artist {
 
 
 	public Artist(String artistId, String password, String artistname, int age, String gender, String phone, String email,
-			String address, String workAddress, Date enrollDate, String businessNo,
+			String workAddress, Date enrollDate, String businessNo,
 			int enrollStatus) {
 		super();
 		this.artistId = artistId;
@@ -42,7 +41,6 @@ public class Artist {
 		this.gender = gender;
 		this.phone = phone;
 		this.email = email;
-		this.address = address;
 		this.workAddress = workAddress;
 		this.enrollDate = enrollDate;
 		this.businessNo = businessNo;
@@ -53,8 +51,7 @@ public class Artist {
 	@Override
 	public String toString() {
 		return "Artist [artistId=" + artistId + ", password=" + password + ", artistName=" + artistName + ", age=" + age
-				+ ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", address=" + address
-				+ ", workAddress=" + workAddress + ", enrollDate=" + enrollDate + ", businessNo=" + businessNo + ", enrollStatus=" + enrollStatus + "]";
+				+ ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", workAddress=" + workAddress + ", enrollDate=" + enrollDate + ", businessNo=" + businessNo + ", enrollStatus=" + enrollStatus + "]";
 	}
 
 
@@ -126,17 +123,6 @@ public class Artist {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
-	public String getAddress() {
-		return address;
-	}
-
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 
 	public String getWorkAddress() {
 		return workAddress;
