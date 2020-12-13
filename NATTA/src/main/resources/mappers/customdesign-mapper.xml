@@ -24,15 +24,20 @@
 	</resultMap>
 	
 	<!-- 맞춤도안 -->
+	<select id="getListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM CUSTOM_DESIGN
+	</select>
+	
 	
 	<insert id="insertCustomDesign">
 		INSERT INTO CUSTOM_DESIGN
-		VALUES(CUSTOM_DESIGN_SEQ.NEXTVAL,'0',#{customTitle},#{contents},#{tattooType},SYSDATE,SYSDATE,'0',#{customerId})
+		VALUES(CUSTOM_DESIGN_SEQ.NEXTVAL,#{onOff},#{customTitle},#{contents},#{tattooType},SYSDATE,SYSDATE,'0',#{customerId})
 	</insert>
 	
 	<select id="selectListCustomDesign" resultMap="customDesignResultMap">
 		SELECT * FROM CUSTOM_DESIGN
-		ORDER BY CUSTOM_CODE
+		ORDER BY CUSTOM_CODE DESC
 	</select>
 	
 	<select id="selectOneCustomDesign" resultMap="customDesignResultMap">
@@ -42,15 +47,46 @@
 	
 	<update id="updateCustomDesign">
 		UPDATE CUSTOM_DESIGN
-		SET CUSTOM_TITLE=#{customTitle}, TATTOO_TYPE=#{tattooType}, CONTENTS=#{contents}, C_MODIFY_DATE=SYSDATE
+		SET ON_OFF=#{onOff} CUSTOM_TITLE=#{customTitle}, TATTOO_TYPE=#{tattooType}, CONTENTS=#{contents}, C_MODIFY_DATE=SYSDATE
 		WHERE CUSTOM_CODE=#{customCode}
+	</update>
+	
+	<delete id="deleteCustomDesign">
+		DELETE CUSTOM_DESIGN
+		WHERE CUSTOM_CODE=#{customCode}
+	</delete>
+	
+	<select id="searchList" resultMap="customDesignResultMap">
+	SELECT * FROM CUSTOM_DESIGN
+	<where>
+		<if test="searchCondition.toString() == 'all'">
+			CUSTOM_TITLE LIKE '%' || #{searchValue} || '%'
+			OR TATTOO_TYPE LIKE '%' || #{searchValue} || '%'
+			OR CONTENTS LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchCondition.toString() == 'customTitle'">
+			CUSTOM_TITLE LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchCondition.toString() == 'tattooType'">
+			TATTOO_TYPE LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchCondition.toString() == 'contents'">
+			CONTENTS LIKE '%' || #{searchValue} || '%'
+		</if>
+	</where>
+	</select>
+	
+	<update id="updateAddHits">
+		UPDATE CUSTOM_DESIGN
+		SET CUSTOM_HITS = CUSTOM_HITS + 1
+		WHERE CUSTOM_CODE = #{customCode}
 	</update>
 	
 	<!-- 댓글 -->
 	
 	<insert id="insertComment">
 		INSERT INTO CUSTOM_COMMENT
-		VALUES(C_COMMENT_SEQ.NEXTVAL,#{artistId},#{cContents},SYSDATE,SYSDATE,'0',#{customCode})
+		VALUES(C_COMMENT_SEQ.NEXTVAL,#{artistId},#{cContents},SYSDATE,SYSDATE,#{cOnOff},#{customCode})
 	</insert>
 	
 	<select id="selectListComment" resultMap="customCommentResultMap">
@@ -61,7 +97,7 @@
 	
 	<update id="updateCustomComment">
 		UPDATE CUSTOM_COMMENT
-		SET  C_CONTENTS=#{cContents}, CC_MODIFY_DATE=SYSDATE
+		SET  C_CONTENTS=#{cContents}, CC_MODIFY_DATE=SYSDATE , C_ON_OFF=#{cOnOff}
 		WHERE CUSTOM_C_CODE=#{customCCode}	
 	</update>
 	
@@ -69,5 +105,7 @@
 		DELETE CUSTOM_COMMENT
 		WHERE CUSTOM_C_CODE=#{customCCode}
 	</delete>
+	
+	
 	
 </mapper>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -26,7 +27,19 @@
         	</tr>
         	<tr>
         		<td>타투스타일</td>
-        		<td><input type="text" name="tattooType" value="${customDesign.tattooType }"></td>
+        		<td>
+        		<select name="tattooType">
+        		<option value="올드스쿨">올드스쿨</option>
+        		<option value="이레즈미">이레즈미</option>
+        		</select>
+        		</td>
+        	</tr>
+        	<tr>
+        		<td>공개/비공개</td>
+        		<td>	
+        			<input type="radio" name="onOff" value="0" checked="checked"><span>공개</span>
+        			<input type="radio" name="onOff" value="1"><span>비공개</span>
+        		</td>
         	</tr>
         	<tr>
         		<td>내용</td>
@@ -37,9 +50,13 @@
         	
         	</tr>
             <tr>
+            	
             	<td colspan="2" align="center">
             	<input type="submit" value="수정"> &nbsp;
-				<a href="#">목록으로</a>
+            	<c:url var="cList" value="customDesignList.na">
+            		<c:param name="page" value="${currentPage }"></c:param>
+            	</c:url>
+				<a href="${cList }">목록으로</a>
             	</td>
             </tr>
 		</table>

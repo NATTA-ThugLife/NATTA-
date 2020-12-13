@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.natta.common.PageInfo;
 import com.kh.natta.customDesign.domain.CustomComment;
 import com.kh.natta.customDesign.domain.CustomDesign;
+import com.kh.natta.customDesign.domain.Search;
 import com.kh.natta.customDesign.store.CustomDesignStore;
 
 @Service
@@ -21,8 +23,8 @@ public class CustomDesignServiceImpl  implements CustomDesignService{
 	}
 
 	@Override
-	public ArrayList<CustomDesign> selectList() {
-		return store.selectList();
+	public ArrayList<CustomDesign> selectList(PageInfo pi) {
+		return store.selectList(pi);
 	}
 
 	@Override
@@ -37,8 +39,7 @@ public class CustomDesignServiceImpl  implements CustomDesignService{
 
 	@Override
 	public int deleteCustomDesign(int customCode) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.deleteCustomDesign(customCode);
 	}
 
 	@Override
@@ -59,6 +60,21 @@ public class CustomDesignServiceImpl  implements CustomDesignService{
 	@Override
 	public int deleteCustomComment(int customCCode) {
 		return store.deleteCustomComment(customCCode);
+	}
+
+	@Override
+	public ArrayList<CustomDesign> selectListSearch(Search search) {
+		return store.selectListSearch(search);
+	}
+
+	@Override
+	public int addHits(int customCode) {
+		return store.addHits(customCode);
+	}
+
+	@Override
+	public int getListCount() {
+		return store.getListCount();
 	}
 
 }
