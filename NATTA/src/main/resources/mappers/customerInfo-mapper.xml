@@ -9,6 +9,13 @@
 		<result property="customerProfile" column="CUSTOMER_PROFILE"></result>
 	</resultMap>
 	
+	<resultMap type="Following" id="followingResultMap">
+		<result property="customerId" column="CUSTOMER_ID"></result>
+		<result property="artistId" column="ARTIST_ID"></result>
+		<result property="myReprofile" column="MY_REPROFILE"></result>
+		<result property="myInfo" column="MY_INFO"></result>
+	</resultMap>
+	
 	<update id="modifyCusotmer">
 		UPDATE CUSTOMER
 		<set>
@@ -35,5 +42,9 @@
 	<select resultMap="customerResultMap" id="dupPwd">
 		SELECT * FROM CUSTOMER
 		WHERE CUSTOMER_ID = #{customerId} AND PASSWORD = #{password}
+	</select>
+	
+	<select resultMap="followingResultMap" id="selectListFollowing">
+		SELECT * FROM FOLLOWING JOIN ARTISTINFO USING(ARTIST_ID) WHERE CUSTOMER_ID = #{customerId}
 	</select>
 </mapper>

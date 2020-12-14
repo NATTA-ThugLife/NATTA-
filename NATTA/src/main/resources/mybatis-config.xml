@@ -19,11 +19,14 @@
 		<typeAlias type="com.kh.natta.qna.domain.Qna" alias="Qna"/>
 		<typeAlias type="com.kh.natta.artistWork.domain.ArtistWork" alias="ArtistWork"/>
 		<typeAlias type="com.kh.natta.qna.domain.QnaComment" alias="QnaComment"/>
+		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistInfoPrice" alias="ArtistInfoPrice"/>
+		<typeAlias type="com.kh.natta.customerInfo.domain.Following" alias="Following"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/artist-mapper.xml"/>
 		<mapper resource="mappers/customer-mapper.xml"/>
+		<mapper resource="mappers/customerInfo-mapper.xml"/>
 		<mapper resource="mappers/reservation-mapper.xml"/>
 		<mapper resource="mappers/artistInfo-mapper.xml"/>
 		<mapper resource="mappers/customdesign-mapper.xml"/>

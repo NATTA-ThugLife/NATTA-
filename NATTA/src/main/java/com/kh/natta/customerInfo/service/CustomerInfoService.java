@@ -1,6 +1,9 @@
 package com.kh.natta.customerInfo.service;
 
+import java.util.ArrayList;
+
 import com.kh.natta.customer.domain.Customer;
+import com.kh.natta.customerInfo.domain.Following;
 
 public interface CustomerInfoService {
 	
@@ -18,4 +21,12 @@ public interface CustomerInfoService {
 	 * @return
 	 */
 	public Customer dupPwd (Customer customer);
+	
+	/**
+	 * 팔로잉 리스트  가져오기
+	 * @param <ArrayList>
+	 * @param customerId
+	 * @return
+	 */
+	public ArrayList<Following> selectListFollowing(String customerId); 
 }

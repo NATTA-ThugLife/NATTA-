@@ -3,6 +3,7 @@ package com.kh.natta.customerInfo.controller;
 import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.customer.service.CustomerService;
+import com.kh.natta.customerInfo.domain.Following;
 import com.kh.natta.customerInfo.service.CustomerInfoService;
 
 
@@ -31,6 +33,8 @@ public class CustomerInfoController {
 	
 	@RequestMapping(value="/customerInfo.na" , method = RequestMethod.GET)
 	public String customerInfoView(String customerId) {
+		ArrayList<Following> fList = service.selectListFollowing(customerId);
+		System.out.println(fList);
 		return "Customer-info/customerPage";
 	}
 	
@@ -49,13 +53,10 @@ public class CustomerInfoController {
 		int result = service.modifyCustomerModify(customer);
 		if(result > 0 ) {
 			HttpSession session = request.getSession();
-			System.out.println("비밀번호 변경 안됨" + customer);
 			if(customer.getPassword().isEmpty()) {
 				customer.setPassword(dupPwd);
 			}
 			Customer updateCustomer = cService.loginCustomer(customer);
-			System.out.println("비밀번호 다시 세팅" + customer);
-			System.out.println("수정된 후 다시 로그인 : " + updateCustomer);
 			session.setAttribute("loginCustomer", updateCustomer);
 		}
 		return "redirect:customerInfo.na";

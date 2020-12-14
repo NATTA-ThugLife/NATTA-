@@ -63,7 +63,7 @@ public class CustomerController {
 	@RequestMapping(value="customerRegister.na",method=RequestMethod.POST)
 	public String customerRegister(Model model, Customer customer,String post, String address) {
 		customer.setAddress(post+","+address);
-		//System.out.println(customer);
+//		System.out.println(customer);
 		int result = service.registerCustomer(customer);
 		//System.out.println(result);
 		if(result > 0) {			
