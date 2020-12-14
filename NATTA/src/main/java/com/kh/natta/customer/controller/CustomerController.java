@@ -74,19 +74,21 @@ public class CustomerController {
 		}
 	}
 	
-	//아이디 중복검사
-	@ResponseBody
-	@RequestMapping(value="dupId.na", method=RequestMethod.GET)
-	public String idDuplicateCheck(String customerId) {
-		boolean isUsable = service.checkIdDup(customerId) == 0 ? true : false;
-		return isUsable+""; 
-	}
 	
-	//회원가입할때 회원/아티스트 선택 옵션
-	@RequestMapping(value = "joinOption.na", method = RequestMethod.GET)
-	public String joinOption(Locale locale, Model model) {
-		return "join/joinOption";
-	}
+	  //아이디 중복검사	  
+	  @ResponseBody
+	  
+	  @RequestMapping(value="dupId.na", method=RequestMethod.GET) public String
+	  idDuplicateCheck(String customerId) { boolean isUsable =
+	  service.checkIdDup(customerId) == 0 ? true : false; return isUsable+""; }
+	 
+
+	
+	/*
+	 * //회원가입할때 회원/아티스트 선택 옵션
+	 * @RequestMapping(value = "joinOption.na", method = RequestMethod.GET) public
+	 * String joinOption(Locale locale, Model model) { return "join/joinOption"; }
+	 */
 	
 	//아이디 찾기 페이지
 	@RequestMapping(value = "findId.na", method = RequestMethod.GET)
@@ -99,7 +101,7 @@ public class CustomerController {
 		  HttpSession session = request.getSession();
 	  Customer customer = new Customer(); 
 	  customer.setCustomerName(customerName);
-	  customer.setEmail(email); // 이렇게 해도 되고 로그인할 떄 쓴거처럼 생성자를 하나더 만들어도 돼요 네네 같은거에요  그건 한줄에 끝내려고 하는거에요 생성자 안만들면 두줄더추가되자나요 setter메소드를 이영해야되니..
+	  customer.setEmail(email); 
 	  //System.out.println(customerName);
 	  //System.out.println(email);
 	  Customer findCustomer = service.findIdEmail(customer);
@@ -118,6 +120,29 @@ public class CustomerController {
 	public String findPwd(Locale locale, Model model) {
 		return "join/findPwd";
 	}
-	//
+	//비번 찾기 본인 인증 페이지
+	@RequestMapping(value="findPwdCerti.na", method = RequestMethod.GET)
+	  public ModelAndView findPwdCerti(String customerId, String customerName, String email, ModelAndView mv, HttpServletRequest request) { 
+		  HttpSession session = request.getSession();
+	  Customer customer = new Customer(); 
+	  customer.setCustomerId(customerId);
+	  customer.setCustomerName(customerName);
+	  customer.setEmail(email); 
+	  System.out.println(customerId);
+	  System.out.println(customerName);
+	  System.out.println(email);
+	  Customer findCustomerPwd = service.findPwdEmail(customer);
+	  if(findCustomerPwd != null) { 
+		  mv.addObject("findCustomerPwd", findCustomerPwd);
+		  mv.setViewName("join/findPwdCerti"); 
+	  }else {
+		  mv.addObject("msg","로그인 실패!");
+		  mv.setViewName("common/errorPage"); 
+	  } return mv;
+	  }
+	
+	
+	
+	
 	
 }

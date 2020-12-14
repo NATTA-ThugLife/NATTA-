@@ -22,8 +22,7 @@ public class ArtistController {
 	
 	//로그인
 	@RequestMapping(value="artistLogin.na")
-	public ModelAndView artistLogin(String artistId, String password, ModelAndView mv, HttpServletRequest request) {
-		
+	public ModelAndView artistLogin(String artistId, String password, ModelAndView mv, HttpServletRequest request) {		
 		HttpSession session = request.getSession();
 		Artist artist = new Artist(artistId,password);
 		Artist loginArtist = service.loginArtist(artist);
@@ -54,17 +53,16 @@ public class ArtistController {
 	@RequestMapping(value="artistRegister.na",method=RequestMethod.POST)
 	public String artistRegister(Model model, Artist artist,String post, String workAddress) {
 		artist.setWorkAddress(post+","+workAddress);
-		System.out.println(artist);
+		//System.out.println(artist);
 		int result = service.registerArtist(artist);
-		System.out.println(result);
+		//System.out.println(result);
 		if(result > 0) {
 			return "redirect:main.na";
 		}else {
 			model.addAttribute("msg", "회원 가입 실패");
 			return "common/errorPage";
 		}
-	}
-	
+	}	
 	
 	  // 아이디 중복검사	  
 	  @ResponseBody	  

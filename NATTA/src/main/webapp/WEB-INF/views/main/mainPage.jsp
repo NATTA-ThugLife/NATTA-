@@ -45,7 +45,7 @@
 	        <!--로그인 세션 비어있을 때 -->
 			<c:if test="${empty sessionScope.loginCustomer && empty sessionScope.loginArtist  }">
 				<li><a href="/login.na">LOGIN</a></li>
-				<li><a href="/joinOption.na">SIGNUP</a></li>
+				<li><a href="/customerJoinView.na">SIGNUP</a></li>
 			</c:if>
 			<!-- 회원 로그인시 -->
 			<c:if test="${!empty sessionScope.loginCustomer }">

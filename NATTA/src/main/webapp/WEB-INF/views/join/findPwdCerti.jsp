@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비번 찾기</title>
+<title>비번 찾기 본인 인증</title>
 </head>
 <body>
 	<header>
@@ -15,7 +15,7 @@
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
 				<h2>Find PWD</h2>
-				<p>비밀번호 찾기</p>
+				<p>본인 확인 인증</p>
 			</div>
 			
 				<table align="center">
@@ -23,35 +23,38 @@
 						<td><input type="radio" name="checkOption" id="checkEmail" onchange="setDisplay()" checked>이메일</td>
 						<td><input type="radio" name="checkOption" onchange="setDisplay()" >휴대폰</td>
 					</tr>
-					<form action="findPwd.na" method="post" id="formId">
+					<form action="findPwdCerti.na" method="post" id="formId">
 						<table align="center">
 							<tr>
 								<td>ID</td>
-								<td><input type="text" name="customerId">
+								<td><input type="text" name="customerId" id="customerId">
 								</td>
 							</tr>
 							<tr>
 								<td>이름</td>
-								<td><input type="text" name="customerName">
+								<td><input type="text" name="customerName" id="customerName">
 								</td>
 							</tr>
 							<tr id="email">
 								<td>이메일</td>
-								<td><input type="text" name="email"></td>
+								<td> ${findCustomerPwd.customerEmail }</td>
+								<td><button name="certi" value="인증번호 받기"></button></td>
 							</tr>
 							<tr id="phone" style="display:none;">
 								<td>폰</td>
 								<td><input type="text" name="phone"></td>
 							</tr>
 							<tr>
+								<td>인증 번호</td>
+								<td><input type="text" name="certiNum" id="certiNum"></td>
+							</tr>
+							<tr>
 								<td colspan="2" align="center">
 									<button id="next">다음</button>
 								</td>
 							</tr>
-
 						</table>
 					</form>
-
 				</table>
 			</div>
 	</section>
@@ -59,11 +62,11 @@
 	<script>
 		function setDisplay(){
 		    if($('#checkEmail').is(':checked')){
-		        $('#formId').attr("action","findPwd.na")	
+		        $('#formId').attr("action","findPwdCerti.na")	
 		        $("#email").show();
 				$("#phone").hide();
 		    }else{
-		    	$('#formId').attr("action","findPwd.na")
+		    	$('#formId').attr("action","findPwdCerti.na")
 		    	$("#email").hide();
 				$("#phone").show();
 		    }
@@ -73,5 +76,6 @@
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</footer>
+
 </body>
 </html>

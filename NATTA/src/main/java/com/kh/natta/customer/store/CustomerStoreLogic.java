@@ -32,9 +32,15 @@ public class CustomerStoreLogic implements CustomerStore{
 	
 	@Override
 	public Customer selectTwoCustomer(Customer customer) {		
-	Customer findIdEmail = sqlSession.selectOne("customerMapper.selectTwo",customer);
-	return findIdEmail;		
+	    Customer findIdEmail = sqlSession.selectOne("customerMapper.selectTwo",customer);
+	    return findIdEmail;		
 }
+
+	@Override
+	public Customer selectThreeCustomer(Customer customer) {
+		Customer findPwdEmail = sqlSession.selectOne("customerMapper.selectThree",customer);
+		return findPwdEmail;
+	}
 	
 	
 	

@@ -6,6 +6,7 @@ public class Artist {
 	
 	private String artistId;
 	private String password;
+	private String password2;
 	private String artistName;
 	private int age;
 	private String gender;
@@ -30,12 +31,13 @@ public class Artist {
 	}
 
 
-	public Artist(String artistId, String password, String artistname, int age, String gender, String phone, String email,
+	public Artist(String artistId, String password, String password2, String artistname, int age, String gender, String phone, String email,
 			String workAddress, Date enrollDate, String businessNo,
 			int enrollStatus) {
 		super();
 		this.artistId = artistId;
 		this.password = password;
+		this.password = password2;
 		this.artistName = artistname;
 		this.age = age;
 		this.gender = gender;
@@ -50,7 +52,7 @@ public class Artist {
 
 	@Override
 	public String toString() {
-		return "Artist [artistId=" + artistId + ", password=" + password + ", artistName=" + artistName + ", age=" + age
+		return "Artist [artistId=" + artistId + ", password=" + password + ", password2=" + password2 + ", artistName=" + artistName + ", age=" + age
 				+ ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", workAddress=" + workAddress + ", enrollDate=" + enrollDate + ", businessNo=" + businessNo + ", enrollStatus=" + enrollStatus + "]";
 	}
 
@@ -161,6 +163,16 @@ public class Artist {
 
 	public void setEnrollStatus(int enrollStatus) {
 		this.enrollStatus = enrollStatus;
+	}
+
+
+	public String getPassword2() {
+		return password2;
+	}
+
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
 	}
 	
 	

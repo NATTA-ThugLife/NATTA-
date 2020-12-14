@@ -6,6 +6,7 @@ public class Customer {
 
 	private String customerId;
 	private String password;
+	private String password2;
 	private String customerName;
 	private int age;
 	private String gender;
@@ -18,11 +19,7 @@ public class Customer {
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	
-	
-
-	
+	}	
 	
 	public String getCustomerProfile() {
 		return customerProfile;
@@ -40,11 +37,12 @@ public class Customer {
 
 
 
-	public Customer(String customerId, String password, String customerName, int age, String gender, String phone, String email,
+	public Customer(String customerId, String password, String password2, String customerName, int age, String gender, String phone, String email,
 			String address, Date enrollDate) {
 		super();
 		this.customerId = customerId;
 		this.password = password;
+		this.password2 = password2;
 		this.customerName = customerName;
 		this.age = age;
 		this.gender = gender;
@@ -58,7 +56,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", password=" + password + ", customerName=" + customerName
+		return "Customer [customerId=" + customerId + ", password=" + password + ", password2=" + password2 + ", customerName=" + customerName
 				+ ", age=" + age + ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", address="
 				+ address + ", enrollDate=" + enrollDate + ", customerProfile=" + customerProfile + "]";
 	}
@@ -137,6 +135,14 @@ public class Customer {
 
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
+	}
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
 	}
 	
 	

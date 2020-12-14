@@ -16,7 +16,7 @@
 	
 	<insert id="insertCustomer">
 		INSERT INTO CUSTOMER
-	 	VALUES (#{customerId},#{password},#{customerName},#{age},#{gender},#{phone},#{email},#{address},SYSDATE)
+	 	VALUES (#{customerId},#{password},#{password2},#{customerName},#{age},#{gender},#{phone},#{email},#{address},SYSDATE,#{customerProfile})
 	</insert>
 	 
 	 <select id="checkIdDup" resultType="int">
@@ -27,6 +27,11 @@
 	 <select id="selectTwo" resultMap="customerResultMap">
 		SELECT * FROM CUSTOMER
 		WHERE CUSTOMER_NAME=#{customerName} AND EMAIL=#{email}
+	</select>
+	
+	<select id="selectThree" resultMap="customerResultMap">
+		SELECT * FROM CUSTOMER
+		WHERE CUSTOMER_ID=#{customerId} AND CUSTOMER_NAME=#{customerName} AND EMAIL=#{email}
 	</select>
 	
 </mapper>

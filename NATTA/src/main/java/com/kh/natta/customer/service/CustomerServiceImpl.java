@@ -33,4 +33,9 @@ public class CustomerServiceImpl implements CustomerService{
 		return store.selectTwoCustomer(customer);
 	}
 
+	@Override
+	public Customer findPwdEmail(Customer customer) {
+		return store.selectThreeCustomer(customer);
+	}
+
 }

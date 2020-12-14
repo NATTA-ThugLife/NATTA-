@@ -11,5 +11,7 @@ public interface CustomerStore {
 	public int insertCustomer(Customer customer);
 
 	Customer selectTwoCustomer(Customer customer);
+
+	Customer selectThreeCustomer(Customer customer);
 	
 }
