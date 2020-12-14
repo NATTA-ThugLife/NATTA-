@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ArtistWorkMapper">
 
+	 <resultMap type="ArtistWork" id="artistWorkMap">
+	 	<result property="workImgPath" column="WORK_IMGPATH"/>
+	 	<result property="workReImgPath" column="WORK_REIMGPATH"/>
+	 	<result property="workInfo" column="WORK_INFO"/>
+	 	<result property="workStyle" column="WORK_STYLE"/>
+	 	<result property="artistId" column="ARTIST_ID"/>
+	 </resultMap>
+	
+	
+	
+	
+	<insert id="insertArtistWork">
+		INSERT INTO WORK
+		VALUES(WORK_SEQ.NEXTVAL, #{workImgPath}, #{workReImgPath}, #{workInfo}, #{workStyle}, SYSDATE, SYSDATE, #{artistId})
+	</insert>
 </mapper>

@@ -35,4 +35,15 @@
 		VALUES( #{pStyle}, #{pSize1}, #{pSize2}, #{pSize3}, #{pSize4}
 				, #{pSize5}, #{pSize6}, #{pSize7}, #{artistId} )
 	</insert>
+	
+	<!-- 아티스트 스타일 목록만 가져옴   -->
+	<select id="selectArtistStyle" resultMap="artistInfoPriceMap">
+		SELECT P_STYLE
+		FROM PRICE
+		WHERE ARTIST_ID = #{artistId}
+	</select>
+	
+	
+	
+	
 </mapper>

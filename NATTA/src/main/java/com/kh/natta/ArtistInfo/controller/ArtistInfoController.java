@@ -76,8 +76,8 @@ public class ArtistInfoController {
 	}
 	// 프로필사진 등록
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\artistProfile";
+		String root = request.getSession().getServletContext().getRealPath("resources/artistInfoFile");
+		String savePath = root + "\\Profile";
 		File folder = new File(savePath);
 		if(!folder.exists()) {
 			folder.mkdir();
@@ -134,8 +134,8 @@ public class ArtistInfoController {
 	}
 	// 수정시 파일삭제 메소드
 	public void deleteProfile(String fileName, HttpServletRequest request) {
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		String deletePath = root + "\\artistProfile";
+		String root = request.getSession().getServletContext().getRealPath("resources/artistInfoFile");
+		String deletePath = root + "\\Profile";
 		File deleteProfile = new File(deletePath + "\\" + fileName);
 		if( deleteProfile.exists() ) {
 			deleteProfile.delete();

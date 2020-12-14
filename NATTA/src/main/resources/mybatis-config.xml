@@ -20,7 +20,6 @@
 		<typeAlias type="com.kh.natta.artistWork.domain.ArtistWork" alias="ArtistWork"/>
 		<typeAlias type="com.kh.natta.qna.domain.QnaComment" alias="QnaComment"/>
 		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistInfoPrice" alias="ArtistInfoPrice"/>
-		
 	</typeAliases>
 	
 	<mappers>
