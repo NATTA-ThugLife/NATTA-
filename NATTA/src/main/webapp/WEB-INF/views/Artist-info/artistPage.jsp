@@ -91,7 +91,7 @@
        <div class="profile container d-flex align-items-center" style="float:left;">
        <div style="width:380px; float:left;"></div>
         <img 
-        src="resources/artistProfile/${ artistInfo.myReProfile }" alt="" class="img-fluid rounded-circle" 
+        src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" alt="" class="img-fluid rounded-circle" 
         style="margin-left: 15px auto; display: block; width: 120px; border: 8px solid #2c2f3f;">
   	<nav class="nav-menu d-none d-lg-block" data-aos="fade-in">
         <h2 class="text-light" style="margin-left:25px;">${ artistInfo.name }</h2>
@@ -102,82 +102,7 @@
           	<li class="active"><a href="#" data-toggle="modal" id="insertInfo"><i class="bx bx-home"></i><span> 타투숍 소개</span></a></li>
           	<li><a href="#modalArtistWork" data-toggle="modal" id="artistInfoWork"><i class="bx bx-book-content"></i> 내 작품등록하기</a></li>
           	<li><a href="#modalArtistPrice" data-toggle="modal" id="artistInfoPrice"><i class="bx bx-file-blank"></i><span> 스타일별 가격</span></a></li>
-		</c:if>
-		<script>
- 		$(document).ready(function(){
- 			$(".tattoStyle").on("change", function(){
-				var artistId = "${ loginArtist.artistId }";
-				var tattoStyleOptionValue = $(this).find(":selected").val();
-				if( tattoStyleOptionValue == 'pleaseSelect' ) {
-					$('.tattolayer').css("display","none");
-				}else{
-					$('.tattolayer').css("display","block");
-						console.log(tattoStyleOptionValue);
-						$.ajax({
-							url : "artistPriceChecking.na",
-							type : "post",
-							data : { 
-								"artistId" : artistId,
-								"pStyle" : tattoStyleOptionValue 
-								},
-							dataType : "json",
-							success : function(checkPrice) {
-								if( checkPrice != null ){
-									$("input[name=pSize1]").prop("value", checkPrice.pSize1);
-									$("input[name=pSize2]").prop("value", checkPrice.pSize2);
-									$("input[name=pSize3]").prop("value", checkPrice.pSize3);
-									$("input[name=pSize4]").prop("value", checkPrice.pSize4);
-									$("input[name=pSize5]").prop("value", checkPrice.pSize5);
-									$("input[name=pSize6]").prop("value", checkPrice.pSize6);
-									$("input[name=pSize7]").prop("value", checkPrice.pSize7);
-									$(".priceActionCheck").prop("action", "updateArtistPrice.na");
-									$(".artistPriceButton").html("Tatto Price Update");
-								} else {
-									alert("저장된 정보가 없습니다.");
-									$("input[name=pSize1]").prop("value", "");
-									$("input[name=pSize2]").prop("value", "");
-									$("input[name=pSize3]").prop("value", "");
-									$("input[name=pSize4]").prop("value", "");
-									$("input[name=pSize5]").prop("value", "");
-									$("input[name=pSize6]").prop("value", "");
-									$("input[name=pSize7]").prop("value", "");									
-									$(".priceActionCheck").prop("action", "insertArtistPrice.na");
-									$(".artistPriceButton").html("Tatto Price Insert");
-								}
-							}
-						});
-				}
-			});
-		});
-			
-			
-			
-			$("#insertInfo").on("click", function(){
-				var artistId = "${ loginArtist.artistId }";
-				$.ajax({
-					url : "artistChecking.na",
-					type : "post",
-					data :{ "artistId" : artistId },
-					dataType : "json",
-					success : function(check) {
-							if( check != null ){
-								$(".artistShopName").prop("value", decodeURIComponent(check.name.replace(/\+/g," ")));
-								$(".artistmodalProfileName").prop("name", "reloadFile");
-								$(".artistmodalInfo").prop("value", decodeURIComponent(check.myInfo.replace(/\+/g," ")));
-								$(".modalActionCheck").prop("action", "UpdateArtistInfo.na");
-								$(".artistInfoButton").html("MyInfo Update");
-								$("#modalInfo").modal();
-							}else {
-								$(".modalActionCheck").prop("action", "InsertArtistInfo.na");
-								$(".artistmodalProfileName").prop("name", "uploadFile");
-								$(".artistInfoButton").html("MyInfo Insert");
-								$("#modalInfo").modal();
-							}				
-					}
-				});
-			});
-
-        </script>          	
+		</c:if>     	
           	<li><a href="#resume"><i class="bx bx-user"></i><span>Resume</span></a></li>
           	<li><a href="#services"><i class="bx bx-server"></i> Services</a></li>
           	<li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
@@ -196,7 +121,7 @@
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
             <div class="about-img">
-              <img src="resources/artistProfile/${ artistInfo.myReProfile }" alt="">
+              <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" alt="">
             </div>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
@@ -217,7 +142,7 @@
       </div>
     </section>
     <!--============ 아티스트 소개 섹션 끝 ==========  -->
-
+	
   
 
 
@@ -232,7 +157,7 @@
 
         <div class="section-title">
           <h2>Work</h2>
-          <p>Artist Work Area</p>
+          <p>아티스트 포트폴리오</p>
         </div>
 
         <div class="row">
@@ -242,15 +167,15 @@
               <img src="resources/assets/img/chefs/chefs-1.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Walter White</h4>
-                  <span>Master Chef</span>
+                  <h4>작품이름영역</h4>
+                  <span>스타일영역</span>
                 </div>
                 <div class="social">
-                  <a href=""><i class="icofont-twitter"></i></a>
+                  <!-- <a href=""><i class="icofont-twitter"></i></a>
                   <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
-                  <a href="resources/assets/img/chefs/chefs-1.jpg" class="venobox" data-gall="gallery-item">g</a>
+                  <a href=""><i class="icofont-instagram"></i></a> -->
+                  <a href=""><i class="icofont-linkedin"></i>작품예약링크</a>
+                  <a href="resources/assets/img/chefs/chefs-1.jpg" class="venobox" data-gall="gallery-item">사진보기링크</a>
                 </div>
               </div>
             </div>
@@ -495,15 +420,16 @@
 		
 		
 		
+				
 	<!-- 아티스트 작품 등록 -->
-  	<div class="modal fade" id="modalWork" tabindex="-1" role="dialog"
+  	<div class="modal fade" id="modalArtistWork" tabindex="-1" role="dialog"
 			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
 				<!-- 센터모달창 추가  modal-dialog-centered -->
 				<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
 					<div class="modal-header">
 						<h5 class="modal-title" id="TEST">
-							<b>ARTIST WORK INSERT</b>
+							<b>내 작품 등록하기</b>
 						</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
@@ -512,54 +438,35 @@
 					</div>
 					<div class="modal-body book-a-table">
 						<form action="InsertArtistWork.na" 
-						method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
+							method="post" role="form" class="php-email-form workForm" data-aos="fade-up" data-aos-delay="100" 
+							enctype="multipart/form-data" onsubmit="return optionCheck();">
 				          <div>
-				            <!-- 프로필사진 업로드-->
+				            <!-- 작품 사진파일-->
 				            <div class="col-lg-4 col-md-6 form-group">
-				              MY WORKFile
-				              <input type="file" class="form-control" name="uploadFile">  
+				              WorkFile
+				              <input type="file" class="form-control fileCheck" name="uploadFile">  
 				            </div>
-				            
-				            <!-- 스타일 -->
+							
+				         	<!-- 작품 스타일 -->
 				            <div class="col-lg-4 col-md-6 form-group">
 				              Tatto Style
-				              <select name="part" class="form-control" id="name">
-				              	<option value="등부위">등</option>
-				              	<option value="목부위">목</option>
-				              	<option value="어깨부위">어깨</option>
-				              	<option value="가슴부위">가슴</option>
-				              	<option value="팔부위">팔</option>
-				              	<option value="다리부위">다리</option>
+				              <select name="workStyle" class="form-control workStyle" id="name">
+				              	<option value="pleaseSelect" id="optionKing" selected>등록할 타투스타일</option>
 				              </select>
-				             <input type="text" name="style" class="form-control" id="name" placeholder="Tatto Style" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
 				              <div class="validate"></div>
 				            </div>
-
-				         	<!-- 사이즈 -->
-				            <div class="col-lg-4 col-md-6 form-group">
-				              Tatto Size
-				              <input type="text" name="size" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-				              <div class="validate"></div>
-				            </div>				            
-				            
-				            
-				            <!-- 근무지주소 -->
-				            <div class="col-lg-4 col-md-6 form-group">
-				              WORK ADDRESS
-				              <input type="text" name="workAddress" class="form-control" id="name" placeholder="Your WorkAddress" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-				              <div class="validate"></div>
-				            </div>
-				            <!-- 자기소개  -->
+				         	
+				            <!-- 작품소개  -->
 				            <div class="form-group">
-				               WORKINFO
-				               <textarea class="form-control" name="myInfo" cols="600" rows="5"  placeholder="Your Info" style="resize: none;"></textarea>
+				               	작품소개
+				               <textarea class="form-control" name="workInfo" cols="600" rows="5"  placeholder="Your Info" style="resize: none;"></textarea>
 				               <div class="validate"></div>
 				            </div>			            			            				            				            
 				          </div>
 				          <div class="mb-3">
 				            <div class="loading">Loading</div>
 				          </div>
-				          <div class="text-center"><button type="submit" class="artistWorkButton"></button></div>
+				          <div class="text-center"><button type="submit">Work Insert</button></div>
  				          <input type="hidden" name="artistId" value="${ loginArtist.artistId }">
 				        </form>
 					</div>
@@ -569,6 +476,109 @@
 				</div>
 			</div>
 		</div> 		
+		<script>
+		function optionCheck(){
+			var fileCheck = $(".fileCheck").val();
+			var styleCheck = $(".workStyle").val();
+			if( styleCheck == "pleaseSelect" || !fileCheck ){
+				alert("작품의 사진 및 스타일을 선택해주세요.");
+				return false;
+			}
+			return true;
+		}		
+		$(document).ready(function(){
+
+	 		
+	 			$("#artistInfoWork").on("click", function(){
+	 				var artistId = "${ loginArtist.artistId }";
+	 				$.ajax({
+	 					url : "artistStyle.na",
+	 					type : "post",
+	 					data : { "artistId" : artistId },
+	 					dataType : "json",
+	 					success : function(style) {
+	 						for( var i in style ) {
+	 							var aStyle = decodeURIComponent(style[i].pStyle.replace(/\+/g," "));
+	 							var aOption = $("<option value='"+ aStyle +"'>"+ aStyle + "</option>");
+	 							$("#optionKing").after("<option value='"+ aStyle + "'>" + aStyle + "</option>");
+	 						}
+	 					}
+	 				});
+	 			});
+	 			
+ 			
+ 			$(".tattoStyle").on("change", function(){
+				var artistId = "${ loginArtist.artistId }";
+				var tattoStyleOptionValue = $(this).find(":selected").val();
+				if( tattoStyleOptionValue == 'pleaseSelect' ) {
+					$('.tattolayer').css("display","none");
+				}else{
+					$('.tattolayer').css("display","block");
+						console.log(tattoStyleOptionValue);
+						$.ajax({
+							url : "artistPriceChecking.na",
+							type : "post",
+							data : { 
+								"artistId" : artistId,
+								"pStyle" : tattoStyleOptionValue 
+								},
+							dataType : "json",
+							success : function(checkPrice) {
+								if( checkPrice != null ){
+									$("input[name=pSize1]").prop("value", checkPrice.pSize1);
+									$("input[name=pSize2]").prop("value", checkPrice.pSize2);
+									$("input[name=pSize3]").prop("value", checkPrice.pSize3);
+									$("input[name=pSize4]").prop("value", checkPrice.pSize4);
+									$("input[name=pSize5]").prop("value", checkPrice.pSize5);
+									$("input[name=pSize6]").prop("value", checkPrice.pSize6);
+									$("input[name=pSize7]").prop("value", checkPrice.pSize7);
+									$(".priceActionCheck").prop("action", "updateArtistPrice.na");
+									$(".artistPriceButton").html("Tatto Price Update");
+								} else {
+									alert("저장된 정보가 없습니다.");
+									$("input[name=pSize1]").prop("value", "");
+									$("input[name=pSize2]").prop("value", "");
+									$("input[name=pSize3]").prop("value", "");
+									$("input[name=pSize4]").prop("value", "");
+									$("input[name=pSize5]").prop("value", "");
+									$("input[name=pSize6]").prop("value", "");
+									$("input[name=pSize7]").prop("value", "");									
+									$(".priceActionCheck").prop("action", "insertArtistPrice.na");
+									$(".artistPriceButton").html("Tatto Price Insert");
+								}
+							}
+						});
+					}
+				});
+			
+				
+			$("#insertInfo").on("click", function(){
+				var artistId = "${ loginArtist.artistId }";
+				$.ajax({
+					url : "artistChecking.na",
+					type : "post",
+					data :{ "artistId" : artistId },
+					dataType : "json",
+					success : function(check) {
+							if( check != null ){
+								$(".artistShopName").prop("value", decodeURIComponent(check.name.replace(/\+/g," ")));
+								$(".artistmodalProfileName").prop("name", "reloadFile");
+								$(".artistmodalInfo").prop("value", decodeURIComponent(check.myInfo.replace(/\+/g," ")));
+								$(".modalActionCheck").prop("action", "UpdateArtistInfo.na");
+								$(".artistInfoButton").html("MyInfo Update");
+								$("#modalInfo").modal();
+							}else {
+								$(".modalActionCheck").prop("action", "InsertArtistInfo.na");
+								$(".artistmodalProfileName").prop("name", "uploadFile");
+								$(".artistInfoButton").html("MyInfo Insert");
+								$("#modalInfo").modal();
+							}				
+						}
+					});
+				});
+	 		});
+		</script>
+		
 		
 		
 	<!-- 아티스트 가격등록 -->
@@ -594,7 +604,7 @@
 				            <div class="col-lg-4 col-md-6 form-group">
 				              Tatto Style
 				              <select name="pStyle" class="form-control tattoStyle" id="name">
-				              	<option value="pleaseSelect" selected>등록할 타투스타일</option>
+				              	<option value="pleaseSelect" selected>작품 스타일</option>
 				              	<option value="올드스쿨">올드스쿨</option>
 				              	<option value="이레즈미">이레즈미</option>
 				              	<option value="트라이벌">트라이벌</option>

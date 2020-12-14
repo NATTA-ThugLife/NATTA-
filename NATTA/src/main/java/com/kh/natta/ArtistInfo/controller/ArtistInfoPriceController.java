@@ -1,5 +1,6 @@
 package com.kh.natta.ArtistInfo.controller;
 
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +45,10 @@ public class ArtistInfoPriceController {
 		System.out.println("updatePrice 정보 : "+price);
 		int result = ifpService.updateArtistPrice(price);
 		if( result > 0 ) {
-			return "redirect:artistInfoPage.na?artistId="+price.getArtistId();
+			model.addAttribute("msg","가격 정보수정이 완료되었습니다 >_<");
+			model.addAttribute("url", "artistInfoPage.na?artistId="+price.getArtistId());
+//			return "redirect:artistInfoPage.na?artistId="+price.getArtistId();
+			return "common/Alert";
 		} else {
 			System.out.println("도랐냐");
 			return "ㅜㅜ";
