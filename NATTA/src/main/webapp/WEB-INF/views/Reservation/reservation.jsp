@@ -24,43 +24,42 @@
 </style>
 </head>
 <body>
-	<header></header>
+	<header>
+		<jsp:include page="../common/headerNone.jsp"></jsp:include>
+	</header>
 	<section>
-		<article  id="article0">
-		
-			<img align="center" height=150px; width="150px" src="../resources/images/reservationImages/ttugccat.png">
-
-		</article>
+	<br><br><br><br><br><br><br><br>
 		<article>
 		<h1 align="center">예약 페이지</h1>
+		<br><br><br><br>
 			<form action="reservation.na" method="post">
-				<input type="text" id="artistId" name="artistId">
-				<input type="text" id="tatooStyle" name="tatooStyle">
+				<input type="text" name="customerId" value="${loginCustomer.customerId }">
+				<input type="text" name="address" placeholder="주소">
+				<input type="text" id="artistId" name="artistId" placeholder="아티스트아이디">
+				<input type="text" id="artistName" name="artistName" placeholder="아티스트이름">
+				<input type="text" id="tatooStyle" name="style" placeholder="타투스타일">
 				<br><br><br>
 				
 				
-				
-				<span><input type="radio" name="part" value="팔">
+				<span><input type="radio" name="part" value="팔">팔
 					<img height=150px; width="150px" src="../resources/images/reservationImages/arm.jpg">
 				</span>
-				<span><input type="radio" name="part" value="등">
+				<span><input type="radio" name="part" value="등">등
 					<img height=150px; width="150px" src="../resources/images/reservationImages/back.jpg">
 				</span>
-				<span><input type="radio" name="part" value="다리">
+				<span><input type="radio" name="part" value="다리">다리
 					<img height=150px; width="150px" src="../resources/images/reservationImages/leg.jpg">
 				</span>
 				<br><br><br>
 				
-				<select>
-					<option>A4 1/8</option>
-					<option>A4 1/4</option>
-					<option>A4 1/2</option>
-					<option>A4</option>
+				<select name="tattooSize">
+					<option value="A4 1/8">A4 1/8</option>
+					<option value="A4 1/4">A4 1/4</option>
+					<option value="A4 1/2">A4 1/2</option>
+					<option value="A4">A4</option>
 				</select>
-				<input type="text" pattern="[0-9]+">
 				
-				
-				<input type="date">
+				<input type="date" name="reservationDate">
 				<br><br><br><br><br><br>
 				<div id="map" style="width: 350px; height: 350px; margin-top: 10px; float: left;">
 				</div>
@@ -146,7 +145,7 @@
 	
 	        // 인포윈도우로 장소에 대한 설명을 표시합니다
 	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+	            content: '<div style="width:150px;text-align:center; color:black;padding:6px 0;">타투샵이름:${artistInfo.name}</div>'
 	        });
 	        infowindow.open(map, marker);
 	

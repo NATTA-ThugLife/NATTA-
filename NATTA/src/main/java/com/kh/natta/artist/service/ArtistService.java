@@ -6,7 +6,7 @@ public interface ArtistService {
 	
 	public Artist loginArtist(Artist artist);
 	
-	 public int checkIdDup(String artistId); 
+	public int checkIdDup(String artistId); 
 	
 	public int registerArtist(Artist artist);
 }

@@ -81,7 +81,7 @@
           <li class="active"> <a href="main.na">Home</a></li>
           <li></li>
           <li></li>
-          <li><a href="#menu">ARTIST</a></li>
+          <li><a href="artistList.na">ARTIST</a></li>
           <li></li>
           <li></li>
           <li><a href="customDesignList.na" style="text-align: center">Customized<br>Tatto</a></li>

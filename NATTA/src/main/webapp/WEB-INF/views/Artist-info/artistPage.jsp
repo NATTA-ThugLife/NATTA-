@@ -103,8 +103,8 @@
           	<li><a href="#modalArtistWork" data-toggle="modal" id="artistInfoWork"><i class="bx bx-book-content"></i> 내 작품등록하기</a></li>
           	<li><a href="#modalArtistPrice" data-toggle="modal" id="artistInfoPrice"><i class="bx bx-file-blank"></i><span> 스타일별 가격</span></a></li>
 		</c:if>     	
+        	<li><a href="reservation.na?artistId=${artistInfo.artistId }"><i class="icofont-calendar"></i> Reservation</a></li>
           	<li><a href="#resume"><i class="bx bx-user"></i><span>Resume</span></a></li>
-          	<li><a href="#services"><i class="bx bx-server"></i> Services</a></li>
           	<li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
         </ul>            
         </nav><!-- .nav-menu -->
