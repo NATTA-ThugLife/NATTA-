@@ -104,10 +104,7 @@
        	<!-- 아티스트 프로필 메뉴바 -->
         <ul style="list-style : none;">
           	<li><a href="#modifyInfo" ><i class="bx bx-user"></i><span>INFO MODIFY</span></a></li>
-          	<script>
-          		
-          	</script>
-          	<li><a href="#"><i class="icofont-heart"></i><span>Following</span></a></li>
+          	<li><a href="#following"><i class="icofont-heart"></i><span>Following</span></a></li>
           	<li><a href="#resume"><i class="bx bx-file-blank"></i><span>Review</span></a></li>
           	<li><a href="#services"><i class="icofont-calendar"></i> Reservation</a></li>
           	<li><a href="/chatting.na"><i class="bx bx-envelope"></i> Chatting</a></li>
@@ -268,13 +265,13 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
   
 
     <!-- ======= 아티스트 작품 섹션 ======= -->
-<!--     <section id="events" class="events">
+     <section id="following" class="events">
    <div id="chefs" class="chefs">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Work</h2>
-          <p>Artist Work Area</p>
+          <h2>Artist</h2>
+          <p>Following</p>
         </div>
 
         <div class="row">
@@ -288,57 +285,20 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
                   <span>Master Chef</span>
                 </div>
                 <div class="social">
-                  <a href=""><i class="icofont-twitter"></i></a>
-                  <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
-                  <a href="resources/assets/img/chefs/chefs-1.jpg" class="venobox" data-gall="gallery-item">g</a>
+                  <a href=""><i class="icofont-page"><br>페이지 가기</i></a>
+                  <a href=""><i class="icofont-instagram"><br>Instagram</i></a>
+                  <a href=""><i class="icofont-heart-beat"></i><br>팔로우 취소 </a>
+                  <a href="resources/assets/img/chefs/chefs-1.jpg" class="venobox" data-gall="gallery-item"><br></a>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="zoom-in" data-aos-delay="200">
-              <img src="resources/assets/img/chefs/chefs-2.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Patissier</span>
-                </div>
-                <div class="social">
-                  <a href=""><i class="icofont-twitter"></i></a>
-                  <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="zoom-in" data-aos-delay="300">
-              <img src="resources/assets/img/chefs/chefs-3.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>William Anderson</h4>
-                  <span>Cook</span>
-                </div>
-                <div class="social">
-                  <a href=""><i class="icofont-twitter"></i></a>
-                  <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+          </div>          
 
         </div>
 
       </div>
       </div>
-	</section> -->
+	</section> 
 	<!-- ======= 아티스트 작품 섹션 끝 ======= -->
 	
 	

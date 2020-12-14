@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,25 +74,19 @@ span.error {
 						<tr>
 							<td>아이디</td>
 							<td><input type="text" name="customerId" id="customerId">
-								<span class="guide ok">이 아이디는 사용 가능합니다.</span>
-								<span class="guide error">이 아이디는 사용할 수 없습니다.</span>
-								<input type="hidden" id="idDuplicateCheck" value="0"> 
-								<!-- <button type="button" onclick="">중복 확인</button> -->
-								
-							</td>
+						<span class="guide ok">이 아이디는 사용 가능합니다.</span>
+						<span class="guide error">이 아이디는 사용할 수 없습니다.</span>
+						<input type="hidden" id="idDuplicateCheck" value="0"> - 
+						<!-- <input type="button" id="idDuplicateCheck" value="중복 확인"></td> -->
 						</tr>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" name="password" id="pwd1"></td>
-
+							<td><input type="password" name="password"></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td>비밀번호 확인</td>
-							<td><input type="password" name="password2" id="pwd2">
-								<span class="success" id="success">비밀번호가 일치합니다.</span>
-								<span class="fail" id="fail">비밀번호가 일치하지 않습니다.</span></td>
-						</tr>
-
+							<td><input type="password" name="password"></td>
+						</tr> -->
 						<tr>
 							<td>이름</td>
 							<td><input type="text" name="customerName"></td>
