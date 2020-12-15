@@ -18,6 +18,7 @@ public class Reservation {
 	private int status;
 	private String customerId;
 	private String artistId;
+	private String shopName;
 	
 	public Reservation() {}
 
@@ -133,18 +134,17 @@ public class Reservation {
 		this.artistId = artistId;
 	}
 
-	@Override
-	public String toString() {
-		return "Reservation [reservationCode=" + reservationCode + ", artistName=" + artistName + ", reservationDate="
-				+ reservationDate + ", address=" + address + ", originalFilename=" + originalFilename
-				+ ", renameFilename=" + renameFilename + ", tattooSize=" + tattooSize + ", request=" + request
-				+ ", style=" + style + ", part=" + part + ", price=" + price + ", status=" + status + ", customerId="
-				+ customerId + ", artistId=" + artistId + "]";
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 
 	public Reservation(int reservationCode, String artistName, Date reservationDate, String address,
 			String originalFilename, String renameFilename, String tattooSize, String request, String style,
-			String part, String price, int status, String customerId, String artistId) {
+			String part, String price, int status, String customerId, String artistId, String shopName) {
 		super();
 		this.reservationCode = reservationCode;
 		this.artistName = artistName;
@@ -160,7 +160,20 @@ public class Reservation {
 		this.status = status;
 		this.customerId = customerId;
 		this.artistId = artistId;
+		this.shopName = shopName;
 	}
+
+	@Override
+	public String toString() {
+		return "Reservation [reservationCode=" + reservationCode + ", artistName=" + artistName + ", reservationDate="
+				+ reservationDate + ", address=" + address + ", originalFilename=" + originalFilename
+				+ ", renameFilename=" + renameFilename + ", tattooSize=" + tattooSize + ", request=" + request
+				+ ", style=" + style + ", part=" + part + ", price=" + price + ", status=" + status + ", customerId="
+				+ customerId + ", artistId=" + artistId + ", shopName=" + shopName + "]";
+	}
+
+	
+	
 	
 	
 	

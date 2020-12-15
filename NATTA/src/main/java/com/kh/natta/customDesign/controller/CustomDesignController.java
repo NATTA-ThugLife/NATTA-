@@ -164,7 +164,12 @@ public class CustomDesignController {
         // 랜덤 문자 생성
         UUID uid = UUID.randomUUID();
         
-        String fileDir = "D:\\springworkspace\\NATTA(1207)\\src\\main\\webapp\\resources\\images\\customDesignImages\\";
+		/*
+		 * String fileDir =
+		 * "D:\\springworkspace\\NATTA(1207)\\src\\main\\webapp\\resources\\images\\customDesignImages\\";
+		 */
+        String fileDir = request.getSession().getServletContext().getRealPath("resources/images/customDesignImages");
+        System.out.println(fileDir);
         
         OutputStream out = null;
         PrintWriter printWriter = null;
@@ -224,7 +229,11 @@ public class CustomDesignController {
                             , HttpServletRequest request, HttpServletResponse response)
                             throws ServletException, IOException{
     	
-    	String fileDir = "D:\\springworkspace\\NATTA(1207)\\src\\main\\webapp\\resources\\images\\customDesignImages\\";
+		/*
+		 * String fileDir =
+		 * "D:\\springworkspace\\NATTA(1207)\\src\\main\\webapp\\resources\\images\\customDesignImages\\";
+		 */
+    	String fileDir = request.getSession().getServletContext().getRealPath("resources/images/customDesignImages");
         
         //서버에 저장된 이미지 경로
         String path = fileDir + "ckImage/";

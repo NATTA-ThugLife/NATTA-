@@ -27,17 +27,19 @@
 	<header>
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
-	<section>
+	<section align="center">
 	<br><br><br><br><br><br><br><br>
 		<article>
 		<h1 align="center">예약 페이지</h1>
 		<br><br><br><br>
-			<form action="reservation.na" method="post">
+			<form text-align="center"  action="reservation.na" method="post" enctype="multipart/form-data">
 				<input type="text" name="customerId" value="${loginCustomer.customerId }">
-				<input type="text" name="address" placeholder="주소">
-				<input type="text" id="artistId" name="artistId" placeholder="아티스트아이디">
+				<input type="text" name="address" placeholder="주소" >
+				<input type="text" name="shopName" value="${artistInfo.name}">
+				<input type="text" id="artistId" name="artistId" placeholder="아티스트아이디" value="${artistInfo.artistId }">
 				<input type="text" id="artistName" name="artistName" placeholder="아티스트이름">
 				<input type="text" id="tatooStyle" name="style" placeholder="타투스타일">
+				<input type="text" name="price" placeholder="가격">
 				<br><br><br>
 				
 				
@@ -61,12 +63,15 @@
 				
 				<input type="date" name="reservationDate">
 				<br><br><br><br><br><br>
-				<div id="map" style="width: 350px; height: 350px; margin-top: 10px; float: left;">
+				<div align="center">
+				<div id="map" style=" width: 350px; height: 350px; margin-top: 10px;">
 				</div>
-				
-				<div id="preview" style="margin-top: 10px; float: left;">
+				<div id="preview" style=" margin-top: 10px;">
 				<!-- 미리보기 공간 -->
 				</div>
+				</div>
+				
+				
 				<br>
 				<input type="button" id="upfile" value="도안업로드">
 				<input type="file" id="upload" name="upload" style="display:none">
@@ -74,7 +79,9 @@
 						
 				
 				
-				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br><br><br><br><br><br><br><br>
+				<textarea rows="7" cols="30" name="request"></textarea>
+				<br><br><br><br><br><br><br><br><br><br><br><br>
 				<input id="btnr" type="submit" value="예약하기">
 			</form>
 		</article>

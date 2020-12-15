@@ -22,8 +22,7 @@ public class ReservationServiceImpl implements ReservationService{
 
 	@Override
 	public int insertReservation(Reservation reservation) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.insertReservation(reservation);
 	}
 
 	@Override

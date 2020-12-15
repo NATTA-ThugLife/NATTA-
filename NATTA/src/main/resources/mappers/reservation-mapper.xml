@@ -12,5 +12,9 @@
 		<result property="artistId" column="ARTIST_ID"></result>
 	</resultMap>
 
-
+	<insert id="insertReservation">
+		INSERT INTO RESERVATION
+		VALUES(RESERVATION_SEQ.NEXTVAL,#{artistName},#{reservationDate},#{address},#{originalFilename},#{renameFilename},#{tattooSize},#{request},#{style},#{part},#{price},'0',#{shopName},#{customerId},#{artistId})
+	</insert>
+	
 </mapper>
