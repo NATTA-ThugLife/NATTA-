@@ -144,6 +144,7 @@ public class CustomerController {
 	      mv.setViewName("common/errorPage");  
 	  } return mv;
 	  }
+<<<<<<< HEAD
 		
 		/*
 		 * //비번 변경
@@ -188,6 +189,9 @@ public class CustomerController {
 //	}
 	
 >>>>>>> refs/remotes/origin/12150930
+=======
+
+>>>>>>> refs/remotes/origin/1215/0929/YOON
 	
 	
 	
