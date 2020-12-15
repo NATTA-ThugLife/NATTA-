@@ -115,7 +115,7 @@ public class CustomerController {
 	  }
 
 
-<<<<<<< HEAD
+
 	//비번 찾기 페이지
 	@RequestMapping(value = "findPwd.na", method = RequestMethod.GET)
 	public String findPwd(Locale locale, Model model) {
@@ -144,57 +144,8 @@ public class CustomerController {
 	      mv.setViewName("common/errorPage");  
 	  } return mv;
 	  }
-<<<<<<< HEAD
-		
-		/*
-		 * //비번 변경
-		 * 
-		 * @RequestMapping(value = "changePwd.na", method = RequestMethod.POST) public
-		 * String changePwd(Locale locale, Model model) { return "join/changePwd"; }
-		 * 
-		 */
-=======
-//	//비번 찾기 페이지
-//	@RequestMapping(value = "findPwd.na", method = RequestMethod.GET)
-//	public String findPwd(Locale locale, Model model) {
-//		return "join/findPwd";
-//	}
-//	
-//	//비번 찾기 본인 인증
-//	@RequestMapping(value="findPwdCerti.na", method = RequestMethod.POST)
-//	  public ModelAndView findPwdCerti(String customerId, String customerName, String email, ModelAndView mv, HttpServletRequest request) { 
-//		  HttpSession session = request.getSession();
-//	  Customer customer = new Customer(); 
-//	  customer.setCustomerId(customerId);
-//	  customer.setCustomerName(customerName);
-//	  customer.setEmail(email); 
-//		/*
-//		 * System.out.println(customerId); System.out.println(customerName);
-//		 * System.out.println(email);
-//		 */
-//	  Customer findCustomerPwd = service.findPwdEmail(customer);
-//	  if(findCustomerPwd != null) { 
-//		  mv.addObject("findCustomerPwd", findCustomerPwd);
-//		  mv.setViewName("join/findPwdCerti"); 
-//	  }else {
-//		  mv.addObject("msg","로그인 실패!");
-//		  mv.setViewName("common/errorPage"); 
-//	  } return mv;
-//	  }
-//	
-//	//비번 변경
-//	@RequestMapping(value = "findPwd.na", method = RequestMethod.GET)
-//	public String changePwd(Locale locale, Model model) {
-//		return "join/changePwd";
-//	}
-	
-<<<<<<< HEAD
-=======
->>>>>>> refs/remotes/origin/12150930
-=======
 
->>>>>>> refs/remotes/origin/1215/0929/YOON
->>>>>>> branch 'master' of https://github.com/NATTA-ThugLife/NATTA-.git
+
 	
 	
 	
