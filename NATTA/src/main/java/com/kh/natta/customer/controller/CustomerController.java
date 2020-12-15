@@ -130,7 +130,8 @@ public class CustomerController {
 	  customer.setCustomerName(customerName);
 	  customer.setEmail(email); 
 		/*
-		 * System.out.println(customerId); System.out.println(customerName);
+		 * System.out.println(customerId); 
+		 * System.out.println(customerName);
 		 * System.out.println(email);
 		 */
 	  Customer findCustomerPwd = service.findPwdEmail(customer);
@@ -138,17 +139,18 @@ public class CustomerController {
 		  mv.addObject("findCustomerPwd", findCustomerPwd);
 		  mv.setViewName("join/findPwdCerti"); 
 	  }else {
-		  mv.addObject("msg","로그인 실패!");
-		  mv.setViewName("common/errorPage"); 
+		  mv.addObject("msg","정보를 입력..해주세요");
+	      mv.setViewName("common/errorPage");  
 	  } return mv;
 	  }
-	
-	//비번 변경
-	@RequestMapping(value = "findPwd.na", method = RequestMethod.GET)
-	public String changePwd(Locale locale, Model model) {
-		return "join/changePwd";
-	}
-	
+		
+		/*
+		 * //비번 변경
+		 * 
+		 * @RequestMapping(value = "changePwd.na", method = RequestMethod.POST) public
+		 * String changePwd(Locale locale, Model model) { return "join/changePwd"; }
+		 * 
+		 */
 	
 	
 	

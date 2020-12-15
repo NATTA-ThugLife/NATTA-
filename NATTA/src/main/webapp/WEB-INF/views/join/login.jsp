@@ -76,7 +76,7 @@ rotate(
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 
-	<section>
+	<section class="about">
 
 		<div class="container" data-aos="fade-up"
 			style="width: 100%; margin: 0 auto;">

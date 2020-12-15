@@ -23,24 +23,26 @@
 	    </section>
 
 	<br><br>
-	<table align="center" border="1" cellspacing="0">
+	
 		<form action="noticeUpdate.na" method="post">
 			<input type="hidden" name="noticeCode" value="${notice.noticeCode }">
+			<table align="center" border="1" cellspacing="0">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" size="50" name="nTitle" value="${notice.noticeTitle }"></td>
+				<td><input type="text" size="50" name="noticeTitle" value="${notice.noticeTitle }"></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="7" cols="50" name="nContent">${notice.noticeContents }</textarea></td>
+				<td><textarea rows="7" cols="50" name="noticeContents">${notice.noticeContents }</textarea></td>
 			</tr>			
 			<tr>
 				<td colspan="2" align="center">
 					<input type="submit" value="수정">
 				</td>
 			</tr>
+			</table>
 		</form>
-	</table>
+	
 	
 	<p align="center">
 		<c:url var="home" value="main.na"></c:url>

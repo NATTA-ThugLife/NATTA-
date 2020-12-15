@@ -56,7 +56,7 @@ span.error {
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 
-	<section>
+	<section class="about">
 		<div class="container" data-aos="fade-up" style="width: 100%; margin: 0 auto;">
 			<div class="section-title">
 				<h2>Join</h2>
@@ -73,57 +73,57 @@ span.error {
 					<table align="center" id="customerRegister">
 						<tr>
 							<td>아이디</td>
-							<td><input type="text" name="customerId" id="customerId">
+							<td><input type="text" name="customerId" id="customerId" required>
 						        <input type="button" value="중복 확인" onclick="checkDuplicate();">
 						    </td>
 						</tr>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" name="password" id="pwd1"></td>
+							<td><input type="password" name="password" id="pwd1" required></td>
 
 						</tr>
 						<tr>
 							<td>비밀번호 확인</td>
-							<td><input type="password" name="password2" id="pwd2">
+							<td><input type="password" name="password2" id="pwd2" required>
 								<span id="success" style="color:green;">비밀번호가 일치합니다.</span>
 								<span id="fail" style="color:red;">비밀번호가 일치하지 않습니다.</span></td>
 						</tr>
 						<tr>
 							<td>이름</td>
-							<td><input type="text" name="customerName"></td>
+							<td><input type="text" name="customerName" required></td>
 						</tr>
 						<tr>
 							<td>나이</td>
-							<td><input type="number" min="20" max="100" name="age"></td>
+							<td><input type="number" min="20" max="100" name="age" required></td>
 						</tr>
 						<tr>
 							<td>성별</td>
-							<td><input type="radio" name="gender" value="M">남
+							<td><input type="radio" name="gender" value="M" required>남
 							<input type="radio" name="gender" value="F">여</td>
 						</tr>
 						<tr>
 							<td>휴대폰 번호</td>
-							<td><input type="text" name="phone"></td>
+							<td><input type="text" name="phone" required></td>
 						</tr>
 						<tr>
 							<td>이메일</td>
-							<td><input type="email" name="email"></td>
+							<td><input type="email" name="email" required>
+							    <input type="button" value="중복 확인" onclick="checkEmail();">
+							</td>
 						</tr>
 						<tr>
 							<td>우편번호</td>
-							<td><input type="text" name="post" class="postcodify_postcode5" size="6">
+							<td><input type="text" name="post" class="postcodify_postcode5" size="6" readonly>
 								<button type="button" id="postcodify_search_button">검색</button>
 							</td>
 						</tr>
 						<tr>
 							<td>도로명 주소</td>
-							<td><input type="text" name="address"
-								class="postcodify_address"></td>
+							<td><input type="text" name="address" class="postcodify_address" readonly></td>
 						</tr>
 						<tr>
 							<td>상세 주소</td>
-							<td><input type="text" name="address2"
-								class="postcodify_extra_info"></td>
+							<td><input type="text" name="address2" class="postcodify_extra_info"></td>
 						</tr>
 
 						<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
@@ -147,59 +147,58 @@ span.error {
 					<form action="artistRegister.na" method="post" id="artistRegister">
 						<tr>
 							<td>아이디</td>
-							<td><input type="text" name="artistId" id="artistId">
-								<input type="button" value="중복 확인" onclick="checkDuplicate();">
+							<td><input type="text" name="artistId" id="artistId" required>
+								<input type="button" value="중복 확인" onclick="checkDuplicate2();">
 						    </td>
 						</tr>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" name="password" id="pwd3"></td>
+							<td><input type="password" name="password" id="pwd3" required></td>
 
 						</tr>
 						<tr>
 							<td>비밀번호 확인</td>
-							<td><input type="password" name="password2" id="pwd4">
+							<td><input type="password" name="password2" id="pwd4" required>
 								<span id="success2" style="color:green;">비밀번호가 일치합니다.</span>
 								<span id="fail2" style="color:red;">비밀번호가 일치하지 않습니다.</span></td>
 						</tr>
 						<tr>
 							<td>이름</td>
-							<td><input type="text" name="artistName"></td>
+							<td><input type="text" name="artistName" required></td>
 						</tr>
 						<tr>
 							<td>나이</td>
-							<td><input type="number" min="20" max="100" name="age"></td>
+							<td><input type="number" min="20" max="100" name="age" required></td>
 						</tr>
 						<tr>
 							<td>성별</td>
-							<td><input type="radio" name="gender" value="M">남 <input
+							<td><input type="radio" name="gender" value="M" required>남 <input
 								type="radio" name="gender" value="F">여</td>
 						</tr>
 						<tr>
 							<td>휴대폰 번호</td>
-							<td><input type="text" name="phone"></td>
+							<td><input type="text" name="phone" required></td>
 						</tr>
 						<tr>
 							<td>이메일</td>
-							<td><input type="email" name="email"></td>
+							<td><input type="email" name="email" required>
+							    <input type="button" value="중복 확인" onclick="checkEmail2();">
+							</td>
 						</tr>
 
 						<tr>
 							<td>우편번호</td>
-							<td><input type="text" name="post"
-								class="postcodify_postcode5" size="6">
+							<td><input type="text" name="post" class="postcodify_postcode5" size="6" readonly>
 								<button type="button" id="postcodify_search_button2">검색</button>
 							</td>
 						</tr>
 						<tr>
 							<td>도로명 주소</td>
-							<td><input type="text" name="workAddress"
-								class="postcodify_address"></td>
+							<td><input type="text" name="workAddress" class="postcodify_address" readonly></td>
 						</tr>
 						<tr>
 							<td>상세 주소</td>
-							<td><input type="text" name="address2"
-								class="postcodify_extra_info"></td>
+							<td><input type="text" name="address2" class="postcodify_extra_info"></td>
 						</tr>
 
 						<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
@@ -211,7 +210,9 @@ span.error {
 
 						<tr>
 							<td>사업자 등록증</td>
-							<td><input type="text" name="businessNo"></td>
+							<td>
+							    <input type="file" name="uploadFile" style="float: left">  
+							</td>
 						</tr><tr><td><hr></td></tr>
 						<tr>
 							<td colspan="2" align="center">
@@ -244,20 +245,30 @@ span.error {
 	}		
 
  	    function validate() {
-			if($("#idDuplicateCheck").val() == 0){
-				alert("사용 가능한 아이디를 입력해주세요.")
+			if($("#checkDuplicate").val(0)){
+				alert("아이디 중복 확인을 해주세요.")
 				$("#customerId").focus();
 				return false;
-			}else {
+			} 
+			if($("#pwd1").val() != $("#pwd2").val()){
+				alert('비밀번호를 동일하게 입력해주세요.');
+				return false;
+			 }
+			if(!$("#address").val()){
+				alert('주소를 검색해주세요.');
+				return false;
+			} 
+			
+			
+			else {
+				alert("회원가입 성공??")
 				return true;
 			}
 		}
 		
 	
 		//아이디 중복 검사 -회원
-		/* $("#customerId").on("click",function(){	 */
 		function checkDuplicate() {
-			/* var customerId = $(this).val();		 */	
 			var customerId = $("#customerId").val();			
 			if(customerId.length < 4){
 				$(".guide").hide();
@@ -270,14 +281,8 @@ span.error {
 				data : {"customerId" : customerId},
 				success : function(result) {
 					if(result == "true"){
-						/* $(".guide.error").hide();
-						$(".guide.ok").show();
-						$("#idDuplicateCheck").val(1); */
 						alert("사용 가능한 ID입니다");
 					}else if (result == "false"){
-						/* $(".guide.error").show();
-						$(".guide.ok").hide();
-						$("#idDuplicateCheck").val(0); */
 						alert("중복된 ID입니다");
 					}
 				} 
@@ -286,8 +291,7 @@ span.error {
 		
  		//아이디 중복 검사 -아티스트
 		$("#artistId").on("blur",function(){			
-			var artistId = $(this).val();
-			
+			var artistId = $(this).val();			
 			if(artistId.length < 4){
 				$(".guide").hide();
 				$("#idDuplicateCheck").val(0);
@@ -299,14 +303,8 @@ span.error {
 				data : {"artistId" : artistId},
 				success : function(result) {
 					if(result == "true"){
-						/* $(".guide.error").hide();
-						$(".guide.ok").show();
-						$("#idDuplicateCheck").val(1); */
 						alert("사용 가능한 ID입니다");
 					}else if (result == "false"){
-						/* $(".guide.error").show();
-						$(".guide.ok").hide();
-						$("#idDuplicateCheck").val(0); */
 						alert("중복된 ID입니다");
 					}
 				}
@@ -354,7 +352,51 @@ span.error {
 					}
 			});
 		}); 
+ 		
+ 		
+		//이메일 중복 검사 -회원
+		function checkEmail() {
+			var customerId = $("#customerId").val();			
+			if(customerId.length < 4){
+				$(".guide").hide();
+				$("#idDuplicateCheck").val(0);
+				alert("4글자 미만입니다.");
+				return;
+			}
+			$.ajax({
+				url : "dupId.na",
+				data : {"customerId" : customerId},
+				success : function(result) {
+					if(result == "true"){
+						alert("사용 가능한 ID입니다");
+					}else if (result == "false"){
+						alert("중복된 ID입니다");
+					}
+				} 
+			});
+		}; 
 		
+		//이메일 중복 검사 -아티스트
+		function checkEmail2() {
+			var customerId = $("#customerId").val();			
+			if(customerId.length < 4){
+				$(".guide").hide();
+				$("#idDuplicateCheck").val(0);
+				alert("4글자 미만입니다.");
+				return;
+			}
+			$.ajax({
+				url : "dupId.na",
+				data : {"customerId" : customerId},
+				success : function(result) {
+					if(result == "true"){
+						alert("사용 가능한 ID입니다");
+					}else if (result == "false"){
+						alert("중복된 ID입니다");
+					}
+				} 
+			});
+		}; 
 		
 	</script>
 

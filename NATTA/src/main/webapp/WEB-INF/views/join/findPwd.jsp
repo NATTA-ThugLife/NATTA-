@@ -11,7 +11,7 @@
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 
-	<section id="book-a-table" class="book-a-table">
+	<section class="about">
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
 				<h2>Find PWD</h2>

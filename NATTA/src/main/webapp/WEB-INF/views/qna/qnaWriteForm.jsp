@@ -26,7 +26,7 @@
 		<table align="center" id="tb">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="qnaTitle"></td>
+				<td><input type="text" name="qnaTitle" required></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
@@ -34,7 +34,7 @@
 			</tr>		
 			<tr>
 				<td>내용</td>
-				<td><textarea cols="50" rows="7" name="qnaContents"></textarea></td>
+				<td><textarea cols="50" rows="7" name="qnaContents" required></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
