@@ -23,22 +23,12 @@
 						<td><input type="radio" name="checkOption" id="checkEmail" onchange="setDisplay()" checked>이메일</td>
 						<td><input type="radio" name="checkOption" onchange="setDisplay()" >휴대폰</td>
 					</tr>
-					<form action="findPwdCerti.na" method="post" id="formId">
+					<form action="changePwd.na" method="post" id="formId">
 						<table align="center">
-							<tr>
-								<td>ID</td>
-								<td><input type="text" name="customerId" id="customerId">
-								</td>
-							</tr>
-							<tr>
-								<td>이름</td>
-								<td><input type="text" name="customerName" id="customerName">
-								</td>
-							</tr>
 							<tr id="email">
 								<td>이메일</td>
-								<td> ${findCustomerPwd.customerEmail }</td>
-								<td><button name="certi" value="인증번호 받기"></button></td>
+								<td> ${findCustomerPwd.email }</td>
+								<td><input type="button" name="certi" value="인증번호 받기"></td>
 							</tr>
 							<tr id="phone" style="display:none;">
 								<td>폰</td>

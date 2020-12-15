@@ -36,6 +36,7 @@ public class ArtistController {
 		}
 		return mv;
 	}
+	
 	// 로그아웃
 	@RequestMapping(value="artistLogout.na",method=RequestMethod.GET)
 	public String artistLogout(HttpServletRequest request) {
@@ -43,28 +44,29 @@ public class ArtistController {
 		session.invalidate();
 		return "main/mainPage";
 	}
-	// 회원가입 페이지 뷰
+	
+	//회원가입 페이지
 	@RequestMapping(value="artistJoinView.na",method={RequestMethod.GET, RequestMethod.POST})
 	public String enrollView() {
 		return "join/artistjoin";
 	}
 	
-	//가입
+	//아티스트 가입
 	@RequestMapping(value="artistRegister.na",method=RequestMethod.POST)
-	public String artistRegister(Model model, Artist artist,String post, String workAddress) {
-		artist.setWorkAddress(post+","+workAddress);
+	public String artistRegister(Model model, Artist artist,String post, String workAddress, String address2) {
+		artist.setWorkAddress(post+","+workAddress+","+address2);
 		//System.out.println(artist);
 		int result = service.registerArtist(artist);
 		//System.out.println(result);
 		if(result > 0) {
-			return "redirect:main.na";
+			return "redirect:login.na";
 		}else {
 			model.addAttribute("msg", "회원 가입 실패");
 			return "common/errorPage";
 		}
 	}	
 	
-	  // 아이디 중복검사	  
+	  //아이디 중복검사	  
 	  @ResponseBody	  
 	  @RequestMapping(value="artistdupId.na", method=RequestMethod.GET)
 	  public String idDuplicateCheck(String artistId) { boolean isUsable =

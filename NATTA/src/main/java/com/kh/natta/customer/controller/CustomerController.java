@@ -29,6 +29,7 @@ public class CustomerController {
 		public String login(Locale locale, Model model) {
 			return "join/login";
 		}
+		
 	//로그인
 	@RequestMapping(value="customerLogin.na")
 	public ModelAndView customerLogin(String customerId, String password, ModelAndView mv, HttpServletRequest request) {
@@ -59,31 +60,29 @@ public class CustomerController {
 	public String enrollView() {
 		return "join/customerjoin";
 	}	
+	
 	// 가입
 	@RequestMapping(value="customerRegister.na",method=RequestMethod.POST)
-	public String customerRegister(Model model, Customer customer,String post, String address) {
-		customer.setAddress(post+","+address);
-//		System.out.println(customer);
+	public String customerRegister(Model model, Customer customer,String post, String address, String address2) {
+		customer.setAddress(post+","+address+","+address2);
+        //System.out.println(customer);
 		int result = service.registerCustomer(customer);
 		//System.out.println(result);
 		if(result > 0) {			
-			return "redirect:main.na";
+			return "redirect:login.na";
 		}else {
 			model.addAttribute("msg", "회원 가입 실패");
 			return "common/errorPage";
 		}
 	}
 	
-	
-	  //아이디 중복검사	  
-	  @ResponseBody
-	  
+	 //아이디 중복검사	  
+	  @ResponseBody	  
 	  @RequestMapping(value="dupId.na", method=RequestMethod.GET) public String
 	  idDuplicateCheck(String customerId) { boolean isUsable =
 	  service.checkIdDup(customerId) == 0 ? true : false; return isUsable+""; }
 	 
-
-	
+	  
 	/*
 	 * //회원가입할때 회원/아티스트 선택 옵션
 	 * @RequestMapping(value = "joinOption.na", method = RequestMethod.GET) public
@@ -95,6 +94,7 @@ public class CustomerController {
 	public String findId(Locale locale, Model model) {
 		return "join/findId";
 	}
+	
 	//아이디 찾기	
 	  @RequestMapping(value="findCustomerId.na")
 	  public ModelAndView findCustomerId(String customerName, String email, ModelAndView mv, HttpServletRequest request) { 
@@ -120,17 +120,19 @@ public class CustomerController {
 	public String findPwd(Locale locale, Model model) {
 		return "join/findPwd";
 	}
-	//비번 찾기 본인 인증 페이지
-	@RequestMapping(value="findPwdCerti.na", method = RequestMethod.GET)
+	
+	//비번 찾기 본인 인증
+	@RequestMapping(value="findPwdCerti.na", method = RequestMethod.POST)
 	  public ModelAndView findPwdCerti(String customerId, String customerName, String email, ModelAndView mv, HttpServletRequest request) { 
 		  HttpSession session = request.getSession();
 	  Customer customer = new Customer(); 
 	  customer.setCustomerId(customerId);
 	  customer.setCustomerName(customerName);
 	  customer.setEmail(email); 
-	  System.out.println(customerId);
-	  System.out.println(customerName);
-	  System.out.println(email);
+		/*
+		 * System.out.println(customerId); System.out.println(customerName);
+		 * System.out.println(email);
+		 */
 	  Customer findCustomerPwd = service.findPwdEmail(customer);
 	  if(findCustomerPwd != null) { 
 		  mv.addObject("findCustomerPwd", findCustomerPwd);
@@ -141,6 +143,11 @@ public class CustomerController {
 	  } return mv;
 	  }
 	
+	//비번 변경
+	@RequestMapping(value = "findPwd.na", method = RequestMethod.GET)
+	public String changePwd(Locale locale, Model model) {
+		return "join/changePwd";
+	}
 	
 	
 	
