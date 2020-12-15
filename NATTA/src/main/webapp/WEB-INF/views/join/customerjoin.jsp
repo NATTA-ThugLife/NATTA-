@@ -74,19 +74,20 @@ span.error {
 						<tr>
 							<td>아이디</td>
 							<td><input type="text" name="customerId" id="customerId">
-						<span class="guide ok">이 아이디는 사용 가능합니다.</span>
-						<span class="guide error">이 아이디는 사용할 수 없습니다.</span>
-						<input type="hidden" id="idDuplicateCheck" value="0"> - 
-						<!-- <input type="button" id="idDuplicateCheck" value="중복 확인"></td> -->
+						        <input type="button" value="중복 확인" onclick="checkDuplicate();">
+						    </td>
 						</tr>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" name="password"></td>
+							<td><input type="password" name="password" id="pwd1"></td>
+
 						</tr>
-						<!-- <tr>
+						<tr>
 							<td>비밀번호 확인</td>
-							<td><input type="password" name="password"></td>
-						</tr> -->
+							<td><input type="password" name="password2" id="pwd2">
+								<span id="success" style="color:green;">비밀번호가 일치합니다.</span>
+								<span id="fail" style="color:red;">비밀번호가 일치하지 않습니다.</span></td>
+						</tr>
 						<tr>
 							<td>이름</td>
 							<td><input type="text" name="customerName"></td>
@@ -116,7 +117,7 @@ span.error {
 						</tr>
 						<tr>
 							<td>도로명 주소</td>
-							<td><input type="text" name="address1"
+							<td><input type="text" name="address"
 								class="postcodify_address"></td>
 						</tr>
 						<tr>
@@ -147,9 +148,8 @@ span.error {
 						<tr>
 							<td>아이디</td>
 							<td><input type="text" name="artistId" id="artistId">
-								<span class="guide ok">이 아이디는 사용 가능합니다.</span> <span
-								class="guide error">이 아이디는 사용할 수 없습니다.</span> <input
-								type="hidden" id="idDuplicateCheck" value="0"></td>
+								<input type="button" value="중복 확인" onclick="checkDuplicate();">
+						    </td>
 						</tr>
 						<tr>
 							<td>비밀번호</td>
@@ -193,7 +193,7 @@ span.error {
 						</tr>
 						<tr>
 							<td>도로명 주소</td>
-							<td><input type="text" name="address1"
+							<td><input type="text" name="workAddress"
 								class="postcodify_address"></td>
 						</tr>
 						<tr>
@@ -255,8 +255,10 @@ span.error {
 		
 	
 		//아이디 중복 검사 -회원
-		$("#customerId").on("click",function(){			
-			var customerId = $(this).val();			
+		/* $("#customerId").on("click",function(){	 */
+		function checkDuplicate() {
+			/* var customerId = $(this).val();		 */	
+			var customerId = $("#customerId").val();			
 			if(customerId.length < 4){
 				$(".guide").hide();
 				$("#idDuplicateCheck").val(0);
@@ -268,17 +270,19 @@ span.error {
 				data : {"customerId" : customerId},
 				success : function(result) {
 					if(result == "true"){
-						$(".guide.error").hide();
+						/* $(".guide.error").hide();
 						$(".guide.ok").show();
-						$("#idDuplicateCheck").val(1);
+						$("#idDuplicateCheck").val(1); */
+						alert("사용 가능한 ID입니다");
 					}else if (result == "false"){
-						$(".guide.error").show();
+						/* $(".guide.error").show();
 						$(".guide.ok").hide();
-						$("#idDuplicateCheck").val(0);
+						$("#idDuplicateCheck").val(0); */
+						alert("중복된 ID입니다");
 					}
 				} 
-		});
-	}); 
+			});
+		}; 
 		
  		//아이디 중복 검사 -아티스트
 		$("#artistId").on("blur",function(){			
@@ -295,13 +299,15 @@ span.error {
 				data : {"artistId" : artistId},
 				success : function(result) {
 					if(result == "true"){
-						$(".guide.error").hide();
+						/* $(".guide.error").hide();
 						$(".guide.ok").show();
-						$("#idDuplicateCheck").val(1);
+						$("#idDuplicateCheck").val(1); */
+						alert("사용 가능한 ID입니다");
 					}else if (result == "false"){
-						$(".guide.error").show();
+						/* $(".guide.error").show();
 						$(".guide.ok").hide();
-						$("#idDuplicateCheck").val(0);
+						$("#idDuplicateCheck").val(0); */
+						alert("중복된 ID입니다");
 					}
 				}
 			});

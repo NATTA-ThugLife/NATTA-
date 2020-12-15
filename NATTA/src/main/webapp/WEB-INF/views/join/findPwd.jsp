@@ -23,7 +23,7 @@
 						<td><input type="radio" name="checkOption" id="checkEmail" onchange="setDisplay()" checked>이메일</td>
 						<td><input type="radio" name="checkOption" onchange="setDisplay()" >휴대폰</td>
 					</tr>
-					<form action="findPwd.na" method="post" id="formId">
+					<form action="findPwdCerti.na" method="post" id="formId">
 						<table align="center">
 							<tr>
 								<td>ID</td>
