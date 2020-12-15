@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.customerInfo.domain.Following;
+import com.kh.natta.customerInfo.domain.Review;
 
 public interface CustomerInfoService {
 	
@@ -29,4 +30,18 @@ public interface CustomerInfoService {
 	 * @return
 	 */
 	public ArrayList<Following> selectListFollowing(String customerId); 
+	
+	/**
+	 * 팔로잉 취소
+	 * @param following
+	 * @return
+	 */
+	public int deleteFollowing(Following following);
+	
+	/**
+	 * 마이페이지에 사용자의 모든 리뷰 가져오기
+	 * @param customerId
+	 * @return
+	 */
+	public ArrayList<Review> selectListReview(String customerId);
 }

@@ -83,19 +83,19 @@
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"> <a href="/main.na">Home</a></li>
+          <li class="active"> <a href="main.na">Home</a></li>
           <li></li>
           <li></li>
           <li><a href="#menu">ARTIST</a></li>
           <li></li>
           <li></li>
-          <li><a href="#" style="text-align: center">Customized<br>Tatto</a></li>
+          <li><a href="#" style="text-align: center">Customized<br>Tattoo</a></li>
           <li></li>
           <li></li>
-          <li><a href="/main.na">NOTICE</a></li>
+          <li><a href="main.na">NOTICE</a></li>
           <li></li>
           <li></li>
-          <li><a href="/qna.na">Q&A</a></li>
+          <li><a href="qna.na">Q&A</a></li>
 <!--           <li></li>
           <li></li>
           <li class="book-a-table text-center"><a href="#book-a-table">LOGIN / SIGNUP</a></li> -->

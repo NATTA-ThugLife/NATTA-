@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.customerInfo.domain.Following;
+import com.kh.natta.customerInfo.domain.Review;
 import com.kh.natta.customerInfo.store.CustomerInfoStore;
 
 @Service
@@ -28,6 +29,16 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 	@Override
 	public ArrayList<Following> selectListFollowing(String customerId) {
 		return store.selectListFollowing(customerId);
+	}
+
+	@Override
+	public int deleteFollowing(Following following) {
+		return store.deleteFollowing(following);
+	}
+
+	@Override
+	public ArrayList<Review> selectListReview(String customerId) {
+		return store.selectListReview(customerId);
 	}
 
 

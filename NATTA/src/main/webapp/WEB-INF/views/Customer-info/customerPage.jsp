@@ -27,7 +27,6 @@
     
   
   
-  <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <style>
    header {
@@ -103,9 +102,10 @@
   	    <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>    
        	<!-- 아티스트 프로필 메뉴바 -->
         <ul style="list-style : none;">
+        	<li><a href="#mypage" ><i class="icofont-page"></i><span>My page</span></li>
           	<li><a href="#modifyInfo" ><i class="bx bx-user"></i><span>INFO MODIFY</span></a></li>
           	<li><a href="#following"><i class="icofont-heart"></i><span>Following</span></a></li>
-          	<li><a href="#resume"><i class="bx bx-file-blank"></i><span>Review</span></a></li>
+          	<li><a href="#review"><i class="bx bx-file-blank"></i><span>Review</span></a></li>
           	<li><a href="#services"><i class="icofont-calendar"></i> Reservation</a></li>
           	<li><a href="/chatting.na"><i class="bx bx-envelope"></i> Chatting</a></li>
           	<li><a href="#modalWork" data-toggle="modal"><i class="icofont-crying"></i> Good-Bye</a></li>    
@@ -119,12 +119,12 @@
     
     <!--============ 아티스트 소개 섹션 ==========  -->
      <section class="about">
-      <div class="container" data-aos="fade-up">
+      <div class="container" data-aos="fade-up" id="mypage">
 
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
             <div class="about-img">
-              <img src="resources/customerProfile/${loginCustomer.customerId }/${ loginCustomer.customerProfile }" alt="">
+              <img src="resources/customerProfile/${loginCustomer.customerId }/${ loginCustomer.customerProfile }" alt="" alt="" style="width: 600px; height:500px;">
             </div>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
@@ -140,8 +140,24 @@
         </div>
       </div>
     </section> 
-    <!--============ 아티스트 소개 섹션 끝 ==========  -->
+    
 
+    <!--============ 아티스트 소개 섹션 끝 ==========  -->
+      <!-- Vendor JS Files -->
+      
+      
+	  <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
+	  <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	  <script src="resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+	  <script src="resources/assets/vendor/php-email-form/validate.js"></script>
+	  <script src="resources/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+	  <script src="resources/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	  <script src="resources/assets/vendor/venobox/venobox.min.js"></script>
+	  <script src="resources/assets/vendor/aos/aos.js"></script>
+	  <!-- Template Main JS File -->
+	  <script src="resources/assets/js/main.js"></script>
+	  
+	  	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
      <section id="modifyInfo" class="about">
 				<div class="container">
 					<div class="modal-header">
@@ -160,22 +176,22 @@
 				         	<!-- 이름 -->
 				            <div class="col-lg-7 col-md-6 form-group">
 				              Customer Name : 
-z				              <input type="text" value="${ loginCustomer.customerName }" name="customerName" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" readonly>
-				              <input type="text" value="${ loginCustomer.customerId }" name="customerId" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" readonly>
+z				              <input type="text" value="${ loginCustomer.customerName }" name="customerName" class="form-control" id="name" placeholder="Your Name" readonly>
+				              <input type="text" value="${ loginCustomer.customerId }" name="customerId" class="form-control" id="name" placeholder="Your Name" readonly>
 				              <div class="validate"></div>
 				            </div>
 				            <!-- 비밀번호 확인  -->
 				            <div class="col-lg-7 col-md-6 form-group">
 				              	현재 비밀번호를 입력해주세요 : 
-				              <input type="text"  name="dupPwd" class="form-control" id="dupPwd" placeholder="Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars" >
+				              <input type="text"  name="dupPwd" class="form-control" id="dupPwd" placeholder="Password">
 				              <div class="validate"></div>
 				            </div>
 				            	
 				            <!-- 비밀번호 입력 -->
 				            <div class="col-lg-7 col-md-6 form-group">
 				              Modify Password : 
-				             <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-				             <input type="password" name="confirmPassowrd" class="form-control" id="confirmPassowrd" placeholder="Confirm Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+				             <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" >
+				             <input type="password" name="confirmPassowrd" class="form-control" id="confirmPassowrd" placeholder="Confirm Password">
 				              <div class="validate"></div>
 				            </div>
 				            <!-- 프로필사진 업로드-->
@@ -188,9 +204,15 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 				            <div class="col-lg-7 col-md-6 form-group">
 				            	ADDRESS
 				            	
+				            	<c:if test="${loginCustomer.address eq null}">
+						            <input type="text" name="post" value="${addr }" class="form-control postcodify_postcode5 address" id="address" placeholder="Your WorkAddress">
+						            <input type="text" name="address1" value="${addr }" class="postcodify_address address">
+						            <input type="text" name="address2" value="${addr }" class="postcodify_extra_info">
+				            	</c:if>
+				            	
 								<c:forTokens items="${loginCustomer.address }" var="addr" delims="," varStatus="status">
 						            <c:if test="${status.index eq 0}">
-						             <input type="text" name="post" value="${addr }" class="form-control postcodify_postcode5 address" id="address" placeholder="Your WorkAddress" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+						             <input type="text" name="post" value="${addr }" class="form-control postcodify_postcode5 address" id="address" placeholder="Your WorkAddress">
 						            </c:if>
 						            <c:if test="${status.index eq 1}">
 						            <input type="text" name="address1" value="${addr }" class="postcodify_address address">
@@ -227,7 +249,7 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 				</div>
 
   </section>
-<script>
+< <script>
 		function dup(){
 			var flag = false;
 			var dupPwd = $("#dupPwd").val();
@@ -243,7 +265,6 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 				success: function (res) {
 					console.log(res)
 					if(res == "success"){
-						alert("정보수정 완료");
 						flag = true;
 					}else{
 						alert("현재 비밀번호가 틀렸습니다. 다시 입력해주세요");
@@ -259,83 +280,266 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 			return flag;
 		}
 </script>
-
+ 
     
     
-  
-
-    <!-- ======= 아티스트 작품 섹션 ======= -->
+          <!-- ======= 팔로잉 섹션 ======= -->
      <section id="following" class="events">
    <div id="chefs" class="chefs">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Artist</h2>
+          <h2>My</h2>
           <p>Following</p>
         </div>
 
         <div class="row">
+		<c:if test="${empty fList}">
+		  <div class="testimonial-item">
+ 				&nbsp;&nbsp;&nbsp; 등록된 리뷰가 없습니다.
+          </div>
+		</c:if>
+		<c:if test="${!empty fList }">
+		<c:forEach items="${fList }" var="follow">
 
-          <div class="col-lg-4 col-md-6">
+					<div class="col-lg-4 col-md-6" id="form${follow.artistId }">
             <div class="member" data-aos="zoom-in" data-aos-delay="100">
-              <img src="resources/assets/img/chefs/chefs-1.jpg" class="img-fluid" alt="">
+              <c:if test="${follow.myReprofile ne null }">
+              	<img src="resources/artistProfile/${follow.myReprofile }" class="img-fluid" alt="" style="width:400px; height:350px;">
+              </c:if>
+              <c:if test="${follow.myReprofile eq null }">
+              	<img src="resources/artistProfile/20201213015554.png" class="img-fluid" alt="" style="width:400px; height:350px;">
+              </c:if>
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Walter White</h4>
-                  <span>Master Chef</span>
+                  <h4>${follow.artistId }</h4>
+                  <span>${follow.name }</span>
                 </div>
                 <div class="social">
-                  <a href=""><i class="icofont-page"><br>페이지 가기</i></a>
+                  <a href="artistInfoPage.na?artistId=${follow.artistId }"><i class="icofont-page"><br>페이지 가기</i></a>
                   <a href=""><i class="icofont-instagram"><br>Instagram</i></a>
-                  <a href=""><i class="icofont-heart-beat"></i><br>팔로우 취소 </a>
+                  <a class="deleteFollow" id="${follow.artistId }"><i class="icofont-heart-beat"></i><br>팔로우 취소 </a>
                   <a href="resources/assets/img/chefs/chefs-1.jpg" class="venobox" data-gall="gallery-item"><br></a>
                 </div>
               </div>
             </div>
-          </div>          
+          </div>
+		</c:forEach>
+		</c:if>
+        <script>
+		        $('.deleteFollow').click(function(){
+		        	var customerId = "${loginCustomer.customerId}";
+		            var artistId = $(this).attr("id");
+		            console.log(customerId);
+		            console.log(artistId);
+		            var con = confirm(artistId + "의 팔로우를 취소하시겠습니까?");
+		            if(con == true){
+		            $.ajax({
+	    				type: "post",
+	    				url: "/deletefollow.na",
+	    				data: {
+	    					"customerId" : customerId,
+	    					"artistId" : artistId
+	    				},
+	    				success: function (res) {
+	    					if(res.length>0){
+	    						$("#form"+artistId).remove();
+	    						alert(res + "의 팔로잉가 삭제 되었습니다.");
+	    						console.log("#form"+artistId);
+	    						
+	    					}
+	    				}
+	    			})
+		           }else{
+		        	   return false;
+		           }
+		        });
+        	
+        	
+        </script>
 
         </div>
 
       </div>
       </div>
 	</section> 
-	<!-- ======= 아티스트 작품 섹션 끝 ======= -->
+	<!-- ======= 팔로잉 끝 ======= -->
+
 	
-	
-  <!-- ======= 후기 댓글정도? ======= -->
-<%--      <section id="testimonials" class="testimonials section-bg">
+  <!-- ======= 리뷰 세션 ======= -->
+      <section id="review" class="testimonials section-bg">
      
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>All</h2>
-          <p>Artist List</p>
+          <h2>My</h2>
+          <p>Review</p>
+        </div>
+			<c:if test="${empty rList }">
+				등록된 리뷰가 없습니다.
+			</c:if>
+			
+			<c:if test="${!empty rList }">
+				<c:forEach items="${rList }" var="review">
+				<div class="testimonial-item">
+		            <p>
+	            		<c:if test="${review.reviewPhoto ne null}">
+	            			<img src="resources/artistProfile/${review.reviewPhoto }" alt="" style="width:200px; height:250px;">
+	            		</c:if>
+		           	 <br>
+		              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+		              	${review.reviewContents }
+		              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+		              
+		            </p>
+		            	<c:if test="${review.myReProfile ne null }">
+		            		<img src="resources/artistProfile/${review.myReProfile}" class="testimonial-img" alt=""  style="margin-left: 15px auto; display: block; width: 100px; height:100px; border: 8px solid #2c2f3f;">
+        				</c:if>
+        				
+        				<!-- 기본이미지로 바꿀것. -->
+        				<c:if test="${review.myReProfile ne null }">
+        					<img src="resources/artistProfile/${review.myReProfile}" class="testimonial-img" alt=""  style="margin-left: 15px auto; display: block; width: 100px; height:100px; border: 8px solid #2c2f3f;">
+        				</c:if>
+		            <h3> ${review.artistId }</h3>
+		            <h4> ${review.name }</h4>
+		        </div>
+				</c:forEach>
+			</c:if>
         </div>
 
+    </section>
+    <!-- 리뷰끝!ㄴ -->
 
-          <div class="testimonial-item">
-            <p style="width:150px;">ArtistName<br>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-             	 ${ artistInfo.name }
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            <img src="resources/artistProfile/${ artistInfo.myReProfile }" class="testimonial-img" alt="">
-          </div>
+    <!-- ======= Specials Section ======= -->
+    <section id="specials" class="specials">
+      <div class="container" data-aos="fade-up">
 
-          <div class="testimonial-item">
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            <img src="resources/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-            <h3>Sara Wilsson</h3>
-            <h4>Designer</h4>
-          </div>
-
+        <div class="section-title">
+          <h2>Specials</h2>
+          <p>Check Our Specials</p>
         </div>
 
-    </section> --%><!-- End Testimonials Section -->
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-3">
+            <ul class="nav nav-tabs flex-column">
+              <li class="nav-item">
+                <a class="nav-link active show" data-toggle="tab" href="#tab-1">Modi sit est</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-2">Unde praesentium sed</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-3">Pariatur explicabo vel</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-4">Nostrum qui quasi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-5">Iusto ut expedita aut</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-6">Iusto ut expedita aut</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-7">Iusto ut expedita aut</a>
+              </li>
 
+            </ul>
+          </div>
+          <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="tab-content">
+              <div class="tab-pane active show" id="tab-1">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Architecto ut aperiam autem id</h3>
+                    <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
+                    <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="resources/assets/img/specials-1.png" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-2">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Et blanditiis nemo veritatis excepturi</h3>
+                    <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
+                    <p>Ea ipsum voluptatem consequatur quis est. Illum error ullam omnis quia et reiciendis sunt sunt est. Non aliquid repellendus itaque accusamus eius et velit ipsa voluptates. Optio nesciunt eaque beatae accusamus lerode pakto madirna desera vafle de nideran pal</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="resources/assets/img/specials-2.png" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-3">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
+                    <p class="font-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
+                    <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et harum voluptatem optio quae</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="resources/assets/img/specials-3.png" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-4">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
+                    <p class="font-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
+                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="resources/assets/img/specials-4.png" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-5">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
+                    <p class="font-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
+                    <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="resources/assets/img/specials-5.png" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-pane" id="tab-6">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
+                    <p class="font-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
+                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="resources/assets/img/specials-4.png" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-pane" id="tab-7">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
+                    <p class="font-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
+                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="resources/assets/img/specials-4.png" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Specials Section -->
 
  
     <!-- ======= Contact Section ======= -->
@@ -518,21 +722,7 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 		 <jsp:include page="../common/footer.jsp"/>  	 
   	</footer>
 </body>
-      <!-- Vendor JS Files -->
-      
-      
-	  <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
-	  <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	  <script src="resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-	  <script src="resources/assets/vendor/php-email-form/validate.js"></script>
-	  <script src="resources/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-	  <script src="resources/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-	  <script src="resources/assets/vendor/venobox/venobox.min.js"></script>
-	  <script src="resources/assets/vendor/aos/aos.js"></script>
-	  <!-- Template Main JS File -->
-	  <script src="resources/assets/js/main.js"></script>
-	  
-	  	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+
 			<script>
 			$(function() {
 					$(".address").postcodifyPopUp();

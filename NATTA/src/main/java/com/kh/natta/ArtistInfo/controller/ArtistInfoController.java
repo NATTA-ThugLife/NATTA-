@@ -30,7 +30,6 @@ public class ArtistInfoController {
 	private ArtistInfoService infoService;
 
 	
-	
 	// 아티스트 상세페이지로 이동
 	@RequestMapping(value="artistInfoPage.na", method=RequestMethod.GET)
 	public String ArtistInfoPage(String artistId, Model model) {
@@ -150,7 +149,10 @@ public class ArtistInfoController {
 		}
 	}
 	
-
+	
+	
+	
+	
 	
 	
 	

@@ -12,8 +12,8 @@
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 	
-	<section>
-		<section id="book-a-table" class="book-a-table">
+	<section> <!--  class="events" -->
+		<section >
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
 				<h2>Notice</h2>
@@ -45,7 +45,7 @@
 			<td>
 				<c:if test="${!empty loginCustomer }">
 					<c:url var="noticeDetail" value="noticeDetailView.na">
-						<c:param name="noticeCode" value="${notice.noticeCode }"></c:param>	<!-- 쿼리스트링 -->
+						<c:param name="noticeCode" value="${notice.noticeCode }"></c:param>
 					</c:url>
 					<a href="${noticeDetail }">${notice.noticeTitle }</a>
 				</c:if>
@@ -59,8 +59,7 @@
 		</c:forEach>
 	</table>
 	
-	<!-- 게시물 검색 -->
-	
+	<!-- 게시물 검색 -->	
 	<div id="searchArea" align="center">
 		<form action="noticeSearch.na" method="get">
 			<select id="searchCondition" name="searchCondition">

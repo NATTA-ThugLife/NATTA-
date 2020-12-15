@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.natta.qna.domain.QnaComment" alias="QnaComment"/>
 		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistInfoPrice" alias="ArtistInfoPrice"/>
 		<typeAlias type="com.kh.natta.customerInfo.domain.Following" alias="Following"/>
+		<typeAlias type="com.kh.natta.customerInfo.domain.Review" alias="Review"/>
 	</typeAliases>
 	
 	<mappers>
@@ -34,6 +35,7 @@
 		<mapper resource="mappers/qna-mapper.xml"/>
 		<mapper resource="mappers/artistInfoPrice-mapper.xml"/>
 		<mapper resource="mappers/artistWork-mapper.xml"/>
+		<mapper resource="mappers/customerInfo-mapper.xml"/>		
 	</mappers>
 	
 

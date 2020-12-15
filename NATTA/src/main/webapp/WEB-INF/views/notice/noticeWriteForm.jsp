@@ -26,11 +26,11 @@
 		<table align="center" border="1" cellspacing="0">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" size="50" name="noticeTitle"></td>
+				<td><input type="text" size="50" name="noticeTitle" required></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="7" cols="50" name="noticeContents"></textarea></td>
+				<td><textarea rows="7" cols="50" name="noticeContents" required></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

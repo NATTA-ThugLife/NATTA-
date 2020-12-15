@@ -26,8 +26,7 @@
 	
 	<form action="qnaUpdate.na" method="post">
 		<input type="hidden" name="page" value="${currentPage }">
-		<input type="hidden" name="qnaCode" value="${qna.qnaCode }">
-				
+		<input type="hidden" name="qnaCode" value="${qna.qnaCode }">				
 		<table align="center" id="tb" border="1" cellspacing="0">
 			<tr>
 				<td>제목</td>
@@ -47,7 +46,7 @@
 					<%-- <c:url var="qnaList" value="qnaList.na">
 						<c:param name="page" value="${currentPage }"></c:param>
 					</c:url>
-					<a href="${qnaList }">목록으로</a>
+					<a href="${qnaList }">목록</a>
 					<a href="javascript:history.go(-1);">이전페이지로</a> --%>
 				</td>
 			</tr>
