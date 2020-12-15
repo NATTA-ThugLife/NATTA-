@@ -19,7 +19,7 @@ public class ReservationController {
 	
 		@RequestMapping(value="reservation.na",method=RequestMethod.GET)
 		public  String reservation(String artistId, Model model) {
-			ArtistInfo infoPage = infoService.selectOneArtist(artistId);
+			ArtistInfo infoPage = infoService.selectOneArtistInfo(artistId);
 			
 			model.addAttribute("artistInfo",infoPage);
 			return "Reservation/reservation";

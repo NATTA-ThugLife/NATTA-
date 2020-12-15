@@ -27,7 +27,8 @@
 	
 	<!-- 아티스트 1명 조회  -->
 	<select id="selectOneArtist" resultMap="artistInfoMap">
-		SELECT * FROM ARTISTINFO WHERE ARTIST_ID = #{artistId}
+		SELECT * FROM ARTISTINFO 
+		WHERE ARTIST_ID = #{artistId}
 	</select>
 	<!-- 아티스트 소개 업데이트 -->
 	<update id="updateArtistInfo">

@@ -28,25 +28,24 @@ public class ArtistWorkController {
 	@Autowired
 	private ArtistWorkService awService;
 	
+	
 	// AJAX ) 해당 아티스트의 price 테이블에 등록되어있는  style 가져옴
 	@RequestMapping(value="artistStyle.na", method=RequestMethod.POST)
 	public void artistIdCheck(HttpServletResponse response, String artistId) throws Exception {
 		ArrayList<ArtistInfoPrice> styleList = awService.selectArtistStyle(artistId);
 		if( !styleList.isEmpty()) {
 			for( ArtistInfoPrice p : styleList ) {
-				System.out.println("확인확인확인~~"+p);
 				p.setpStyle(URLEncoder.encode(p.getpStyle(), "utf-8"));
 			}
 		}
 		Gson gson = new Gson();
 		gson.toJson( styleList,response.getWriter() );
 	}
-
 	
 	
 	// 아티스트 작품등록
 	@RequestMapping(value="InsertArtistWork.na",method=RequestMethod.POST)
-	public String artistInfoInsert(ArtistWork work, Model model, HttpServletRequest request,
+	public String artistWorkInsert(ArtistWork work, Model model, HttpServletRequest request,
 									@RequestParam(name="uploadFile",required=false) MultipartFile uploadFile) {
 		  System.out.println(work);
 		  System.out.println(uploadFile);
@@ -95,7 +94,7 @@ public class ArtistWorkController {
 	/*
 	// artistInfo 수정
 	@RequestMapping(value="UpdateArtistInfo.na",method=RequestMethod.POST)
-	public String artistInfoUpdate(Model model, ArtistInfo artistInfo, HttpServletRequest request,
+	public String artistWorkUpdate(Model model, ArtistInfo artistInfo, HttpServletRequest request,
 										@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
 		if( reloadFile != null && !reloadFile.isEmpty() ) {
 			if( artistInfo.getMyProfile() != null ) {

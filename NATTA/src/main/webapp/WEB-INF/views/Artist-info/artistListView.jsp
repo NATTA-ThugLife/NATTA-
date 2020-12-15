@@ -30,7 +30,7 @@
 	             	 <a href="${ artistInfoPage }">${ artist.name }</a>
 	              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
 	            </p>
-	            <img src="resources/artistProfile/${ artist.myReProfile }" class="testimonial-img" alt="">
+	            <img src="resources/artistInfoFile/Profile/${ artist.myReProfile }" class="testimonial-img" alt="">
 	          </div>
 		</c:forEach>          
 	</c:if>

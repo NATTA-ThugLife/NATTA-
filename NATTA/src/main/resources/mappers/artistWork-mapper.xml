@@ -11,7 +11,10 @@
 	 </resultMap>
 	
 	
-	
+	<select id="selectOneArtist" resultMap="artistWorkMap">
+		SELECT * FROM WORK 
+		WHERE ARTIST_ID = #{artistId}
+	</select>
 	
 	<insert id="insertArtistWork">
 		INSERT INTO WORK

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.artist.domain.Artist;
+import com.kh.natta.artistWork.domain.ArtistWork;
 
 public interface ArtistInfoStore {
 
@@ -19,22 +20,6 @@ public interface ArtistInfoStore {
 	 * artist info selectList
 	 * @return
 	 */
-	public ArrayList<ArtistInfo> selectListArtist();
-	
-	/**
-	 * artist info selectOne
-	 * @param artistId
-	 * @return
-	 */
-	public ArtistInfo selectOneArtist(String artistId);
-	
-	/**
-	 * artist 패키지에서 가져오기 회원정보
-	 * @param artistId
-	 * @return
-	 */
-	public Artist selectArtist(String artistId);
-	
 	/**
 	 * 정보수정하는 메소드
 	 * @param artistInfo
@@ -51,6 +36,45 @@ public interface ArtistInfoStore {
 	 */
 	public ArtistInfoPrice selectStylePrice(ArtistInfoPrice ap);
 	
+	/**
+	 * artist List
+	 * @return
+	 */
+	public ArrayList<ArtistInfo> selectListArtist();
+	
+	
+	
+	/**
+	 * artist info selectOne
+	 * @param artistId
+	 * @return
+	 */
+	public ArtistInfo selectOneArtistInfo(String artistId);
+	
+	/**
+	 * artist 패키지에서 가져오기 회원정보
+	 * @param artistId
+	 * @return
+	 */
+	public Artist selectOneArtist(String artistId);
+	
+	
+	/**
+	 * artist price selectOne
+	 * @param artistId
+	 * @return
+	 */
+	public ArrayList<ArtistInfoPrice> selectListArtistPrice(String artistId);
+	
+	
+	/**
+	 * artist work selectOne
+	 * @param artistId
+	 * @return
+	 */
+	public ArrayList<ArtistWork> selectListArtistWork(String artistId);	
+	
+		
 	
 	
 	
