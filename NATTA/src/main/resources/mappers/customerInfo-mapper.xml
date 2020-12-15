@@ -16,6 +16,20 @@
 		<result property="myInfo" column="MY_INFO"></result>
 	</resultMap>
 	
+	<resultMap type="Review" id="ReviewResultMap">
+		<result property="reviewCode" column="REVIEW_CODE"></result>
+		<result property="customerId" column="CUSTOMER_ID"></result>
+		<result property="artistId" column="ARTIST_ID"></result>
+		<result property="reviewContents" column="REVIEW_CONTENTS"></result>
+		<result property="reviewPhoto" column="REVIEW_PHOTO"></result>
+		<result property="reviewStar" column="REVIEW_STAR"></result>
+		<result property="reviewCreateDate" column="REVIEW_CREATEDATE"></result>
+		<result property="reviewModifyDate" column="REVIEW_MODIFYDATE"></result>
+		<result property="reviewHit" column="REVIEW_HITS"></result>
+		<result property="myProfile" column="MY_PROFILE"></result>
+		<result property="myReProfile" column="MY_REPROFILE"></result>
+	</resultMap>
+	
 	<update id="modifyCusotmer">
 		UPDATE CUSTOMER
 		<set>
@@ -45,6 +59,14 @@
 	</select>
 	
 	<select resultMap="followingResultMap" id="selectListFollowing">
-		SELECT * FROM FOLLOWING JOIN ARTISTINFO USING(ARTIST_ID) WHERE CUSTOMER_ID = #{customerId}
+		SELECT * FROM FOLLOWING OUTER LEFT JOIN ARTISTINFO USING(ARTIST_ID) WHERE CUSTOMER_ID = #{customerId}
+	</select>
+	
+	<delete id="deleteFollowing">
+		DELETE FROM FOLLOWING WHERE CUSTOMER_ID = #{customerId} AND ARTIST_ID = #{artistId}
+	</delete>
+	
+	<select id="selectListReview" resultMap="ReviewResultMap">
+		SELECT * FROM REVIEW LEFT OUTER JOIN ARTISTINFO USING(ARTIST_ID) WHERE CUSTOMER_ID = #{customerId}
 	</select>
 </mapper>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.customer.service.CustomerService;
 import com.kh.natta.customerInfo.domain.Following;
+import com.kh.natta.customerInfo.domain.Review;
 import com.kh.natta.customerInfo.service.CustomerInfoService;
 
 
@@ -32,9 +34,12 @@ public class CustomerInfoController {
 	private CustomerService cService;
 	
 	@RequestMapping(value="/customerInfo.na" , method = RequestMethod.GET)
-	public String customerInfoView(String customerId) {
+	public String customerInfoView(String customerId, Model model) {
 		ArrayList<Following> fList = service.selectListFollowing(customerId);
-		System.out.println(fList);
+		ArrayList<Review> rList = service.selectListReview(customerId);
+		System.out.println(rList);
+		model.addAttribute("fList",fList);
+		model.addAttribute("rList",rList);
 		return "Customer-info/customerPage";
 	}
 	
@@ -42,6 +47,7 @@ public class CustomerInfoController {
 	public String modifyCustomerInfo(Customer customer,String dupPwd,  String post, String address1, String address2,String orginalFileName, MultipartFile uploadFile, HttpServletRequest request) {
 		
 		customer.setAddress(post+","+address1+","+address2);
+		
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			String renameFileName = saveFile(uploadFile,request,customer.getCustomerId());
 			if(renameFileName != null) {
@@ -111,6 +117,18 @@ public class CustomerInfoController {
 				return "success";
 			}else {
 				return "fail";
+			}
+		}
+		
+		@ResponseBody
+		@RequestMapping(value="/deletefollow.na", method= RequestMethod.POST)
+		public String deleteFollow(Following following) {
+			System.out.println(following);
+			int result = service.deleteFollowing(following);
+			if(result > 0 ) {
+				return following.getArtistId();
+			}else {
+				return null;
 			}
 		}
 }
