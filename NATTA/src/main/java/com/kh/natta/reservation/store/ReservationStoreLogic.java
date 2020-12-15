@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
+import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.reservation.domain.Reservation;
 
 @Repository
@@ -38,7 +40,7 @@ public class ReservationStoreLogic implements ReservationStore{
 	}
 
 	@Override
-	public ArrayList<Reservation> selectLisst() {
+	public ArrayList<Reservation> selectList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -48,5 +50,24 @@ public class ReservationStoreLogic implements ReservationStore{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Artist selectOneArtist(String artistId) {
+		return sqlSession.selectOne("artistMapper.selectOneArtist", artistId);
+	}
+
+	@Override
+	public ArrayList<ArtistInfoPrice> selectListSize(ArtistInfoPrice size) {
+		return (ArrayList)sqlSession.selectList("ArtistInfoPriceMapper.selectListSize",size);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectListDate(String artistId) {
+		return (ArrayList)sqlSession.selectList("reservationMapper.selectListDate",artistId);
+	}
+
+	
+
+	
 
 }

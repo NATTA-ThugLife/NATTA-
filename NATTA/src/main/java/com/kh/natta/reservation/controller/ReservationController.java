@@ -1,21 +1,29 @@
 package com.kh.natta.reservation.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.service.ArtistInfoService;
+import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artist.service.ArtistService;
 import com.kh.natta.reservation.domain.Reservation;
 import com.kh.natta.reservation.service.ReservationService;
@@ -31,8 +39,15 @@ public class ReservationController {
 		@RequestMapping(value="reservation.na",method=RequestMethod.GET)
 		public  String reservation(String artistId, Model model) {
 			ArtistInfo infoPage = infoService.selectOneArtistInfo(artistId);
+			Artist artist = rService.selectOneArtist(artistId);
+			ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);	
+			ArrayList<Reservation> date = rService.selectListDate(artistId);
+			System.out.println(date);
 			
+			model.addAttribute("priceList",priceList);
+			model.addAttribute("artist",artist);
 			model.addAttribute("artistInfo",infoPage);
+			model.addAttribute("date",date);
 			return "Reservation/reservation";
 		}
 		
@@ -89,6 +104,20 @@ public class ReservationController {
 				e.printStackTrace();
 			}
 			return renameFilename;
+		}
+		
+		@ResponseBody
+		@RequestMapping(value="reservationSizeList.na",method=RequestMethod.POST)
+		public void reservationSizeList(String artistId,String pStyle, HttpServletResponse response)throws Exception{
+			ArtistInfoPrice size = new ArtistInfoPrice();
+			size.setArtistId(artistId);
+			size.setpStyle(pStyle);
+			System.out.println(size);
+			ArrayList<ArtistInfoPrice> sizeList = rService.selectListSize(size);
+			System.out.println(sizeList);
+			Gson gson = new Gson();
+			gson.toJson(sizeList,response.getWriter());
+			
 		}
 		
 		

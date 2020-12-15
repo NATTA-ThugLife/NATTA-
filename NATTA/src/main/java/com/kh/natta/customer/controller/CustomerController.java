@@ -143,12 +143,6 @@ public class CustomerController {
 	  } return mv;
 	  }
 	
-	//비번 변경
-	@RequestMapping(value = "findPwd.na", method = RequestMethod.GET)
-	public String changePwd(Locale locale, Model model) {
-		return "join/changePwd";
-	}
-	
 	
 	
 	

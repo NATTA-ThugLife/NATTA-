@@ -48,5 +48,10 @@
 		WHERE ARTIST_ID = #{artistId}
 	</select>
 	
+	<select id="selectListSize" resultMap="artistInfoPriceMap">
+		SELECT * FROM PRICE
+		WHERE ARTIST_ID = #{artistId} AND P_STYLE = #{pStyle}
+	</select>
+	
 	
 </mapper>

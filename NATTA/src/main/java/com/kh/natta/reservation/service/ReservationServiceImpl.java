@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
+import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.reservation.domain.Reservation;
 import com.kh.natta.reservation.store.ReservationStore;
 
@@ -38,7 +40,7 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public ArrayList<Reservation> selectLisst() {
+	public ArrayList<Reservation> selectList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -48,5 +50,26 @@ public class ReservationServiceImpl implements ReservationService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Artist selectOneArtist(String artistId) {
+		return store.selectOneArtist(artistId);
+	}
+
+	@Override
+	public ArrayList<ArtistInfoPrice> selectListSize(ArtistInfoPrice size) {
+		return store.selectListSize(size);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectListDate(String artistId) {
+		return store.selectListDate(artistId);
+	}
+
+	
+
+	
+
+	
 
 }

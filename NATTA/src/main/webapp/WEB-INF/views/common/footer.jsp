@@ -26,8 +26,8 @@
   <link href="resources/assets/vendor/aos/aos.css" rel="stylesheet">
 
 <!--   Template Main CSS File -->
-
 <link href="resources/assets/css/style.css" rel="stylesheet"> 
+
 </head>
 
 <body>

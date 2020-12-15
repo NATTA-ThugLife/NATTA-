@@ -6,8 +6,10 @@
 		<result property="reservationCode" column="RESERVATION_CODE"></result>
 		<result property="artistName" column="ARTIST_NAME"></result>
 		<result property="reservationDate" column="RESERVATION_DATE"></result>
-		<result property="designPath" column="DESIGN_PATH"></result>
+		<result property="originalFilename" column="ORIGINAL_FILENAME"></result>
+		<result property="renameFilename" column="RENAME_FILENAME"></result>
 		<result property="tattooSize" column="TATTOO_SIZE"></result>
+		<result property="shopName" column="SHOP_NAME"></result>
 		<result property="customerId" column="CUSTOMER_ID"></result>
 		<result property="artistId" column="ARTIST_ID"></result>
 	</resultMap>
@@ -16,5 +18,10 @@
 		INSERT INTO RESERVATION
 		VALUES(RESERVATION_SEQ.NEXTVAL,#{artistName},#{reservationDate},#{address},#{originalFilename},#{renameFilename},#{tattooSize},#{request},#{style},#{part},#{price},'0',#{shopName},#{customerId},#{artistId})
 	</insert>
+	
+	<select id="selectListDate" resultMap="reservationResultMap">
+		SELECT RESERVATION_DATE FROM RESERVATION
+		WHERE ARTIST_ID = #{artistId}
+	</select>
 	
 </mapper>
