@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,15 +25,14 @@
   <script src="resources/assets/js/main.js"></script>   -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
-   header {
-      height: 215px;
-   }	
-   #header {
-   	height: 175px;
-   }
+	header { height: 215px; }	
+	#header { height: 175px; }
+	.artistPriceTable th { border-bottom : 0.01px solid dimgrey; width:800px; padding: 10px; }
+	.artistPriceTable td { padding: 20px; width:800px;  }
+	.artistPriceTable {border-spacing:10px; border-top : 0.6px solid #cda45e; border-bottom : 0.6px solid #cda45e; text-align : center;}
+	.artistPriceTable td:hover { color : #cda45e; }
  </style>
 </head>
-
 <body>
 <header>
 	<div id="header" class="fixed-top">
@@ -189,25 +189,70 @@
 	    </div>
 	</section>
 	<!-- ======= 아티스트 작품 섹션 끝 ======= -->
+	<!-- 견적 표 -->
+     <section id="testimonials" class="testimonials section-bg">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Price</h2>
+          <p>타투 견적</p>
+        </div>
+ 		<div class="artistPriceTable">
+			<table>
+				<thead>
+					<tr>
+						<th>Style</th><th>38 x 38 </th>
+						<th>38 x 64</th><th>65 x 76</th>
+						<th>102 x 127 (A6)</th><th>152 x 152</th>
+						<th>203 x 152 (A5)</th><th>210 x 297 (A4)</th>
+						<td>mm/원</td>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${ priceList }" var="pList">
+						<tr>
+							<td>${ pList.pStyle } </td>
+							<td><fmt:formatNumber value="${ pList.pSize1 }"/></td>
+							<td><fmt:formatNumber value="${ pList.pSize2 }"/></td>
+							<td><fmt:formatNumber value="${ pList.pSize3 }"/></td>
+							<td><fmt:formatNumber value="${ pList.pSize4 }"/></td>
+							<td><fmt:formatNumber value="${ pList.pSize5 }"/></td>
+							<td><fmt:formatNumber value="${ pList.pSize6 }"/></td>
+							<td><fmt:formatNumber value="${ pList.pSize7 }"/></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>			
+     </div>
+     </section>	
 	
 	
-  <!-- ======= 후기 댓글정도? ======= -->
+	
+	
+	
+	
+	
+  <!-- ======= 후기 섹션 ======= -->
      <section id="testimonials" class="testimonials section-bg">
      
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>All</h2>
-          <p>Artist List</p>
+          <h2>후 기</h2>
+          <p>${ artistInfo.name } 님의 타투는 어땠나요 ?</p>
         </div>
-
+		
 
           <div class="testimonial-item">
-            <p style="width:150px;">ArtistName<br>
+            <p>		
+               <img src="resources/artistInfoFile/WorkFile/20201214184858.png" class="img-fluid" alt="잉? 왜없을까?" style="width:50px; height:50px;">
+            <a href="resources/artistInfoFile/WorkFile/20201214184858.png" class="venobox" data-gall="gallery-item"><i class="icofont-linkedin"></i></a>
+            <br>
               <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-             	 ${ artistInfo.name }
+             	와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우
+             	와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
-            <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" class="testimonial-img" alt="">
+            <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" class="testimonial-img" alt="">qweqweqwe
           </div>
 
           <div class="testimonial-item">
