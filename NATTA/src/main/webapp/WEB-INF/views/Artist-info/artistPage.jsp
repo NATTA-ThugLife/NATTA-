@@ -11,6 +11,7 @@
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
   <link href="resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
 <!--     <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
   <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
@@ -24,8 +25,11 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
    header {
-      height: 180px;
+      height: 215px;
    }	
+   #header {
+   	height: 175px;
+   }
  </style>
 </head>
 
@@ -36,7 +40,7 @@
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
-        <i class="icofont-phone"></i> +82 010 1234 5678
+        <i class="icofont-phone"></i> ${ artist.phone }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span class="d-none d-lg-inline-block"><i class="icofont-clock-time icofont-rotate-180"></i> Mon-Sat: 11:00 AM - 23:00 PM</span>
       </div>
       <div class="languages">
@@ -88,11 +92,10 @@
       </nav><!-- .nav-menu -->
     </div>
     	<!-- 아티스트 프로필 헤더! -->
-       <div class="profile container d-flex align-items-center" style="float:left;">
-       <div style="width:380px; float:left;"></div>
+       <div class="profile container d-flex align-items-center" style="margin-top:10px;">
         <img 
         src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" alt="" class="img-fluid rounded-circle" 
-        style="margin-left: 15px auto; display: block; width: 120px; border: 8px solid #2c2f3f;">
+        style="margin-left: 15px auto; display: block; width: 100px; height:100px; border: 8px solid #2c2f3f;">
   	<nav class="nav-menu d-none d-lg-block" data-aos="fade-in">
         <h2 class="text-light" style="margin-left:25px;">${ artistInfo.name }</h2>
   	    <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>    
@@ -121,7 +124,7 @@
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
             <div class="about-img">
-              <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" alt="">
+              <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" alt="" style="width: 600px; height:500px;">
             </div>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
@@ -152,75 +155,38 @@
 
     <!-- ======= 아티스트 작품 섹션 ======= -->
     <section id="events" class="events">
-   <div id="chefs" class="chefs">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Work</h2>
-          <p>아티스트 포트폴리오</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="zoom-in" data-aos-delay="100">
-              <img src="resources/assets/img/chefs/chefs-1.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>작품이름영역</h4>
-                  <span>스타일영역</span>
-                </div>
-                <div class="social">
-                  <!-- <a href=""><i class="icofont-twitter"></i></a>
-                  <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a> -->
-                  <a href=""><i class="icofont-linkedin"></i>작품예약링크</a>
-                  <a href="resources/assets/img/chefs/chefs-1.jpg" class="venobox" data-gall="gallery-item">사진보기링크</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="zoom-in" data-aos-delay="200">
-              <img src="resources/assets/img/chefs/chefs-2.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Patissier</span>
-                </div>
-                <div class="social">
-                  <a href=""><i class="icofont-twitter"></i></a>
-                  <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="zoom-in" data-aos-delay="300">
-              <img src="resources/assets/img/chefs/chefs-3.jpg" class="img-fluid" alt="">
-              <div class="member-info">
-                <div class="member-info-content">
-                  <h4>William Anderson</h4>
-                  <span>Cook</span>
-                </div>
-                <div class="social">
-                  <a href=""><i class="icofont-twitter"></i></a>
-                  <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-      </div>
+	   <div id="chefs" class="chefs">
+	      <div class="container" data-aos="fade-up">
+	        <div class="section-title">
+	          <h2>Work</h2>
+	          <p>아티스트 포트폴리오</p>
+	        </div>
+			
+	        <div class="row">
+				<c:forEach items="${ workList }" var="aWork">
+		          <div class="col-lg-4 col-md-6">
+		            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+		              <img src="resources/artistInfoFile/WorkFile/${ aWork.workReImgPath }"
+		               class="img-fluid" alt="잉? 왜없을까?" style="width:400px; height:350px;">
+		              <div class="member-info">
+		                <div class="member-info-content">
+		                  <h5>${ aWork.workStyle }</h5>
+		                  <span>${ artistInfo.name }</span>
+		                </div>
+		                <div class="social">
+		                  <!-- <a href=""><i class="icofont-twitter"></i></a>
+		                  <a href=""><i class="icofont-facebook"></i></a>
+		                  <a href=""><i class="icofont-instagram"></i></a> -->
+		                  <a href="">작품예약하기</a>
+		                  <a href="resources/artistInfoFile/WorkFile/${ aWork.workReImgPath }" class="venobox" data-gall="gallery-item"><i class="icofont-linkedin"></i></a>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+			   </c:forEach>			
+	        </div>
+	      </div>
+	    </div>
 	</section>
 	<!-- ======= 아티스트 작품 섹션 끝 ======= -->
 	
@@ -241,7 +207,7 @@
              	 ${ artistInfo.name }
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
-            <img src="resources/artistProfile/${ artistInfo.myReProfile }" class="testimonial-img" alt="">
+            <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" class="testimonial-img" alt="">
           </div>
 
           <div class="testimonial-item">

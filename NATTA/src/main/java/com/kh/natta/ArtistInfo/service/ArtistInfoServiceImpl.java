@@ -9,6 +9,7 @@ import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.store.ArtistInfoStore;
 import com.kh.natta.artist.domain.Artist;
+import com.kh.natta.artistWork.domain.ArtistWork;
 
 @Service
 public class ArtistInfoServiceImpl implements ArtistInfoService{
@@ -28,18 +29,28 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 	}
 
 	@Override
-	public ArtistInfo selectOneArtist(String artistId) {
-		return infoStore.selectOneArtist(artistId);
+	public ArtistInfo selectOneArtistInfo(String artistId) {
+		return infoStore.selectOneArtistInfo(artistId);
 	}
 
 	@Override
-	public Artist selectArtist(String artistId) {
-		return infoStore.selectArtist(artistId);
+	public Artist selectOneArtist(String artistId) {
+		return infoStore.selectOneArtist(artistId);
 	}
 
 	@Override
 	public int updateArtistInfo(ArtistInfo artistInfo) {
 		return infoStore.updateArtistInfo(artistInfo);
+	}
+
+	@Override
+	public ArrayList<ArtistInfoPrice> selectListArtistPrice(String artistId) {
+		return infoStore.selectListArtistPrice(artistId);
+	}
+
+	@Override
+	public ArrayList<ArtistWork> selectListArtistWork(String artistId) {
+		return infoStore.selectListArtistWork(artistId);
 	}
 
 

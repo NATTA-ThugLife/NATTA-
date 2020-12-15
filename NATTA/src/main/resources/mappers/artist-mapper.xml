@@ -26,4 +26,8 @@
 	 	WHERE ARTIST_ID = #{artistId}
 	 </select>
 	
+	<select id="selectOneArtist" resultMap="artistResultMap">
+		SELECT * FROM ARTIST 
+		WHERE ARTIST_ID = #{artistId}
+	</select>	 	
 </mapper>

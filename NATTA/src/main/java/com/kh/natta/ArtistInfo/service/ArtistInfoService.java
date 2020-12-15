@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.artist.domain.Artist;
+import com.kh.natta.artistWork.domain.ArtistWork;
 
 public interface ArtistInfoService {
 
@@ -14,6 +15,13 @@ public interface ArtistInfoService {
 	 * @return
 	 */
 	public int registerArtistInfo(ArtistInfo artistInfo);
+	
+	/**
+	 * artist info update
+	 * @param artistInfo
+	 * @return
+	 */
+	public int updateArtistInfo(ArtistInfo artistInfo);	
 	
 	/**
 	 * artist info selectList
@@ -26,18 +34,29 @@ public interface ArtistInfoService {
 	 * @param artistId
 	 * @return
 	 */
-	public ArtistInfo selectOneArtist(String artistId);
-	
-	
-	
-	public Artist selectArtist(String artistId);
+	public ArtistInfo selectOneArtistInfo(String artistId);
 	
 	/**
-	 * artist info update
-	 * @param artistInfo
+	 * artist selectOne
+	 * @param artistId
 	 * @return
 	 */
-	public int updateArtistInfo(ArtistInfo artistInfo);
+	public Artist selectOneArtist(String artistId);
+	
+	/**
+	 * artist price selectOne
+	 * @param artistId
+	 * @return
+	 */
+	public ArrayList<ArtistInfoPrice> selectListArtistPrice(String artistId);
+	
+	
+	/**
+	 * artist work selectOne
+	 * @param artistId
+	 * @return
+	 */
+	public ArrayList<ArtistWork> selectListArtistWork(String artistId);
 	
 
 

@@ -19,19 +19,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
+import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.service.ArtistInfoService;
+import com.kh.natta.artist.domain.Artist;
+import com.kh.natta.artistWork.domain.ArtistWork;
 
 @Controller
 public class ArtistInfoController {
 	@Autowired
 	private ArtistInfoService infoService;
+
 	
 	
 	// 아티스트 상세페이지로 이동
 	@RequestMapping(value="artistInfoPage.na", method=RequestMethod.GET)
 	public String ArtistInfoPage(String artistId, Model model) {
-		ArtistInfo infoPage = infoService.selectOneArtist(artistId);
-//		Artist artist = infoService.selectArtist(artistId);
+		Artist artist = infoService.selectOneArtist(artistId);
+		ArtistInfo infoPage = infoService.selectOneArtistInfo(artistId);
+		ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);
+		ArrayList<ArtistWork> workList = infoService.selectListArtistWork(artistId);
+			model.addAttribute("artist", artist);
+			model.addAttribute("priceList", priceList);
+			model.addAttribute("workList", workList);
 			model.addAttribute("artistInfo", infoPage);
 			// 세션id 값이랑 해당 상세페이지 아티스트 정보랑 유효성검사 채크용
 			model.addAttribute("artistPageId",artistId);
@@ -41,7 +50,7 @@ public class ArtistInfoController {
 	// AJAX ) 아티스트 정보 DB에 artistId 존재유무 확인
 	@RequestMapping(value="artistChecking.na", method=RequestMethod.POST)
 	public void artistIdCheck(HttpServletResponse response, String artistId) throws Exception {
-		ArtistInfo artistCheck = infoService.selectOneArtist(artistId);
+		ArtistInfo artistCheck = infoService.selectOneArtistInfo(artistId);
 		if(artistCheck != null) {
 			artistCheck.setMyInfo(URLEncoder.encode(artistCheck.getMyInfo(), "utf-8"));
 			artistCheck.setName(URLEncoder.encode(artistCheck.getName(), "utf-8"));
@@ -55,8 +64,6 @@ public class ArtistInfoController {
 	@RequestMapping(value="InsertArtistInfo.na",method=RequestMethod.POST)
 	public String artistInfoInsert(ArtistInfo artistInfo, Model model, HttpServletRequest request,
 									@RequestParam(name="uploadFile",required=false) MultipartFile uploadFile) {
-		System.out.println(uploadFile);
-		System.out.println(artistInfo);
 		  if(!uploadFile.getOriginalFilename().equals("")) { 
 			  String reProfileName = saveFile(uploadFile, request); 
 			  if( reProfileName != null) {
@@ -79,6 +86,7 @@ public class ArtistInfoController {
 		String root = request.getSession().getServletContext().getRealPath("resources/artistInfoFile");
 		String savePath = root + "\\Profile";
 		File folder = new File(savePath);
+		System.out.println(folder);
 		if(!folder.exists()) {
 			folder.mkdir();
 		}

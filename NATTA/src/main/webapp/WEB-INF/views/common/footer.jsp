@@ -26,11 +26,8 @@
   <link href="resources/assets/vendor/aos/aos.css" rel="stylesheet">
 
 <!--   Template Main CSS File -->
-<<<<<<< HEAD
-  <link href="resources/assets/css/style.css" rel="stylesheet"> 
-=======
-  <link href="resources/assets/css/style.css" rel="stylesheet">
->>>>>>> refs/remotes/origin/1213/1051/leeseok
+
+<link href="resources/assets/css/style.css" rel="stylesheet"> 
 </head>
 
 <body>

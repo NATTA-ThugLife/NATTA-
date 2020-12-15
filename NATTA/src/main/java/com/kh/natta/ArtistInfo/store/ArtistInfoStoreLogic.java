@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.artist.domain.Artist;
+import com.kh.natta.artistWork.domain.ArtistWork;
 
 @Repository
 public class ArtistInfoStoreLogic implements ArtistInfoStore {
@@ -28,16 +29,6 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 	}
 
 	@Override
-	public ArtistInfo selectOneArtist(String artistId) {
-		return sqlSession.selectOne("ArtistInfoMapper.selectOneArtist", artistId);
-	}
-
-	@Override
-	public Artist selectArtist(String artistId) {
-		return sqlSession.selectOne("artistMapper.selectArtistInfo", artistId);
-	}
-
-	@Override
 	public int updateArtistInfo(ArtistInfo artistInfo) {
 		return sqlSession.update("ArtistInfoMapper.updateArtistInfo",artistInfo);
 	}
@@ -45,6 +36,26 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 	@Override
 	public ArtistInfoPrice selectStylePrice(ArtistInfoPrice ap) {
 		return sqlSession.selectOne("ArtistInfoMapper.insertArtistPrice", ap);
+	}
+
+	@Override
+	public ArtistInfo selectOneArtistInfo(String artistId) {
+		return sqlSession.selectOne("ArtistInfoMapper.selectOneArtist", artistId);
+	}	
+	
+	@Override
+	public Artist selectOneArtist(String artistId) {
+		return sqlSession.selectOne("artistMapper.selectOneArtist", artistId);
+	}
+
+	@Override
+	public ArrayList<ArtistInfoPrice> selectListArtistPrice(String artistId) {
+		return (ArrayList)sqlSession.selectList("ArtistInfoPriceMapper.selectOneArtist", artistId);
+	}
+
+	@Override
+	public ArrayList<ArtistWork> selectListArtistWork(String artistId) {
+		return (ArrayList)sqlSession.selectList("ArtistWorkMapper.selectOneArtist", artistId);
 	}
 
 	
