@@ -78,8 +78,11 @@
 			</tr>
 		</thead>
 		<tbody></tbody>
+		<tfoot>
+		<!-- 페이징 처리 -->
+			
+		</tfoot>
 	</table>
-	
     </section>
     <section>
     	<c:if test="${loginArtist ne null }">
@@ -108,6 +111,7 @@
 	<input type="hidden" id="sessionArtist" value="${loginArtist.artistId}">
 	<input type="hidden" id="sessionCustomer" value="${loginCustomer.customerId }">
 	<input type="hidden" id="Writer" value="${customDesign.customerId }">
+	<input type="text" id=Code value="${customDesign.customCode }">
 	
 	<!-- 댓글수정 모달창 -->
 	<div class="replyModal">
@@ -137,11 +141,13 @@
 		
 		$(function() {
 			getCommentList();
+			getpage();
 			/* getReplyList(); */
 			// ajax polling
 			// 타 회원이 댓글들을 작성했을 수도 있으므로 지속적으로 댓글 불러오기
 			setInterval(function(){
 				getCommentList();
+				getpage();
 			}, 50000);
 			
 			$("#cSubmit").on("click",function(){
@@ -175,6 +181,7 @@
 				data : {"customCode" : customCode},
 				dataType:"json",
 				success : function(data) {
+					console.log(data)
 					// db에 있는 데이터를 json형태로 가져와서
 					// 댓글 목록 테이블의 tbody에 넣어주어야 함.
 					
@@ -224,8 +231,32 @@
 						$tr.append($cContents); // <tr><td colspan='3'>등록된 댓글이 없습니다.</td></tr>
 						$tableBody.append($tr);
 					}
+					
 				}
-			});			
+			});
+		}
+		// 페이징
+		function getpage(){
+			var customCode = ${customDesign.customCode};
+			$.ajax({
+				url : "commentListt.na",
+				type : "get",
+				data : {"customCode" : customCode},
+				dataType:"json",
+				success : function(data) {
+					console.log(data)
+					var customCode = $("#Code").val();
+					var $tableBody = $("#ctb tfoot");
+					$tableBody.html("");
+					var $tr = $("<tr align='center' height='20'>");
+					
+					
+					
+					$tableBody.append($tr);
+					
+					
+				}
+			});
 		}
 		// 댓글 수정 뷰
 		$(document).on("click",".modify",function(){

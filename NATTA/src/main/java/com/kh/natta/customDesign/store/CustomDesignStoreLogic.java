@@ -1,6 +1,8 @@
 package com.kh.natta.customDesign.store;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -63,8 +65,15 @@ public class CustomDesignStoreLogic implements CustomDesignStore{
 	}
 
 	@Override
-	public ArrayList<CustomComment> selectListComment(int customCode) {
-		return (ArrayList)sqlSession.selectList("CustomDesignMapper.selectListComment",customCode);
+	public ArrayList<CustomComment> selectListComment(int customCode,PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", offset);
+		map.put("pi.getBoardLimit()", pi.getBoardLimit());
+		map.put("customCode", customCode);
+		
+		return (ArrayList)sqlSession.selectList("CustomDesignMapper.selectListComment",map);
 	}
 
 	@Override
@@ -92,6 +101,11 @@ public class CustomDesignStoreLogic implements CustomDesignStore{
 		int result = sqlSession.selectOne("CustomDesignMapper.getListCount");
 		System.out.println(result);
 		 return result;
+	}
+
+	@Override
+	public int getListCountComment(int customCode) {
+		return sqlSession.selectOne("CustomDesignMapper.getListCountComment",customCode);
 	}
 
 }

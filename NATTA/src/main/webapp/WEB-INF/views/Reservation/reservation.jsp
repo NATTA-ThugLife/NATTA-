@@ -10,6 +10,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a8e5007416460a5bee56aaba2bb1ea6d&libraries=services"></script>
+   
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+ 
 <style>
 	#preview  img{
 	width : 350px; 
@@ -89,8 +94,11 @@
 				<br><br><br>
 				
 				
+				  
+				<p>Date: <input type="text" name="reservationDate" id="datepicker"></p>
 				
-				<input type="date" name="reservationDate">
+				<!-- <input type="text" id="datepicker" name="reservationDate"> -->
+				
 				<br><br><br><br><br><br>
 				<div align="center">
 				<div id="map" style=" width: 350px; height: 350px; margin-top: 10px;">
@@ -105,7 +113,9 @@
 				<input type="button" id="upfile" value="도안업로드">
 				<input type="file" id="upload" name="upload" style="display:none">
 				
-						
+				<c:forEach items="${reservationDate }" var="reservation">
+				<input type="hidden" class="rDate" value="${reservation}">
+				</c:forEach>
 				
 				
 				<br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -114,6 +124,7 @@
 				<input id="btnr" type="submit" value="예약하기">
 			</form>
 		</article>
+		
 		<script>
 			$("#upfile").click(function(){
 				$("#upload").trigger('click');
@@ -145,6 +156,56 @@
 		 
 		        preview.appendChild(image);
 		    })
+		</script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script>
+		var reservationDate = new Array();
+		$(".rDate").each(function(index,item){
+			reservationDate.push($(item).val());
+		 });
+		
+		
+		jQuery(function($){	
+		$("#datepicker").datepicker({
+			changeMonth:true,
+			changeYear:true,
+			showOn:"both",
+			buttonImage:"resources/images/reservationImages/clock.jpg",
+			buttonImageOnly:true,
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths: true,
+			selectOtherMonths: true,
+			showMonthAfterYear: true,
+			dayNamesMin: ['일','월', '화', '수', '목', '금', '토'],
+			monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			monthNames: ['년 1월','년 2월','년 3월','년 4월','년 5월','년 6월','년 7월','년 8월','년 9월','년 10월','년 11월','년 12월'],
+			nextText: '다음 달',
+			prevText: '이전 달',
+			beforeShowDay: disableAllTheseDays 
+				});
+				 
+			});
+			
+			// 특정날짜들 배열
+			var disabledDays = reservationDate;
+			/* var disabledDays = ["2020-12-9","2020-12-24","2020-12-26"];
+			console.log(disabledDays) */
+		
+			// 특정일 선택막기
+			function disableAllTheseDays(date) {
+				var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+				for (i = 0; i < disabledDays.length; i++) {
+					if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+						return [false];
+					}
+				}
+				return [true];
+			}		
+
+			$(function() {
+				$("#datepicker").datepicker();
+			});
 		</script>
 		<script>
 		
@@ -179,13 +240,9 @@
 		<script>
 		$("#tattooSize").change(function() {
 			var price = $("#tattooSize").val();
-			console.log(price)
 			var i = price.indexOf(",");
-			console.log(i)
 			var a = price.substr(0,i);
-			console.log(a)
 			var b = price.substr(i+1,price.length);
-			console.log(b)
 		
 			$("#price").attr("value",a);
 

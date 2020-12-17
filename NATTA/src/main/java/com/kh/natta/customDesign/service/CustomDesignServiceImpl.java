@@ -48,8 +48,8 @@ public class CustomDesignServiceImpl  implements CustomDesignService{
 	}
 
 	@Override
-	public ArrayList<CustomComment> selectListComment(int customCode) {
-		return store.selectListComment(customCode);
+	public ArrayList<CustomComment> selectListComment(int customCode,PageInfo pi) {
+		return store.selectListComment(customCode,pi);
 	}
 
 	@Override
@@ -75,6 +75,11 @@ public class CustomDesignServiceImpl  implements CustomDesignService{
 	@Override
 	public int getListCount() {
 		return store.getListCount();
+	}
+
+	@Override
+	public int getListCountComment(int customCode) {
+		return store.getListCountComment(customCode);
 	}
 
 }

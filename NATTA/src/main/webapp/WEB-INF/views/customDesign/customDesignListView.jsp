@@ -63,13 +63,15 @@
 					<!-- 이전 --> 
 					<c:if test="${pi.currentPage <= 1 }">
 					[이전]&nbsp;
-				</c:if> <c:if test="${pi.currentPage >1 }">
+					</c:if> 
+					<c:if test="${pi.currentPage >1 }">
 						<c:url var="before" value="customDesignList.na">
 							<c:param name="page" value="${pi.currentPage -1 }"></c:param>
 						</c:url>
 						<a href="${before }">[이전]</a>
-					</c:if> <!-- 페이지 --> <c:forEach var="p" begin="${pi.startPage }"
-						end="${pi.endPage }">
+					</c:if> 
+					<!-- 페이지 --> 
+					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
 						<c:url var="pagination" value="customDesignList.na">
 							<c:param name="page" value="${p }"></c:param>
 						</c:url>
@@ -79,14 +81,17 @@
 						<c:if test="${p ne pi.currentPage }">
 							<a href="${pagination }">${p }</a>
 						</c:if>
-					</c:forEach> <!-- 다음 --> <c:if test="${pi.currentPage >= pi.maxPage }">
+					</c:forEach> 
+					<!-- 다음 --> 
+					<c:if test="${pi.currentPage >= pi.maxPage }">
 					[다음]&nbsp;
-				</c:if> <c:if test="${pi.currentPage < pi.maxPage }">
+					</c:if> 
+					<c:if test="${pi.currentPage < pi.maxPage }">
 						<c:url var="after" value="customDesignList.na">
 							<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 						</c:url>
 						<a href="${after }">[다음]</a>&nbsp;
-				</c:if>
+					</c:if>
 				</td>
 			</tr>
 

@@ -21,7 +21,7 @@ public interface CustomDesignService {
 	
 	public int insertCustomComment(CustomComment customComment);
 	
-	public ArrayList<CustomComment> selectListComment(int customCode);
+	public ArrayList<CustomComment> selectListComment(int customCode,PageInfo pi);
 	
 	public int modifyCustomComment(CustomComment customComment);
 	
@@ -32,4 +32,6 @@ public interface CustomDesignService {
 	public int addHits(int customCode);
 	
 	public int getListCount();
+	
+	public int getListCountComment(int customCode);
 }

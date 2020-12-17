@@ -296,15 +296,41 @@ public class CustomDesignController {
     // 댓글 조회
     @ResponseBody
     @RequestMapping(value="commentList.na", method=RequestMethod.GET)
-    public void getCommentList(HttpServletResponse response, int customCode)throws Exception{
-    	ArrayList<CustomComment> ccList = cService.selectListComment(customCode);
+    public void getCommentList(HttpServletResponse response, int customCode,@RequestParam(value="page", required=false) Integer page)throws Exception{
     	
+    	int currentPage = (page != null) ? page : 1;
     	
+    	int listCount = cService.getListCountComment(customCode);
+    	
+    	PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+    	ArrayList<CustomComment> ccList = cService.selectListComment(customCode,pi);
+    	
+    	System.out.println(pi);
     	for(CustomComment c : ccList) {
     		c.setcContents(URLEncoder.encode(c.getcContents(),"utf-8"));
     	}
     	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
     	gson.toJson(ccList,response.getWriter());
+    	PrintWriter out = response.getWriter();
+    }
+    // 페이징
+    @ResponseBody
+    @RequestMapping(value="commentListt.na", method=RequestMethod.GET)
+    public void getCommentListt(HttpServletResponse response, int customCode,@RequestParam(value="page", required=false) Integer page)throws Exception{
+    	
+    	int currentPage = (page != null) ? page : 1;
+    	
+    	int listCount = cService.getListCountComment(customCode);
+    	
+    	PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+    	ArrayList<CustomComment> ccList = cService.selectListComment(customCode,pi);
+    	
+    	System.out.println(pi);
+    	for(CustomComment c : ccList) {
+    		c.setcContents(URLEncoder.encode(c.getcContents(),"utf-8"));
+    	}
+    	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+    	gson.toJson(pi,response.getWriter());
     	PrintWriter out = response.getWriter();
     }
     

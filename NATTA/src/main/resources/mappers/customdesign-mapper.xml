@@ -106,6 +106,10 @@
 		WHERE CUSTOM_C_CODE=#{customCCode}
 	</delete>
 	
-	
+	<select id="getListCountComment" resultType="int">
+		SELECT COUNT(*)
+		FROM CUSTOM_COMMENT
+		WHERE CUSTOM_CODE = #{customCode}
+	</select>
 	
 </mapper>

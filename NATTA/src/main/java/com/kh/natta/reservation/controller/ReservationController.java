@@ -2,8 +2,11 @@ package com.kh.natta.reservation.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,26 +39,45 @@ public class ReservationController {
 	@Autowired
 	private ReservationService rService;
 	
+	
+	
 		@RequestMapping(value="reservation.na",method=RequestMethod.GET)
-		public  String reservation(String artistId, Model model) {
+		public  String reservation(String artistId, Model model,HttpServletResponse response) throws Exception {
 			ArtistInfo infoPage = infoService.selectOneArtistInfo(artistId);
 			Artist artist = rService.selectOneArtist(artistId);
 			ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);	
 			ArrayList<Reservation> date = rService.selectListDate(artistId);
 			System.out.println(date);
+			ArrayList<String> reservedList = new ArrayList<String>();
 			
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+			for ( Reservation reserve : date) {
+				int year = reserve.getReservationDate().getYear()+1900;
+				int month = reserve.getReservationDate().getMonth()+1;
+				int day = reserve.getReservationDate().getDay();
+				String rDate = year + "-" + month + "-" + day;
+				reservedList.add(rDate);
+			}
+			System.out.println(reservedList.toArray(new String[reservedList.size()])[0]);
+			model.addAttribute("reservationDate", reservedList.toArray(new String[reservedList.size()]));
 			model.addAttribute("priceList",priceList);
 			model.addAttribute("artist",artist);
 			model.addAttribute("artistInfo",infoPage);
-			model.addAttribute("date",date);
 			return "Reservation/reservation";
 		}
 		
 		// 예약 등록
 		@RequestMapping(value="reservation.na",method=RequestMethod.POST)
-		public String reservationInsert(Reservation reservation,Model model,HttpServletRequest request,
+		public String reservationInsert(Reservation reservation,String tattooSize,Model model,HttpServletRequest request,
 										@RequestParam(name="upload",required=false)MultipartFile uploadFile){
-
+			
+			String size = tattooSize.substring(tattooSize.indexOf(",")+1,tattooSize.length());
+			System.out.println(size);
+			
+			reservation.setTattooSize(size);
+			
+			System.out.println(reservation);
+			
 			if(!uploadFile.getOriginalFilename().equals("")) {
 				String renameFilename = saveFile(uploadFile,request);
 				if(renameFilename != null) {
@@ -119,6 +141,8 @@ public class ReservationController {
 			gson.toJson(sizeList,response.getWriter());
 			
 		}
+		
+		
 		
 		
 		
