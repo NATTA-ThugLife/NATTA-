@@ -19,6 +19,7 @@
   <link href="resources/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="resources/assets/vendor/venobox/venobox.css" rel="stylesheet">
   <link href="resources/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
 
   <!-- Template Main CSS File -->
   <link href="resources/assets/css/style.css" rel="stylesheet">
@@ -31,8 +32,18 @@
 <style>
    header {
       height: 180px;
-   }	
+   }
+ 
+ .modify{
+  background: green;
+  border: 0;
+  padding: 10px 35px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;	
+ }    
  </style>
+ 
 </head>
 
 <body>
@@ -296,7 +307,7 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
         <div class="row">
 		<c:if test="${empty fList}">
 		  <div class="testimonial-item">
- 				&nbsp;&nbsp;&nbsp; 등록된 리뷰가 없습니다.
+ 				&nbsp;&nbsp;&nbsp; 팔로잉한 사람이 없습니다.
           </div>
 		</c:if>
 		<c:if test="${!empty fList }">
@@ -365,51 +376,180 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 	</section> 
 	<!-- ======= 팔로잉 끝 ======= -->
 
-	
-  <!-- ======= 리뷰 세션 ======= -->
-      <section id="review" class="testimonials section-bg">
-     
+    <!-- ======= 리뷰 ======= -->
+    <section id="review" class="specials">
       <div class="container" data-aos="fade-up">
+
         <div class="section-title">
           <h2>My</h2>
           <p>Review</p>
         </div>
-			<c:if test="${empty rList }">
-				등록된 리뷰가 없습니다.
-			</c:if>
-			
-			<c:if test="${!empty rList }">
-				<c:forEach items="${rList }" var="review">
-				<div class="testimonial-item">
-		            <p>
-	            		<c:if test="${review.reviewPhoto ne null}">
-	            			<img src="resources/artistProfile/${review.reviewPhoto }" alt="" style="width:200px; height:250px;">
-	            		</c:if>
-		           	 <br>
-		              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-		              	${review.reviewContents }
-		              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-		              
-		            </p>
-		            	<c:if test="${review.myReProfile ne null }">
-		            		<img src="resources/artistProfile/${review.myReProfile}" class="testimonial-img" alt=""  style="margin-left: 15px auto; display: block; width: 100px; height:100px; border: 8px solid #2c2f3f;">
-        				</c:if>
-        				
-        				<!-- 기본이미지로 바꿀것. -->
-        				<c:if test="${review.myReProfile ne null }">
-        					<img src="resources/artistProfile/${review.myReProfile}" class="testimonial-img" alt=""  style="margin-left: 15px auto; display: block; width: 100px; height:100px; border: 8px solid #2c2f3f;">
-        				</c:if>
-		            <h3> ${review.artistId }</h3>
-		            <h4> ${review.name }</h4>
-		        </div>
-				</c:forEach>
-			</c:if>
-        </div>
 
+				
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-3">
+            <ul class="nav nav-tabs flex-column">
+            	<c:forEach items="${rList }" var="review" varStatus="status">
+            	 	<c:if test="${status.index eq 0 }">
+            	 	<li class="nav-item">
+            	 		<a class="nav-link active show" data-toggle="tab" href="#tab-${review.reviewCode }">${status.index + 1 }번째 리뷰 <span>&nbsp;&nbsp;&nbsp;&nbsp;<button class="modify active btn-sm" data-toggle="modal" data-target="#modifyReview">수정</button> &nbsp;&nbsp;&nbsp;<button class="modify active btn-sm">삭제</button></span></a> 
+            	 	</li>
+            	 	</c:if>
+            		<c:if test="${status.index ne 0 }">
+            		<li class="nav-item">
+            	 		<a class="nav-link" data-toggle="tab" href="#tab-${review.reviewCode }">${status.index + 1 }번째 리뷰 <span>&nbsp;&nbsp;&nbsp;&nbsp;<button class="modify btn-sm" data-toggle="modal" data-target="#modifyReview">수정</button> &nbsp;&nbsp;&nbsp;<button class="modify btn-sm">삭제</button></span></a>
+            	 	</li>
+            	 	</c:if>
+            	</c:forEach>
+            </ul>
+          </div>
+
+          <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="tab-content">
+              <c:forEach items="${rList }" var="review" varStatus="status">
+	              <c:if test="${status.index eq 0 }">
+		              <div class="tab-pane active show" id="tab-${review.reviewCode }">
+		                <div class="row">
+		                  <div class="col-lg-8 details order-2 order-lg-1">
+		                  	<div id="star${review.reviewCode }">
+		                  		<span style="color:yellow" id="grade1"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:yellow" id="grade2"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:yellow" id="grade3"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:yellow" id="grade4"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:yellow" id="grade5"><i class="far fa-star fa-2x"></i></span>
+		                  	</div>
+		                  	<script>
+								 $(function(){
+									 $("#star${review.reviewCode }").children("#grade${review.reviewStar}").prevAll().children().attr("class","fas fa-star fa-2x");
+									 $("#star${review.reviewCode }").children("#grade${review.reviewStar}").children().attr("class","fas fa-star fa-2x");
+								 }) 
+							 </script>
+		                  	<br>
+		                    <h5>${review.reviewContents }</h5>
+		                  </div>
+		                  <div class="col-lg-4 text-center order-1 order-lg-2">
+		                  	<!-- 경로 나중에 바꿔주기 -->
+		                  	<c:if test="${review.reviewPhoto ne null}">
+		                  	  <img src="resources/artistProfile/${review.reviewPhoto }" alt="" class="img-fluid">
+		                    </c:if>
+		                  </div>
+		                </div>
+		              </div>
+	              </c:if>
+	              <c:if test="${status.index ne 0 }">
+	              	  <div class="tab-pane" id="tab-${review.reviewCode }">
+		                <div class="row">
+		                  <div class="col-lg-8 details order-2 order-lg-1">
+		                  	<div id="star${review.reviewCode }">
+		                  		<span style="color:yellow" id="grade1"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:yellow" id="grade2"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:yellow" id="grade3"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:yellow" id="grade4"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:yellow" id="grade5"><i class="far fa-star fa-2x"></i></span>
+		                  	</div>
+							 <script>
+								 $(function(){
+									 $("#star${review.reviewCode }").children("#grade${review.reviewStar}").prevAll().children().attr("class","fas fa-star fa-2x");
+									 $("#star${review.reviewCode }").children("#grade${review.reviewStar}").children().attr("class","fas fa-star fa-2x");
+								 }) 
+							 </script>
+		                  	<br>
+		                    <h5>${review.reviewContents }</h5>
+		                  </div>
+		                  <div class="col-lg-4 text-center order-1 order-lg-2">
+		                  	<!-- 경로 나중에 바꿔주기 -->
+		                  	<c:if test="${review.reviewPhoto ne null}">
+		                  	  <img src="resources/artistProfile/${review.reviewPhoto }" alt="" class="img-fluid">
+		                    </c:if>
+		                  </div>
+		                </div>
+		              </div>
+	              </c:if>
+              </c:forEach>
+           </div>
+		 </div>
+       </div>
+		<script>
+		$(function(){
+				 $(".modify").hide();
+				 $(".active").show();
+				})
+						
+			$(".nav-item").on("click",function(){
+				$(".modify").hide();
+				$(this).find("span").children().show();
+			});
+		</script>																																																																																		/div>
     </section>
-    <!-- 리뷰끝!ㄴ -->
+    <!-- 리뷰 끝 -->
 
-    <!-- ======= Specials Section ======= -->
+ 
+
+		<!-- 리뷰 수정 모달 -->
+		<div class="modal fade" id="modifyReview" tabindex="-1" role="dialog"
+			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
+				<!-- 센터모달창 추가  modal-dialog-centered -->
+				<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
+					<div class="modal-header">
+						<h5 class="modal-title" id="TEST">
+							<b>리뷰 정보</b>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body book-a-table">
+						<form action="InsertArtistInfo.na" 
+						method="post" role="form" class="php-email-form modalActionCheck" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
+				          <div>
+				         	<!-- 타투샵이름 -->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              ARTIST SHOP NAME 
+				              <input type="text" value="" name="name" class="form-control artistShopName" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="1글자 이상 입력해주세요.">
+				              <div class="validate"></div>
+				            </div>
+				            <!-- 프로필사진 업로드-->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              MY PROFILE 
+				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile"> 
+				            </div>
+				            <!-- 자기소개  -->
+				            <div class="form-group">
+				               INFO 
+				               <textarea class="form-control artistmodalInfo" name="myInfo" cols="600" rows="5"  placeholder="Your Info" style="resize: none;"></textarea>
+				               <div class="validate"></div>
+				            </div>				            				            
+				          </div>
+				          <div class="mb-3">
+				            <div class="loading">Loading</div>
+				          </div>
+				          <div class="text-center"><button type="submit" class="artistInfoButton"></button></div>
+				        </form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- 리뷰 수정 모달 끝-->
+  	<footer>
+		 <jsp:include page="../common/footer.jsp"/>  	 
+  	</footer>
+</body>
+
+			<script>
+			$(function() {
+					$(".address").postcodifyPopUp();
+				})
+		</script>
+</html>
+
+
+ 
+<!--      ======= Specials Section =======
     <section id="specials" class="specials">
       <div class="container" data-aos="fade-up">
 
@@ -539,9 +679,7 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
         </div>
 
       </div>
-    </section><!-- End Specials Section -->
-
- 
+    </section>End Specials Section -->
     <!-- ======= Contact Section ======= -->
  <!--    <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
@@ -717,15 +855,3 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 				</div>
 			</div>
 		</div> 		 --%>
-
-  	<footer>
-		 <jsp:include page="../common/footer.jsp"/>  	 
-  	</footer>
-</body>
-
-			<script>
-			$(function() {
-					$(".address").postcodifyPopUp();
-				})
-		</script>
-</html>
