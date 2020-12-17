@@ -24,6 +24,21 @@ public class ArtistWorkStoreLogic implements ArtistWorkStore {
 	public int insertArtistWork(ArtistWork work) {
 		return sqlSession.insert("ArtistWorkMapper.insertArtistWork", work);
 	}
+
+	@Override
+	public int deleteArtistWork(int workCode) {
+		return sqlSession.delete("ArtistWorkMapper.deleteArtistWork", workCode);
+	}
+
+	@Override
+	public int updateArtistWork(ArtistWork work) {
+		return sqlSession.update("ArtistWorkMapper.updateArtistWork", work);
+	}
+
+	@Override
+	public ArtistWork selectArtistWork(int workCode) {
+		return sqlSession.selectOne("ArtistWorkMapper.selectArtistWork", workCode);
+	}
 	
 	
 }

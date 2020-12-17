@@ -3,13 +3,20 @@
 <mapper namespace="ArtistWorkMapper">
 
 	 <resultMap type="ArtistWork" id="artistWorkMap">
+	 	<result property="workCode" column="WORK_CODE"/>
 	 	<result property="workImgPath" column="WORK_IMGPATH"/>
 	 	<result property="workReImgPath" column="WORK_REIMGPATH"/>
 	 	<result property="workInfo" column="WORK_INFO"/>
 	 	<result property="workStyle" column="WORK_STYLE"/>
 	 	<result property="artistId" column="ARTIST_ID"/>
 	 </resultMap>
-	
+	 
+	<update id="updateArtistWork">
+		UPDATE WORK 
+		SET WORK_IMGPATH = #{workImgPath}, WORK_REIMGPATH = #{workReImgPath}, 
+			WORK_INFO = #{workInfo}, WORK_STYLE = #{workStyle}, WORK_MODIFYDATE = SYSDATE
+		WHERE WORK_CODE = #{workCode}
+	</update>	
 	
 	<select id="selectOneArtist" resultMap="artistWorkMap">
 		SELECT * FROM WORK 
@@ -20,4 +27,16 @@
 		INSERT INTO WORK
 		VALUES(WORK_SEQ.NEXTVAL, #{workImgPath}, #{workReImgPath}, #{workInfo}, #{workStyle}, SYSDATE, SYSDATE, #{artistId})
 	</insert>
+	
+	<delete id="deleteArtistWork">
+		DELETE 
+		FROM WORK
+		WHERE WORK_CODE = #{workCode}
+	</delete>
+	
+	<select id="selectArtistWork" resultMap="artistWorkMap">
+		SELECT * FROM WORK
+		WHERE WORK_CODE = #{workCode}
+	</select>
+	
 </mapper>

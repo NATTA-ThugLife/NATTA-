@@ -20,4 +20,22 @@ public interface ArtistWorkStore {
 	 * @return
 	 */
 	public int insertArtistWork(ArtistWork work);
+	
+	/**
+	 * 아티스트 작품 삭제
+	 * @param workCode
+	 * @return
+	 */
+	public int deleteArtistWork(int workCode);
+	
+	/**
+	 * 아티스트 작품 수정
+	 * @param workCode
+	 * @return
+	 */
+	public int updateArtistWork(ArtistWork work);
+	
+	
+	public ArtistWork selectArtistWork(int workCode);
+	
 }
