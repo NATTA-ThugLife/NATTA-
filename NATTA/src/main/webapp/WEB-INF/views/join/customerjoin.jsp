@@ -75,6 +75,7 @@ span.error {
 							<td>아이디</td>
 							<td><input type="text" name="customerId" id="customerId" required>
 						        <input type="button" value="중복 확인" onclick="checkDuplicate();">
+						        <input type="hidden" id="idDuplicateCheck" value="0">
 						    </td>
 						</tr>
 						<tr>
@@ -107,8 +108,9 @@ span.error {
 						</tr>
 						<tr>
 							<td>이메일</td>
-							<td><input type="email" name="email" required>
+							<td><input type="email" name="email" id="email" required>
 							    <input type="button" value="중복 확인" onclick="checkEmail();">
+							    <input type="hidden" id="emailDuplicateCheck" value="0">
 							</td>
 						</tr>
 						<tr>
@@ -119,7 +121,7 @@ span.error {
 						</tr>
 						<tr>
 							<td>도로명 주소</td>
-							<td><input type="text" name="address" class="postcodify_address" readonly></td>
+							<td><input type="text" name="address" id="address" class="postcodify_address" readonly></td>
 						</tr>
 						<tr>
 							<td>상세 주소</td>
@@ -144,11 +146,12 @@ span.error {
 			</table>
 			
 					<table align="center" id="artistRegister" style="display:none;">
-					<form action="artistRegister.na" method="post" id="artistRegister">
+					<form action="artistRegister.na" method="post" id="artistRegister" enctype="multipart/form-data">
 						<tr>
 							<td>아이디</td>
 							<td><input type="text" name="artistId" id="artistId" required>
 								<input type="button" value="중복 확인" onclick="checkDuplicate2();">
+								<input type="hidden" id="idDuplicateCheck2" value="0">
 						    </td>
 						</tr>
 						<tr>
@@ -181,8 +184,9 @@ span.error {
 						</tr>
 						<tr>
 							<td>이메일</td>
-							<td><input type="email" name="email" required>
+							<td><input type="email" name="email2" id="email2" required>
 							    <input type="button" value="중복 확인" onclick="checkEmail2();">
+							    <input type="hidden" id="emailDuplicateCheck2" value="0">
 							</td>
 						</tr>
 
@@ -194,7 +198,7 @@ span.error {
 						</tr>
 						<tr>
 							<td>도로명 주소</td>
-							<td><input type="text" name="workAddress" class="postcodify_address" readonly></td>
+							<td><input type="text" name="workAddress" id="workAddress" class="postcodify_address" readonly></td>
 						</tr>
 						<tr>
 							<td>상세 주소</td>
@@ -216,7 +220,7 @@ span.error {
 						</tr><tr><td><hr></td></tr>
 						<tr>
 							<td colspan="2" align="center">
-								<button id="join" onclick="return validate();">가입하기</button>
+								<button id="join2" onclick="return validate2();">가입하기</button>
 							</td>
 						</tr>
 						</form>
@@ -231,7 +235,7 @@ span.error {
 
 	<script>
 	
-	//회원/아티스트 체크
+	//회원/아티스트 선택
 	    function setDisplay(){
 	    if($('#customerJoin').is(':checked')){
 	        $('#customerRegister').attr("action","customerRegister.na")	
@@ -245,7 +249,7 @@ span.error {
 	}		
 
  	    function validate() {
-			if($("#checkDuplicate").val(0)){
+			if($("#idDuplicateCheck").val() == 0){
 				alert("아이디 중복 확인을 해주세요.")
 				$("#customerId").focus();
 				return false;
@@ -254,17 +258,40 @@ span.error {
 				alert('비밀번호를 동일하게 입력해주세요.');
 				return false;
 			 }
-			if(!$("#address").val()){
-				alert('주소를 검색해주세요.');
+			if($("#emailDuplicateCheck").val() == 0){
+				alert("이메일 중복 확인을 해주세요.");
 				return false;
-			} 
-			
-			
+			} 	
+			if($("#address").val() == ""){
+				alert("주소를 검색해주세요.");
+				return false;
+			} 			
 			else {
-				alert("회원가입 성공??")
 				return true;
 			}
 		}
+ 	    
+ 	    
+  	   function validate2() {
+ 		  if($("#idDuplicateCheck2").val() == 0){
+				alert("아이디 중복 확인을 해주세요.")
+				$("#artistId").focus();
+				return false;
+			} if($("#pwd3").val() != $("#pwd4").val()){
+				alert('비밀번호를 동일하게 입력해주세요.');
+				return false;
+			}if($("#emailDuplicateCheck2").val() == 0){
+				alert("이메일 중복 확인을 해주세요.");
+				return false;				
+			}if($("#workAddress").val() == ""){
+				alert('주소를 검색해주세요.');
+				return false;
+			}
+			else {
+				return true;
+			}
+		} 
+
 		
 	
 		//아이디 중복 검사 -회원
@@ -282,19 +309,21 @@ span.error {
 				success : function(result) {
 					if(result == "true"){
 						alert("사용 가능한 ID입니다");
+						$("#idDuplicateCheck").val(1);
 					}else if (result == "false"){
 						alert("중복된 ID입니다");
+						$("#idDuplicateCheck").val(0);
 					}
 				} 
 			});
 		}; 
 		
  		//아이디 중복 검사 -아티스트
-		$("#artistId").on("blur",function(){			
-			var artistId = $(this).val();			
+ 		function checkDuplicate2() {			
+			var artistId = $("#artistId").val();			
 			if(artistId.length < 4){
 				$(".guide").hide();
-				$("#idDuplicateCheck").val(0);
+				$("#idDuplicateCheck2").val(0);
 				alert("4글자 미만입니다.");
 				return;
 			}
@@ -304,12 +333,14 @@ span.error {
 				success : function(result) {
 					if(result == "true"){
 						alert("사용 가능한 ID입니다");
+						$("#idDuplicateCheck2").val(1);
 					}else if (result == "false"){
 						alert("중복된 ID입니다");
+						$("#idDuplicateCheck2").val(0);
 					}
 				}
 			});
-		}); 
+		};  
 		
 		//비밀번호 확인 -회원
 		$(function(){
@@ -353,50 +384,51 @@ span.error {
 			});
 		}); 
  		
- 		
-		//이메일 중복 검사 -회원
-		function checkEmail() {
-			var customerId = $("#customerId").val();			
-			if(customerId.length < 4){
+ 		//이메일 중복 검사 -회원
+ 		function checkEmail() {
+			var email = $("#email").val();	
+			if(email == ""){
 				$(".guide").hide();
-				$("#idDuplicateCheck").val(0);
-				alert("4글자 미만입니다.");
+				$("#emailDuplicateCheck").val(0);
 				return;
 			}
 			$.ajax({
-				url : "dupId.na",
-				data : {"customerId" : customerId},
+				url : "dupEmail.na",
+				data : {"email" : email},
 				success : function(result) {
 					if(result == "true"){
-						alert("사용 가능한 ID입니다");
+						alert("사용 가능한 Email입니다");
+						$("#emailDuplicateCheck").val(1);
 					}else if (result == "false"){
-						alert("중복된 ID입니다");
+						alert("중복된 Email입니다");
+						$("#emailDuplicateCheck").val(0);
 					}
 				} 
 			});
-		}; 
+		};   
 		
-		//이메일 중복 검사 -아티스트
+ 		//이메일 중복 검사 -아티스트
 		function checkEmail2() {
-			var customerId = $("#customerId").val();			
-			if(customerId.length < 4){
+			var email2 = $("#email2").val();			
+			if(email2 == ""){
 				$(".guide").hide();
-				$("#idDuplicateCheck").val(0);
-				alert("4글자 미만입니다.");
+				$("#emailDuplicateCheck2").val(0);
 				return;
 			}
 			$.ajax({
-				url : "dupId.na",
-				data : {"customerId" : customerId},
+				url : "artistdupEmail.na",
+				data : {"email2" : email2},
 				success : function(result) {
 					if(result == "true"){
-						alert("사용 가능한 ID입니다");
+						alert("사용 가능한 email입니다");
+						$("#emailDuplicateCheck2").val(1);
 					}else if (result == "false"){
-						alert("중복된 ID입니다");
+						alert("중복된 email입니다");
+						$("#emailDuplicateCheck2").val(0);
 					}
 				} 
 			});
-		}; 
+		};  
 		
 	</script>
 

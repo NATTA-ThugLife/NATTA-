@@ -18,12 +18,17 @@
 	
 	<insert id="insertArtist">
 		INSERT INTO ARTIST
-	 	VALUES (#{artistId},#{password},#{password2},#{artistName},#{age},#{gender},#{phone},#{email},#{workAddress},SYSDATE,#{businessNo},#{enrollStatus})
+	 	VALUES (#{artistId},#{password},#{password2},#{artistName},#{age},#{gender},#{phone},#{email2},#{workAddress},SYSDATE,#{businessNo},#{enrollStatus})
 	</insert>
 	 
 	 <select id="checkIdDup" resultType="int">
 	 	SELECT COUNT(*) FROM ARTIST
 	 	WHERE ARTIST_ID = #{artistId}
+	 </select>
+	 
+	 <select id="checkEmailDup" resultType="int">
+	 	SELECT COUNT(*) FROM ARTIST
+	 	WHERE Email = #{email2}
 	 </select>
 	
 	<select id="selectOneArtist" resultMap="artistResultMap">

@@ -24,14 +24,27 @@
 	 	WHERE CUSTOMER_ID = #{customerId}
 	 </select>
 	 
+	 <select id="checkEmailDup" resultType="int">
+	 	SELECT COUNT(*) FROM CUSTOMER
+	 	WHERE Email = #{email}
+	 </select>
+	 
+	 <!-- id 찾기 -->
 	 <select id="selectTwo" resultMap="customerResultMap">
 		SELECT * FROM CUSTOMER
 		WHERE CUSTOMER_NAME=#{customerName} AND EMAIL=#{email}
 	</select>
 	
+	<!-- pwd 찾기 -->
 	<select id="selectThree" resultMap="customerResultMap">
 		SELECT * FROM CUSTOMER
 		WHERE CUSTOMER_ID=#{customerId} AND CUSTOMER_NAME=#{customerName} AND EMAIL=#{email}
 	</select>
+	
+	<!-- 비밀번호 변경 -->
+<!-- 	<update id="update_pw"> parameterType="CUSTOMER"??
+	    UPDATE CUSTOMER SET PASSWORD = #{password}
+	    WHERE CUSTOMER_ID = #{customerId} AND CUSTOMER_NAME=#{customerName} AND EMAIL=#{email}
+	</update>  -->
 	
 </mapper>

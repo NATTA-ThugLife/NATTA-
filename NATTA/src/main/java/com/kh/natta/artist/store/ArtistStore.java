@@ -6,8 +6,12 @@ public interface ArtistStore {
 	
 	public Artist selectOneArtist(Artist artist);
 	
-	 public int checkIdDup(String artistId); 
+	public int checkIdDup(String artistId); 
+	 
+	public int checkEmailDup(String email2);
 	
 	public int insertArtist(Artist artist);
+
+	
 
 }

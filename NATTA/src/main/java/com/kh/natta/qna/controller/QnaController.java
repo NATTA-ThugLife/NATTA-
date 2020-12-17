@@ -72,6 +72,7 @@ public class QnaController {
 		public  String qnaWriteForm() {
 			return "qna/qnaWriteForm";
 		}		
+		
 	//qna 작성
 		@RequestMapping(value="qnaInsert.na", method=RequestMethod.POST)
 		public String QnaInsert(Qna Qna, Model model, HttpServletRequest request) {
@@ -146,12 +147,12 @@ public class QnaController {
 	// 댓글 전체 조회
 	@RequestMapping(value="QnaCommentList.na", method=RequestMethod.GET)
 	public void getQnaCommentList(HttpServletResponse response, int qnaCode) throws Exception{
-		ArrayList<QnaComment> rList = qService.selectQnaCommentList(qnaCode);
-		for(QnaComment r : rList) {
-			r.setQcContents(URLEncoder.encode(r.getQcContents(),"utf-8"));
+		ArrayList<QnaComment> qcList = qService.selectQnaCommentList(qnaCode);
+		for(QnaComment qc : qcList) {
+			qc.setQcContents(URLEncoder.encode(qc.getQcContents(),"utf-8"));
 		}
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create(); 
-		gson.toJson(rList, response.getWriter());
+		gson.toJson(qcList, response.getWriter());
 		PrintWriter out = response.getWriter();
 		
 	}

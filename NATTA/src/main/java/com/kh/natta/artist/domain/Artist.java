@@ -11,11 +11,13 @@ public class Artist {
 	private int age;
 	private String gender;
 	private String phone;
-	private String email;
+	private String email2;
 	private String workAddress;
 	private Date enrollDate;
 	private String businessNo;
 	private int enrollStatus;	
+	private String originalFilename;
+	private String renameFilename;
 	
 	
 	public Artist(String artistId, String password) {
@@ -31,9 +33,10 @@ public class Artist {
 	}
 
 
-	public Artist(String artistId, String password, String password2, String artistname, int age, String gender, String phone, String email,
+	public Artist(String artistId, String password, String password2, String artistname, int age, String gender, String phone, String email2,
 			String workAddress, Date enrollDate, String businessNo,
-			int enrollStatus) {
+			int enrollStatus, String originalFilename,
+			String renameFilename) {
 		super();
 		this.artistId = artistId;
 		this.password = password;
@@ -42,18 +45,20 @@ public class Artist {
 		this.age = age;
 		this.gender = gender;
 		this.phone = phone;
-		this.email = email;
+		this.email2 = email2;
 		this.workAddress = workAddress;
 		this.enrollDate = enrollDate;
 		this.businessNo = businessNo;
 		this.enrollStatus = enrollStatus;
+		this.originalFilename = originalFilename;
+		this.renameFilename = renameFilename;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Artist [artistId=" + artistId + ", password=" + password + ", password2=" + password2 + ", artistName=" + artistName + ", age=" + age
-				+ ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", workAddress=" + workAddress + ", enrollDate=" + enrollDate + ", businessNo=" + businessNo + ", enrollStatus=" + enrollStatus + "]";
+				+ ", gender=" + gender + ", phone=" + phone + ", email2=" + email2 + ", workAddress=" + workAddress + ", enrollDate=" + enrollDate + ", businessNo=" + businessNo + ", enrollStatus=" + enrollStatus +  ", originalFilename=" + originalFilename + ", renameFilename=" + renameFilename +"]";
 	}
 
 
@@ -117,13 +122,13 @@ public class Artist {
 	}
 
 
-	public String getEmail() {
-		return email;
+	public String getemail2() {
+		return email2;
 	}
 
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setemail2(String email2) {
+		this.email2 = email2;
 	}
 
 	public String getWorkAddress() {
@@ -173,6 +178,26 @@ public class Artist {
 
 	public void setPassword2(String password2) {
 		this.password2 = password2;
+	}
+
+
+	public String getOriginalFilename() {
+		return originalFilename;
+	}
+
+
+	public void setOriginalFilename(String originalFilename) {
+		this.originalFilename = originalFilename;
+	}
+
+
+	public String getRenameFilename() {
+		return renameFilename;
+	}
+
+
+	public void setRenameFilename(String renameFilename) {
+		this.renameFilename = renameFilename;
 	}
 	
 	

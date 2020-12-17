@@ -70,6 +70,8 @@ rotate(
 </style>
 
 <title>로그인</title>
+
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
 	<header>
@@ -103,8 +105,7 @@ rotate(
 							</td>
 							<br>
 							<td>
-								<button id="button" class="btn btn-login"
-									style="margin-right: 30px;">로그인</button>
+								<button id="button" class="btn btn-login" style="margin-right: 30px;">로그인</button>
 							</td>
 
 						</tr>
@@ -130,6 +131,8 @@ rotate(
 										style="margin-right: 30px;">  --> 
 								<input data-target=".modal" data-toggle="modal" class="find1" id="button" type="button" onClick="location.href='findId.na'" value="ID 찾기" style="margin-left: 30px"> 
 								<input class="find2" id="button" type="button" onClick="location.href='findPwd.na'" value="PW 찾기" style="margin-left: 30px"> <!-- </form> -->
+								<br><br><a id="kakao-login-btn"></a>
+							<a href="http://developers.kakao.com/logout"></a>
 							</td>
 						</tr>
 					</table>
@@ -147,7 +150,19 @@ rotate(
 		    	$('#formId').attr("action","artistLogin.na")
 		    	$('#id').attr("name","artistId")
 		    }
-		}                    
+		}            
+		
+		Kakao.init('8dffdaf5568eceb8d7c16e4a8cd5eb67');
+		Kakao.Auth.createLoginButton({ 
+		   container: '#kakao-login-btn',
+		   success: function(authObj) {
+		      alert(JSON.stringify(authObj));
+		      },
+		      fail: function(err) {
+		         alert(JSON.stringify(err));
+		         }
+		      });
+
         </script>
 
 
