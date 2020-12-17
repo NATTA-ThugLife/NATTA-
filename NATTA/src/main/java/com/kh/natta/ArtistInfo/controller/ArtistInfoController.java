@@ -50,9 +50,12 @@ public class ArtistInfoController {
 	@RequestMapping(value="artistChecking.na", method=RequestMethod.POST)
 	public void artistIdCheck(HttpServletResponse response, String artistId) throws Exception {
 		ArtistInfo artistCheck = infoService.selectOneArtistInfo(artistId);
+		System.out.println(artistCheck);
 		if(artistCheck != null) {
 			artistCheck.setMyInfo(URLEncoder.encode(artistCheck.getMyInfo(), "utf-8"));
 			artistCheck.setName(URLEncoder.encode(artistCheck.getName(), "utf-8"));
+			artistCheck.setMyProfile(URLEncoder.encode(artistCheck.getMyProfile(), "utf-8"));
+			artistCheck.setMyReProfile(URLEncoder.encode(artistCheck.getMyReProfile(), "utf-8"));
 		}
 		Gson gson = new Gson();
 		gson.toJson(artistCheck,response.getWriter());

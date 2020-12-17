@@ -24,6 +24,21 @@ public class ArtistWorkServiceImpl implements ArtistWorkService {
 	public int insertArtistWork(ArtistWork work) {
 		return awStore.insertArtistWork(work);
 	}
+
+	@Override
+	public int deleteArtistWork(int workCode) {
+		return awStore.deleteArtistWork(workCode);
+	}
+
+	@Override
+	public int updateArtistWork(ArtistWork work) {
+		return awStore.updateArtistWork(work);
+	}
+
+	@Override
+	public ArtistWork selectArtistWork(int workCode) {
+		return awStore.selectArtistWork(workCode);
+	}
 	
 	
 }

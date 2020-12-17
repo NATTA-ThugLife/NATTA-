@@ -12,18 +12,7 @@
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
   <link href="resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-<!--     <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="resources/assets/vendor/php-email-form/validate.js"></script>
-  <script src="resources/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="resources/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="resources/assets/vendor/venobox/venobox.min.js"></script>
-  <script src="resources/assets/vendor/aos/aos.js"></script>
-  Template Main JS File
-  <script src="resources/assets/js/main.js"></script>   -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
 	header { height: 215px; }	
 	#header { height: 175px; }
@@ -177,8 +166,26 @@
 		                  <!-- <a href=""><i class="icofont-twitter"></i></a>
 		                  <a href=""><i class="icofont-facebook"></i></a>
 		                  <a href=""><i class="icofont-instagram"></i></a> -->
-		                  <a href="">작품예약하기</a>
-		                  <a href="resources/artistInfoFile/WorkFile/${ aWork.workReImgPath }" class="venobox" data-gall="gallery-item"><i class="icofont-linkedin"></i></a>
+		                  <a href="#" onclick="return confirm('예약하시겠습니까 ?')"><i class="icofont-basket"></i></a>
+		                  <a href="resources/artistInfoFile/WorkFile/${ aWork.workReImgPath }" class="venobox" data-gall="gallery-item"><i class="icofont-camera"></i></a>
+		                  
+		                  <c:url var="workUpdate" value="updateArtistWork.na">
+		                  	<c:param name="workCode" value="${ aWork.workCode }"/>
+		                  	<c:param name="workCode" value="${ aWork.artistId }"/>
+		                  </c:url>		           		                  
+		                  <c:url var="workDelete" value="deleteArtistWork.na">
+							<c:param name="workCode" value="${ aWork.workCode }"/>
+		                  	<c:param name="workImgPath" value="${ aWork.workImgPath }"/>
+		                  	<c:param name="workReImgPath" value="${ aWork.workReImgPath }"/>
+		                  	<c:param name="artistId" value="${ aWork.artistId }"/>
+		                  </c:url>
+		                  
+		                  <c:if test="${ artistPageId eq loginArtist.artistId }">
+		                 	<a href="#" data-toggle="modal"><i class="icofont-spanner updateWork" id="${ aWork.workCode }"></i></a>
+						<%--<a href="${ workUpdate }"><i class="icofont-spanner"></i></a> --%>
+		                  	<a href="${ workDelete }" onclick="return confirm('정말로 작품을 삭제하시겠습니까 ?');"><i class="icofont-bin"></i></a>
+		                  	
+		                  </c:if>
 		                </div>
 		              </div>
 		            </div>
@@ -231,7 +238,7 @@
 	
 	
 	
-	
+
   <!-- ======= 후기 섹션 ======= -->
      <section id="testimonials" class="testimonials section-bg">
      
@@ -370,7 +377,67 @@
   <script src="resources/assets/vendor/venobox/venobox.min.js"></script>
   <script src="resources/assets/vendor/aos/aos.js"></script>
   <!-- Template Main JS File -->
-  <script src="resources/assets/js/main.js"></script>    
+  <script src="resources/assets/js/main.js"></script>
+  
+ 	<!-- 아티스트 모달 업데이트  -->
+ 	<div class="modal fade" id="modalUpdateWork" tabindex="-1" role="dialog"
+			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
+				<!-- 센터모달창 추가  modal-dialog-centered -->
+				<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
+					<div class="modal-header">
+						<h5 class="modal-title" id="TEST">
+							<b>내 작품 수정하기</b>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body book-a-table">
+						<form action="updateArtistWork.na" 
+							method="post" role="form" class="php-email-form workForm" data-aos="fade-up" data-aos-delay="100" 
+							enctype="multipart/form-data" onsubmit="return updateCheck();">
+				          <div>
+				            <!-- 작품 사진파일-->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              	기존파일
+				              <input type="text" class="form-control workImgPath" name="workImgPath" readonly>
+				              	업데이트 파일
+				              <input type="file" class="form-control" name="reloadFile">  
+				            </div>
+							
+				         	<!-- 작품 스타일 -->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              Update Tatto Style
+				              <select name="workStyle" class="form-control updateStyle" id="name">
+				              	<option value="pleaseSelect" id="selectOption" selected>수정 타투스타일</option>
+				              </select>
+				              <div class="validate"></div>
+				            </div>
+				         	
+				            <!-- 작품소개  -->
+				            <div class="form-group">
+				               	소개 수정
+				               <textarea class="form-control updateWorkArea" name="workInfo" cols="600" rows="5"  placeholder="작품 소개" style="resize: none;"></textarea>
+				               <div class="validate"></div>
+				            </div>			            			            				            				            
+				          </div>
+				          <div class="mb-3">
+				            <div class="loading">Loading</div>
+				          </div>
+				          <div class="text-center"><button type="submit">Work Update</button></div>
+ 				          <input type="hidden" name="artistId" value="${ loginArtist.artistId }">
+ 				          <input type="hidden" id="workReImgPath" name="workReImgPath" value="">
+ 				          <input type="hidden" id="artistWorkCode" name="workCode" value="">
+				        </form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+					</div>
+				</div>
+			</div>
+		</div> 		
   
   
   
@@ -380,7 +447,7 @@
   
   	<!-- 아티스트 모달페이지 출력  -->
   	<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog"
-			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
+			aria-labelledby="ARTIST_TITLE" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
 				<!-- 센터모달창 추가  modal-dialog-centered -->
 				<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
@@ -405,8 +472,14 @@
 				            </div>
 				            <!-- 프로필사진 업로드-->
 				            <div class="col-lg-4 col-md-6 form-group">
-				              MY PROFILE 
-				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile"> 
+				            <c:if test="${ empty artistInfo.myProfile }">
+				                             프로필 사진 선택 
+				              <input type="file" class="form-control artistmodalProfileName" name="reloadFile">
+				            </c:if>
+				              <c:if test="${ !empty artistInfo.myProfile }">
+				              	기존 사진<input type="text" class="form-control" id="InfoProfile" name="myProfile" value="" readonly>
+				              	수정할 사진<input type="file" class="form-control artistmodalProfileName" name="uploadFile">
+				              </c:if>	
 				            </div>
 				            <!-- 자기소개  -->
 				            <div class="form-group">
@@ -419,7 +492,9 @@
 				            <div class="loading">Loading</div>
 				          </div>
 				          <div class="text-center"><button type="submit" class="artistInfoButton"></button></div>
- 				          <input type="hidden" name="artistId" value="${ loginArtist.artistId }">
+				          <!-- 프로필사진은 변경하고싶지않을 때 그냥 등록해도됨 hidden으로 넘겨줌  -->
+				          <input type="hidden" name="artistId" value="${ loginArtist.artistId }">
+				          <input type="hidden" id="InfoReProfile" name="myReProfile" value="">
 				        </form>
 					</div>
 					<div class="modal-footer">
@@ -434,7 +509,7 @@
 				
 	<!-- 아티스트 작품 등록 -->
   	<div class="modal fade" id="modalArtistWork" tabindex="-1" role="dialog"
-			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
+			aria-labelledby="ARTIST_TITLE" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
 				<!-- 센터모달창 추가  modal-dialog-centered -->
 				<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
@@ -489,7 +564,7 @@
 		</div> 		
 		<script>
 		function optionCheck(){
-			var fileCheck = $(".fileCheck").val();
+ 			var fileCheck = $(".fileCheck").val();
 			var styleCheck = $(".workStyle").val();
 			if( styleCheck == "pleaseSelect" || !fileCheck ){
 				alert("작품의 사진 및 스타일을 선택해주세요.");
@@ -497,11 +572,20 @@
 			}
 			return true;
 		}		
+		  function updateCheck(){
+			var styleCheck = $(".updateStyle").val();
+			if( styleCheck == "pleaseSelect" ){
+				alert(" 스타일을 선택해주세요.");
+				return false;
+			}
+			return true;
+		} 
+		
 		$(document).ready(function(){
-
-	 		
 	 			$("#artistInfoWork").on("click", function(){
+	 				$("option").remove(".styleDelete");
 	 				var artistId = "${ loginArtist.artistId }";
+	 				console.log(artistId)
 	 				$.ajax({
 	 					url : "artistStyle.na",
 	 					type : "post",
@@ -510,22 +594,23 @@
 	 					success : function(style) {
 	 						for( var i in style ) {
 	 							var aStyle = decodeURIComponent(style[i].pStyle.replace(/\+/g," "));
-	 							var aOption = $("<option value='"+ aStyle +"'>"+ aStyle + "</option>");
-	 							$("#optionKing").after("<option value='"+ aStyle + "'>" + aStyle + "</option>");
+	 							var aOption = $("<option class='styleDelete' value='"+ aStyle +"'>"+ aStyle + "</option>");
+	 							/* $("#optionKing").after("<option class='styleDelete' value='"+ aStyle + "'>" + aStyle + "</option>"); */
+	 							$("#optionKing").after(aOption);
+	 							
 	 						}
 	 					}
 	 				});
 	 			});
 	 			
  			
- 			$(".tattoStyle").on("change", function(){
+ 			$(".tattoStyle").on("change", function() {
 				var artistId = "${ loginArtist.artistId }";
 				var tattoStyleOptionValue = $(this).find(":selected").val();
 				if( tattoStyleOptionValue == 'pleaseSelect' ) {
 					$('.tattolayer').css("display","none");
 				}else{
 					$('.tattolayer').css("display","block");
-						console.log(tattoStyleOptionValue);
 						$.ajax({
 							url : "artistPriceChecking.na",
 							type : "post",
@@ -571,10 +656,13 @@
 					data :{ "artistId" : artistId },
 					dataType : "json",
 					success : function(check) {
+						console.log(check)
 							if( check != null ){
 								$(".artistShopName").prop("value", decodeURIComponent(check.name.replace(/\+/g," ")));
 								$(".artistmodalProfileName").prop("name", "reloadFile");
 								$(".artistmodalInfo").prop("value", decodeURIComponent(check.myInfo.replace(/\+/g," ")));
+								$("#InfoProfile").prop("value", decodeURIComponent(check.myProfile.replace(/\+/g," ")));
+								$("#InfoReProfile").prop("value", decodeURIComponent(check.myReProfile.replace(/\+/g," ")));
 								$(".modalActionCheck").prop("action", "UpdateArtistInfo.na");
 								$(".artistInfoButton").html("MyInfo Update");
 								$("#modalInfo").modal();
@@ -588,6 +676,44 @@
 					});
 				});
 	 		});
+		
+		
+			/* 작품 수정버튼 클릭시 작품정보 및 스타일 출력  */
+			$(".updateWork").on("click", function(){
+				 $("option").remove(".styleDelete");
+				 getTattoStyle();
+				 var workCode = $(this).attr("id");
+				 $.ajax({
+				 	url : "selectArtistWork.na",
+				 	type : "post",
+				 	data :{ "workCode" : workCode },
+				 	dataType : "json",
+				 	success : function(workData) {
+								$(".workImgPath").prop("value", decodeURIComponent(workData.workImgPath.replace(/\+/g," ")));
+								$(".updateWorkArea").prop("value", decodeURIComponent(workData.workInfo.replace(/\+/g," ")));
+								$("#workReImgPath").prop("value", decodeURIComponent(workData.workReImgPath.replace(/\+/g," ")));
+								$("#artistWorkCode").prop("value", workCode);
+								$("#modalUpdateWork").modal(); 				
+					}
+				});
+			});
+			/* 작품 수정시 에이젝스 메소드  */
+			function getTattoStyle(){
+				var artistId = "${ loginArtist.artistId }";
+				$.ajax({
+					url : "artistStyle.na",
+					type : "post",
+					data : { "artistId" : artistId },
+					dataType : "json",
+					success : function(style) {
+						for( var i in style ) {
+							var pStyle = decodeURIComponent(style[i].pStyle.replace(/\+/g," "));
+							var wOption = $("<option class='styleDelete' value='"+ pStyle +"'>"+ pStyle + "</option>");
+							$("#selectOption").after( wOption );
+						}
+					}
+				});
+			}		
 		</script>
 		
 		
@@ -651,9 +777,9 @@
 				</div>
 			</div>
 		</div> 				
+
   	<footer>
 		 <jsp:include page="../common/footer.jsp"/>  	 
   	</footer>
 </body>
-
 </html>
