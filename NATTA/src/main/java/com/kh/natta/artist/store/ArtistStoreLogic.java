@@ -8,7 +8,7 @@ import com.kh.natta.artist.domain.Artist;
 
 @Repository
 public class ArtistStoreLogic implements ArtistStore{
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -18,17 +18,26 @@ public class ArtistStoreLogic implements ArtistStore{
 		return loginArtist;
 	}
 
-	
-	  @Override public int checkIdDup(String artistId) { int result =
-	  sqlSession.selectOne("artistMapper.checkIdDup",artistId);
-	  return result; 
-	  }
-	 
+
+	@Override public int checkIdDup(String artistId) { 
+		int result =sqlSession.selectOne("artistMapper.checkIdDup",artistId);
+		return result; 
+	}
+
+	@Override
+	public int checkEmailDup(String email2) {
+		int result =sqlSession.selectOne("artistMapper.checkEmailDup",email2);
+		return result; 
+	}
+
 
 	@Override
 	public int insertArtist(Artist artist) {
 		int result = sqlSession.insert("artistMapper.insertArtist",artist);
 		return result;
 	}
+
+
+
 
 }

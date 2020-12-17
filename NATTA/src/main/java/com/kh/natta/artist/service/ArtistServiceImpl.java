@@ -18,13 +18,21 @@ public class ArtistServiceImpl implements ArtistService{
 		return store.selectOneArtist(artist);
 	}
 
-	@Override public int checkIdDup(String artistId) { return
-	store.checkIdDup(artistId); }
+	@Override public int checkIdDup(String artistId) { 
+		return store.checkIdDup(artistId); 
+	}
+	
+	@Override
+	public int checkEmailDup(String email2) {
+		return store.checkEmailDup(email2);
+	}
 	 
 
 	@Override
 	public int registerArtist(Artist artist) {
 		return store.insertArtist(artist);
 	}
+
+	
 
 }

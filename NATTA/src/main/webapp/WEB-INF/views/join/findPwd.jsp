@@ -4,6 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+	$(function(){
+		$("#findBtn").click(function(){
+			$.ajax({
+				url : "findPwd.na",
+				type : "POST",
+				data : {
+					id : $("#customerId").val(),
+					name : $("#customerName").val(),
+					email : $("#email").val()
+				},
+				success : function(result) {
+					alert(result);
+				},
+			})
+		});
+	})
+</script>
+
 <title>비번 찾기</title>
 </head>
 <body>
@@ -23,7 +48,7 @@
 						<td><input type="radio" name="checkOption" id="checkEmail" onchange="setDisplay()" checked>이메일</td>
 						<td><input type="radio" name="checkOption" onchange="setDisplay()" >휴대폰</td>
 					</tr>
-					<form action="findPwdCerti.na" method="post" id="formId">
+					<form action="sendPwdEmail.na" method="post" id="formId">
 						<table align="center">
 							<tr>
 								<td>ID</td>
@@ -45,7 +70,7 @@
 							</tr>
 							<tr>
 								<td colspan="2" align="center">
-									<button id="next">다음</button>
+									<button typd="submit" id="findBtn">확인</button>
 								</td>
 							</tr>
 

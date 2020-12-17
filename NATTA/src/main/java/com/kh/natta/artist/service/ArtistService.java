@@ -8,5 +8,7 @@ public interface ArtistService {
 	
 	public int checkIdDup(String artistId); 
 	
+	public int checkEmailDup(String email2); 
+	
 	public int registerArtist(Artist artist);
 }

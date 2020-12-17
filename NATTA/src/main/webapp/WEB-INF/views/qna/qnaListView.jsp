@@ -59,21 +59,21 @@
 					[이전]&nbsp;
 				</c:if>
 				<c:if test="${pi.currentPage >1 }">
-					<c:url var="before" value="qnaList.na">
+					<c:url var="before" value="qna.na">
 						<c:param name="page" value="${pi.currentPage -1 }"></c:param>
 					</c:url>
 					<a href="${before }">[이전]</a>
 				</c:if>
 				<!-- 페이지 -->
 				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-					<c:url var="pagination" value="qnaList.na">
+					<c:url var="Paging" value="qna.na">
 						<c:param name="page" value="${p }"></c:param>
 					</c:url>
 					<c:if test="${p eq pi.currentPage }">
 						<font color="red" size="4">[${p }]</font>
 					</c:if>
 					<c:if test="${p ne pi.currentPage }">
-						<a href="${pagination }">${p }</a>
+						<a href="${Paging }">${p }</a>
 					</c:if>
 				</c:forEach>
 				<!-- 다음 -->
@@ -81,7 +81,7 @@
 					[다음]&nbsp;
 				</c:if>
 				<c:if test="${pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="qnaList.na">
+					<c:url var="after" value="qna.na">
 						<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 					</c:url>
 					<a href="${after }">[다음]</a>&nbsp;

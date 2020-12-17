@@ -2,6 +2,7 @@ package com.kh.natta.customer.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.natta.artist.store.ArtistStore;
 import com.kh.natta.customer.domain.Customer;
@@ -22,6 +23,11 @@ public class CustomerServiceImpl implements CustomerService{
 	public int checkIdDup(String customerId) {
 		return store.checkIdDup(customerId);
 	}
+	
+	@Override
+	public int checkEmailDup(String email) {
+		return store.checkEmailDup(email);
+	}
 
 	@Override
 	public int registerCustomer(Customer customer) {
@@ -37,5 +43,12 @@ public class CustomerServiceImpl implements CustomerService{
 	public Customer findPwdEmail(Customer customer) {
 		return store.selectThreeCustomer(customer);
 	}
+
+	/*
+	 * @Override public int updatePassword(Customer customer) { 
+	 * return store.updatePassword(customer); }
+	 */
+	
+	
 
 }

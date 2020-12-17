@@ -41,7 +41,7 @@
 							</tr>
 							<tr>
 								<td colspan="2" align="center">
-									<button id="next">다음</button>
+									<button id="next">확인</button>
 								</td>
 							</tr>
 						</table>
