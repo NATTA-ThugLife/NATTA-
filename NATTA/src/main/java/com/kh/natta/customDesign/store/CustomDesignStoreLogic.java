@@ -73,7 +73,7 @@ public class CustomDesignStoreLogic implements CustomDesignStore{
 		map.put("pi.getBoardLimit()", pi.getBoardLimit());
 		map.put("customCode", customCode);
 		
-		return (ArrayList)sqlSession.selectList("CustomDesignMapper.selectListComment",map);
+		return (ArrayList)sqlSession.selectList("CustomDesignMapper.selectListComment",customCode, rowBounds);
 	}
 
 	@Override

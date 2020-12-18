@@ -16,7 +16,11 @@
 		 div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
 		 div.modalContent button.modal_cancel { margin-left:20px; }
 		</style>
-		
+		<style>
+		 #iii:hover {
+		 color:#cda45e;
+		 }
+		</style>
     </head>
     <body>
     <header>
@@ -78,10 +82,8 @@
 			</tr>
 		</thead>
 		<tbody></tbody>
-		<tfoot>
 		<!-- 페이징 처리 -->
-			
-		</tfoot>
+		<tfoot></tfoot>
 	</table>
     </section>
     <section>
@@ -111,7 +113,7 @@
 	<input type="hidden" id="sessionArtist" value="${loginArtist.artistId}">
 	<input type="hidden" id="sessionCustomer" value="${loginCustomer.customerId }">
 	<input type="hidden" id="Writer" value="${customDesign.customerId }">
-	<input type="text" id=Code value="${customDesign.customCode }">
+	<input type="hidden" id=Code value="${customDesign.customCode }">
 	
 	<!-- 댓글수정 모달창 -->
 	<div class="replyModal">
@@ -140,14 +142,12 @@
 		
 		
 		$(function() {
-			getCommentList();
-			getpage();
+			getCommentList(1);
 			/* getReplyList(); */
 			// ajax polling
 			// 타 회원이 댓글들을 작성했을 수도 있으므로 지속적으로 댓글 불러오기
 			setInterval(function(){
 				getCommentList();
-				getpage();
 			}, 50000);
 			
 			$("#cSubmit").on("click",function(){
@@ -173,18 +173,18 @@
 		});
 		
 		// 댓글 리스트를 불러오는 ajax Function
-		function getCommentList() {
+		function getCommentList(page) {
 			var customCode = ${customDesign.customCode };
+			console.log("현재페이지" + page);
 			$.ajax({
 				url : "commentList.na",
 				type : "get",
-				data : {"customCode" : customCode},
+				data : {"customCode" : customCode,"page" : page},
 				dataType:"json",
 				success : function(data) {
-					console.log(data)
+					console.log("실행후" + data.pi.currentPage)
 					// db에 있는 데이터를 json형태로 가져와서
 					// 댓글 목록 테이블의 tbody에 넣어주어야 함.
-					
 					var $tableBody = $("#ctb tbody");
 					$tableBody.html(""); // tbody에 존재하는 값을 초기화
 					var $tr;
@@ -196,31 +196,38 @@
 					var sessionCustomer = $("#sessionCustomer").val();
 					var Writer = $("#Writer").val();
 					var secret;
-					$("#cCount").text("댓글 (" + data.length + ")"); // 댓글의 갯수 표시
-					if (data.length > 0) {
-						for ( var i in data ) {
+					var customCode = $("#Code").val();
+					// 댓글 페이징
+					var $tableFoot = $("#ctb tfoot");
+					$tableFoot.html("");
+					var $td;
+					
+					$("#cCount").text("댓글 (" + data.pi.listCount + ")"); // 댓글의 갯수 표시
+					if (data.ccList.length > 0) {
+						console.log(data.pi)
+						for ( var i in data.ccList ) {
 							$tr = $("<tr>");
-							$artistId = $("<td> width='100'>").text(data[i].artistId);
+							$artistId = $("<td> width='100'>").text(data.ccList[i].artistId);
 							
-							$cContents = $("<td class='replyContent'>").html(decodeURIComponent(data[i].cContents.replace(/\+/g," "))); 
+							$cContents = $("<td class='replyContent'>").html(decodeURIComponent(data.ccList[i].cContents.replace(/\+/g," "))); 
 							
-							$ccCreateDate = $("<td> width='150'>").text(data[i].ccCreateDate);
+							$ccCreateDate = $("<td> width='150'>").text(data.ccList[i].ccCreateDate);
 						
-							$modify = $("<td><button class='modify' data-customCCode='"+data[i].customCCode+"'>수정</button> <button class='delete' data-customCCode='"+data[i].customCCode+"'>삭제</button>");
+							$modify = $("<td><button class='modify' data-customCCode='"+data.ccList[i].customCCode+"'>수정</button> <button class='delete' data-customCCode='"+data.ccList[i].customCCode+"'>삭제</button>");
 							
 							$secret = $("<td align='center' colspan='4'>").text('비밀글입니다.');
 							
-							if((data[i].cOnOff == 1 && ((sessionArtist == data[i].artistId) || (Writer == sessionCustomer))) || (data[i].cOnOff == 0)){
+							if((data.ccList[i].cOnOff == 1 && ((sessionArtist == data.ccList[i].artistId) || (Writer == sessionCustomer))) || (data.ccList[i].cOnOff == 0)){
 							$tr.append($artistId);
 							$tr.append($cContents);
 							$tr.append($ccCreateDate);
-							if(sessionArtist == data[i].artistId){
+							if(sessionArtist == data.ccList[i].artistId){
 								$tr.append($modify);
 							}
 							$tableBody.append($tr);
 							}else{
 								$tr.append($secret);
-								$tableBody.append($tr);
+							$tableBody.append($tr);
 							}
 						}
 					}else{
@@ -231,33 +238,44 @@
 						$tr.append($cContents); // <tr><td colspan='3'>등록된 댓글이 없습니다.</td></tr>
 						$tableBody.append($tr);
 					}
-					
-				}
-			});
-		}
-		// 페이징
-		function getpage(){
-			var customCode = ${customDesign.customCode};
-			$.ajax({
-				url : "commentListt.na",
-				type : "get",
-				data : {"customCode" : customCode},
-				dataType:"json",
-				success : function(data) {
-					console.log(data)
-					var customCode = $("#Code").val();
-					var $tableBody = $("#ctb tfoot");
-					$tableBody.html("");
-					var $tr = $("<tr align='center' height='20'>");
-					
-					
-					
+					$tr = $("<tr align='center' height='20'>");
+					$td = $("<td colspan='3'>");
+					var $1 = '[이전]';
+					var $2 = $("<a id='iii' onclick='getCommentList("+parseInt(data.pi.currentPage-1)+")';>").text('[이전]');
+					var $3 = $("<font color='red' size='4'>");
+					var $4 = '[다음]';
+					var $5 = $("<a id='iii'  onclick='getCommentList("+parseInt(data.pi.currentPage+1)+")';>").text('[다음]');
+					var $6;
+					if(data.pi.currentPage<=1){
+						$td.append($1);
+					}
+					if(data.pi.currentPage>1){
+						$td.append($2);
+					}
+					for(var i = data.pi.startPage; i < data.pi.endPage+1; i++ ){
+						if(i == parseInt(data.pi.currentPage)){
+						$6 = $("<a style='color: red' onclick='getCommentList("+i+")';>").text('['+i+']');
+						$td.append($6);
+						}
+						else{
+						$6 = $("<a onclick='getCommentList("+i+")';>").text(i);
+						$td.append($6);
+						}
+						
+					}
+					if(data.pi.currentPage >= data.pi.maxPage){
+						$td.append($4);
+					}
+					if(data.pi.currentPage < data.pi.maxPage){
+						$td.append($5);
+					}
+					$tr.append($td);
 					$tableBody.append($tr);
 					
-					
 				}
 			});
 		}
+		
 		// 댓글 수정 뷰
 		$(document).on("click",".modify",function(){
 			$(".replyModal").fadeIn(1000);
@@ -299,9 +317,6 @@
 				var cContents = CKEDITOR.instances.cContentsModify.getData();
 				var customCCode = $(this).attr("customCCode");
 				var cOnOffModify = $('input:radio[name=cOnOffModify]:checked').val( );
-				console.log(cOnOffModify)
-				console.log(cContents)
-				console.log(customCCode)
 			$.ajax({
 				url : "customCommentModify.na",
 				type : "post",

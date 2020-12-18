@@ -114,7 +114,7 @@
 				<input type="file" id="upload" name="upload" style="display:none">
 				
 				<c:forEach items="${reservationDate }" var="reservation">
-				<input type="hidden" class="rDate" value="${reservation}">
+				<input type="text" class="rDate" value="${reservation}">
 				</c:forEach>
 				
 				
@@ -182,7 +182,8 @@
 			monthNames: ['년 1월','년 2월','년 3월','년 4월','년 5월','년 6월','년 7월','년 8월','년 9월','년 10월','년 11월','년 12월'],
 			nextText: '다음 달',
 			prevText: '이전 달',
-			beforeShowDay: disableAllTheseDays 
+			minDate: 7,
+			beforeShowDay: disableAllTheseDays
 				});
 				 
 			});
@@ -192,6 +193,7 @@
 			/* var disabledDays = ["2020-12-9","2020-12-24","2020-12-26"];
 			console.log(disabledDays) */
 		
+			
 			// 특정일 선택막기
 			function disableAllTheseDays(date) {
 				var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
@@ -204,7 +206,7 @@
 			}		
 
 			$(function() {
-				$("#datepicker").datepicker();
+				$("#datepicker").datepicker({minDate : 0});
 			});
 		</script>
 		<script>
