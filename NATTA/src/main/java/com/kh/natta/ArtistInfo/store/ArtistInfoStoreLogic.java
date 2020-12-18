@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.natta.ArtistInfo.domain.ArtistFollow;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.artist.domain.Artist;
@@ -56,6 +57,26 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 	@Override
 	public ArrayList<ArtistWork> selectListArtistWork(String artistId) {
 		return (ArrayList)sqlSession.selectList("ArtistWorkMapper.selectOneArtist", artistId);
+	}
+
+	@Override
+	public ArrayList<ArtistFollow> selectArtistFollow(String artistId) {
+		return (ArrayList)sqlSession.selectList("ArtistInfoMapper.selectListArtistFollow", artistId);
+	}
+
+	@Override
+	public int insertArtistFollow(ArtistFollow af) {
+		return sqlSession.insert("ArtistInfoMapper.insertArtistFollow", af);
+	}
+
+	@Override
+	public int deleteArtistFollow(ArtistFollow af) {
+		return sqlSession.delete("ArtistInfoMapper.deleteArtistFollow", af);
+	}
+
+	@Override
+	public ArtistFollow selectFollowing(ArtistFollow af) {
+		return sqlSession.selectOne("ArtistInfoMapper.selectArtistFollow", af);
 	}
 
 	

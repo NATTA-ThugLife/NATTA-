@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,15 +15,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.kh.natta.ArtistInfo.domain.ArtistFollow;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.service.ArtistInfoService;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artistWork.domain.ArtistWork;
+import com.kh.natta.customer.domain.Customer;
 
 @Controller
 public class ArtistInfoController {
@@ -32,16 +36,33 @@ public class ArtistInfoController {
 	
 	// 아티스트 상세페이지로 이동
 	@RequestMapping(value="artistInfoPage.na", method=RequestMethod.GET)
-	public String ArtistInfoPage(String artistId, Model model) {
+	public String ArtistInfoPage(String artistId, Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if( session.getAttribute("loginCustomer") != null) {
+			Customer customer = (Customer)session.getAttribute("loginCustomer");
+			String customerId = customer.getCustomerId();
+			ArtistFollow arf = new ArtistFollow(customerId, artistId);
+			ArtistFollow af = infoService.selectFollowing(arf);
+			if(af != null ) {
+			model.addAttribute("follow", af);
+			}
+		}
+
+
+
 		Artist artist = infoService.selectOneArtist(artistId);
 		ArtistInfo infoPage = infoService.selectOneArtistInfo(artistId);
 		ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);
 		ArrayList<ArtistWork> workList = infoService.selectListArtistWork(artistId);
+		ArrayList<ArtistFollow> aFollow = infoService.selectArtistFollow(artistId);
+		
+			
 			model.addAttribute("artist", artist);
 			model.addAttribute("priceList", priceList);
 			model.addAttribute("workList", workList);
 			model.addAttribute("artistInfo", infoPage);
-			// 세션id 값이랑 해당 상세페이지 아티스트 정보랑 유효성검사 채크용
+			model.addAttribute("followList", aFollow);
+			// 세션id 값이랑 해당 상세페이지 아티스트 정보랑 유효성검사 채크할 때 사용하려고 넘겼음.
 			model.addAttribute("artistPageId",artistId);
 			return "Artist-info/artistPage";
 		}
@@ -60,6 +81,32 @@ public class ArtistInfoController {
 		Gson gson = new Gson();
 		gson.toJson(artistCheck,response.getWriter());
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="InsertArtistFollow.na", method=RequestMethod.POST)
+	public String insertFollowing(ArtistFollow af, Model model) {
+		System.out.println("등록" + af);
+		int result = infoService.insertArtistFollow(af);
+		if ( result > 0 ) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value="deleteArtistFollow.na", method=RequestMethod.POST)
+	public String deleteFollowing(ArtistFollow af, Model model) {
+		System.out.println("삭제" + af);
+		int result = infoService.deleteArtistFollow(af);
+		if ( result > 0 ) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}	
+	
+	
+	
 	
 	
 	// 아티스트 소개 입력

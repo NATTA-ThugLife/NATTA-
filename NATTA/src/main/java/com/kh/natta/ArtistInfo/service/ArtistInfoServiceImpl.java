@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.natta.ArtistInfo.domain.ArtistFollow;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.store.ArtistInfoStore;
@@ -51,6 +52,26 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 	@Override
 	public ArrayList<ArtistWork> selectListArtistWork(String artistId) {
 		return infoStore.selectListArtistWork(artistId);
+	}
+
+	@Override
+	public ArrayList<ArtistFollow> selectArtistFollow(String artistId) {
+		return infoStore.selectArtistFollow(artistId);
+	}
+
+	@Override
+	public int insertArtistFollow(ArtistFollow af) {
+		return infoStore.insertArtistFollow(af);
+	}
+
+	@Override
+	public int deleteArtistFollow(ArtistFollow af) {
+		return infoStore.deleteArtistFollow(af);
+	}
+
+	@Override
+	public ArtistFollow selectFollowing(ArtistFollow af) {
+		return infoStore.selectFollowing(af);
 	}
 
 

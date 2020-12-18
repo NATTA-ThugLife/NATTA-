@@ -2,6 +2,7 @@ package com.kh.natta.ArtistInfo.store;
 
 import java.util.ArrayList;
 
+import com.kh.natta.ArtistInfo.domain.ArtistFollow;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.artist.domain.Artist;
@@ -75,10 +76,28 @@ public interface ArtistInfoStore {
 	public ArrayList<ArtistWork> selectListArtistWork(String artistId);	
 	
 		
+	/**
+	 * artist follow list
+	 * @param artistId
+	 * @return
+	 */
+	public ArrayList<ArtistFollow> selectArtistFollow(String artistId);
+	
+	/**
+	 * 팔로우 인서트
+	 * @param af
+	 * @return
+	 */
+	public int insertArtistFollow(ArtistFollow af);
+	
+	/**
+	 * 팔로우 삭제
+	 * @param af
+	 * @return
+	 */
+	public int deleteArtistFollow(ArtistFollow af);	
 	
 	
-	
-	
-	
+	public ArtistFollow selectFollowing(ArtistFollow af);
 	
 }

@@ -13,6 +13,7 @@
   <meta content="" name="keywords">
   <link href="resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
 <style>
 	header { height: 215px; }	
 	#header { height: 175px; }
@@ -80,26 +81,59 @@
         </ul>
       </nav><!-- .nav-menu -->
     </div>
+    
+    
     	<!-- 아티스트 프로필 헤더! -->
        <div class="profile container d-flex align-items-center" style="margin-top:10px;">
-        <img 
-        src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" alt="" class="img-fluid rounded-circle" 
-        style="margin-left: 15px auto; display: block; width: 100px; height:100px; border: 8px solid #2c2f3f;">
-  	<nav class="nav-menu d-none d-lg-block" data-aos="fade-in">
-        <h2 class="text-light" style="margin-left:25px;">${ artistInfo.name }</h2>
-  	    <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>    
+       
+       <c:if test="${ artistInfo.myReProfile eq null }">
+		<img src="resources/artistInfoFile/Profile/NATTAprofile.png" alt="" class="img-fluid rounded-circle" 
+	     style="margin-left: 15px auto; display: block; width: 100px; height:100px; border: 8px solid #2c2f3f;">  
+	  	<nav class="nav-menu d-none d-lg-block" data-aos="fade-in">
+	        <h4 class="text-light" style="margin-left:25px;">타투숍 이름이 없습니다.</h4>
+	  	    <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>    
+	       	<!-- 아티스트 프로필 메뉴바 -->
+	       	
+	        <ul style="list-style : none;">
+	        <c:if test="${ artistPageId eq loginArtist.artistId }">
+	          	<li class="active"><a href="#" data-toggle="modal" id="insertInfo"><i class="bx bx-home"></i><span> 타투숍 소개</span></a></li>
+	          	<li><a href="javascript:void(0);" data-toggle="modal" id="artistInfoWork"><i class="bx bx-book-content"></i> 내 작품등록하기</a></li>
+	          	<li><a href="#modalArtistPrice" data-toggle="modal" id="artistInfoPrice"><i class="bx bx-file-blank"></i><span> 스타일별 가격</span></a></li>
+			</c:if>     	
+	        	<li><a href="reservation.na?artistId=${ artistInfo.artistId }"><i class="icofont-calendar"></i> Reservation</a></li>
+	          	<li><a href="#resume"><i class="bx bx-user"></i><span>Resume</span></a></li>
+	          	<li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
+	        </ul>            
+        </nav><!-- .nav-menu -->	      		       
+       </c:if>
+       
+       <c:if test="${ artistInfo.myReProfile ne null }">
+	   <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" alt="" class="img-fluid rounded-circle" 
+	       style="margin-left: 15px auto; display: block; width: 100px; height:100px; border: 8px solid #2c2f3f;">
+		<nav class="nav-menu d-none d-lg-block" data-aos="fade-in">
+	      <h4 class="text-light" style="margin-left:25px;">${ artistInfo.name }</h4>
+		  <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>    
        	<!-- 아티스트 프로필 메뉴바 -->
         <ul style="list-style : none;">
         <c:if test="${ artistPageId eq loginArtist.artistId }">
           	<li class="active"><a href="#" data-toggle="modal" id="insertInfo"><i class="bx bx-home"></i><span> 타투숍 소개</span></a></li>
-          	<li><a href="#modalArtistWork" data-toggle="modal" id="artistInfoWork"><i class="bx bx-book-content"></i> 내 작품등록하기</a></li>
+          	<li><a href="javascript:void(0);" data-toggle="modal" id="artistInfoWork"><i class="bx bx-book-content"></i> 내 작품등록하기</a></li>
           	<li><a href="#modalArtistPrice" data-toggle="modal" id="artistInfoPrice"><i class="bx bx-file-blank"></i><span> 스타일별 가격</span></a></li>
 		</c:if>     	
         	<li><a href="reservation.na?artistId=${artistInfo.artistId }"><i class="icofont-calendar"></i> Reservation</a></li>
           	<li><a href="#resume"><i class="bx bx-user"></i><span>Resume</span></a></li>
           	<li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
+          	
+          	<!-- javascript:void(0); 꽉 찬 하트 fas-->
+          	<c:if test="${follow ne null }">
+          		<li id="sibar"><a href="#" onclick="deleteFollowing();" id="clickChange"><i class="fas fa-heart" id="followCheck"></i>Follow</a></li>
+          	</c:if>
+          	<c:if test="${follow eq null }">
+          		<li id="sibar"><a href="#" onclick="insertFollowing();" id="clickChange"><i class="far fa-heart" id="followCheck"></i>Follow</a></li>
+          	</c:if>
         </ul>            
         </nav><!-- .nav-menu -->
+        </c:if>
       </div>      
   </div>
 </header>  
@@ -113,7 +147,12 @@
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
             <div class="about-img">
-              <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" alt="" style="width: 600px; height:500px;">
+              <c:if test="${ artistInfo.myReProfile eq null }">
+	 	     	<img src="resources/artistInfoFile/Profile/NATTAprofile.png" alt="" style="width: 540px; height:403px;">              
+              </c:if>
+              <c:if test="${ artistInfo.myReProfile ne null }">
+              	<img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" alt="" style="width: 540px; height:403px;">
+              </c:if>
             </div>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
@@ -124,7 +163,7 @@
             <ul>
               <li><i class="icofont-check-circled"></i> 아티스트의 작품을 보고, 마음에 드는 작품을 예약하세요 !  </li>
               <li><i class="icofont-check-circled"></i> 자신만의 원하는 도안을 아티스트에게 문의하세요 !</li>
-              <li><i class="icofont-check-circled"></i> </li>
+              <li><i class="icofont-check-circled"></i> 아티스트에게 솔직한 후기를 남겨주세요 !</li>
             </ul>
             <p>
           		${ artistInfo.myInfo }
@@ -152,6 +191,7 @@
 	        </div>
 			
 	        <div class="row">
+	        <c:if test="${ workList ne null }">
 				<c:forEach items="${ workList }" var="aWork">
 		          <div class="col-lg-4 col-md-6">
 		            <div class="member" data-aos="zoom-in" data-aos-delay="100">
@@ -169,10 +209,6 @@
 		                  <a href="#" onclick="return confirm('예약하시겠습니까 ?')"><i class="icofont-basket"></i></a>
 		                  <a href="resources/artistInfoFile/WorkFile/${ aWork.workReImgPath }" class="venobox" data-gall="gallery-item"><i class="icofont-camera"></i></a>
 		                  
-		                  <c:url var="workUpdate" value="updateArtistWork.na">
-		                  	<c:param name="workCode" value="${ aWork.workCode }"/>
-		                  	<c:param name="workCode" value="${ aWork.artistId }"/>
-		                  </c:url>		           		                  
 		                  <c:url var="workDelete" value="deleteArtistWork.na">
 							<c:param name="workCode" value="${ aWork.workCode }"/>
 		                  	<c:param name="workImgPath" value="${ aWork.workImgPath }"/>
@@ -182,7 +218,6 @@
 		                  
 		                  <c:if test="${ artistPageId eq loginArtist.artistId }">
 		                 	<a href="#" data-toggle="modal"><i class="icofont-spanner updateWork" id="${ aWork.workCode }"></i></a>
-						<%--<a href="${ workUpdate }"><i class="icofont-spanner"></i></a> --%>
 		                  	<a href="${ workDelete }" onclick="return confirm('정말로 작품을 삭제하시겠습니까 ?');"><i class="icofont-bin"></i></a>
 		                  	
 		                  </c:if>
@@ -190,7 +225,11 @@
 		              </div>
 		            </div>
 		          </div>
-			   </c:forEach>			
+			   	</c:forEach>		
+			   </c:if>
+			   <c:if test="${ workList eq null }">
+			  		<h3>등록된 작품이 없습니다.</h3>
+			   </c:if>
 	        </div>
 	      </div>
 	    </div>
@@ -597,6 +636,7 @@
 	 							var aOption = $("<option class='styleDelete' value='"+ aStyle +"'>"+ aStyle + "</option>");
 	 							/* $("#optionKing").after("<option class='styleDelete' value='"+ aStyle + "'>" + aStyle + "</option>"); */
 	 							$("#optionKing").after(aOption);
+	 							$("#modalArtistWork").modal();
 	 							
 	 						}
 	 					}
@@ -777,9 +817,63 @@
 				</div>
 			</div>
 		</div> 				
-
   	<footer>
 		 <jsp:include page="../common/footer.jsp"/>  	 
   	</footer>
+  	
+   	<script>
+		function insertFollowing(){
+			var artistId = "${ artistInfo.artistId }";
+			var customerId = "${ loginCustomer.customerId }";
+			console.log(customerId);
+			console.log(artistId);
+			if( customerId == "") {
+				alert("로그인은 기본이다 씻팔");
+			}else {
+				$.ajax({
+					url : "InsertArtistFollow.na",
+					type : "post",
+					data : { "artistId" : artistId,
+							 "customerId" : customerId },		
+					success : function(chk) {
+						if( chk == "success") {
+							$("#followCheck").attr("class","fas fa-heart");
+							$("#clickChange").attr("onclick","deleteFollowing();");
+						}else {
+							alert("왜 실패냐");
+						}
+					}
+				});
+			}
+		}
+		
+		function deleteFollowing(){
+			var artistId2 = "${ artistInfo.artistId }";
+			var customerId2 = "${ loginCustomer.customerId }";
+			console.log("삭제"+customerId2);
+			console.log("삭제"+ artistId2);
+			if( customerId2 == "") {
+				alert("로그인은 기본이다 씻팔");
+			}else {
+				$.ajax({
+					url : "deleteArtistFollow.na",
+					type : "post",
+					data : { "artistId" : artistId2,
+							 "customerId" : customerId2 },		
+					success : function(dchk) {
+						if( dchk == "success") {
+							$("#clickChange").attr("onclick","insertFollowing();");
+							$("#followCheck").attr("class","far fa-heart");
+						}else {
+							alert("실패했다");
+						}
+					}
+				});
+			}
+		}  	
+		
+  	
+  	</script>
+
 </body>
 </html>

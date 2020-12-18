@@ -10,6 +10,33 @@
 		<result property="workAddress" column="WORK_ADDRESS"/>
 		<result property="artistId" column="ARTIST_ID"/>
 	</resultMap>
+	<resultMap type="ArtistFollow" id="followMap">
+		<result property="customerProfile" column="CUSTOMER_PROFILE"/>
+		<result property="customerId" column="CUSTOMER_ID"/>
+		<result property="artistId" column="ARTIST_ID"/>
+	</resultMap>
+	
+	<select id="selectArtistFollow" resultMap="followMap">
+		SELECT * FROM FOLLOWING
+	</select>
+	
+	<!-- 팔로우 등록 -->
+	<insert id="insertArtistFollow">
+		INSERT INTO FOLLOWING
+		VALUES( #{customerId}, #{artistId})
+	</insert>
+	
+	<delete id="deleteArtistFollow">
+		DELETE FROM FOLLOWING
+		WHERE CUSTOMER_ID = #{ customerId } AND ARTIST_ID = #{ artistId }
+	</delete>
+	
+	
+	
+	<!-- 아티스트 팔로우 리스트  -->
+	<select id="selectListArtistFollow" resultMap="followMap">
+		SELECT * FROM FOLLOWING JOIN
+	</select>
 	
 	
 	<!-- 아티스트정보 입력 -->
