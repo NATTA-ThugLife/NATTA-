@@ -33,7 +33,7 @@ public class ArtistController {
 		HttpSession session = request.getSession();
 		Artist artist = new Artist(artistId,password);
 		Artist loginArtist = service.loginArtist(artist);
-		System.out.println(loginArtist);
+		//System.out.println(loginArtist);
 		if(loginArtist != null) {
 			session.setAttribute("loginArtist", loginArtist);
 			mv.setViewName("main/mainPage");

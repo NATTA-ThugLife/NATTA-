@@ -1,38 +1,43 @@
-/*
- * package com.kh.natta.customer.controller;
- * 
- * import java.util.Random;
- * 
- * import javax.servlet.http.HttpSession;
- * 
- * import org.springframework.stereotype.Controller; import
- * org.springframework.web.bind.annotation.RequestMapping; import
- * org.springframework.web.bind.annotation.RequestMethod; import
- * org.springframework.web.bind.annotation.RequestParam; import
- * org.springframework.web.servlet.mvc.support.RedirectAttributes;
- * 
- * import com.kh.natta.customer.service.MailService;
- * 
- * @Controller public class MailController { private MailService mailService;
- * 
- * public void setMailService(MailService mailService) { this.mailService =
- * mailService; }
- * 
- * // 비밀번호 찾기
- * 
- * @RequestMapping(value = "sendPwdEmail.na", method = RequestMethod.POST)
- * public String sendMailPassword(HttpSession session, @RequestParam String
- * id, @RequestParam String email, RedirectAttributes ra) {
- * 
- * User user = userService.findAccount(email); if (user != null) { int ran = new
- * Random().nextInt(100000) + 10000; // 10000 ~ 99999 String password =
- * String.valueOf(ran); userService.updateInfo(user.getNo(), "password",
- * password); // 해당 유저의 DB정보 변경
- * 
- * String subject = "임시 비밀번호 발급 안내 입니다."; StringBuilder sb = new
- * StringBuilder(); sb.append("귀하의 임시 비밀번호는 " + password + " 입니다.");
- * mailService.send(subject, sb.toString(), "아이디@gmail.com", email, null);
- * ra.addFlashAttribute("resultMsg", "귀하의 이메일 주소로 새로운 임시 비밀번호를 발송 하였습니다."); }
- * else { ra.addFlashAttribute("resultMsg", "귀하의 이메일로 가입된 아이디가 존재하지 않습니다."); }
- * return "redirect:/find/password"; } }
- */
+package com.kh.natta.customer.controller;
+
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class MailController {
+
+	@Autowired
+	private JavaMailSender mailSender;
+
+	// mailSending 코드
+	@RequestMapping(value = "mail.na")
+	public String mailSending(HttpServletRequest request) {
+
+		String setfrom = "thugkinghansol@gmail.com";
+		String tomail = request.getParameter("tomail"); // 받는 사람 이메일
+		String title = request.getParameter("title"); // 제목
+		String content = request.getParameter("content"); // 내용
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+			messageHelper.setTo(tomail); // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+			messageHelper.setText(content); // 메일 내용
+
+			mailSender.send(message);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return "join/login";
+	}
+}
