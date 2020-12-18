@@ -41,7 +41,15 @@
   color: #fff;
   transition: 0.4s;
   border-radius: 50px;	
- }    
+ }
+ .delete{
+  background: green;
+  border: 0;
+  padding: 10px 35px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;	
+ }      
  </style>
  
 </head>
@@ -181,14 +189,14 @@
 
 					</div>
 					<div class="modal-body book-a-table" >
-						<form action="/modifyCustomerInfo.na" 
+			 			<form action="/modifyCustomerInfo.na" 
 						method="post" role="form" class="php-email-form"  enctype="multipart/form-data" onsubmit="return dup();">
 				          <div style="margin-left: 330px;">
 				         	<!-- 이름 -->
 				            <div class="col-lg-7 col-md-6 form-group">
 				              Customer Name : 
-z				              <input type="text" value="${ loginCustomer.customerName }" name="customerName" class="form-control" id="name" placeholder="Your Name" readonly>
-				              <input type="text" value="${ loginCustomer.customerId }" name="customerId" class="form-control" id="name" placeholder="Your Name" readonly>
+				              <input type="text" value="${ loginCustomer.customerName }" name="customerName" class="form-control"  placeholder="Your Name" readonly>
+				              <input type="text" value="${ loginCustomer.customerId }" name="customerId" class="form-control"  placeholder="Your Name" readonly>
 				              <div class="validate"></div>
 				            </div>
 				            <!-- 비밀번호 확인  -->
@@ -391,13 +399,13 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
             <ul class="nav nav-tabs flex-column">
             	<c:forEach items="${rList }" var="review" varStatus="status">
             	 	<c:if test="${status.index eq 0 }">
-            	 	<li class="nav-item">
-            	 		<a class="nav-link active show" data-toggle="tab" href="#tab-${review.reviewCode }">${status.index + 1 }번째 리뷰 <span>&nbsp;&nbsp;&nbsp;&nbsp;<button class="modify active btn-sm" data-toggle="modal" data-target="#modifyReview">수정</button> &nbsp;&nbsp;&nbsp;<button class="modify active btn-sm">삭제</button></span></a> 
+            	 	<li class="nav-item" id="item${review.reviewCode }">
+            	 		<a class="nav-link active show" data-toggle="tab" href="#tab-${review.reviewCode }">${status.index + 1 }번째 리뷰 <span>&nbsp;&nbsp;&nbsp;&nbsp;<button class="modify active btn-sm" value="tab-${review.reviewCode }" data-toggle="modal" data-target="#modifyReview">수정</button> &nbsp;&nbsp;&nbsp;<button value="${review.reviewCode }" class="delete active btn-sm">삭제</button></span></a> 
             	 	</li>
             	 	</c:if>
             		<c:if test="${status.index ne 0 }">
-            		<li class="nav-item">
-            	 		<a class="nav-link" data-toggle="tab" href="#tab-${review.reviewCode }">${status.index + 1 }번째 리뷰 <span>&nbsp;&nbsp;&nbsp;&nbsp;<button class="modify btn-sm" data-toggle="modal" data-target="#modifyReview">수정</button> &nbsp;&nbsp;&nbsp;<button class="modify btn-sm">삭제</button></span></a>
+            		<li class="nav-item" id="item${review.reviewCode }">
+            	 		<a class="nav-link" data-toggle="tab" href="#tab-${review.reviewCode }">${status.index + 1 }번째 리뷰 <span>&nbsp;&nbsp;&nbsp;&nbsp;<button class="modify btn-sm" data-toggle="modal" value="tab-${review.reviewCode }" data-target="#modifyReview">수정</button> &nbsp;&nbsp;&nbsp;<button value="${review.reviewCode }" class="delete btn-sm">삭제</button></span></a>
             	 	</li>
             	 	</c:if>
             	</c:forEach>
@@ -407,8 +415,10 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
           <div class="col-lg-9 mt-4 mt-lg-0">
             <div class="tab-content">
               <c:forEach items="${rList }" var="review" varStatus="status">
+              
 	              <c:if test="${status.index eq 0 }">
 		              <div class="tab-pane active show" id="tab-${review.reviewCode }">
+
 		                <div class="row">
 		                  <div class="col-lg-8 details order-2 order-lg-1">
 		                  	<div id="star${review.reviewCode }">
@@ -429,8 +439,13 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 		                  </div>
 		                  <div class="col-lg-4 text-center order-1 order-lg-2">
 		                  	<!-- 경로 나중에 바꿔주기 -->
+		                  	<input type="hidden" value="${review.artistId }" class="artistId">
+		                    <input type="hidden" value="${review.reviewStar }" class="reviewStar">
+		                    <input type="hidden" value="${review.reviewCode }" class="reviewCode">
+		                    <input type="hidden" value="${review.reviewContents }" class="reviewContents">
 		                  	<c:if test="${review.reviewPhoto ne null}">
-		                  	  <img src="resources/artistProfile/${review.reviewPhoto }" alt="" class="img-fluid">
+		                  	  <img src="resources/review/${review.customerId }/${review.reviewCode}/${review.reviewPhoto }" alt="" class="img-fluid">
+		                  	  <input type="hidden" value="${review.reviewPhoto }" class="reviewPhoto" id="reviewPhoto${review.reviewCode }">
 		                    </c:if>
 		                  </div>
 		                </div>
@@ -457,10 +472,14 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 		                    <h5>${review.reviewContents }</h5>
 		                  </div>
 		                  <div class="col-lg-4 text-center order-1 order-lg-2">
-		                  	<!-- 경로 나중에 바꿔주기 -->
 		                  	<c:if test="${review.reviewPhoto ne null}">
-		                  	  <img src="resources/artistProfile/${review.reviewPhoto }" alt="" class="img-fluid">
+		                  	  <img src="resources/review/${review.customerId }/${review.reviewCode}/${review.reviewPhoto }" alt="" class="img-fluid">
+		                  	  <input type="hidden" value="${review.reviewPhoto }" class="reviewPhoto" id="reviewPhoto${review.reviewCode }">
 		                    </c:if>
+		                    <input type="hidden" value="${review.artistId }" class="artistId">
+		                    <input type="hidden" value="${review.reviewStar }" class="reviewStar">
+		                    <input type="hidden" value="${review.reviewCode }" class="reviewCode">
+		                    <input type="hidden" value="${review.reviewContents }" class="reviewContents">
 		                  </div>
 		                </div>
 		              </div>
@@ -469,14 +488,18 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
            </div>
 		 </div>
        </div>
+       </div>
+
 		<script>
 		$(function(){
 				 $(".modify").hide();
+				 $(".delete").hide();
 				 $(".active").show();
 				})
 						
 			$(".nav-item").on("click",function(){
 				$(".modify").hide();
+				$(".delete").hide();
 				$(this).find("span").children().show();
 			});
 		</script>																																																																																		/div>
@@ -501,35 +524,42 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 						</button>
 					</div>
 					<div class="modal-body book-a-table">
-						<form action="InsertArtistInfo.na" 
+						<form action="/modifyReview.na" 
 						method="post" role="form" class="php-email-form modalActionCheck" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
 				          <div>
 				         	<!-- 타투샵이름 -->
 				            <div class="col-lg-4 col-md-6 form-group">
 				              ARTIST SHOP NAME 
-				              <input type="text" value="" name="name" class="form-control artistShopName" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="1글자 이상 입력해주세요.">
+				              <input type="text" value="" name="artistId" class="form-control artistShopName" id="artistId" readonly>
+				              <input type="hidden" value="" name="reviewCode" id="reviewCode">
 				              <div class="validate"></div>
 				            </div>
-				            <!-- 프로필사진 업로드-->
+				            <!-- 리뷰사진 업로드-->
 				            <div class="col-lg-4 col-md-6 form-group">
 				              MY PROFILE 
 				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile"> 
+				              <input type="hidden" name="originFile" id="originFile" value="">
 				            </div>
-				            <!-- 자기소개  -->
+				            <!-- 리뷰 내용  -->
 				            <div class="form-group">
-				               INFO 
-				               <textarea class="form-control artistmodalInfo" name="myInfo" cols="600" rows="5"  placeholder="Your Info" style="resize: none;"></textarea>
+				            <div id="star">
+		                  		<span style="color:yellow"><i class="far fa-star fa-2x grade" id="1"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="2"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="3"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="4"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="5"></i></span>
+			                  	<input type="hidden" name="reviewStar" id="reviewStar" value="">
+		                  	</div>
+				               CONTENT 
+				               <textarea class="form-control artistmodalInfo" id="reviewContents" name="reviewContents" cols="600" rows="5" style="resize: none;"></textarea>
 				               <div class="validate"></div>
 				            </div>				            				            
 				          </div>
 				          <div class="mb-3">
 				            <div class="loading">Loading</div>
 				          </div>
-				          <div class="text-center"><button type="submit" class="artistInfoButton"></button></div>
+				          <div class="text-center"><button type="submit">리뷰 수정</button></div>
 				        </form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
 					</div>
 				</div>
 			</div>
@@ -545,6 +575,63 @@ z				              <input type="text" value="${ loginCustomer.customerName }" na
 					$(".address").postcodifyPopUp();
 				})
 		</script>
+		
+		
+		       <script>
+		       
+				 $(function(){
+					 $("#star${review.reviewCode }").children("#grade${review.reviewStar}").prevAll().children().attr("class","fas fa-star fa-2x");
+					 $("#star${review.reviewCode }").children("#grade${review.reviewStar}").children().attr("class","fas fa-star fa-2x");
+				 }) 
+				 <!-- 모달에 데이터 입력 바꾸기 -->
+				$(".modify").on("click",function(){
+					var review = $(this).val();
+					var artist = $("#"+review).find(".artistId").val();
+					var reviewStar = $("#"+review).find(".reviewStar").val();
+					var reviewCode = $("#"+review).find(".reviewCode").val();
+					var reviewContents = $("#"+review).find(".reviewContents").val();
+					var reviewPhoto = $("#"+review).find(".reviewPhoto").val();
+					$("#artistId").val(artist);
+					$("#originFile").val(reviewPhoto);
+					$("#reviewCode").val(reviewCode);
+					$("#reviewContents").val(reviewContents);
+					$("#"+reviewStar).parent().prevAll().children().attr("class","fas fa-star fa-2x grade");
+					$("#"+reviewStar).attr("class","fas fa-star fa-2x grade");
+					$("#reviewStar").val(reviewStar);
+				})
+				<!-- 별점 바꾸기 -->
+				$(".grade").on("click", function(){
+					var grade = $(this).attr("id");
+					$(".grade").attr("class","far fa-star fa-2x grade")
+					$("#reviewStar").val(grade);
+					$("#"+grade).parent().prevAll().children().attr("class","fas fa-star fa-2x grade");
+					$(this).attr("class","fas fa-star fa-2x grade");
+				})
+				
+				
+				$(".delete").on("click",function(){
+					var reviewCode = $(this).val();
+					var reviewPhoto = $("#reviewPhoto"+reviewCode).val();
+					var customerId = "${loginCustomer.customerId}";
+					
+ 					$.ajax({
+						type: "post",
+						url: "/deleteReview.na",
+						data: {
+							"reviewCode" : reviewCode,
+							"reviewPhoto" : reviewPhoto,
+							"customerId" : customerId
+						},
+						success: function (data) {
+							if(data>0){
+							$("#item"+data).remove();
+							alert("리뷰 삭제가 완료되었습니다.")
+							}
+						}
+					})  
+					/* $(this).parent().parent().remove(); */
+				})
+			</script>
 </html>
 
 

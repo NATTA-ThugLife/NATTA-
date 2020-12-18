@@ -41,6 +41,16 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 		return store.selectListReview(customerId);
 	}
 
+	@Override
+	public int modifyReview(Review review) {
+		return store.modifyReview(review);
+	}
+
+	@Override
+	public int deleteReview(int reviewCode) {
+		return store.deleteReview(reviewCode);
+	}
+
 
 	
 	

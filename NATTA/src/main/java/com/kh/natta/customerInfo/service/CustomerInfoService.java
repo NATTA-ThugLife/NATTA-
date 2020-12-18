@@ -44,4 +44,18 @@ public interface CustomerInfoService {
 	 * @return
 	 */
 	public ArrayList<Review> selectListReview(String customerId);
+	
+	/**
+	 * 리뷰 수정 메소드
+	 * @param review
+	 * @return
+	 */
+	public int modifyReview(Review review);
+	
+	/**
+	 * 리뷰 삭제 메소드
+	 * @param reviewCode
+	 * @return
+	 */
+	public int deleteReview(int reviewCode);
 }

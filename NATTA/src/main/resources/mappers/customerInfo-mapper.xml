@@ -69,4 +69,13 @@
 	<select id="selectListReview" resultMap="ReviewResultMap">
 		SELECT * FROM REVIEW LEFT OUTER JOIN ARTISTINFO USING(ARTIST_ID) WHERE CUSTOMER_ID = #{customerId}
 	</select>
+	
+	<update id="modifyReview">
+		UPDATE REVIEW SET REVIEW_CONTENTS = #{reviewContents} , REVIEW_STAR = #{reviewStar} , REVIEW_MODIFYDATE = SYSDATE , REVIEW_PHOTO = #{reviewPhoto} WHERE REVIEW_CODE = #{reviewCode}
+	</update>
+	
+	<delete id="deleteReview">
+		DELETE FROM REVIEW
+		WHERE REVIEW_CODE = #{reviewCode}
+	</delete>
 </mapper>

@@ -97,7 +97,12 @@
 		</c:if>     	
         	<li><a href="reservation.na?artistId=${artistInfo.artistId }"><i class="icofont-calendar"></i> Reservation</a></li>
           	<li><a href="#resume"><i class="bx bx-user"></i><span>Resume</span></a></li>
-          	<li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
+          	<c:if test="${ artistPageId eq loginArtist.artistId }">
+          	<li><a href="/chatting.na"><i class="bx bx-envelope"></i> My Message</a></li>
+          	</c:if>
+          	<c:if test="${ artistPageId ne loginArtist.artistId }">
+          	<li><a href="/chatting.na?artistId=${artistPageId }"><i class="bx bx-envelope"></i> Contact</a></li>
+          	</c:if>
         </ul>            
         </nav><!-- .nav-menu -->
       </div>      

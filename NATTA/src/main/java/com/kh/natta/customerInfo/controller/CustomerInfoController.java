@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,6 @@ public class CustomerInfoController {
 	public String customerInfoView(String customerId, Model model) {
 		ArrayList<Following> fList = service.selectListFollowing(customerId);
 		ArrayList<Review> rList = service.selectListReview(customerId);
-		System.out.println(rList);
 		model.addAttribute("fList",fList);
 		model.addAttribute("rList",rList);
 		return "Customer-info/customerPage";
@@ -71,7 +71,6 @@ public class CustomerInfoController {
 	// 파일 저장
 		public String saveFile(MultipartFile file, HttpServletRequest request, String customerId) {
 			String root = request.getSession().getServletContext().getRealPath("resources");
-			// 채팅 폴더 만들기 잊지말기
 			String savePath = root + "\\customerProfile\\" + customerId;
 			File folder = new File(savePath);
 			
@@ -129,6 +128,82 @@ public class CustomerInfoController {
 				return following.getArtistId();
 			}else {
 				return null;
+			}
+		}
+		
+		@RequestMapping(value="/modifyReview.na", method = RequestMethod.POST)
+		public String modifyReview(Review review, String originFile, MultipartFile uploadFile, HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			Customer customer = (Customer)session.getAttribute("loginCustomer");
+			String customerId = customer.getCustomerId();
+			if(!uploadFile.getOriginalFilename().isEmpty()) {
+				deleteReviewFile(originFile, customerId, request,review.getReviewCode());
+				String renameFileName = saveReviewFile(uploadFile,request,customerId, review.getReviewCode());
+				review.setReviewPhoto(renameFileName);
+			}else {
+				review.setReviewPhoto(originFile);
+			}
+			int result = service.modifyReview(review);
+			return "redirect:/customerInfo.na?customerId="+customerId;
+		}
+
+
+		// 파일 저장
+		public String saveReviewFile(MultipartFile file, HttpServletRequest request, String customerId, int reviewCode) {
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			// 채팅 폴더 만들기 잊지말기
+			String savePath = root + "\\review\\" + customerId + "\\" + reviewCode;
+			File folder = new File(savePath);
+			
+			if(!folder.exists()) {
+				folder.mkdir();
+			}
+			
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String originalFileName = file.getOriginalFilename();
+			String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			
+			String filePath = folder + "\\" + renameFileName;
+			
+			try {
+				file.transferTo(new File(filePath));
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+			return renameFileName;
+		}
+		
+
+		
+		public void deleteReviewFile(String fileName,String customerId, HttpServletRequest request , int reviewCode) {
+		      String root = request.getSession().getServletContext().getRealPath("resources");
+		      String savePath = root + "\\review\\" + customerId + "\\" + reviewCode;
+		      
+		      File file = new File(savePath + "\\" + fileName);
+		      if (file.exists()) {
+		         file.delete();
+		      }
+		   }
+		
+		public void deleteFolder(String customerId,HttpServletRequest request,int reviewCode) {
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			String deletePath = root + "\\review\\" + customerId + "\\" + reviewCode;
+			File folder = new File(deletePath);
+			folder.delete();
+		}
+		
+		@ResponseBody
+		@RequestMapping(value = "/deleteReview.na", method = RequestMethod.POST)
+		public int deleteReview(int reviewCode, String reviewPhoto, String customerId, HttpServletRequest request) {
+			deleteReviewFile(reviewPhoto, customerId, request, reviewCode);
+			deleteFolder(customerId,request,reviewCode);
+			int result = service.deleteReview(reviewCode);
+			
+			if(result > 0) {
+				return reviewCode;
+			}else {
+				return 0;
 			}
 		}
 }

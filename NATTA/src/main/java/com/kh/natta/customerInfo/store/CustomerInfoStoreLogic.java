@@ -41,4 +41,15 @@ public class CustomerInfoStoreLogic implements CustomerInfoStore {
 	public ArrayList<Review> selectListReview(String customerId) {
 		return (ArrayList)session.selectList("customerInfoMapper.selectListReview", customerId);
 	}
+
+	@Override
+	public int modifyReview(Review review) {
+		return session.update("customerInfoMapper.modifyReview",review);
+	}
+
+	@Override
+	public int deleteReview(int reviewCode) {
+		return session.delete("customerInfoMapper.deleteReview",reviewCode);
+	}
+	
 }
