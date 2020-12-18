@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>일반 회원 가입</title>
+<title>회원 가입</title>
 <style type="text/css">
 #success {
 	color: green;

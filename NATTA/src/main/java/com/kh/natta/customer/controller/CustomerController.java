@@ -2,10 +2,13 @@ package com.kh.natta.customer.controller;
 
 import java.util.Locale;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +26,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService service;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 
 	// 로그인 페이지
 	@RequestMapping(value = "login.na", method = RequestMethod.GET)
@@ -108,50 +114,75 @@ public class CustomerController {
 	}
 
 	// 아이디 찾기
+	/*
+	 * @RequestMapping(value = "findCustomerId.na") public ModelAndView
+	 * findCustomerId(String customerName, String email, ModelAndView mv,
+	 * HttpServletRequest request) { HttpSession session = request.getSession();
+	 * Customer customer = new Customer(); customer.setCustomerName(customerName);
+	 * customer.setEmail(email); // System.out.println(customerName); //
+	 * System.out.println(email); Customer findCustomer =
+	 * service.findIdEmail(customer); if (findCustomer != null) {
+	 * mv.addObject("findCustomer", findCustomer); mv.setViewName("join/foundId"); }
+	 * else { mv.addObject("msg", "로그인 실패!"); mv.setViewName("common/errorPage"); }
+	 * return mv; }
+	 */
+	@ResponseBody
 	@RequestMapping(value = "findCustomerId.na")
-	public ModelAndView findCustomerId(String customerName, String email, ModelAndView mv, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public String findCustomerId(String customerName, String email) {
 		Customer customer = new Customer();
 		customer.setCustomerName(customerName);
 		customer.setEmail(email);
 		// System.out.println(customerName);
 		// System.out.println(email);
 		Customer findCustomer = service.findIdEmail(customer);
-		if (findCustomer != null) {
-			mv.addObject("findCustomer", findCustomer);
-			mv.setViewName("join/foundId");
-		} else {
-			mv.addObject("msg", "로그인 실패!");
-			mv.setViewName("common/errorPage");
+		if(findCustomer != null) {
+		    return findCustomer.getCustomerId();
+		}else {
+			return"fail";
 		}
-		return mv;
 	}
-
 	// 비번 찾기 페이지
 	@RequestMapping(value = "findPwd.na", method = RequestMethod.GET)
-	public String findPwd(Locale locale, Model model) {
+	public String finPwdView() {
 		return "join/findPwd";
 	}
-
-	// 비번 찾기 본인 인증
-	/*
-	 * @RequestMapping(value="findPwdCerti.na", method = RequestMethod.POST) public
-	 * ModelAndView findPwdCerti(String customerId, String customerName, String
-	 * email, ModelAndView mv, HttpServletRequest request) { HttpSession session =
-	 * request.getSession(); Customer customer = new Customer();
-	 * customer.setCustomerId(customerId); customer.setCustomerName(customerName);
-	 * customer.setEmail(email);
-	 * 
-	 * System.out.println(customerId); System.out.println(customerName);
-	 * System.out.println(email);
-	 * 
-	 * Customer findCustomerPwd = service.findPwdEmail(customer); if(findCustomerPwd
-	 * != null) { mv.addObject("findCustomerPwd", findCustomerPwd);
-	 * mv.setViewName("join/findPwdCerti"); }else {
-	 * mv.addObject("msg","정보를 입력..해주세요"); mv.setViewName("common/errorPage"); }
-	 * return mv; }
-	 */
-	
 	
 
+	// 비번 찾기 이메일 전송
+	@RequestMapping(value = "mailSending.na", method = RequestMethod.POST)
+	public String findPwd(Model model,String customerId, String customerName, String email) {
+		Customer customer = new Customer();
+		customer.setCustomerId(customerId);
+		customer.setCustomerName(customerName);
+		customer.setEmail(email);
+		
+		Customer findCustomerPwd = service.findPwdEmail(customer);
+	    //System.out.println(findCustomerPwd);
+		
+		if(findCustomerPwd != null) {		
+		String tomail = findCustomerPwd.getEmail(); // 받는 사람 이메일
+		//System.out.println(tomail);
+		String title = "임시 비밀번호입니다."; // 제목
+		String content = findCustomerPwd.getCustomerId()+"님의 비밀번호는 "+findCustomerPwd.getPassword()+"입니다."; // 내용
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+			messageHelper.setFrom("thugkinghansol@gmail.com"); // 보내는사람 생략하면 정상작동을 안함
+			messageHelper.setTo(tomail); // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+			messageHelper.setText(content); // 메일 내용
+			// System.out.println(messageHelper);
+			mailSender.send(message);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return "join/login";
+	} else {
+		return "redirect:findPwd.na";
+	}
+}
+		
+	
 }
