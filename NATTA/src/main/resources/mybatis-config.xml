@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.natta.qna.domain.QnaComment" alias="QnaComment"/>
 		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistInfoPrice" alias="ArtistInfoPrice"/>
 		<typeAlias type="com.kh.natta.customerInfo.domain.Following" alias="Following"/>
+		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistFollow" alias="ArtistFollow"/>
 		<typeAlias type="com.kh.natta.customerInfo.domain.Review" alias="Review"/>
 	</typeAliases>
 	
