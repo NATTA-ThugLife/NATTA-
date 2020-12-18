@@ -47,18 +47,21 @@ public class ReservationController {
 			Artist artist = rService.selectOneArtist(artistId);
 			ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);	
 			ArrayList<Reservation> date = rService.selectListDate(artistId);
-			System.out.println(date);
-			ArrayList<String> reservedList = new ArrayList<String>();
 			
+			ArrayList<String> reservedList = new ArrayList<String>();
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+			try {
 			for ( Reservation reserve : date) {
 				int year = reserve.getReservationDate().getYear()+1900;
 				int month = reserve.getReservationDate().getMonth()+1;
-				int day = reserve.getReservationDate().getDay();
+				int day = reserve.getReservationDate().getDate();
 				String rDate = year + "-" + month + "-" + day;
 				reservedList.add(rDate);
 			}
-			System.out.println(reservedList.toArray(new String[reservedList.size()])[0]);
+			}catch(IndexOutOfBoundsException e){
+				System.out.println(e);
+			}
+			System.out.println(reservedList);
 			model.addAttribute("reservationDate", reservedList.toArray(new String[reservedList.size()]));
 			model.addAttribute("priceList",priceList);
 			model.addAttribute("artist",artist);
