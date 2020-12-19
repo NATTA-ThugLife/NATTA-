@@ -13,7 +13,9 @@
 		<jsp:include page="../common/headerNone.jsp"/>
 	</header>
 	<br><br><br><br><br><br>
-	<section id="testimonials" class="testimonials section-bg">
+<!-- 	    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">  css 파일 about section-bg-->
+	<section id="testimonials" class="about testimonials section-bg">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
           <h2>All</h2>
@@ -23,16 +25,24 @@
 		<c:forEach items="${ aList }" var="artist">
 			   <c:url var="artistInfoPage" value="artistInfoPage.na">
 			   		<c:param name="artistId" value="${ artist.artistId }"/>
-			   </c:url>	
+			   </c:url>
 	          <div class="testimonial-item" style="float:left;">
 	            <p style="width:300px;">Artist Name<br>
 	              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
 	             	 <a href="${ artistInfoPage }">${ artist.name }</a>
+	             	 
 	              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
 	            </p>
-	            <img src="resources/artistInfoFile/Profile/${ artist.myReProfile }" class="testimonial-img" alt="">
+	            <c:if test="${ artist.myReProfile eq null }">
+	              <img src="resources/artistInfoFile/Profile/NATTAprofile.png" style="width:80px; height:80px;" class="testimonial-img" alt="">
+	              Follow : ${ artist.count }  
+	            </c:if>
+	            <c:if test="${ artist.myReProfile ne null }">
+	          	  <img src="resources/artistInfoFile/Profile/${ artist.myReProfile }" style="width:80px; height:80px;" class="testimonial-img" alt="">
+	          	  Follow : ${ artist.count+9291 }
+	            </c:if>
 	          </div>
-		</c:forEach>          
+		</c:forEach>
 	</c:if>
 	<c:if test="${ empty aList }">
 		<h1 style="color:white;">등록된 아티스트가 없습니다.</h1>
