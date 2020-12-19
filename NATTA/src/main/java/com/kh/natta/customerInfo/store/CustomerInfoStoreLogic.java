@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.customerInfo.domain.Following;
 import com.kh.natta.customerInfo.domain.Review;
+import com.kh.natta.reservation.domain.Reservation;
 
 @Repository
 public class CustomerInfoStoreLogic implements CustomerInfoStore {
@@ -50,6 +51,11 @@ public class CustomerInfoStoreLogic implements CustomerInfoStore {
 	@Override
 	public int deleteReview(int reviewCode) {
 		return session.delete("customerInfoMapper.deleteReview",reviewCode);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectListReservation(String customerId) {
+		return (ArrayList)session.selectList("customerInfoMapper.selectListReservation",customerId);
 	}
 	
 }

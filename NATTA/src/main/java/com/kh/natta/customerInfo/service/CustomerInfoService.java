@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.customerInfo.domain.Following;
 import com.kh.natta.customerInfo.domain.Review;
+import com.kh.natta.reservation.domain.Reservation;
 
 public interface CustomerInfoService {
 	
@@ -58,4 +59,11 @@ public interface CustomerInfoService {
 	 * @return
 	 */
 	public int deleteReview(int reviewCode);
+	
+	
+	/**
+	 * 사용자 예약을 가져오는 메소드
+	 * 
+	 */
+	public ArrayList<Reservation> selectListReservation(String customerId);
 }

@@ -25,7 +25,7 @@
   <link href="resources/assets/css/style.css" rel="stylesheet">
   
   
-    
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a8e5007416460a5bee56aaba2bb1ea6d&libraries=services"></script>
   
   
 
@@ -49,6 +49,14 @@
   color: #fff;
   transition: 0.4s;
   border-radius: 50px;	
+ }
+ .res{
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+  background: #0c0b09;
+  border-color: #625b4b;
+  color: white;
  }      
  </style>
  
@@ -143,7 +151,12 @@
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
             <div class="about-img">
+            	<c:if test="${ loginCustomer.customerProfile ne null}">
               <img src="resources/customerProfile/${loginCustomer.customerId }/${ loginCustomer.customerProfile }" alt="" alt="" style="width: 600px; height:500px;">
+              </c:if>
+              <c:if test="${ loginCustomer.customerProfile eq null}">
+              <img src="resources/artistInfoFile/Profile/NATTAprofile.png" alt="" style="width: 540px; height:403px;">    
+              </c:if>
             </div>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
@@ -268,7 +281,7 @@
 				</div>
 
   </section>
-< <script>
+ <script>
 		function dup(){
 			var flag = false;
 			var dupPwd = $("#dupPwd").val();
@@ -392,8 +405,10 @@
           <h2>My</h2>
           <p>Review</p>
         </div>
-
-				
+        <c:if test="${empty rList }">
+         	등록된 리뷰가 없습니다.
+        </c:if>
+		<c:if test="${!empty rList }">
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-3">
             <ul class="nav nav-tabs flex-column">
@@ -485,9 +500,11 @@
 		              </div>
 	              </c:if>
               </c:forEach>
+              
            </div>
 		 </div>
        </div>
+       </c:if>
        </div>
 
 		<script>
@@ -502,7 +519,7 @@
 				$(".delete").hide();
 				$(this).find("span").children().show();
 			});
-		</script>																																																																																		/div>
+		</script>																																																																															
     </section>
     <!-- 리뷰 끝 -->
 
@@ -565,6 +582,155 @@
 			</div>
 		</div> 
 		<!-- 리뷰 수정 모달 끝-->
+		
+				<!-- 리뷰 수정 모달 -->
+		<div class="modal fade" id="modifyReview" tabindex="-1" role="dialog"
+			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
+				<!-- 센터모달창 추가  modal-dialog-centered -->
+				<div class="modal-content" style="background-color: black">
+					<div class="modal-header">
+						<h5 class="modal-title" id="TEST">
+							<b>리뷰 정보</b>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body book-a-table">
+						<form action="/modifyReview.na" 
+						method="post" role="form" class="php-email-form modalActionCheck" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
+				          <div>
+				         	<!-- 타투샵이름 -->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              ARTIST SHOP NAME 
+				              <input type="text" value="" name="artistId" class="form-control artistShopName" id="artistId" readonly>
+				              <input type="hidden" value="" name="reviewCode" id="reviewCode">
+				              <div class="validate"></div>
+				            </div>
+				            <!-- 리뷰사진 업로드-->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              MY PROFILE 
+				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile" > 
+				              <input type="hidden" name="originFile" id="originFile" value="">
+				            </div>
+				            <!-- 리뷰 내용  -->
+				            <div class="form-group">
+				            <div id="star">
+		                  		<span style="color:yellow"><i class="far fa-star fa-2x grade" id="1"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="2"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="3"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="4"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="5"></i></span>
+			                  	<input type="hidden" name="reviewStar" id="reviewStar" value="">
+		                  	</div>
+				               CONTENT 
+				               <textarea class="form-control artistmodalInfo" id="reviewContents" name="reviewContents" cols="600" rows="5" style="resize: none;"></textarea>
+				               <div class="validate"></div>
+				            </div>				            				            
+				          </div>
+				          <div class="mb-3">
+				            <div class="loading">Loading</div>
+				          </div>
+				          <div class="text-center"><button type="submit">리뷰 수정</button></div>
+				        </form>
+					</div>
+				</div>
+			</div>
+		</div> 
+		
+		<!--  -->
+		
+   <section id="review" class="specials">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>My</h2>
+          <p>Reservation</p>
+        </div>
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+        	<table class="table" style="color:white">
+			 <thead>
+			   <tr style="text-align: center;">
+			      <th>아티스트 샵</th>
+			      <th>아티스트 명</th>
+			      <th>예약 스타일</th>
+			      <th>예약 날짜</th>
+			      <th>예약 상태</th>
+			      <th>상세보기</th>
+			   </tr>
+			 </thead>
+			 <tbody>
+			<c:forEach items="${resList }" var="res" >
+				<tr style="text-align: center;">
+			      <td id="shopName${res.reservationCode }">${res.shopName }</td>
+			      <td id="artistName${res.reservationCode }">${res.artistName }</td>
+			      <td id="style${res.reservationCode }">${res.style }</td>
+			      <td id="reservationDate${res.reservationCode }">${res.reservationDate }</td>
+			      <input type="text" value="${res.renameFilename }" id="renameFilename${res.reservationCode }">
+			      <c:if test="${res.status eq 0}"><td>예약 대기</td></c:if>
+			      <c:if test="${res.status eq 1}"><td>예약 확정</td></c:if>			      
+			      <td><button value="${res.reservationCode }" class="detail">상세보기</button></td>
+			   </tr>
+			</c:forEach>
+			 </tbody> 
+			</table>
+       </div>
+      </div>
+																																																																														
+    </section>
+    
+    
+    	<!-- 예약 디테일 뷰-->
+		<div class="modal fade" id="detailReservation" tabindex="-1" role="dialog"
+			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
+				<!-- 센터모달창 추가  modal-dialog-centered -->
+				<div class="modal-content" style="background-color: black;">
+					<div class="modal-header">
+						<h5 class="modal-title" id="TEST">
+							<b>예약 정보</b>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body book-a-table">
+				          <div>
+				         	<!-- 타투샵이름 -->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              ARTIST SHOP NAME 
+				              <input type="text" value="" name="shopName" class="form-control" id="shopName" readonly>
+				              <div class="validate"></div>
+				            </div>
+				            <!-- 리뷰사진 업로드-->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              ARTIST NAME
+				              <input type="text" class="form-control" id="artistName" readonly> 
+				            </div>
+				            <div class="col-lg-4 col-md-6 form-group">
+				              reservationDate
+				              <input type="text" class="form-control" id="reservationDate" readonly> 
+				            </div>
+				            <!-- 리뷰 내용  -->
+				            <div class="col form-group">
+				                                 도안
+								<img src="resources/images/ruploadFiles/">              
+				               
+				            </div>
+				            
+				            <div id="map" style=" width: 100%; height: 350px; margin-top: 10px;">
+							</div>				            				            
+				          </div>
+				          <div class="mb-3">
+				          </div>
+				          <div class="text-center"><button type="submit">리뷰 수정</button></div>
+					</div>
+				</div>
+			</div>
+		</div> 
   	<footer>
 		 <jsp:include page="../common/footer.jsp"/>  	 
   	</footer>
@@ -577,13 +743,28 @@
 		</script>
 		
 		
+		<script>
+			$(".detail").on("click",function(){
+				var reservationCode = $(this).val();
+				var shopName = $("#shopName"+reservationCode).text();
+				var artistName = $("#artistName"+reservationCode).text();
+				var style = $("#style"+reservationCode).text();
+				var reservationDate = $("#reservationDate"+reservationCode).text();
+				$("#shopName").val(shopName);
+				$("#artistName").val(artistName);
+				$("#reservationDate").val(reservationDate);
+				$("#detailReservation").modal("show");
+				mapRead();
+			})
+		</script>
+		
 		       <script>
 		       
 				 $(function(){
 					 $("#star${review.reviewCode }").children("#grade${review.reviewStar}").prevAll().children().attr("class","fas fa-star fa-2x");
 					 $("#star${review.reviewCode }").children("#grade${review.reviewStar}").children().attr("class","fas fa-star fa-2x");
 				 }) 
-				 <!-- 모달에 데이터 입력 바꾸기 -->
+				  /* 모달에 데이터 입력 바꾸기  */
 				$(".modify").on("click",function(){
 					var review = $(this).val();
 					var artist = $("#"+review).find(".artistId").val();
@@ -599,7 +780,7 @@
 					$("#"+reviewStar).attr("class","fas fa-star fa-2x grade");
 					$("#reviewStar").val(reviewStar);
 				})
-				<!-- 별점 바꾸기 -->
+				/* 별점 바꾸기  */
 				$(".grade").on("click", function(){
 					var grade = $(this).attr("id");
 					$(".grade").attr("class","far fa-star fa-2x grade")
@@ -632,313 +813,75 @@
 					/* $(this).parent().parent().remove(); */
 				})
 			</script>
+			
+	<script>
+	function mapRead(){
+		
+		$("#detailReservation").on("shown.bs.modal", function() {
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+			    };  
+			
+			// 지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			
+			
+			
+			// 주소-좌표 변환 객체를 생성합니다
+			var geocoder = new kakao.maps.services.Geocoder();
+			
+			// 주소로 좌표를 검색합니다
+			geocoder.addressSearch("백석로 151", function(result, status) {
+			
+			    // 정상적으로 검색이 완료됐으면 
+			     if (status === kakao.maps.services.Status.OK) {
+			
+			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			
+			        // 결과값으로 받은 위치를 마커로 표시합니다
+			        var marker = new kakao.maps.Marker({
+			            map: map,
+			            position: coords
+			        });
+			
+			        // 인포윈도우로 장소에 대한 설명을 표시합니다
+			        /* var infowindow = new kakao.maps.InfoWindow({ */
+			        var    content='<div class="wrap">' + 
+				                '    <div class="info">' + 
+				                '        <div class="title">' + 
+				                '            ${artistInfo.name}' + 
+				                '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+				                '        </div>' + 
+				                '        <div class="body">' + 
+				                '            <div class="img">' +
+				                '                <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" width="73" height="70">' +
+				                '			</div>' + 
+				                '            <div class="desc">' + 
+				                '                <div class="ellipsis">'+/*workAddress*/+'</div>' + 
+				                '            </div>' + 
+				                '        </div>' + 
+				                '    </div>' +    
+				                '</div>';
+			            	
+			        /* });
+			        infowindow.open(map, marker); */
+			        var overlay = new kakao.maps.CustomOverlay({
+			            content: content,
+			            map: map,
+			            position: marker.getPosition()       
+			        });
+			        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+			        map.setCenter(coords);
+			    } 
+			});	
+		
+		
+		})		
+		
+
+	}	
+	</script>
+			
 </html>
-
-
- 
-<!--      ======= Specials Section =======
-    <section id="specials" class="specials">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Specials</h2>
-          <p>Check Our Specials</p>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-3">
-            <ul class="nav nav-tabs flex-column">
-              <li class="nav-item">
-                <a class="nav-link active show" data-toggle="tab" href="#tab-1">Modi sit est</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab-2">Unde praesentium sed</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab-3">Pariatur explicabo vel</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab-4">Nostrum qui quasi</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab-5">Iusto ut expedita aut</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab-6">Iusto ut expedita aut</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab-7">Iusto ut expedita aut</a>
-              </li>
-
-            </ul>
-          </div>
-          <div class="col-lg-9 mt-4 mt-lg-0">
-            <div class="tab-content">
-              <div class="tab-pane active show" id="tab-1">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Architecto ut aperiam autem id</h3>
-                    <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                    <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="resources/assets/img/specials-1.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-2">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Et blanditiis nemo veritatis excepturi</h3>
-                    <p class="font-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                    <p>Ea ipsum voluptatem consequatur quis est. Illum error ullam omnis quia et reiciendis sunt sunt est. Non aliquid repellendus itaque accusamus eius et velit ipsa voluptates. Optio nesciunt eaque beatae accusamus lerode pakto madirna desera vafle de nideran pal</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="resources/assets/img/specials-2.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-3">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
-                    <p class="font-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
-                    <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et harum voluptatem optio quae</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="resources/assets/img/specials-3.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-4">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
-                    <p class="font-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
-                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="resources/assets/img/specials-4.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-5">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
-                    <p class="font-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
-                    <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="resources/assets/img/specials-5.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              
-              <div class="tab-pane" id="tab-6">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
-                    <p class="font-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
-                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="resources/assets/img/specials-4.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              
-              <div class="tab-pane" id="tab-7">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
-                    <p class="font-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
-                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="resources/assets/img/specials-4.png" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>End Specials Section -->
-    <!-- ======= Contact Section ======= -->
- <!--    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Contact</h2>
-          <p>Contact Us</p>
-        </div>
-      </div>
-
-      <div data-aos="fade-up">
-        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <div class="container" data-aos="fade-up">
-
-        <div class="row mt-5">
-
-          <div class="col-lg-4">
-            <div class="info">
-              <div class="address">
-                <i class="icofont-google-map"></i>
-                <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
-
-              <div class="open-hours">
-                <i class="icofont-clock-time icofont-rotate-90"></i>
-                <h4>Open Hours:</h4>
-                <p>
-                  Monday-Saturday:<br>
-                  11:00 AM - 2300 PM
-                </p>
-              </div>
-
-              <div class="email">
-                <i class="icofont-envelope"></i>
-                <h4>Email:</h4>
-                <p>info@example.com</p>
-              </div>
-
-              <div class="phone">
-                <i class="icofont-phone"></i>
-                <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <form action="resources/forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="form-row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validate"></div>
-                </div>
-                <div class="col-md-6 form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validate"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                <div class="validate"></div>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="message" rows="8" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                <div class="validate"></div>
-              </div>
-              <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section> --><!-- End Contact Section -->
-
-  
-
-  
-  
-  
-  
-  
-  
-  
-
-				
-
-		
-		
-	<!-- 아티스트 작품 등록 -->
- <%--  	<div class="modal fade" id="modalWork" tabindex="-1" role="dialog"
-			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
-			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
-				<!-- 센터모달창 추가  modal-dialog-centered -->
-				<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
-					<div class="modal-header">
-						<h5 class="modal-title" id="TEST">
-							<b>ARTIST WORK INSERT</b>
-						</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body book-a-table">
-						<form action="InsertArtistWork.na" 
-						method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
-				          <div>
-				            <!-- 프로필사진 업로드-->
-				            <div class="col-lg-4 col-md-6 form-group">
-				              MY WORKFile
-				              <input type="file" class="form-control" name="uploadFile">  
-				            </div>
-				            
-				            <!-- 스타일 -->
-				            <div class="col-lg-4 col-md-6 form-group">
-				              Tatto Style
-				              <select name="part" class="form-control" id="name">
-				              	<option value="등부위">등</option>
-				              	<option value="목부위">목</option>
-				              	<option value="어깨부위">어깨</option>
-				              	<option value="가슴부위">가슴</option>
-				              	<option value="팔부위">팔</option>
-				              	<option value="다리부위">다리</option>
-				              </select>
-				             <input type="text" name="style" class="form-control" id="name" placeholder="Tatto Style" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-				              <div class="validate"></div>
-				            </div>
-
-				         	<!-- 사이즈 -->
-				            <div class="col-lg-4 col-md-6 form-group">
-				              Tatto Size
-				              <input type="text" name="size" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-				              <div class="validate"></div>
-				            </div>				            
-				            
-				            
-				            <!-- 근무지주소 -->
-				            <div class="col-lg-4 col-md-6 form-group">
-				              WORK ADDRESS
-				              <input type="text" name="workAddress" class="form-control" id="name" placeholder="Your WorkAddress" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-				              <div class="validate"></div>
-				            </div>
-				            <!-- 자기소개  -->
-				            <div class="form-group">
-				               WORKINFO
-				               <textarea class="form-control" name="myInfo" cols="600" rows="5"  placeholder="Your Info" style="resize: none;"></textarea>
-				               <div class="validate"></div>
-				            </div>			            			            				            				            
-				          </div>
-				          <div class="mb-3">
-				            <div class="loading">Loading</div>
-				          </div>
-				          <div class="text-center"><button type="submit">INFO UPDATE</button></div>
- 				          <input type="hidden" name="artistId" value="${ loginArtist.artistId }">
-				        </form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
-					</div>
-				</div>
-			</div>
-		</div> 		 --%>

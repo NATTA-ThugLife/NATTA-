@@ -23,6 +23,7 @@ import com.kh.natta.customer.service.CustomerService;
 import com.kh.natta.customerInfo.domain.Following;
 import com.kh.natta.customerInfo.domain.Review;
 import com.kh.natta.customerInfo.service.CustomerInfoService;
+import com.kh.natta.reservation.domain.Reservation;
 
 
 @Controller
@@ -38,6 +39,9 @@ public class CustomerInfoController {
 	public String customerInfoView(String customerId, Model model) {
 		ArrayList<Following> fList = service.selectListFollowing(customerId);
 		ArrayList<Review> rList = service.selectListReview(customerId);
+		ArrayList<Reservation> resList = service.selectListReservation(customerId);
+		System.out.println(resList);
+		model.addAttribute("resList",resList);
 		model.addAttribute("fList",fList);
 		model.addAttribute("rList",rList);
 		return "Customer-info/customerPage";

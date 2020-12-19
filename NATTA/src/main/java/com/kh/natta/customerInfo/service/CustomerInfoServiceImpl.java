@@ -9,6 +9,7 @@ import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.customerInfo.domain.Following;
 import com.kh.natta.customerInfo.domain.Review;
 import com.kh.natta.customerInfo.store.CustomerInfoStore;
+import com.kh.natta.reservation.domain.Reservation;
 
 @Service
 public class CustomerInfoServiceImpl implements CustomerInfoService {
@@ -49,6 +50,11 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 	@Override
 	public int deleteReview(int reviewCode) {
 		return store.deleteReview(reviewCode);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectListReservation(String customerId) {
+		return store.selectListReservation(customerId);
 	}
 
 

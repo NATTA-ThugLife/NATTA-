@@ -15,9 +15,12 @@ public class Review {
 	private String name;
 	private String myProfile;
 	private String myReProfile;
+	private int reservationCode;
 	
 	
-	
+
+
+
 	public Review() {
 		super();
 	}
@@ -26,7 +29,7 @@ public class Review {
 
 	public Review(String artistId, int reviewCode, String reviewContents, String reviewPhoto, String reviewStar,
 			Date reviewCreateDate, Date reviewModifyDate, int reviewHit, String customerId, String name,
-			String myProfile, String myReProfile) {
+			String myProfile, String myReProfile, int reservationCode) {
 		super();
 		this.artistId = artistId;
 		this.reviewCode = reviewCode;
@@ -40,12 +43,25 @@ public class Review {
 		this.name = name;
 		this.myProfile = myProfile;
 		this.myReProfile = myReProfile;
+		this.reservationCode = reservationCode;
 	}
 
 
 
 	public String getArtistId() {
 		return artistId;
+	}
+
+
+
+	public int getReservationCode() {
+		return reservationCode;
+	}
+
+
+
+	public void setReservationCode(int reservationCode) {
+		this.reservationCode = reservationCode;
 	}
 
 
@@ -194,8 +210,12 @@ public class Review {
 				+ ", reviewPhoto=" + reviewPhoto + ", reviewStar=" + reviewStar + ", reviewCreateDate="
 				+ reviewCreateDate + ", reviewModifyDate=" + reviewModifyDate + ", reviewHit=" + reviewHit
 				+ ", customerId=" + customerId + ", name=" + name + ", myProfile=" + myProfile + ", myReProfile="
-				+ myReProfile + "]";
+				+ myReProfile + ", reservationCode=" + reservationCode + "]";
 	}
+
+
+
+	
 	
 	
 
