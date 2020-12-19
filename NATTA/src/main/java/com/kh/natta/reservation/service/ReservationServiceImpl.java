@@ -66,7 +66,10 @@ public class ReservationServiceImpl implements ReservationService{
 		return store.selectListDate(artistId);
 	}
 
-	
+	@Override
+	public ArrayList<Reservation> selectListTime(Reservation time) {
+		return store.selectListTime(time);
+	}
 
 	
 

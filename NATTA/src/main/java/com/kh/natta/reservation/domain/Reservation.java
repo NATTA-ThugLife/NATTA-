@@ -7,6 +7,7 @@ public class Reservation {
 	private int reservationCode;
 	private String artistName;
 	private Date reservationDate;
+	private String reservationTime;
 	private String address;
 	private String originalFilename;
 	private String renameFilename;
@@ -44,6 +45,14 @@ public class Reservation {
 
 	public void setReservationDate(Date reservationDate) {
 		this.reservationDate = reservationDate;
+	}
+
+	public String getReservationTime() {
+		return reservationTime;
+	}
+
+	public void setReservationTime(String reservationTime) {
+		this.reservationTime = reservationTime;
 	}
 
 	public String getAddress() {
@@ -142,13 +151,24 @@ public class Reservation {
 		this.shopName = shopName;
 	}
 
-	public Reservation(int reservationCode, String artistName, Date reservationDate, String address,
-			String originalFilename, String renameFilename, String tattooSize, String request, String style,
-			String part, String price, int status, String customerId, String artistId, String shopName) {
+	@Override
+	public String toString() {
+		return "Reservation [reservationCode=" + reservationCode + ", artistName=" + artistName + ", reservationDate="
+				+ reservationDate + ", reservationTime=" + reservationTime + ", address=" + address
+				+ ", originalFilename=" + originalFilename + ", renameFilename=" + renameFilename + ", tattooSize="
+				+ tattooSize + ", request=" + request + ", style=" + style + ", part=" + part + ", price=" + price
+				+ ", status=" + status + ", customerId=" + customerId + ", artistId=" + artistId + ", shopName="
+				+ shopName + "]";
+	}
+
+	public Reservation(int reservationCode, String artistName, Date reservationDate, String reservationTime,
+			String address, String originalFilename, String renameFilename, String tattooSize, String request,
+			String style, String part, String price, int status, String customerId, String artistId, String shopName) {
 		super();
 		this.reservationCode = reservationCode;
 		this.artistName = artistName;
 		this.reservationDate = reservationDate;
+		this.reservationTime = reservationTime;
 		this.address = address;
 		this.originalFilename = originalFilename;
 		this.renameFilename = renameFilename;
@@ -163,23 +183,6 @@ public class Reservation {
 		this.shopName = shopName;
 	}
 
-	@Override
-	public String toString() {
-		return "Reservation [reservationCode=" + reservationCode + ", artistName=" + artistName + ", reservationDate="
-				+ reservationDate + ", address=" + address + ", originalFilename=" + originalFilename
-				+ ", renameFilename=" + renameFilename + ", tattooSize=" + tattooSize + ", request=" + request
-				+ ", style=" + style + ", part=" + part + ", price=" + price + ", status=" + status + ", customerId="
-				+ customerId + ", artistId=" + artistId + ", shopName=" + shopName + "]";
-	}
-
-	
-	
-	
-	
-	
-	
-
-	
 	
 	
 }

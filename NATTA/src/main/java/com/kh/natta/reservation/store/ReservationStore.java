@@ -25,4 +25,7 @@ public interface ReservationStore {
 	public ArrayList<ArtistInfoPrice> selectListSize(ArtistInfoPrice size);
 	
 	public ArrayList<Reservation> selectListDate(String artistId);
+	
+	public ArrayList<Reservation> selectListTime(Reservation time);
+	
 }

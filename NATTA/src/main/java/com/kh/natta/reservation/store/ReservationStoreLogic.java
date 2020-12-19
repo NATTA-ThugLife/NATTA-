@@ -66,6 +66,12 @@ public class ReservationStoreLogic implements ReservationStore{
 		return (ArrayList)sqlSession.selectList("reservationMapper.selectListDate",artistId);
 	}
 
+	@Override
+	public ArrayList<Reservation> selectListTime(Reservation time) {
+		return (ArrayList)sqlSession.selectList("reservationMapper.selectListTime",time);
+	}
+
+
 	
 
 	

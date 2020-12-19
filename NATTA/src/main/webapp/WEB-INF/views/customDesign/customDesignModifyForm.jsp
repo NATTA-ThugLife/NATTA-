@@ -52,7 +52,7 @@
             <tr>
             	
             	<td colspan="2" align="center">
-            	<input type="submit" value="수정"> &nbsp;
+            	<input type="submit" onclick="return validate();" value="수정"> &nbsp;
             	<c:url var="cList" value="customDesignList.na">
             		<c:param name="page" value="${currentPage }"></c:param>
             	</c:url>
@@ -62,5 +62,20 @@
 		</table>
         </form>
     </section>
+    <script>
+    	function validate(){
+    		if($("#customTitle").val() == ""){
+    			alert("제목을 입력해주세요.")
+    			$("#customTitle").focus();
+    			return false;
+    		}
+    		if(CKEDITOR.instances.contents.getData() == ""){
+    			alert("내용을 입력해주세요.")
+    			return false;
+    		}else{
+    			return true;
+    		}
+    	}
+    </script>
     </body>
 </html>

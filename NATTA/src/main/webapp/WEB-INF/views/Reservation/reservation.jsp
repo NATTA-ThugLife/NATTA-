@@ -68,17 +68,23 @@
 				
 				
 				<select id="style" name="style">
-					<option>사이즈를 선택해주세요</option>
+					<option>스타일을 선택해주세요</option>
 					<c:forEach items="${priceList }" var="style">
 						<option value="${style.pStyle }">${style.pStyle }</option>
 					</c:forEach>
 				</select>
 				
 				<select id="tattooSize" name="tattooSize">
-					
+					<!-- <option>사이즈를 선택해주세요</option>
+					<option value=>38mmx38mm</option>
+					<option value=>65mmx76mm</option>
+					<option value=>102mmx127mm</option>
+					<option value=>152mmx152mm</option>
+					<option value=>203mmx152mm</option>
+					<option value=>210mmx297mm</option> -->
 				</select>
 				
-				<input type="text" id="price" name="price" placeholder="가격">
+				<input type="text" id="price" name="price" placeholder="가격" readonly>
 				<br><br><br>
 				
 				
@@ -95,7 +101,15 @@
 				
 				
 				  
-				<p>Date: <input type="text" name="reservationDate" id="datepicker"></p>
+				<p>Date: <input type="text" name="reservationDate" id="datepicker" placeholder="예약일을 선택해주세요" readonly></p>
+				
+				<select id="reservationTime" name="reservationTime">
+					<option>예약시간을 선택해주세요</option>
+			    	<option value="09:00 ~ 11:00">09:00 ~ 11:00</option>
+			    	<option value="11:00 ~ 13:00">11:00 ~ 13:00</option>
+			    	<option value="14:00 ~ 16:00">14:00 ~ 16:00</option>
+			    	<option value="16:00 ~ 18:00">16:00 ~ 18:00</option>
+			    </select>
 				
 				<!-- <input type="text" id="datepicker" name="reservationDate"> -->
 				
@@ -210,7 +224,6 @@
 			});
 		</script>
 		<script>
-		
 			$(function(){
 				$("#style").change(function(){
 					var $select = $("select[name='tattooSize']");
@@ -224,7 +237,8 @@
 						dataType:"json",
 						success : function(sizeList) {
 							for(var i in sizeList){
-							$select.append("<option value='"+sizeList[i].pSize1+",38mmx38mm'>38mmx38mm</option>"+
+							$select.append(
+											"<option value='"+sizeList[i].pSize1+",38mmx38mm'>38mmx38mm</option>"+
 											"<option value='"+sizeList[i].pSize2+",38mmx64mm'>38mmx64mm</option>"+
 											"<option value='"+sizeList[i].pSize3+",65mmx76mm'>65mmx76mm</option>"+
 											"<option value='"+sizeList[i].pSize4+",102mmx127mm'>102mmx127mm</option>"+
@@ -237,8 +251,8 @@
 					})
 				});
 			});
-			
 		</script>
+		
 		<script>
 		$("#tattooSize").change(function() {
 			var price = $("#tattooSize").val();
@@ -248,6 +262,33 @@
 		
 			$("#price").attr("value",a);
 
+		});
+		
+		$("#datepicker").change(function() {
+			var reservationDate = $("#datepicker").val();
+			var artistId = '${artistInfo.artistId}';
+			var $select = $("select[name='reservationTime']");
+			$select.html("");
+			$.ajax({
+				url : "reservationTime.na",
+				type : "post",
+				data : {"reservationDate" : reservationDate,"artistId" : artistId},
+				dataType:"json",
+				success : function(tList){
+					console.log(tList)
+					$select.append("<option>예약시간을 선택해주세요</option>"
+								"<option value='09:00 ~ 11:00'>09:00 ~ 11:00</option>"+
+								"<option value='11:00 ~ 13:00'>11:00 ~ 13:00</option>"+
+								"<option value='14:00 ~ 16:00'>14:00 ~ 16:00</option>"+
+								"<option value='16:00 ~ 18:00'>16:00 ~ 18:00</option>");
+					for(var i in tList){
+						
+						console.log(tList[i].reservationTime)
+						
+						$("#reservationTime option[value*='"+tList[i].reservationTime+"']").remove();
+					}
+				}
+			});
 		});
 		</script>
 

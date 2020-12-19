@@ -16,6 +16,7 @@
 	<resultMap type="CustomComment" id="customCommentResultMap">
 		<result property="customCCode" column="CUSTOM_C_CODE"/>
 		<result property="artistId" column="ARTIST_ID"/>
+		<result property="artistName" column="ARTIST_NAME"/>
 		<result property="cContents" column="C_CONTENTS"/>
 		<result property="ccCreateDate" column="CC_CREATE_DATE"/>
 		<result property="ccModifyDate" column="CC_MODIFY_DATE"/>
@@ -47,7 +48,7 @@
 	
 	<update id="updateCustomDesign">
 		UPDATE CUSTOM_DESIGN
-		SET ON_OFF=#{onOff} CUSTOM_TITLE=#{customTitle}, TATTOO_TYPE=#{tattooType}, CONTENTS=#{contents}, C_MODIFY_DATE=SYSDATE
+		SET ON_OFF=#{onOff}, CUSTOM_TITLE=#{customTitle}, TATTOO_TYPE=#{tattooType}, CONTENTS=#{contents}, C_MODIFY_DATE=SYSDATE
 		WHERE CUSTOM_CODE=#{customCode}
 	</update>
 	
@@ -86,7 +87,7 @@
 	
 	<insert id="insertComment">
 		INSERT INTO CUSTOM_COMMENT
-		VALUES(C_COMMENT_SEQ.NEXTVAL,#{artistId},#{cContents},SYSDATE,SYSDATE,#{cOnOff},#{customCode})
+		VALUES(C_COMMENT_SEQ.NEXTVAL,#{artistId},#{artistName},#{cContents},SYSDATE,SYSDATE,#{cOnOff},#{customCode})
 	</insert>
 	
 	<select id="selectListComment" resultMap="customCommentResultMap">

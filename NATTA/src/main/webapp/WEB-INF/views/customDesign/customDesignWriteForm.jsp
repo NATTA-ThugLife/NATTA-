@@ -21,7 +21,7 @@
         	</tr>
         	<tr>
         		<td>제목</td>
-        		<td><input type="text" name="customTitle"></td>
+        		<td><input type="text" id="customTitle" name="customTitle"></td>
         	</tr>
         	<tr>
         		<td>타투스타일</td>
@@ -48,12 +48,27 @@
         	</tr>
             <tr>
             	<td colspan="2" align="center">
-            	<input type="submit" value="등록하기"> &nbsp;
+            	<input type="submit" onclick="return validate();" value="등록하기"> &nbsp;
 				<a href="#">목록으로</a>
             	</td>
             </tr>
 		</table>
         </form>
     </section>
+    <script>
+    	function validate(){
+    		if($("#customTitle").val() == ""){
+    			alert("제목을 입력해주세요.")
+    			$("#customTitle").focus();
+    			return false;
+    		}
+    		if(CKEDITOR.instances.contents.getData() == ""){
+    			alert("내용을 입력해주세요.")
+    			return false;
+    		}else{
+    			return true;
+    		}
+    	}
+    </script>
     </body>
 </html>
