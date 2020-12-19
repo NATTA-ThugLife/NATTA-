@@ -132,7 +132,7 @@ public class CustomDesignController {
 	// 게시판 수정
 	@RequestMapping(value="customDesignModify.na",method=RequestMethod.POST)
 	public String customDesignModifyForm(CustomDesign customDesign, Model model, HttpServletRequest request) {
-		
+		System.out.println(customDesign);
 		int result = cService.modifyCustomDesign(customDesign);
 		if(result>0) {
 			return "redirect:customDesignDetail.na?customCode="+customDesign.getCustomCode();
@@ -285,7 +285,9 @@ public class CustomDesignController {
     public String addComment(CustomComment customComment, HttpSession session) {
     	Artist loginArtist = (Artist)session.getAttribute("loginArtist");
     	String artistId = loginArtist.getArtistId();
+    	String artistName = loginArtist.getArtistName();
     	customComment.setArtistId(artistId);
+    	customComment.setArtistName(artistName);
     	int result = cService.insertCustomComment(customComment);
     	if(result>0) {
     		return "success";

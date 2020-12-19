@@ -39,7 +39,10 @@ public class ReservationController {
 	@Autowired
 	private ReservationService rService;
 	
-	
+		@RequestMapping(value="pay.na")
+		public String pay() {
+			return "Reservation/pay";
+		}
 	
 		@RequestMapping(value="reservation.na",method=RequestMethod.GET)
 		public  String reservation(String artistId, Model model,HttpServletResponse response) throws Exception {
@@ -47,6 +50,7 @@ public class ReservationController {
 			Artist artist = rService.selectOneArtist(artistId);
 			ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);	
 			ArrayList<Reservation> date = rService.selectListDate(artistId);
+			System.out.println(date);
 			
 			ArrayList<String> reservedList = new ArrayList<String>();
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
@@ -75,11 +79,11 @@ public class ReservationController {
 										@RequestParam(name="upload",required=false)MultipartFile uploadFile){
 			
 			String size = tattooSize.substring(tattooSize.indexOf(",")+1,tattooSize.length());
-			System.out.println(size);
+			
 			
 			reservation.setTattooSize(size);
 			
-			System.out.println(reservation);
+			
 			
 			if(!uploadFile.getOriginalFilename().equals("")) {
 				String renameFilename = saveFile(uploadFile,request);
@@ -90,7 +94,7 @@ public class ReservationController {
 			}
 			int result = 0;
 			String path = null;
-			System.out.println(reservation);
+
 			result = rService.insertReservation(reservation);
 			if(result>0) {
 				path="redirect:main.na";
@@ -137,12 +141,24 @@ public class ReservationController {
 			ArtistInfoPrice size = new ArtistInfoPrice();
 			size.setArtistId(artistId);
 			size.setpStyle(pStyle);
-			System.out.println(size);
 			ArrayList<ArtistInfoPrice> sizeList = rService.selectListSize(size);
-			System.out.println(sizeList);
+			
 			Gson gson = new Gson();
 			gson.toJson(sizeList,response.getWriter());
 			
+		}
+		@ResponseBody
+		@RequestMapping(value="reservationTime.na",method=RequestMethod.POST)
+		public void reservationTimeList(String artistId, java.sql.Date reservationDate,HttpServletResponse response)throws Exception {
+			
+			Reservation time = new Reservation();
+			time.setArtistId(artistId);
+			time.setReservationDate(reservationDate);
+			
+			
+			ArrayList<Reservation> tList = rService.selectListTime(time);
+			Gson gson = new Gson();
+			gson.toJson(tList,response.getWriter());
 		}
 		
 		

@@ -21,6 +21,12 @@
 		 color:#cda45e;
 		 }
 		</style>
+		<style>
+  table {
+    width: 70%;
+    border: 1px solid #444444;
+  }
+</style>
     </head>
     <body>
     <header>
@@ -29,21 +35,31 @@
     <section>
         <table align="center" cellpadding="10"  width="1000">
         	<tr>
-        		<td>작성자</td>
-        		<td>${customDesign.customerId }</td>
+        	<br>
+        	<br>
         	</tr>
         	<tr>
-        		<td>제목</td>
-        		<td>${customDesign.customTitle }</td>
+        		<td>작성자 : ${customDesign.customerId }</td>
+        		<td></td>
+        		<td></td>
         	</tr>
         	<tr>
-        		<td>타투스타일</td>
-        		<td>${customDesign.tattooType }</td>
+        		<td>제목 : ${customDesign.customTitle }</td>
+        		<td></td>
+        		<td></td>
         	</tr>
         	<tr>
-        	<td>내용</td>
-        	<td>${customDesign.contents }</td>
+        		<td>타투스타일 : ${customDesign.tattooType }</td>
+        		<td></td>
+        		<td></td>
         	</tr>
+        	<tr style="border:1px solid #444444;">
+        		<td>내용</td>  	
+        	</tr>
+        	<tr>
+        	<td colspan="2">${customDesign.contents }</td> 
+        	</tr>
+    
         	<tr>
         	</tr>
             <tr>
@@ -153,8 +169,12 @@
 			$("#cSubmit").on("click",function(){
 				// 댓글 등록 ajax
 				var cContents = CKEDITOR.instances.cContents.getData();
+				if(cContents == ""){
+					alert("댓글을 입력해주세요.")
+					return false;
+				}
 				var customCode = ${customDesign.customCode};
-				var cOnOff = $('input:radio[name=cOnOff]:checked').val( );
+				var cOnOff = $('input:radio[name=cOnOff]:checked').val();
 				
 				$.ajax({
 					url : "addComment.na",
@@ -207,24 +227,26 @@
 						console.log(data.pi)
 						for ( var i in data.ccList ) {
 							$tr = $("<tr>");
-							$artistId = $("<td> width='100'>").text(data.ccList[i].artistId);
+							$tr2 = $("<tr>");
+							$tr3 = $("<tr>");
+							$artistId = $("<td><a href='artistInfoPage.na?artistId="+(data.ccList[i].artistId)+"'>"+data.ccList[i].artistId+"="+data.ccList[i].artistName+"</td>");
 							
-							$cContents = $("<td class='replyContent'>").html(decodeURIComponent(data.ccList[i].cContents.replace(/\+/g," "))); 
+							$cContents = $("<td colspan='3' class='replyContent'>").html(decodeURIComponent(data.ccList[i].cContents.replace(/\+/g," "))); 
 							
-							$ccCreateDate = $("<td> width='150'>").text(data.ccList[i].ccCreateDate);
+							$ccCreateDate = $("<td>").text('작성일 : '+data.ccList[i].ccCreateDate);
 						
 							$modify = $("<td><button class='modify' data-customCCode='"+data.ccList[i].customCCode+"'>수정</button> <button class='delete' data-customCCode='"+data.ccList[i].customCCode+"'>삭제</button>");
 							
 							$secret = $("<td align='center' colspan='4'>").text('비밀글입니다.');
 							
 							if((data.ccList[i].cOnOff == 1 && ((sessionArtist == data.ccList[i].artistId) || (Writer == sessionCustomer))) || (data.ccList[i].cOnOff == 0)){
-							$tr.append($artistId);
-							$tr.append($cContents);
-							$tr.append($ccCreateDate);
+							$tr.append($artistId,$ccCreateDate);
+							$tr2.append($cContents);
 							if(sessionArtist == data.ccList[i].artistId){
 								$tr.append($modify);
 							}
-							$tableBody.append($tr);
+							$tr3.append($tr,$tr2);
+							$tableBody.append($tr3);
 							}else{
 								$tr.append($secret);
 							$tableBody.append($tr);
