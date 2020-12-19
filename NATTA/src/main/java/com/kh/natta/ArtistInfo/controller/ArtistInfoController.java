@@ -42,21 +42,16 @@ public class ArtistInfoController {
 			Customer customer = (Customer)session.getAttribute("loginCustomer");
 			String customerId = customer.getCustomerId();
 			ArtistFollow arf = new ArtistFollow(customerId, artistId);
-			ArtistFollow af = infoService.selectFollowing(arf);
+			ArtistFollow af = infoService.selectFollowing(arf); 
 			if(af != null ) {
-			model.addAttribute("follow", af);
+			  model.addAttribute("follow", af); 
 			}
 		}
-
-
-
 		Artist artist = infoService.selectOneArtist(artistId);
 		ArtistInfo infoPage = infoService.selectOneArtistInfo(artistId);
 		ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);
 		ArrayList<ArtistWork> workList = infoService.selectListArtistWork(artistId);
 		ArrayList<ArtistFollow> aFollow = infoService.selectArtistFollow(artistId);
-		
-			
 			model.addAttribute("artist", artist);
 			model.addAttribute("priceList", priceList);
 			model.addAttribute("workList", workList);
@@ -67,11 +62,22 @@ public class ArtistInfoController {
 			return "Artist-info/artistPage";
 		}
 	
+	@ResponseBody
+	@RequestMapping(value="deleteFollowing.na", method=RequestMethod.POST)
+	public String goodByeFollow(ArtistFollow af) {
+		int result = infoService.deleteArtistFollow(af);
+		if ( result > 0 ) {
+			return af.getCustomerId();
+		} else {
+			return "fail";
+		}
+	}
+	
+	
 	// AJAX ) 아티스트 정보 DB에 artistId 존재유무 확인
 	@RequestMapping(value="artistChecking.na", method=RequestMethod.POST)
 	public void artistIdCheck(HttpServletResponse response, String artistId) throws Exception {
 		ArtistInfo artistCheck = infoService.selectOneArtistInfo(artistId);
-		System.out.println(artistCheck);
 		if(artistCheck != null) {
 			artistCheck.setMyInfo(URLEncoder.encode(artistCheck.getMyInfo(), "utf-8"));
 			artistCheck.setName(URLEncoder.encode(artistCheck.getName(), "utf-8"));
@@ -85,7 +91,6 @@ public class ArtistInfoController {
 	@ResponseBody
 	@RequestMapping(value="InsertArtistFollow.na", method=RequestMethod.POST)
 	public String insertFollowing(ArtistFollow af, Model model) {
-		System.out.println("등록" + af);
 		int result = infoService.insertArtistFollow(af);
 		if ( result > 0 ) {
 			return "success";
@@ -96,7 +101,6 @@ public class ArtistInfoController {
 	@ResponseBody
 	@RequestMapping(value="deleteArtistFollow.na", method=RequestMethod.POST)
 	public String deleteFollowing(ArtistFollow af, Model model) {
-		System.out.println("삭제" + af);
 		int result = infoService.deleteArtistFollow(af);
 		if ( result > 0 ) {
 			return "success";
@@ -104,9 +108,6 @@ public class ArtistInfoController {
 			return "fail";
 		}
 	}	
-	
-	
-	
 	
 	
 	// 아티스트 소개 입력
@@ -153,8 +154,6 @@ public class ArtistInfoController {
 		}
 	    return reProFileName;
 	}
-	
-	
 	
 	
 	

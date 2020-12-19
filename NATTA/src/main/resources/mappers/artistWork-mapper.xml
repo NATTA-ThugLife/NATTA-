@@ -11,6 +11,7 @@
 	 	<result property="artistId" column="ARTIST_ID"/>
 	 </resultMap>
 	 
+	 
 	<update id="updateArtistWork">
 		UPDATE WORK 
 		SET WORK_IMGPATH = #{workImgPath}, WORK_REIMGPATH = #{workReImgPath}, 
@@ -20,7 +21,7 @@
 	
 	<select id="selectOneArtist" resultMap="artistWorkMap">
 		SELECT * FROM WORK 
-		WHERE ARTIST_ID = #{artistId}
+		WHERE ARTIST_ID = #{artistId} ORDER BY WORK_CODE DESC 
 	</select>
 	
 	<insert id="insertArtistWork">
