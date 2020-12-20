@@ -8,14 +8,36 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-body {
+/* body {
   font-family: "Open Sans", sans-serif;
   background: #0c0b09;
   color: #fff;
 }
+ */
+ /* @font-face {
+    font-family: 'Bazzi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} */
+@font-face {
+    font-family: 'JSDongkang-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/JSDongkang-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+font-family: 'JSDongkang-Regular';
+background: #0c0b09;
+color: #fff;
+}
 
+/* li {
+  font-size : 20px;
+} */
 a {
-  color: #cda45e;
+	color: #cda45e;
+/* 	font-size : 20px; */
 }
 
 a:hover {
@@ -23,8 +45,10 @@ a:hover {
   text-decoration: none;
 }
 
+/* けいしけいし  */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", serif;
+  /* font-family: "Playfair Display", serif; */
+  font-family: 'JSDongkang-Regular';
 }
 
 /*--------------------------------------------------------------
@@ -188,7 +212,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
   letter-spacing: 1px;
   text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
 }
 
 #header .logo a {
@@ -226,7 +250,7 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
   transition: 0.3s;
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
+  /* font-family: "Open Sans", sans-serif; */
 }
 
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
@@ -289,7 +313,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu .drop-down > a:after {
   content: "\ea99";
-  font-family: IcoFont;
+  /* font-family: IcoFont; */
   padding-left: 5px;
 }
 
@@ -310,7 +334,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu .drop-down .drop-down > a:after {
   content: "\eaa0";
-  font-family: IcoFont;
+  /* font-family: IcoFont; */
   position: absolute;
   right: 15px;
 }
@@ -405,7 +429,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .mobile-nav .drop-down > a:after {
   content: "\ea99";
-  font-family: IcoFont;
+  /* font-family: IcoFont; */
   padding-left: 10px;
   position: absolute;
   right: 15px;
@@ -479,7 +503,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/bg1.jpg") top center;
+  background: url("../img/nattaBack/bg1.jpg") top center;
   background-size: cover;
   position: relative;
   padding: 0;
@@ -511,7 +535,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 56px;
   color: #fff;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
 }
 
 #hero h1 span {
@@ -702,7 +726,7 @@ section {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #aaaaaa;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
 }
 
 .section-title h2::after {
@@ -719,7 +743,7 @@ section {
   margin: 0;
   font-size: 36px;
   font-weight: 700;
-  font-family: "Playfair Display", serif;
+  /* : "Playfair Display", serif; */
   color: #cda45e;
 }
 
@@ -779,7 +803,7 @@ section {
 # About
 --------------------------------------------------------------*/
 .about {
-  background: url("../img/about-bg.jpg") center center;
+  background: url("../img/nattaBack/ta8.jpg") center center;
   background-size: cover;
   position: relative;
   padding: 80px 0;
@@ -940,7 +964,7 @@ section {
   margin-bottom: 10px;
   transition: all ease-in-out 0.3s;
   border-radius: 50px;
-  font-family: "Playfair Display", serif;
+  /* font-family: "Playfair Display", serif; */
 }
 
 .menu #menu-flters li:hover, .menu #menu-flters li.filter-active {
@@ -979,7 +1003,7 @@ section {
   top: -4px;
   z-index: 1;
   color: #bab3a6;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  /* font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; */
 }
 
 .menu .menu-content a {
@@ -1007,9 +1031,9 @@ section {
 
 .menu .menu-ingredients {
   margin-left: 85px;
-  font-style: italic;
+  /* font-style: italic; */
   font-size: 14px;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
   color: rgba(255, 255, 255, 0.5);
 }
 
@@ -1080,7 +1104,7 @@ section {
 # Events
 --------------------------------------------------------------*/
 .events {
-  background: url(../img/events-bg.jpg) center center no-repeat;
+  background: url(../img/nattaBack/background1.jpg) center center no-repeat;
   background-size: cover;
   position: relative;
 }
@@ -1126,7 +1150,7 @@ section {
 
 .events .event-item .price {
   font-size: 26px;
-  font-family: "Open Sans", sans-serif;
+  /* font-family: "Open Sans", sans-serif; */
   font-weight: 700;
   margin-bottom: 15px;
 }
@@ -1341,7 +1365,7 @@ section {
 }
 
 .testimonials .testimonial-item p {
-  font-style: italic;
+  /* font-style: italic; */
   margin: 0 15px 0 15px;
   padding: 20px 20px 60px 20px;
   background: #26231d;
@@ -1429,7 +1453,7 @@ section {
 }
 
 .chefs .member .member-info-content span {
-  font-style: italic;
+  /* font-style: italic; */
   display: block;
   font-size: 13px;
   color: #fff;
@@ -1502,7 +1526,7 @@ section {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 5px;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
 }
 
 .contact .info p {
@@ -1669,14 +1693,14 @@ section {
   line-height: 1;
   font-weight: 300;
   text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
 }
 
 #footer .footer-top .footer-info p {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Playfair Display", serif;
+  /* font-family: "Playfair Display", serif; */
   color: #fff;
 }
 
