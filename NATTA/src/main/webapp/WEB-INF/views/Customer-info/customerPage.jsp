@@ -640,6 +640,62 @@
 			</div>
 		</div> 
 		
+		
+						<!-- 리뷰 작성 -->
+		<div class="modal fade" id="insertReviewModal" tabindex="-1" role="dialog"
+			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
+				<!-- 센터모달창 추가  modal-dialog-centered -->
+				<div class="modal-content" style="background-color: black">
+					<div class="modal-header">
+						<h5 class="modal-title" id="TEST">
+							<b>리뷰 정보</b>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body book-a-table">
+						<form action="/insertReview.na" 
+						method="post" role="form" class="php-email-form modalActionCheck" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
+				          <div>
+				         	<!-- 타투샵이름 -->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              ARTIST SHOP NAME 
+				              <input type="text" value="" name="artistId" class="form-control artistShopName" id="insertArtistId" readonly>
+				              <input type="hidden" value="" name="reservationCode" id="insertReservationCode">
+				              <div class="validate"></div>
+				            </div>
+				            <!-- 리뷰사진 업로드-->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              MY PROFILE 
+				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile" > 
+				            </div>
+				            <!-- 리뷰 내용  -->
+				            <div class="form-group">
+				            <div id="star">
+		                  		<span style="color:yellow"><i class="far fa-star fa-2x grade" id="1"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="2"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="3"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="4"></i></span>
+			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="5"></i></span>
+			                  	<input type="hidden" name="reviewStar" id="reviewStar" value="">
+		                  	</div>
+				               CONTENT 
+				               <textarea class="form-control artistmodalInfo" id="insertReviewContents" name="reviewContents" cols="600" rows="5" style="resize: none;"></textarea>
+				               <div class="validate"></div>
+				            </div>				            				            
+				          </div>
+				          <div class="mb-3">
+				            <div class="loading">Loading</div>
+				          </div>
+				          <div class="text-center"><button type="submit">리뷰 작성</button></div>
+				        </form>
+					</div>
+				</div>
+			</div>
+		</div> 
 		<!--  -->
 		
    <section id="review" class="specials">
@@ -668,9 +724,14 @@
 			      <td id="artistName${res.reservationCode }">${res.artistName }</td>
 			      <td id="style${res.reservationCode }">${res.style }</td>
 			      <td id="reservationDate${res.reservationCode }">${res.reservationDate }</td>
-			      <input type="text" value="${res.renameFilename }" id="renameFilename${res.reservationCode }">
-			      <c:if test="${res.status eq 0}"><td>예약 대기</td></c:if>
+			      <input type="hidden" value="${res.renameFilename }" id="resImg${res.reservationCode }">
+			      <input type="hidden" value="${res.tattooSize }" id="tattooSize${res.reservationCode }">
+			      <input type="hidden" value="${res.price }" id="price${res.reservationCode }">
+			      <input type="hidden" value="${res.part }" id="part${res.reservationCode }">
+			      <input type="hidden" value="${res.status}" id="status${res.reservationCode }">
+			      <c:if test="${res.status eq 0}"><td >예약 대기</td></c:if>
 			      <c:if test="${res.status eq 1}"><td>예약 확정</td></c:if>			      
+			      <c:if test="${res.status eq 3}"><td>타투 완료</td></c:if>			      
 			      <td><button value="${res.reservationCode }" class="detail">상세보기</button></td>
 			   </tr>
 			</c:forEach>
@@ -699,34 +760,48 @@
 					</div>
 					<div class="modal-body book-a-table">
 				          <div>
-				         	<!-- 타투샵이름 -->
 				            <div class="col-lg-4 col-md-6 form-group">
-				              ARTIST SHOP NAME 
+				              Artist Shop Name 
 				              <input type="text" value="" name="shopName" class="form-control" id="shopName" readonly>
 				              <div class="validate"></div>
 				            </div>
-				            <!-- 리뷰사진 업로드-->
 				            <div class="col-lg-4 col-md-6 form-group">
-				              ARTIST NAME
+				              Artist Name
 				              <input type="text" class="form-control" id="artistName" readonly> 
 				            </div>
 				            <div class="col-lg-4 col-md-6 form-group">
-				              reservationDate
+				              reservation Date
 				              <input type="text" class="form-control" id="reservationDate" readonly> 
 				            </div>
-				            <!-- 리뷰 내용  -->
+				            <div class="col-lg-4 col-md-6 form-group">
+				              Part
+				              <input type="text" class="form-control" id="Part" readonly> 
+				            </div>
+				            <div class="col-lg-4 col-md-6 form-group">
+				              Style
+				              <input type="text" class="form-control" id="style" readonly> 
+				            </div>
+				            <div class="col-lg-4 col-md-6 form-group">
+				              Tattoo Size
+				              <input type="text" class="form-control" id="tattooSize" readonly> 
+				            </div>
+				            <div class="col-lg-4 col-md-6 form-group">
+				              Price
+				              <input type="text" class="form-control" id="price" readonly> 
+				            </div>
 				            <div class="col form-group">
-				                                 도안
-								<img src="resources/images/ruploadFiles/">              
+				                    Design<br>
+								<img src="" id="resImg" style="width : 300px; heigth:250px;'">              
 				               
 				            </div>
-				            
+				            <div class="col form-group">
 				            <div id="map" style=" width: 100%; height: 350px; margin-top: 10px;">
-							</div>				            				            
+							</div>		
+							</div>		            				            
 				          </div>
 				          <div class="mb-3">
 				          </div>
-				          <div class="text-center"><button type="submit">리뷰 수정</button></div>
+				          <div class="text-center"><button type="button" id="resButton" class="resButton">닫기</button></div>
 					</div>
 				</div>
 			</div>
@@ -745,17 +820,82 @@
 		
 		<script>
 			$(".detail").on("click",function(){
+				
 				var reservationCode = $(this).val();
 				var shopName = $("#shopName"+reservationCode).text();
 				var artistName = $("#artistName"+reservationCode).text();
 				var style = $("#style"+reservationCode).text();
 				var reservationDate = $("#reservationDate"+reservationCode).text();
+				var resImg = $("#resImg"+reservationCode).val();
+				var tattooSize = $("#tattooSize"+reservationCode).val();
+				var price = $("#price"+reservationCode).val();
+				var part = $("#part"+reservationCode).val();
+				var status = $("#status"+reservationCode).val();
+				
+				
+				
 				$("#shopName").val(shopName);
+				$("#style").val(style);
 				$("#artistName").val(artistName);
 				$("#reservationDate").val(reservationDate);
+				$("#price").val(price);
+				$("#tattooSize").val(tattooSize);
+				$("part").val(part);
+				$("#resImg").attr("src","/resources/images/ruploadFiles/" + resImg);
+				
+				if(status == 0){
+					$(".resButton").text("예약 취소");
+					$(".resButton").attr("value",reservationCode);
+					$(".resButton").attr("id","deleteResvertion");
+					$(".resButton").attr("data-dismiss","");
+					$(".resButton").attr("aria-label","");
+				}else if(status == 3){
+					$(".resButton").empty();
+					$(".resButton").text("리뷰 쓰기");
+					$(".resButton").attr("value",reservationCode);
+					$(".resButton").attr("id","insertReview");
+					$(".resButton").attr("data-dismiss","");
+					$(".resButton").attr("aria-label","");
+				}else{
+					$(".resButton").empty();
+					$(".resButton").text("닫기");
+					$(".resButton").attr("value",reservationCode);
+					$(".resButton").attr("data-dismiss","modal");
+					$(".resButton").attr("aria-label","Close");
+				}
+				
 				$("#detailReservation").modal("show");
-				mapRead();
-			})
+				
+				mapRead(); 
+				
+				$("#insertReview").on("click",function(){
+					var reservation = $(this).val();
+					console.log(reservation);
+					$("#detailReservation").modal("hide");
+					$.ajax({
+						type: "post",
+						url: "/dupReview.na",
+						data: {
+							"reservationCode" : reservation
+						},
+						success: function (data) {
+							if(data == "success"){
+								$("#insertArtistId").val(shopName);
+								$("insertReservationCode").val(reservation);
+								$("#insertReviewModal").modal("show");
+							}else{
+								alert('이미 등록된 리뷰가 있습니다.');
+							}
+						}
+					})
+					
+					
+					
+				});
+			});
+			
+			
+
 		</script>
 		
 		       <script>
@@ -815,7 +955,7 @@
 			</script>
 			
 	<script>
-	function mapRead(){
+  	function mapRead(){
 		
 		$("#detailReservation").on("shown.bs.modal", function() {
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -856,7 +996,7 @@
 				                '        </div>' + 
 				                '        <div class="body">' + 
 				                '            <div class="img">' +
-				                '                <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" width="73" height="70">' +
+				              /*   '                <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" width="73" height="70">' + */
 				                '			</div>' + 
 				                '            <div class="desc">' + 
 				                '                <div class="ellipsis">'+/*workAddress*/+'</div>' + 
@@ -865,7 +1005,7 @@
 				                '    </div>' +    
 				                '</div>';
 			            	
-			        /* });
+			        /* }); 
 			        infowindow.open(map, marker); */
 			        var overlay = new kakao.maps.CustomOverlay({
 			            content: content,
@@ -880,8 +1020,9 @@
 		
 		})		
 		
+ 
+	} 
 
-	}	
 	</script>
 			
 </html>

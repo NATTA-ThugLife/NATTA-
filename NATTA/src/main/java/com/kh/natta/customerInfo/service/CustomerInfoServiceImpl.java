@@ -57,6 +57,11 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 		return store.selectListReservation(customerId);
 	}
 
+	@Override
+	public Review dupReview(int reservationCode) {
+		return store.dupReview(reservationCode);
+	}
+
 
 	
 	

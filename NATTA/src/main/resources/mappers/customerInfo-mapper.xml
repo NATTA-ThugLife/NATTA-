@@ -96,4 +96,9 @@
 		SELECT * FROM RESERVATION
 		WHERE CUSTOMER_ID = #{customerId}
 	</select>
+	
+	<select id="dupReview" resultMap="ReviewResultMap">
+		SELECT * FROM REVIEW
+		WHERE RESERVATION_CODE = #{reservationCode}
+	</select>
 </mapper>

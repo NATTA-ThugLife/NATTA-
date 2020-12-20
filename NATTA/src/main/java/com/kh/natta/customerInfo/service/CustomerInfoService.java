@@ -66,4 +66,9 @@ public interface CustomerInfoService {
 	 * 
 	 */
 	public ArrayList<Reservation> selectListReservation(String customerId);
+	/**
+	 * 리뷰 있는지 없는지 체크
+	 * 
+	 */
+	public Review dupReview(int reservationCode);
 }

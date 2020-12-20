@@ -57,5 +57,10 @@ public class CustomerInfoStoreLogic implements CustomerInfoStore {
 	public ArrayList<Reservation> selectListReservation(String customerId) {
 		return (ArrayList)session.selectList("customerInfoMapper.selectListReservation",customerId);
 	}
+
+	@Override
+	public Review dupReview(int reservationCode) {
+		return session.selectOne("customerInfoMapper.dupReview",reservationCode);
+	}
 	
 }

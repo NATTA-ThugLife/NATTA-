@@ -124,6 +124,19 @@ public class CustomerInfoController {
 		}
 		
 		@ResponseBody
+		@RequestMapping(value="/dupReview.na" , method = RequestMethod.POST)
+		public String dupPwd(int reservationCode) {
+			
+			Review check = service.dupReview(reservationCode);
+			
+			if(check != null) {
+				return "success";
+			}else {
+				return "fail";
+			}
+			
+		}
+		@ResponseBody
 		@RequestMapping(value="/deletefollow.na", method= RequestMethod.POST)
 		public String deleteFollow(Following following) {
 			System.out.println(following);
