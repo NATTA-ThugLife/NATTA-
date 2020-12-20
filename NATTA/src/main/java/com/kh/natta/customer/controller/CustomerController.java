@@ -75,7 +75,10 @@ public class CustomerController {
 		int result = service.registerCustomer(customer);
 		// System.out.println(result);
 		if (result > 0) {
-			return "redirect:login.na";
+			model.addAttribute("msg","회원 가입 성공");
+			model.addAttribute("url","login.na");			
+			return "common/Alert";
+			
 		} else {
 			model.addAttribute("msg", "회원 가입 실패");
 			return "common/errorPage";
@@ -113,19 +116,6 @@ public class CustomerController {
 		return "join/findId";
 	}
 
-	// 아이디 찾기
-	/*
-	 * @RequestMapping(value = "findCustomerId.na") public ModelAndView
-	 * findCustomerId(String customerName, String email, ModelAndView mv,
-	 * HttpServletRequest request) { HttpSession session = request.getSession();
-	 * Customer customer = new Customer(); customer.setCustomerName(customerName);
-	 * customer.setEmail(email); // System.out.println(customerName); //
-	 * System.out.println(email); Customer findCustomer =
-	 * service.findIdEmail(customer); if (findCustomer != null) {
-	 * mv.addObject("findCustomer", findCustomer); mv.setViewName("join/foundId"); }
-	 * else { mv.addObject("msg", "로그인 실패!"); mv.setViewName("common/errorPage"); }
-	 * return mv; }
-	 */
 	@ResponseBody
 	@RequestMapping(value = "findCustomerId.na")
 	public String findCustomerId(String customerName, String email) {
@@ -141,6 +131,7 @@ public class CustomerController {
 			return"fail";
 		}
 	}
+	
 	// 비번 찾기 페이지
 	@RequestMapping(value = "findPwd.na", method = RequestMethod.GET)
 	public String finPwdView() {
@@ -162,7 +153,7 @@ public class CustomerController {
 		if(findCustomerPwd != null) {		
 		String tomail = findCustomerPwd.getEmail(); // 받는 사람 이메일
 		//System.out.println(tomail);
-		String title = "임시 비밀번호입니다."; // 제목
+		String title = "회원님의 비밀번호입니다."; // 제목
 		String content = findCustomerPwd.getCustomerId()+"님의 비밀번호는 "+findCustomerPwd.getPassword()+"입니다."; // 내용
 
 		try {
@@ -178,7 +169,9 @@ public class CustomerController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return "join/login";
+		model.addAttribute("msg","이메일이 전송되었습니다.");
+		model.addAttribute("url","join/login");			
+		return "common/Alert";
 	} else {
 		return "redirect:findPwd.na";
 	}

@@ -19,7 +19,7 @@
 		<result property="qcCode" column="QC_CODE"/>
 		<result property="qcTitle" column="QC_TITLE"/>
 		<result property="qcContents" column="QC_CONTENTS"/>
-		<result property="qcWriter" column="QC_CONTENTS"/>
+		<result property="qcWriter" column="QC_WRITER"/>
 		<result property="qcCreateDate" column="QC_CREATEDATE"/>
 		<result property="qcModifyDate" column="QC_MODIFYDATE"/>
 		<result property="onOff" column="ON_OFF"/>

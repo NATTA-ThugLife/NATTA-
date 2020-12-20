@@ -131,8 +131,8 @@ rotate(
 										style="margin-right: 30px;">  --> 
 								<input data-target=".modal" data-toggle="modal" class="find1" id="button" type="button" onClick="location.href='findId.na'" value="ID 찾기" style="margin-left: 30px"> 
 								<input class="find2" id="button" type="button" onClick="location.href='findPwd.na'" value="PW 찾기" style="margin-left: 30px"> <!-- </form> -->
-								<br><br><a id="kakao-login-btn"></a>
-							<a href="http://developers.kakao.com/logout"></a>
+								<!-- <br><br><a id="kakao-login-btn"></a>
+							<a href="http://developers.kakao.com/logout"></a> -->
 							</td>
 						</tr>
 					</table>
@@ -152,7 +152,7 @@ rotate(
 		    }
 		}            
 		
-		Kakao.init('8dffdaf5568eceb8d7c16e4a8cd5eb67');
+/* 		Kakao.init('8dffdaf5568eceb8d7c16e4a8cd5eb67');
 		Kakao.Auth.createLoginButton({ 
 		   container: '#kakao-login-btn',
 		   success: function(authObj) {
@@ -162,7 +162,7 @@ rotate(
 		         alert(JSON.stringify(err));
 		         }
 		      });
-
+ */
         </script>
 
 
