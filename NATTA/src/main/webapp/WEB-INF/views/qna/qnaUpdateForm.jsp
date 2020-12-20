@@ -26,19 +26,19 @@
 	
 	<form action="qnaUpdate.na" method="post">
 		<input type="hidden" name="page" value="${currentPage }">
-		<input type="hidden" name="qnaCode" value="${qna.qnaCode }">				
+		<input type="hidden" name="qnaCode" value="${Qna.qnaCode }">				
 		<table align="center" id="tb" border="1" cellspacing="0">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="qnaTitle" value="${qna.qnaTitle }"></td>
+				<td><input type="text" name="qnaTitle" value="${Qna.qnaTitle }"></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" readonly name="qnaWriter" value="${qna.qnaWriter }"></td>
+				<td><input type="text" readonly name="qnaWriter" value="${Qna.qnaWriter }"></td>
 			</tr>		
 			<tr>
 				<td>내용</td>
-				<td><textarea cols="50" rows="7" name="qnaContents">${qna.qnaContents }</textarea></td>
+				<td><textarea cols="50" rows="7" name="qnaContents">${Qna.qnaContents }</textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

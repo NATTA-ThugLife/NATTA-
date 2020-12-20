@@ -2,22 +2,22 @@ package com.kh.natta.notice.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.notice.domain.Notice;
 import com.kh.natta.notice.service.NoticeService;
+import com.kh.natta.qna.domain.Qna;
 
 @Controller
 public class NoticeController {
@@ -67,10 +67,11 @@ public class NoticeController {
 			notice.setNoticeWriter(noticeWriter);
 			//System.out.println(loginCustomer);
 			//System.out.println(notice);
-			result = nService.registerNotice(notice);
-			
+			result = nService.registerNotice(notice);			
 			if(result>0) {
-				path = "redirect:notice.na";
+				model.addAttribute("msg","공지 글이 등록되었습니다.");
+				model.addAttribute("url","notice.na");			
+				return "common/Alert";
 			}else {
 				model.addAttribute("msg","공지사항 등록 실패!");
 				path = "common/errorPage";
@@ -79,20 +80,26 @@ public class NoticeController {
 		}
 
 	//공지 수정 페이지
-	@RequestMapping(value="noticeUpdateForm.na",method=RequestMethod.GET)
-	public  String noticeUpdateForm() {
-		return "notice/noticeUpdateForm";
+	@RequestMapping(value = "noticeUpdateForm.na", method = RequestMethod.GET)
+	public ModelAndView qnaUpdateForm(ModelAndView mv, @RequestParam("noticeCode") int noticeCode) {
+		Notice notice = nService.selectOne(noticeCode);
+		mv.addObject("Notice", notice);
+		mv.setViewName("notice/noticeUpdateForm");
+		return mv;	 
 	}
-	//공지 수정
-	@RequestMapping(value="noticeUpdate.na",method=RequestMethod.POST)
-	public String noticeUpdate(Notice notice, Model model, HttpServletRequest request) {
+	
+	//공지 수정	
+	@RequestMapping(value="noticeUpdate.na", method=RequestMethod.POST)
+	public ModelAndView NoticeUpdate(ModelAndView mv, @ModelAttribute Notice notice,
+			HttpServletRequest request) {
 		int result = nService.modifyNotice(notice);
-		if(result>0) {
-			return "redirect:noticeDetailView.na?noticeCode="+notice.getNoticeCode();
+		if(result > 0) {
+			mv.addObject("msg","공지 글이 수정되었습니다.").addObject("url","notice.na").setViewName("common/Alert");
 		}else {
-			model.addAttribute("msg","공지사항 수정 실패");
-			return "common/errorPage";
+			mv.addObject("msg","게시글 수정 실패")
+			.setViewName("common/errorPage");
 		}
+		return mv;
 	}
 
 	//공지 삭제
@@ -101,7 +108,9 @@ public class NoticeController {
 		Notice notice = nService.selectOne(noticeCode);
 		int result = nService.deleteNotice(noticeCode);
 		if(result>0) {
-			return "redirect:notice.na";
+			model.addAttribute("msg","공지 글이 삭제되었습니다.");
+			model.addAttribute("url","notice.na");			
+			return "common/Alert";
 		}else {
 			model.addAttribute("msg","공지사항 삭제 실패");
 			return "common/errorPage";

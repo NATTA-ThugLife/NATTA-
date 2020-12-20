@@ -80,7 +80,9 @@ public class QnaController {
 			String path = null;
 			result = qService.registerQna(Qna);
 			if(result>0) {
-				path="redirect:qna.na";
+				model.addAttribute("msg","Qna가 등록되었습니다.");
+				model.addAttribute("url","qna.na");			
+				return "common/Alert";
 			}else {
 				model.addAttribute("msg","보드 등록 실패!");
 				path = "common/errorPage";
@@ -92,7 +94,7 @@ public class QnaController {
 	@RequestMapping(value="qnaUpdateForm.na",method=RequestMethod.GET)
 		public ModelAndView qnaUpdateForm(ModelAndView mv, @RequestParam("qnaCode") int qnaCode, @RequestParam("page") Integer page) {
 		Qna qna = qService.selectQna(qnaCode);
-		mv.addObject("qna",qna);
+		mv.addObject("Qna",qna);
 		mv.addObject("currentPage",page);
 		mv.setViewName("qna/qnaUpdateForm");
 		return mv;
@@ -102,13 +104,11 @@ public class QnaController {
 	@RequestMapping(value="qnaUpdate.na", method=RequestMethod.POST)
 	public ModelAndView QnaUpdate(ModelAndView mv, @ModelAttribute Qna Qna,
 			HttpServletRequest request,
-			@RequestParam("page") Integer page,
-			@RequestParam(value="reloadFile",required=false) MultipartFile reloadFile) {
-
+			@RequestParam("page") Integer page) {
 		//System.out.println(Qna);
 		int result = qService.modifyQna(Qna);
 		if(result > 0) {
-			mv.setViewName("redirect:qna.na");
+			mv.addObject("msg","Qna가 수정되었습니다.").addObject("url","qna.na").setViewName("common/Alert");
 		}else {
 			mv.addObject("msg","게시글 수정 실패")
 			.setViewName("common/errorPage");
@@ -122,7 +122,9 @@ public class QnaController {
 		Qna Qna = qService.selectQna(qnaCode);			
 		int result = qService.deleteQna(qnaCode);
 		if(result>0) {
-			return "redirect:qna.na";
+			model.addAttribute("msg","Qna가 삭제되었습니다.");
+			model.addAttribute("url","qna.na");			
+			return "common/Alert";
 		}else
 			model.addAttribute("msh", "게시글 삭제 실패..");
 		return "common/errorPage";

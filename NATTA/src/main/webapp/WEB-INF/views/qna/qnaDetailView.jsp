@@ -44,8 +44,10 @@
 			<td>내용</td>
 			<td>${Qna.qnaContents }</td>
 		</tr>
-
-		<%-- <c:if test="${loginCustomer.customerId eq qna.qnaWriter }"> --%>
+		
+		<%-- <input type="text" value="${loginCustomer.customerId}">
+		<input type="text" value="${Qna.qnaWriter}"> --%>
+		<c:if test="${loginCustomer.customerId eq Qna.qnaWriter }">
 		<tr>
 			<td colspan="2" align="center">
 				<c:url var="bUpView" value="qnaUpdateForm.na">
@@ -63,7 +65,7 @@
 				<a href="${bList }">목록</a>
 			</td>
 		</tr>
-		<%-- </c:if> --%>
+		</c:if>
 	</table>
 	<br>
 	<br>

@@ -30,9 +30,9 @@
 								<td><input type="text" name="customerName" id="customerName">
 								</td>
 							</tr>
-							<tr>
+							<tr id="email">
 								<td>이메일</td>
-								<td><input type="text" name="email" id="email"></td>
+								<td><input type="text" name="email"></td>
 							</tr>
 							<tr id="phone" style="display:none;">
 								<td>폰</td>
@@ -76,7 +76,7 @@
 				style="background-color: rgba(255, 255, 255, 0.4);">
 				<div class="modal-header">
 					<h5 class="modal-title" id="TEST">
-						<b>찾았따 ID!!</b>
+						<b>ID 조회 결과</b>
 					</h5>
 				</div>
 				<div class="modal-body book-a-table">
@@ -86,8 +86,8 @@
 
 						<div class="container" data-aos="fade-up">
 							<div class="section-title">
-								<h2>Find ID</h2>
-								<p>아이디 찾기</p>
+								<!-- <h2>Find ID</h2>
+								<p>아이디 찾기</p> -->
 								<span id="msg"></span><br><br>
 								<input type="button" onClick="location.href='login.na'" value="로그인">
 								<input type="button" onClick="location.href='findPwd.na'" value="비밀번호 찾기">
@@ -124,7 +124,7 @@
 						$("#msg").append("<b>아이디 찾기 실패! <b>");
 					} else {
 						$("#msg").text("");
-						$("#msg").append("<b>회원님의 아이디는 : " + data + "입니다 <b>");
+						$("#msg").append("<b>회원님의 아이디는  " + data + "입니다 <b>");
 					}
 				}
 			});
