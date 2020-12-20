@@ -39,6 +39,8 @@ public class ReservationController {
 	@Autowired
 	private ReservationService rService;
 	
+		
+		
 		@RequestMapping(value="pay.na")
 		public String pay() {
 			return "Reservation/pay";
