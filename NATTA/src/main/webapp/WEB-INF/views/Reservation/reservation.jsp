@@ -53,6 +53,7 @@
 		<article>
 		<h1 align="center">예약 페이지</h1>
 		<br><br><br><br>
+		<div text-align="center">
 			<form text-align="center"  action="reservation.na" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="customerId" value="${loginCustomer.customerId }">
 				
@@ -64,47 +65,49 @@
 				
 				<input type="hidden" name="shopName" value="${artistInfo.name}" placeholder="샵이름">
 				<input type="hidden" id="artistId" name="artistId" placeholder="아티스트아이디" value="${artistInfo.artistId }">
-				<input type="text" id="artistName" name="artistName" placeholder="아티스트이름" value=${artist.artistName }>
+				<div class="col-lg-2 col-md-2 form-group" >
+				<input class="form-control" type="text" id="artistName" name="artistName" placeholder="아티스트이름" value=${artist.artistName } readonly>
 				
 				
-				<select id="style" name="style">
-					<option>스타일을 선택해주세요</option>
+				<select class="form-control" id="style" name="style">
+					<option value="base">스타일을 선택해주세요</option>
 					<c:forEach items="${priceList }" var="style">
 						<option value="${style.pStyle }">${style.pStyle }</option>
 					</c:forEach>
 				</select>
 				
-				<select id="tattooSize" name="tattooSize">
-					<!-- <option>사이즈를 선택해주세요</option>
-					<option value=>38mmx38mm</option>
-					<option value=>65mmx76mm</option>
-					<option value=>102mmx127mm</option>
-					<option value=>152mmx152mm</option>
-					<option value=>203mmx152mm</option>
-					<option value=>210mmx297mm</option> -->
+				<select class="form-control" id="tattooSize" name="tattooSize">
+					<option value="base">사이즈를 선택해주세요</option>
+					<option value="38mmx38mm">38mmx38mm</option>
+					<option value="38mmx64mm">38mmx64mm</option>
+					<option value="65mmx76mm">65mmx76mm</option>
+					<option value="102mmx127mm">102mmx127mm</option>
+					<option value="152mmx152mm">152mmx152mm</option>
+					<option value="203mmx152mm">203mmx152mm</option>
+					<option value="210mmx297mm">210mmx297mm</option>				
 				</select>
 				
-				<input type="text" id="price" name="price" placeholder="가격" readonly>
+				<input class="form-control" type="text" id="price" name="price" placeholder="가격" readonly>
 				<br><br><br>
 				
 				
-				<span><input type="radio" name="part" value="팔">팔
+				<span><input class="form-control" type="radio" name="part" value="팔">팔
 					<img height=150px; width="150px" src="../resources/images/reservationImages/arm.jpg">
 				</span>
-				<span><input type="radio" name="part" value="등">등
+				<span><input class="form-control" type="radio" name="part" value="등">등
 					<img height=150px; width="150px" src="../resources/images/reservationImages/back.jpg">
 				</span>
-				<span><input type="radio" name="part" value="다리">다리
+				<span><input class="form-control" type="radio" name="part" value="다리">다리
 					<img height=150px; width="150px" src="../resources/images/reservationImages/leg.jpg">
 				</span>
 				<br><br><br>
 				
 				
 				  
-				<p>Date: <input type="text" name="reservationDate" id="datepicker" placeholder="예약일을 선택해주세요" readonly></p>
+				<p>Date: <input class="form-control" type="text" name="reservationDate" id="datepicker" placeholder="예약일을 선택해주세요" readonly></p>
 				
-				<select id="reservationTime" name="reservationTime">
-					<option>예약시간을 선택해주세요</option>
+				<select class="form-control" id="reservationTime" name="reservationTime">
+					<option value="base">예약시간을 선택해주세요</option>
 			    	<option value="09:00 ~ 11:00">09:00 ~ 11:00</option>
 			    	<option value="11:00 ~ 13:00">11:00 ~ 13:00</option>
 			    	<option value="14:00 ~ 16:00">14:00 ~ 16:00</option>
@@ -124,22 +127,70 @@
 				
 				
 				<br>
-				<input type="button" id="upfile" value="도안업로드">
+				<input class="form-control" type="button" id="upfile" value="도안업로드">
 				<input type="file" id="upload" name="upload" style="display:none">
 				
 				<c:forEach items="${reservationDate }" var="reservation">
-				<input type="text" class="rDate" value="${reservation}">
+				<input type="hidden" class="rDate" value="${reservation}">
 				</c:forEach>
 				
 				
 				<br><br><br><br><br><br><br><br><br><br><br><br><br>
-				<textarea rows="7" cols="30" name="request"></textarea>
+				<textarea class="form-control" rows="10" cols="100" id="request" name="request"></textarea>
+				</div>
 				<br><br><br><br><br><br><br><br><br><br><br><br>
-				<input id="btnr" type="submit" value="예약하기">
+				<input class="form-control" id="btnr" type="submit" value="예약하기" onclick="return validate();">
 			</form>
+			</div>
 		</article>
 		
-		<script>
+		
+		
+	</section>
+	<script>
+		function validate(){
+			if($("#style").val() == "base"){
+				alert("타투 스타일을 선택해주세요")
+				$("#style").focus();
+				return false;
+			}
+			else if($("#tattooSize").val() == "base"){
+				alert("타투 사이즈를 선택해주세요")
+				$("#tattooSize").focus();
+				return false;
+			}
+			else if($("#part").val() == ""){
+				alert("타투 부위를 선택해주세요")
+				$("#part").focus();
+				return false;
+			}
+			else if($("#datepicker").val() == ""){
+				alert("예약일을 선택해주세요")
+				$("#datepicker").focus();
+				return false;
+			}
+			else if($("#reservationTime").val() == "base"){
+				alert("예약시간을 선택해주세요")
+				$("#reservationTime").focus();
+				return false;
+			}
+			else if($("#upload").val() == ""){
+				alert("도안을 업로드해주세요")
+				$("#upfile").focus();
+				return false;
+			}
+			else if($("#request").val() == ""){
+				alert("요구사항을 입력해주세요")
+				$("#request").focus();
+				return false;
+			}else{
+				return true;
+			}
+			
+		}
+	</script>
+	<script>
+			//도안 미리보기
 			$("#upfile").click(function(){
 				$("#upload").trigger('click');
 			});
@@ -174,6 +225,7 @@
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script>
+		// 데이트피커
 		var reservationDate = new Array();
 		$(".rDate").each(function(index,item){
 			reservationDate.push($(item).val());
@@ -224,10 +276,13 @@
 			});
 		</script>
 		<script>
+			// 스타일별 사이즈 리스트생성
 			$(function(){
 				$("#style").change(function(){
+					$("#price").attr("value","");
 					var $select = $("select[name='tattooSize']");
 					$select.html("");
+					
 					var style = $("#style").val();
 					var artistId = '${artistInfo.artistId}';
 					$.ajax({
@@ -236,8 +291,9 @@
 						data : {"artistId" : artistId, "pStyle" : style},
 						dataType:"json",
 						success : function(sizeList) {
+							
 							for(var i in sizeList){
-							$select.append(
+							$select.append("<option value='base'>사이즈를 선택해주세요</option>"+
 											"<option value='"+sizeList[i].pSize1+",38mmx38mm'>38mmx38mm</option>"+
 											"<option value='"+sizeList[i].pSize2+",38mmx64mm'>38mmx64mm</option>"+
 											"<option value='"+sizeList[i].pSize3+",65mmx76mm'>65mmx76mm</option>"+
@@ -254,12 +310,13 @@
 		</script>
 		
 		<script>
+		// 날자별 예약 가능시간
 		$("#tattooSize").change(function() {
 			var price = $("#tattooSize").val();
 			var i = price.indexOf(",");
 			var a = price.substr(0,i);
 			var b = price.substr(i+1,price.length);
-		
+			
 			$("#price").attr("value",a);
 
 		});
@@ -275,8 +332,7 @@
 				data : {"reservationDate" : reservationDate,"artistId" : artistId},
 				dataType:"json",
 				success : function(tList){
-					console.log(tList)
-					$select.append("<option>예약시간을 선택해주세요</option>"
+					$select.append("<option value='base'>예약시간을 선택해주세요</option>"+
 								"<option value='09:00 ~ 11:00'>09:00 ~ 11:00</option>"+
 								"<option value='11:00 ~ 13:00'>11:00 ~ 13:00</option>"+
 								"<option value='14:00 ~ 16:00'>14:00 ~ 16:00</option>"+
@@ -291,73 +347,80 @@
 			});
 		});
 		</script>
-
+		<script>
+		// 지도
+		var workAddress = document.getElementById('address').value;
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+		    };  
 		
-	</section>
-	
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch(workAddress, function(result, status) {
+		
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+		
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new kakao.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+		     // 커스텀 오버레이에 표시할 컨텐츠 입니다
+		    	// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+		    	// 별도의 이벤트 메소드를 제공하지 않습니다 
+		        var    content='<div class="wrap">' + 
+		                    '    <div class="info">' + 
+		                    '        <div class="title">' + 
+		                    '            타투샵 : ${artistInfo.name}' + 
+		                    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+		                    '        </div>' + 
+		                    '        <div class="body">' + 
+		                    '            <div class="img">' +
+		                    '                <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" width="73" height="70">' +
+		                    '           </div>' + 
+		                    '            <div class="desc">' + 
+		                    '                <div class="ellipsis">'+workAddress+'</div>' + 
+		                    '            </div>' + 
+		                    '        </div>' + 
+		                    '    </div>' +    
+		                    '</div>';
+		            	
+		        // 마커 위에 커스텀오버레이를 표시합니다
+		        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+		        var overlay = new kakao.maps.CustomOverlay({
+		            content: content,
+		            map: map,
+		            position: marker.getPosition()       
+		        });
+		   		// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+			
+		    	 // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+		        kakao.maps.event.addListener(marker, 'click', function() {
+		            overlay.setMap(map);
+		        });
+		     // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+		        function closeOverlay() {
+		            overlay.setMap(null);     
+		        }
+			}
+		});
+		
+	</script>
 	
 	<footer></footer>
-	<script>
-
-	var workAddress = document.getElementById('address').value;
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-	    };  
 	
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-	
-	
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch(workAddress, function(result, status) {
-	
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === kakao.maps.services.Status.OK) {
-	
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
-	
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        /* var infowindow = new kakao.maps.InfoWindow({ */
-	        var    content='<div class="wrap">' + 
-		                '    <div class="info">' + 
-		                '        <div class="title">' + 
-		                '            ${artistInfo.name}' + 
-		                '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-		                '        </div>' + 
-		                '        <div class="body">' + 
-		                '            <div class="img">' +
-		                '                <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" width="73" height="70">' +
-		                '           </div>' + 
-		                '            <div class="desc">' + 
-		                '                <div class="ellipsis">'+workAddress+'</div>' + 
-		                '            </div>' + 
-		                '        </div>' + 
-		                '    </div>' +    
-		                '</div>';
-	            	
-	        /* });
-	        infowindow.open(map, marker); */
-	        var overlay = new kakao.maps.CustomOverlay({
-	            content: content,
-	            map: map,
-	            position: marker.getPosition()       
-	        });
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    } 
-	});
-	</script>
 </body>
 </html>
