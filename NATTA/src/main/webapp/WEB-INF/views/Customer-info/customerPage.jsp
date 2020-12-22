@@ -35,7 +35,7 @@
    }
  
  .modify{
-  background: green;
+  background: #513B3B;
   border: 0;
   padding: 10px 35px;
   color: #fff;
@@ -43,7 +43,7 @@
   border-radius: 50px;	
  }
  .delete{
-  background: green;
+  background: #513B3B;
   border: 0;
   padding: 10px 35px;
   color: #fff;
@@ -58,8 +58,22 @@
   border-color: #625b4b;
   color: white;
  }      
+     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px; color:black; font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap * {padding: 0;margin: 0;}
+    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close:hover {cursor: pointer;}
+    .info .body {position: relative;overflow: hidden;}
+    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info .link {color: #5085BB;}
  </style>
- 
+
 </head>
 
 <body>
@@ -133,7 +147,7 @@
           	<li><a href="#modifyInfo" ><i class="bx bx-user"></i><span>INFO MODIFY</span></a></li>
           	<li><a href="#following"><i class="icofont-heart"></i><span>Following</span></a></li>
           	<li><a href="#review"><i class="bx bx-file-blank"></i><span>Review</span></a></li>
-          	<li><a href="#services"><i class="icofont-calendar"></i> Reservation</a></li>
+          	<li><a href="#reservationTable"><i class="icofont-calendar"></i> Reservation</a></li>
           	<li><a href="/chatting.na"><i class="bx bx-envelope"></i> Chatting</a></li>
           	<li><a href="#modalWork" data-toggle="modal"><i class="icofont-crying"></i> Good-Bye</a></li>    
         </ul>            
@@ -166,7 +180,19 @@
 				<i class="icofont-id"> Id   : ${ loginCustomer.customerId }</i><br>
 				<i class="icofont-smart-phone"> Phone : ${ loginCustomer.phone }</i> <br>
 				<i class="icofont-email"> Email : ${loginCustomer.email }</i> <br>
-				<i class="icofont-wall-clock"> Enroll-Date : ${loginCustomer.enrollDate }</i>
+				<i class="icofont-wall-clock"> Enroll-Date : ${loginCustomer.enrollDate }</i><br>
+				<i class="icofont-ui-home"> Addr : 
+				
+					<c:forTokens items="${loginCustomer.address }" var="addr" delims="," varStatus="status">
+					<c:if test="${status.index eq 1}">
+						${addr }
+					</c:if>
+					<c:if test="${status.index eq 2}">
+						${addr }
+					</c:if>      
+					</c:forTokens>
+				</i>
+				
             </p>
           </div>
         </div>
@@ -234,23 +260,17 @@
 				            </div>
 				            <!-- 근무지주소 -->
 				            <div class="col-lg-7 col-md-6 form-group">
-				            	ADDRESS
-				            	
-				            	<c:if test="${loginCustomer.address eq null}">
-						            <input type="text" name="post" value="${addr }" class="form-control postcodify_postcode5 address" id="address" placeholder="Your WorkAddress">
-						            <input type="text" name="address1" value="${addr }" class="postcodify_address address">
-						            <input type="text" name="address2" value="${addr }" class="postcodify_extra_info">
-				            	</c:if>
+				            	ADDRESS<br>
 				            	
 								<c:forTokens items="${loginCustomer.address }" var="addr" delims="," varStatus="status">
 						            <c:if test="${status.index eq 0}">
-						             <input type="text" name="post" value="${addr }" class="form-control postcodify_postcode5 address" id="address" placeholder="Your WorkAddress">
+						             <input type="text" name="post" value="${addr }" class=" postcodify_postcode5 address" id="address" placeholder="Your WorkAddress">
 						            </c:if>
 						            <c:if test="${status.index eq 1}">
-						            <input type="text" name="address1" value="${addr }" class="postcodify_address address">
+						            <input type="text" name="address1" value="${addr }" class="form-control postcodify_address address">
 						            </c:if>
 						            <c:if test="${status.index eq 2}">
-						            <input type="text" name="address2" value="${addr }" class="postcodify_extra_info">
+						            <input type="text" name="address2" value="${addr }" class="form-control postcodify_extra_info">
 						            </c:if>      
 					            </c:forTokens>
 
@@ -362,8 +382,6 @@
 		        $('.deleteFollow').click(function(){
 		        	var customerId = "${loginCustomer.customerId}";
 		            var artistId = $(this).attr("id");
-		            console.log(customerId);
-		            console.log(artistId);
 		            var con = confirm(artistId + "의 팔로우를 취소하시겠습니까?");
 		            if(con == true){
 		            $.ajax({
@@ -663,8 +681,9 @@
 				         	<!-- 타투샵이름 -->
 				            <div class="col-lg-4 col-md-6 form-group">
 				              ARTIST SHOP NAME 
-				              <input type="text" value="" name="artistId" class="form-control artistShopName" id="insertArtistId" readonly>
+				              <input type="text" value="" name="shopName" class="form-control artistShopName" id="insertShopName" readonly>
 				              <input type="hidden" value="" name="reservationCode" id="insertReservationCode">
+				              <input type="hidden" value="" name="artistId" id="insertArtistId">
 				              <div class="validate"></div>
 				            </div>
 				            <!-- 리뷰사진 업로드-->
@@ -675,13 +694,15 @@
 				            <!-- 리뷰 내용  -->
 				            <div class="form-group">
 				            <div id="star">
-		                  		<span style="color:yellow"><i class="far fa-star fa-2x grade" id="1"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="2"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="3"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="4"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="5"></i></span>
-			                  	<input type="hidden" name="reviewStar" id="reviewStar" value="">
+		                  		<span style="color:yellow" id="istar1"><i class="far fa-star fa-2x igrade 1" id="1"></i></span>
+			                  	<span style="color:yellow" id="istar2"><i class="far fa-star fa-2x igrade 2" id="2"></i></span>
+			                  	<span style="color:yellow" id="istar3"><i class="far fa-star fa-2x igrade 3" id="3"></i></span>
+			                  	<span style="color:yellow" id="istar4"><i class="far fa-star fa-2x igrade 4" id="4"></i></span>
+			                  	<span style="color:yellow" id="istar5"><i class="far fa-star fa-2x igrade 5" id="5"></i></span>
+			                  	<input type="text" name="reviewStar" id="ireviewStar" value="">
 		                  	</div>
+		                  	
+		                  	
 				               CONTENT 
 				               <textarea class="form-control artistmodalInfo" id="insertReviewContents" name="reviewContents" cols="600" rows="5" style="resize: none;"></textarea>
 				               <div class="validate"></div>
@@ -698,7 +719,7 @@
 		</div> 
 		<!--  -->
 		
-   <section id="review" class="specials">
+   <section id="reservationTable" class="specials">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -729,9 +750,16 @@
 			      <input type="hidden" value="${res.price }" id="price${res.reservationCode }">
 			      <input type="hidden" value="${res.part }" id="part${res.reservationCode }">
 			      <input type="hidden" value="${res.status}" id="status${res.reservationCode }">
+			      <input type="hidden" value="${res.artistId}" id="artistId${res.reservationCode }">
+			      <c:forTokens items="${loginCustomer.address }" var="addr" delims="," varStatus="status">
+						<c:if test="${status.index eq 1}">
+						     <input type="hidden" value="${addr }" id="addr${res.reservationCode }">
+						 </c:if>
+			 	</c:forTokens>
+			 	<input type="hidden" value="${res.artistProfile }" id="artistProfile${res.reservationCode }">
 			      <c:if test="${res.status eq 0}"><td >예약 대기</td></c:if>
 			      <c:if test="${res.status eq 1}"><td>예약 확정</td></c:if>			      
-			      <c:if test="${res.status eq 3}"><td>타투 완료</td></c:if>			      
+			      <c:if test="${res.status eq 2}"><td>타투 완료</td></c:if>			      
 			      <td><button value="${res.reservationCode }" class="detail">상세보기</button></td>
 			   </tr>
 			</c:forEach>
@@ -746,7 +774,9 @@
     	<!-- 예약 디테일 뷰-->
 		<div class="modal fade" id="detailReservation" tabindex="-1" role="dialog"
 			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
+			
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
+			
 				<!-- 센터모달창 추가  modal-dialog-centered -->
 				<div class="modal-content" style="background-color: black;">
 					<div class="modal-header">
@@ -759,10 +789,12 @@
 						</button>
 					</div>
 					<div class="modal-body book-a-table">
+					<form action="/deleteResvertion.na" method="post" role="form" class="php-email-form modalActionCheck" enctype="multipart/form-data" onsubmit="return checkDelete();">
 				          <div>
 				            <div class="col-lg-4 col-md-6 form-group">
 				              Artist Shop Name 
 				              <input type="text" value="" name="shopName" class="form-control" id="shopName" readonly>
+				              <input type="hidden" value="" name="reservationCode" class="form-control" id="reservationCode" readonly>
 				              <div class="validate"></div>
 				            </div>
 				            <div class="col-lg-4 col-md-6 form-group">
@@ -775,7 +807,7 @@
 				            </div>
 				            <div class="col-lg-4 col-md-6 form-group">
 				              Part
-				              <input type="text" class="form-control" id="Part" readonly> 
+				              <input type="text" class="form-control" id="part" readonly> 
 				            </div>
 				            <div class="col-lg-4 col-md-6 form-group">
 				              Style
@@ -802,6 +834,7 @@
 				          <div class="mb-3">
 				          </div>
 				          <div class="text-center"><button type="button" id="resButton" class="resButton">닫기</button></div>
+				          </form>
 					</div>
 				</div>
 			</div>
@@ -831,6 +864,9 @@
 				var price = $("#price"+reservationCode).val();
 				var part = $("#part"+reservationCode).val();
 				var status = $("#status"+reservationCode).val();
+				var artistId = $("#artistId"+reservationCode).val();
+				var addr =  $("#addr"+reservationCode).val()
+				var artistProfile = $("#artistProfile"+reservationCode).val();
 				
 				
 				
@@ -840,37 +876,43 @@
 				$("#reservationDate").val(reservationDate);
 				$("#price").val(price);
 				$("#tattooSize").val(tattooSize);
-				$("part").val(part);
+				$("#part").val(part);
 				$("#resImg").attr("src","/resources/images/ruploadFiles/" + resImg);
-				
+				$("#reservationCode").val(reservationCode);
 				if(status == 0){
 					$(".resButton").text("예약 취소");
 					$(".resButton").attr("value",reservationCode);
 					$(".resButton").attr("id","deleteResvertion");
 					$(".resButton").attr("data-dismiss","");
 					$(".resButton").attr("aria-label","");
-				}else if(status == 3){
+					$(".resButton").attr("type","submit");
+				}else if(status == 2){
 					$(".resButton").empty();
 					$(".resButton").text("리뷰 쓰기");
 					$(".resButton").attr("value",reservationCode);
 					$(".resButton").attr("id","insertReview");
 					$(".resButton").attr("data-dismiss","");
 					$(".resButton").attr("aria-label","");
+					$(".resButton").attr("type","button");
 				}else{
 					$(".resButton").empty();
 					$(".resButton").text("닫기");
 					$(".resButton").attr("value",reservationCode);
 					$(".resButton").attr("data-dismiss","modal");
 					$(".resButton").attr("aria-label","Close");
+					$(".resButton").attr("type","button");
 				}
 				
 				$("#detailReservation").modal("show");
 				
-				mapRead(); 
+				mapRead(addr,artistProfile,shopName); 
 				
+				function checkDelete(){
+					return confirm("예약을 취소하시겠습니까?");
+				}
+				/* 리뷰 추가 */
 				$("#insertReview").on("click",function(){
 					var reservation = $(this).val();
-					console.log(reservation);
 					$("#detailReservation").modal("hide");
 					$.ajax({
 						type: "post",
@@ -880,8 +922,9 @@
 						},
 						success: function (data) {
 							if(data == "success"){
-								$("#insertArtistId").val(shopName);
-								$("insertReservationCode").val(reservation);
+								$("#insertShopName").val(shopName);
+								$("#insertArtistId").val(artistId);
+								$("#insertReservationCode").val(reservation);
 								$("#insertReviewModal").modal("show");
 							}else{
 								alert('이미 등록된 리뷰가 있습니다.');
@@ -889,6 +932,15 @@
 						}
 					})
 					
+					
+					$(".igrade").on("click", function(){
+					var grade = $(this).attr("id");
+					$(".igrade").attr("class","far fa-star fa-2x igrade");
+					$("#ireviewStar").val(grade);
+					$("#istar"+grade).prevAll().children().attr("class","fas fa-star fa-2x igrade");
+					$(this).attr("class","fas fa-star fa-2x igrade");
+					
+				})
 					
 					
 				});
@@ -912,6 +964,8 @@
 					var reviewCode = $("#"+review).find(".reviewCode").val();
 					var reviewContents = $("#"+review).find(".reviewContents").val();
 					var reviewPhoto = $("#"+review).find(".reviewPhoto").val();
+					
+				
 					$("#artistId").val(artist);
 					$("#originFile").val(reviewPhoto);
 					$("#reviewCode").val(reviewCode);
@@ -931,10 +985,11 @@
 				
 				
 				$(".delete").on("click",function(){
+					 var con = confirm("리뷰를 삭제 하시겠습니까?");
 					var reviewCode = $(this).val();
 					var reviewPhoto = $("#reviewPhoto"+reviewCode).val();
 					var customerId = "${loginCustomer.customerId}";
-					
+					if(con == true){
  					$.ajax({
 						type: "post",
 						url: "/deleteReview.na",
@@ -946,16 +1001,18 @@
 						success: function (data) {
 							if(data>0){
 							$("#item"+data).remove();
+							$("#tab-"+data).remove();
 							alert("리뷰 삭제가 완료되었습니다.")
 							}
 						}
-					})  
+					})
+					}
 					/* $(this).parent().parent().remove(); */
 				})
 			</script>
 			
 	<script>
-  	function mapRead(){
+  	function mapRead(addr,artistProfile,shopName){
 		
 		$("#detailReservation").on("shown.bs.modal", function() {
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -963,7 +1020,6 @@
 		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 		        level: 3 // 지도의 확대 레벨
 			    };  
-			
 			// 지도를 생성합니다    
 			var map = new kakao.maps.Map(mapContainer, mapOption); 
 			
@@ -973,7 +1029,7 @@
 			var geocoder = new kakao.maps.services.Geocoder();
 			
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch("백석로 151", function(result, status) {
+			geocoder.addressSearch(addr, function(result, status) {
 			
 			    // 정상적으로 검색이 완료됐으면 
 			     if (status === kakao.maps.services.Status.OK) {
@@ -985,28 +1041,26 @@
 			            map: map,
 			            position: coords
 			        });
-			
-			        // 인포윈도우로 장소에 대한 설명을 표시합니다
-			        /* var infowindow = new kakao.maps.InfoWindow({ */
-			        var    content='<div class="wrap">' + 
-				                '    <div class="info">' + 
-				                '        <div class="title">' + 
-				                '            ${artistInfo.name}' + 
-				                '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-				                '        </div>' + 
-				                '        <div class="body">' + 
-				                '            <div class="img">' +
-				              /*   '                <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" width="73" height="70">' + */
-				                '			</div>' + 
-				                '            <div class="desc">' + 
-				                '                <div class="ellipsis">'+/*workAddress*/+'</div>' + 
-				                '            </div>' + 
-				                '        </div>' + 
-				                '    </div>' +    
-				                '</div>';
+
+
+				                
+						        var    content='<div class="wrap">' + 
+			                    '    <div class="info">' + 
+			                    '        <div class="title">' + 
+			                    '            타투샵 : '+shopName+ 
+			                    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+			                    '        </div>' + 
+			                    '        <div class="body">' + 
+			                    '            <div class="img">' +
+			                    '                <img src="resources/artistInfoFile/Profile/'+artistProfile+'" width="100" height="100">' +
+			                    '           </div>' + 
+			                    '            <div class="desc">' + 
+			                    '                <div class="ellipsis">'+addr+'</div>' + 
+			                    '            </div>' + 
+			                    '        </div>' + 
+			                    '    </div>' +    
+			                    '</div>';
 			            	
-			        /* }); 
-			        infowindow.open(map, marker); */
 			        var overlay = new kakao.maps.CustomOverlay({
 			            content: content,
 			            map: map,

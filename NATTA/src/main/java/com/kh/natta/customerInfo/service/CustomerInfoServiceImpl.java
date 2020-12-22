@@ -62,6 +62,20 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 		return store.dupReview(reservationCode);
 	}
 
+	@Override
+	public int insertReview(Review review) {
+		return store.insertReview(review);
+	}
+
+	@Override
+	public int deleteResvertion(int reservationCode) {
+		return store.deleteResvertion(reservationCode);
+	}
+
+	@Override
+	public Reservation selectOneReservation(int reservationCode) {
+		return store.selectOneReservation(reservationCode);
+	}
 
 	
 	

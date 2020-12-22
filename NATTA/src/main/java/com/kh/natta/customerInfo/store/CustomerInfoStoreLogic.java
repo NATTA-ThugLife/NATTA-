@@ -62,5 +62,21 @@ public class CustomerInfoStoreLogic implements CustomerInfoStore {
 	public Review dupReview(int reservationCode) {
 		return session.selectOne("customerInfoMapper.dupReview",reservationCode);
 	}
+
+	@Override
+	public int insertReview(Review review) {
+		return session.insert("customerInfoMapper.insertReview",review);
+	}
+
+	@Override
+	public int deleteResvertion(int reservationCode) {
+		return session.delete("customerInfoMapper.deleteResvertion",reservationCode);
+	}
+
+	@Override
+	public Reservation selectOneReservation(int reservationCode) {
+		return session.selectOne("customerInfoMapper.selectOneReservation",reservationCode);
+	}
+	
 	
 }

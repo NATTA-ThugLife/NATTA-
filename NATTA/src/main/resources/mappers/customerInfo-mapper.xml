@@ -41,6 +41,7 @@
 		<result property="shopName" column="SHOP_NAME"></result>
 		<result property="customerId" column="CUSTOMER_ID"></result>
 		<result property="artistId" column="ARTIST_ID"></result>
+		<result property="artistProfile" column="MY_REPROFILE"></result>
 	</resultMap>
 	
 	<update id="modifyCusotmer">
@@ -93,12 +94,25 @@
 	</delete>
 	
 	<select id="selectListReservation" resultMap="reservationResultMap">
-		SELECT * FROM RESERVATION
+		SELECT * FROM RESERVATION join artistInfo using(artist_Id)
 		WHERE CUSTOMER_ID = #{customerId}
 	</select>
 	
 	<select id="dupReview" resultMap="ReviewResultMap">
 		SELECT * FROM REVIEW
+		WHERE RESERVATION_CODE = #{reservationCode}
+	</select>
+	
+	<insert id="insertReview">
+		INSERT INTO REVIEW VALUES(#{reviewCode},#{reviewContents},#{reviewPhoto},#{reviewStar},SYSDATE,SYSDATE,0,#{artistId},#{customerId},#{reservationCode})
+	</insert>
+	
+	<delete id="deleteResvertion">
+		DELETE FROM RESERVATION WHERE RESERVATION_CODE = #{reservationCode}
+	</delete>
+	
+	<select id="selectOneReservation" resultMap="reservationResultMap">
+		SELECT * FROM RESERVATION
 		WHERE RESERVATION_CODE = #{reservationCode}
 	</select>
 </mapper>

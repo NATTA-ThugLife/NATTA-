@@ -71,4 +71,24 @@ public interface CustomerInfoService {
 	 * 
 	 */
 	public Review dupReview(int reservationCode);
+	
+	/**
+	 * 
+	 *  리뷰 인서트
+	 */
+	
+	public int insertReview(Review review);
+	
+	/**
+	 * 
+	 * 예약 취소
+	 */
+	public int deleteResvertion(int reservationCode);
+	
+	/**
+	 * 
+	 * 예약 사진 삭제를 위한 예약 설렉트 원
+	 */
+	
+	public Reservation selectOneReservation(int reservationCode);
 }

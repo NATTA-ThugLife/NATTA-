@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,10 +41,10 @@ public class CustomerInfoController {
 		ArrayList<Following> fList = service.selectListFollowing(customerId);
 		ArrayList<Review> rList = service.selectListReview(customerId);
 		ArrayList<Reservation> resList = service.selectListReservation(customerId);
-		System.out.println(resList);
 		model.addAttribute("resList",resList);
 		model.addAttribute("fList",fList);
 		model.addAttribute("rList",rList);
+		System.out.println(resList);
 		return "Customer-info/customerPage";
 	}
 	
@@ -129,7 +130,7 @@ public class CustomerInfoController {
 			
 			Review check = service.dupReview(reservationCode);
 			
-			if(check != null) {
+			if(check == null) {
 				return "success";
 			}else {
 				return "fail";
@@ -139,7 +140,6 @@ public class CustomerInfoController {
 		@ResponseBody
 		@RequestMapping(value="/deletefollow.na", method= RequestMethod.POST)
 		public String deleteFollow(Following following) {
-			System.out.println(following);
 			int result = service.deleteFollowing(following);
 			if(result > 0 ) {
 				return following.getArtistId();
@@ -164,11 +164,25 @@ public class CustomerInfoController {
 			return "redirect:/customerInfo.na?customerId="+customerId;
 		}
 
-
+		@RequestMapping(value="/insertReview.na",method = RequestMethod.POST)
+		public String insertReview(Review review, HttpServletRequest request,MultipartFile uploadFile) {
+			HttpSession session = request.getSession();
+			Customer customer = (Customer)session.getAttribute("loginCustomer");
+			String customerId = customer.getCustomerId();
+			review.setCustomerId(customerId);
+			review.setReviewCode(review.getReservationCode());
+			if(!uploadFile.getOriginalFilename().isEmpty()) {
+				String renameFileName = saveReviewFile(uploadFile,request,customerId, review.getReservationCode());
+				review.setReviewPhoto(renameFileName);
+			}
+			int result = service.insertReview(review);
+			return "redirect:/customerInfo.na?customerId="+customerId;
+		}
+		
+		
 		// 파일 저장
 		public String saveReviewFile(MultipartFile file, HttpServletRequest request, String customerId, int reviewCode) {
 			String root = request.getSession().getServletContext().getRealPath("resources");
-			// 채팅 폴더 만들기 잊지말기
 			String savePath = root + "\\review\\" + customerId + "\\" + reviewCode;
 			File folder = new File(savePath);
 			
@@ -223,4 +237,26 @@ public class CustomerInfoController {
 				return 0;
 			}
 		}
+		
+		@RequestMapping(value ="/deleteResvertion.na" , method = RequestMethod.POST)
+		public String deleteResvertion(int reservationCode, HttpServletRequest request) {
+			Reservation reservation = service.selectOneReservation(reservationCode);
+			HttpSession session = request.getSession();
+			Customer customer = (Customer)session.getAttribute("loginCustomer");
+			String customerId = customer.getCustomerId();
+			deleteReservationFile(reservation.getRenameFilename(), request);
+		    int result = service.deleteResvertion(reservationCode);
+			return "redirect:/customerInfo.na?customerId="+customerId;
+		}
+		
+		
+		public void deleteReservationFile(String fileName, HttpServletRequest request ) {
+		      String root = request.getSession().getServletContext().getRealPath("resources");
+		      String savePath = root + "\\images\\ruploadFiles";
+		      
+		      File file = new File(savePath + "\\" + fileName);
+		      if (file.exists()) {
+		         file.delete();
+		      }
+		   }
 }
