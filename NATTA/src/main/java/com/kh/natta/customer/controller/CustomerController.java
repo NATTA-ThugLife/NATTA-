@@ -104,8 +104,7 @@ public class CustomerController {
 	}
 
 	/*
-	 * //회원가입할때 회원/아티스트 선택 옵션
-	 * 
+	/ * //회원가입할때 회원/아티스트 선택 옵션 
 	 * @RequestMapping(value = "joinOption.na", method = RequestMethod.GET) public
 	 * String joinOption(Locale locale, Model model) { return "join/joinOption"; }
 	 */
@@ -116,21 +115,41 @@ public class CustomerController {
 		return "join/findId";
 	}
 
+    // 아이디 찾기 (이메일 인증)
 	@ResponseBody
-	@RequestMapping(value = "findCustomerId.na")
-	public String findCustomerId(String customerName, String email) {
+	@RequestMapping(value = "findIdEmail.na")
+	public String findIdEmail(String customerName, String email) {
 		Customer customer = new Customer();
 		customer.setCustomerName(customerName);
 		customer.setEmail(email);
-		// System.out.println(customerName);
-		// System.out.println(email);
+		//System.out.println("email인증"+customerName);
+		//System.out.println("email인증"+email);
 		Customer findCustomer = service.findIdEmail(customer);
+		System.out.println("email인증"+findCustomer);
 		if(findCustomer != null) {
 		    return findCustomer.getCustomerId();
 		}else {
 			return"fail";
 		}
 	}
+	
+	//아이디 찾기 (폰번호 인증)
+	@ResponseBody
+	@RequestMapping(value = "findIdPhone.na")
+	public String findIdPhone(String customerName, String phone) {
+		Customer customer = new Customer();
+		customer.setCustomerName(customerName);
+		customer.setPhone(phone);
+		//System.out.println("phone인증"+customerName);
+		//System.out.println("phone인증"+phone);		
+		Customer findCustomer = service.findIdPhone(customer);
+		System.out.println("phone인증"+findCustomer);
+		if(findCustomer != null) {
+		    return findCustomer.getCustomerId();
+		}else {
+			return"fail";
+		}
+	}	
 	
 	// 비번 찾기 페이지
 	@RequestMapping(value = "findPwd.na", method = RequestMethod.GET)

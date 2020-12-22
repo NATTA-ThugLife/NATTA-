@@ -44,6 +44,11 @@ public class CustomerServiceImpl implements CustomerService{
 		return store.selectThreeCustomer(customer);
 	}
 
+	@Override
+	public Customer findIdPhone(Customer customer) {
+		return store.selectFourCustomer(customer);
+	}
+
 	/*
 	 * @Override public int updatePassword(Customer customer) { 
 	 * return store.updatePassword(customer); }

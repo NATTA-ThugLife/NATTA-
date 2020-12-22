@@ -30,17 +30,14 @@
 								<td><input type="text" name="customerName" id="customerName">
 								</td>
 							</tr>
-							<tr id="email">
-								<td>이메일</td>
-								<td><input type="text" name="email"></td>
+							<tr id="emailForm">
+								<td id="changeText">이메일</td>
+								<td><input type="text" name="email" id="chageInput"></td>
 							</tr>
-							<tr id="phone" style="display:none;">
-								<td>폰</td>
-								<td><input type="text" name="phone"></td>
-							</tr>
+							
 							<tr>
 								<td colspan="2" align="center">
-									<button id="next"><a href="#modalArtistPrice" data-toggle="modal" id="artistInfoPrice">확인</button>
+									<button id="next"><a href="#modalArtistPrice" data-toggle="modal" id="findEmail" onclick="emailCheck()">확인</button>
 								</td>
 							</tr>
 						</table>
@@ -49,28 +46,27 @@
 			</div>
 	</section>
 	
-
 	<script>
 		function setDisplay(){
 		    if($('#checkEmail').is(':checked')){
-		        $('#formId').attr("action","findId.na")	
-		        $("#email").show();
-				$("#phone").hide();
+		        $('#findPhone').attr("onclick","emailCheck()")	
+		        $('#findPhone').attr("id","findEmail")	
+		        $('#changeText').text("이메일")	
+		        $('#chageInput').attr("name","email")	
+
 		    }else{
-		    	$('#formId').attr("action","findId.na")
-		    	$("#email").hide();
-				$("#phone").show();
+		    	$('#findEmail').attr("onclick","phoneCheck()")	
+		    	$('#findEmail').attr("id","findPhone")
+		    	$('#changeText').text("휴대폰")	
+		    	$('#chageInput').attr("name","phone")
+		    	
 		    }
 		}                    
         </script>
 
-
-
-	<div class="modal fade" id="modalArtistPrice" tabindex="-1"
-		role="dialog" aria-labelledby="ARTIST_TITLE" aria-hidden="true"
+	<div class="modal fade" id="modalArtistPrice" tabindex="-1" role="dialog" aria-labelledby="ARTIST_TITLE" aria-hidden="true"
 		style="">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-middle" role="document">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-middle" role="document">
 			<!-- 센터모달창 추가  modal-dialog-centered -->
 			<div class="modal-content"
 				style="background-color: rgba(255, 255, 255, 0.4);">
@@ -80,10 +76,8 @@
 					</h5>
 				</div>
 				<div class="modal-body book-a-table">
-					<form action="findCustomerId.na" method="post" role="form"
-						class="php-email-form priceActionCheck" data-aos="fade-up"
+					<form role="form" class="php-email-form priceActionCheck" data-aos="fade-up"
 						data-aos-delay="100" enctype="multipart/form-data">
-
 						<div class="container" data-aos="fade-up">
 							<div class="section-title">
 								<!-- <h2>Find ID</h2>
@@ -96,8 +90,6 @@
 						<div class="mb-3">
 							<div class="loading">Loading</div>
 						</div>
-						<input type="hidden" name="artistId"
-							value="${ loginArtist.artistId }">
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -107,12 +99,15 @@
 			</div>
 		</div>
 	</div>
+	
 	<script>
-		$("#artistInfoPrice").on("click", function() {
+	 function emailCheck() {
+			console.log("이메 동작");
 			var customerName = $("#customerName").val();
-			var email = $("#email").val();
+			var email = $("#chageInput").val();
+			console.log(email);
 			$.ajax({
-				url : "findCustomerId.na",
+				url : "findIdEmail.na",
 				type : "post",
 				data : {
 					"customerName" : customerName,
@@ -128,8 +123,30 @@
 					}
 				}
 			});
-
-		});
+		};
+		
+		function phoneCheck() {
+			console.log("핸드폰 동작");
+			var customerName = $("#customerName").val();
+			var phone = $("#chageInput").val();
+			$.ajax({
+				url : "findIdPhone.na",
+				type : "post",
+				data : {
+					"customerName" : customerName,
+					"phone" : phone
+				},
+				success : function(data) {
+					if (data == "fail") {
+						$("#msg").text("");
+						$("#msg").append("<b>아이디 찾기 실패! <b>");
+					} else {
+						$("#msg").text("");
+						$("#msg").append("<b>회원님의 아이디는  " + data + "입니다 <b>");
+					}
+				}
+			});
+		};  
 	</script>
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>

@@ -106,7 +106,6 @@ public class ArtistController {
 		}
 		return renameFileName;
 	}
-
 	
 	  //아이디 중복검사	  
 	  @ResponseBody	  
@@ -115,8 +114,7 @@ public class ArtistController {
 		  boolean isUsable = service.checkIdDup(artistId) == 0 ? true : false; 
 	      //System.out.println(isUsable);
 	      return isUsable+""; 
-	  }	
-	  
+	  }		  
 	  
 	  // 이메일 중복 체크
 		@ResponseBody

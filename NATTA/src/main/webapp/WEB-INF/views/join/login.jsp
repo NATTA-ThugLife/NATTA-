@@ -107,7 +107,6 @@ rotate(
 							<td>
 								<button id="button" class="btn btn-login" style="margin-right: 30px;">로그인</button>
 							</td>
-
 						</tr>
 						<tr>
 							<td><input type="password" name="password"
