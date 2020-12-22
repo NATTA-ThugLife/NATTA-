@@ -100,7 +100,7 @@
       <div class="row">
         <div class="col-lg-8">
           <h1><span>NATTA ! </span></h1>
-          <h2>타투아티스트의 놀이동산에 오신 것을 환영합니다.</h2>
+          <h2>다양한 아티스트들을 만나보세요.</h2>
 
           <!-- <div class="btns">
             <a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Menu</a>

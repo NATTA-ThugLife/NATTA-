@@ -11,6 +11,7 @@ import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.store.ArtistInfoStore;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artistWork.domain.ArtistWork;
+import com.kh.natta.reservation.domain.Reservation;
 
 @Service
 public class ArtistInfoServiceImpl implements ArtistInfoService{
@@ -72,6 +73,21 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 	@Override
 	public ArtistFollow selectFollowing(ArtistFollow af) {
 		return infoStore.selectFollowing(af);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectReList(String artistId) {
+		return infoStore.selectReList(artistId);
+	}
+
+	@Override
+	public int updateStatus(int reservationCode) {
+		return infoStore.updateStatus(reservationCode);
+	}
+
+	@Override
+	public int deleteStatus(int reservationCode) {
+		return infoStore.deleteStatus(reservationCode);
 	}
 
 
