@@ -50,6 +50,12 @@ public class CustomerStoreLogic implements CustomerStore{
 		return findPwdEmail;
 	}
 
+	@Override
+	public Customer selectFourCustomer(Customer customer) {
+		Customer findIdPhone = sqlSession.selectOne("customerMapper.selectFour",customer);
+		return findIdPhone;
+	}
+
 	
 	/*
 	 * // 비밀번호 변경 

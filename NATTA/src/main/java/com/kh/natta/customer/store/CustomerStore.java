@@ -13,9 +13,14 @@ public interface CustomerStore {
 	
 	public int insertCustomer(Customer customer);
 
+	//회원 아이디 찾기 (이메일 인증)
 	Customer selectTwoCustomer(Customer customer);
-
+	
+	//회원 비번 찾기 (이메일 인증)
 	Customer selectThreeCustomer(Customer customer);
+	
+	//회원 아이디 찾기 (폰 인증)
+	Customer selectFourCustomer(Customer customer);
 	
 	/* public int updatePassword(Customer customer); */
 	

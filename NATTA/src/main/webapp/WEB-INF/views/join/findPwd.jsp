@@ -65,7 +65,7 @@
 								<td><input type="text" name="email"></td>
 							</tr>
 							<tr id="phone" style="display:none;">
-								<td>폰</td>
+								<td>휴대폰</td>
 								<td><input type="text" name="phone"></td>
 							</tr>
 							<tr>

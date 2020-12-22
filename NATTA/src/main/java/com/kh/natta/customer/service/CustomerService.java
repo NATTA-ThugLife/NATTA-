@@ -18,6 +18,8 @@ public interface CustomerService {
 	public Customer findIdEmail(Customer customer);
 	
 	public Customer findPwdEmail(Customer customer);
+	
+	public Customer findIdPhone(Customer customer);
 
 	/* public int updatePassword(Customer customer); */
 

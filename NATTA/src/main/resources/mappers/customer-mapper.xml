@@ -29,16 +29,22 @@
 	 	WHERE Email = #{email}
 	 </select>
 	 
-	 <!-- id 찾기 -->
+	 <!-- id 찾기 (이메일 인증) -->
 	 <select id="selectTwo" resultMap="customerResultMap">
 		SELECT * FROM CUSTOMER
 		WHERE CUSTOMER_NAME=#{customerName} AND EMAIL=#{email}
 	</select>
 	
-	<!-- pwd 찾기 -->
+	<!-- pwd 찾기 (이메일 인증) -->
 	<select id="selectThree" resultMap="customerResultMap">
 		SELECT * FROM CUSTOMER
 		WHERE CUSTOMER_ID=#{customerId} AND CUSTOMER_NAME=#{customerName} AND EMAIL=#{email}
+	</select>
+	
+	<!-- id 찾기  (폰 인증) -->
+	<select id="selectFour" resultMap="customerResultMap">
+		SELECT * FROM CUSTOMER
+		WHERE CUSTOMER_NAME=#{customerName} AND PHONE=#{phone}
 	</select>
 	
 	<!-- 비밀번호 변경 -->
