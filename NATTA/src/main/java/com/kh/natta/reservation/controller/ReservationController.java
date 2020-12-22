@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,11 +42,7 @@ public class ReservationController {
 	
 		
 		
-		@RequestMapping(value="pay.na")
-		public String pay() {
-			return "Reservation/pay";
-		}
-	
+		
 		@RequestMapping(value="reservation.na",method=RequestMethod.GET)
 		public  String reservation(String artistId, Model model,HttpServletResponse response) throws Exception {
 			ArtistInfo infoPage = infoService.selectOneArtistInfo(artistId);
@@ -75,17 +72,15 @@ public class ReservationController {
 			return "Reservation/reservation";
 		}
 		
+		
+		
 		// 예약 등록
 		@RequestMapping(value="reservation.na",method=RequestMethod.POST)
 		public String reservationInsert(Reservation reservation,String tattooSize,Model model,HttpServletRequest request,
 										@RequestParam(name="upload",required=false)MultipartFile uploadFile){
-			
 			String size = tattooSize.substring(tattooSize.indexOf(",")+1,tattooSize.length());
 			
-			
 			reservation.setTattooSize(size);
-			
-			
 			
 			if(!uploadFile.getOriginalFilename().equals("")) {
 				String renameFilename = saveFile(uploadFile,request);
@@ -94,9 +89,9 @@ public class ReservationController {
 					reservation.setRenameFilename(renameFilename);
 				}
 			}
+			
 			int result = 0;
 			String path = null;
-
 			result = rService.insertReservation(reservation);
 			if(result>0) {
 				path="redirect:main.na";
