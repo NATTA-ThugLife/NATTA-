@@ -34,20 +34,18 @@
         		</select>
         		</td>
         	</tr>
+        	
         	<tr>
-        		<td>공개/비공개</td>
-        		<td>	
-        			<input type="radio" name="onOff" value="0" checked="checked"><span>공개</span>
+        		<td align="center" >	
+        			<input type="radio" name="onOff" value="0" checked><span>공개</span>
+        			<br><br>
         			<input type="radio" name="onOff" value="1"><span>비공개</span>
         		</td>
-        	</tr>
-        	<tr>
-        		<td>내용</td>
-       	 		<td><textarea id = "contents" name = "contents">${customDesign.contents}</textarea><td>
+       	 		<td><textarea id = "contents" name = "contents">${customDesign.contents }</textarea>
 				<script>
 							CKEDITOR.replace('contents',{filebrowserUploadUrl:'/mine/imageUpload.na'});
 				</script>
-        	
+				<td>
         	</tr>
             <tr>
             	

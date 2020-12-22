@@ -12,6 +12,8 @@
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a8e5007416460a5bee56aaba2bb1ea6d&libraries=services"></script>
    
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 
  
@@ -54,8 +56,8 @@
 		<h1 align="center">예약 페이지</h1>
 		<br><br><br><br>
 		<div text-align="center">
-			<form text-align="center"  action="reservation.na" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="customerId" value="${loginCustomer.customerId }">
+			<form text-align="center" name="sub" action="reservation.na" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="customerId" name="customerId" value="${loginCustomer.customerId }">
 				
 				<c:forTokens items="${artist.workAddress }" var="addr" delims="," varStatus="status">
 				<c:if test="${status.index eq 1 }">
@@ -139,7 +141,7 @@
 				<textarea class="form-control" rows="10" cols="100" id="request" name="request"></textarea>
 				</div>
 				<br><br><br><br><br><br><br><br><br><br><br><br>
-				<input class="form-control" id="btnr" type="submit" value="예약하기" onclick="return validate();">
+				<button class="form-control" id="btnr" type="button" onclick="return validate();">예약하기</button>
 			</form>
 			</div>
 		</article>
@@ -183,12 +185,43 @@
 				alert("요구사항을 입력해주세요")
 				$("#request").focus();
 				return false;
-			}else{
-				return true;
 			}
+			var IMP = window.IMP;
+			var customerId = $("#customerId").val();
+			IMP.init('imp79373058');
+			
+			IMP.request_pay({
+			    pg : 'inicis',
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '주문명:결제테스트',
+			    amount : 100,
+			    buyer_email : 'iamport@siot.do',
+			    buyer_name : customerId,
+			    buyer_tel : '010-1234-5678',
+			    buyer_addr : '서울특별시 강남구 삼성동',
+			    buyer_postcode : '123-456'
+			}, function(rsp) {
+				debugger;
+			    if ( rsp.success ) {
+			    	var msg = '결제가 완료되었습니다.';
+					msg += '\n고유ID : ' + rsp.imp_uid;
+					msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+					msg += '\결제 금액 : ' + rsp.paid_amount;
+					msg += '카드 승인번호 : ' + rsp.apply_num;
+
+					alert(msg);
+					document.sub.submit();
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			        alert(msg);
+			    }
+			});
 			
 		}
 	</script>
+	
 	<script>
 			//도안 미리보기
 			$("#upfile").click(function(){

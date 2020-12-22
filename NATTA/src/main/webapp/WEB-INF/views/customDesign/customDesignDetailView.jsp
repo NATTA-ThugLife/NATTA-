@@ -22,76 +22,75 @@
 		 }
 		</style>
 		<style>
-  table {
-    width: 70%;
-    border: 1px solid #444444;
-  }
-</style>
+		  table {
+		    width: 70%;
+		  }
+		  .datgle{
+		  	 border-bottom: 1px solid #cda45e;
+		  }
+		</style>
+		<style>
+			.customDesign th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
+			.customDesign td {padding: 20px;width: 800px;}
+			.customDesign {border-spacing: 10px;border-top: 0.6px solid #cda45e;border-bottom: 0.6px solid #cda45e;text-align: center;}
+		</style>
     </head>
     <body>
     <header>
     	<jsp:include page="../common/headerNone.jsp"></jsp:include>
     </header>
-    <section>
-        <table align="center" cellpadding="10"  width="1000">
-        	<tr>
-        	<br>
-        	<br>
-        	</tr>
-        	<tr>
-        		<td>작성자 : ${customDesign.customerId }</td>
-        		<td></td>
-        		<td></td>
-        	</tr>
-        	<tr>
-        		<td>제목 : ${customDesign.customTitle }</td>
-        		<td></td>
-        		<td></td>
-        	</tr>
-        	<tr>
-        		<td>타투스타일 : ${customDesign.tattooType }</td>
-        		<td></td>
-        		<td></td>
-        	</tr>
-        	<tr style="border:1px solid #444444;">
-        		<td>내용</td>  	
-        	</tr>
-        	<tr>
-        	<td colspan="2">${customDesign.contents }</td> 
-        	</tr>
-    
-        	<tr>
-        	</tr>
-            <tr>
-            	<td colspan="2" align="center">
-            	<c:url var="cList" value="customDesignList.na">
-            		<c:param name="page" value="${currentPage }"></c:param>
-            	</c:url>
-				<a href="${cList }">목록으로</a>
+	<section id="testimonials" class="testimonials section-bg">
+		<div class="container" data-aos="fade-up">
+			<div class="section-title">
+				<h2>CustomDesign</h2>
+				<p>맞춤 도안 게시판 게시글</p>
+			</div>
+			<div class="customDesign" align="center">
+				<table  align="center">
+					<thead>
+						<tr>
+							<th>제목 : ${customDesign.customTitle }<br>
+							작성자 : ${customDesign.customerId }  타투스타일 : ${customDesign.tattooType }
+							</th>
+						</tr>
+					</thead>
+					<tbody align="left">
+						<tr>
+							<td colspan="3">${customDesign.contents }</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="2" align="center"><c:url var="cList"
+									value="customDesignList.na">
+									<c:param name="page" value="${currentPage }"></c:param>
+								</c:url> <a href="${cList }">목록으로</a> <c:if
+									test="${customDesign.customerId eq loginCustomer.customerId}">
+									<c:url var="cModify" value="customDesignModifyView.na">
+										<c:param name="customCode" value="${customDesign.customCode }"></c:param>
+										<c:param name="page" value="${currentPage }"></c:param>
+									</c:url>
+									<c:url var="cDelete" value="customDesignDelete.na">
+										<c:param name="customCode" value="${customDesign.customCode }"></c:param>
+									</c:url>
+									<a href="${cModify }">수정하기</a>
+									<a href="${cDelete }" onclick="return deleteCustom();">삭제하기</a>
+								</c:if></td>
+						</tr>
+					</tfoot>
+					</table>
+			</div>
+		</div>
 				
-				<c:if test="${customDesign.customerId eq loginCustomer.customerId}">
-				<c:url var="cModify" value="customDesignModifyView.na">
-					<c:param name="customCode" value="${customDesign.customCode }"></c:param>
-					<c:param name="page" value="${currentPage }"></c:param>					
-				</c:url>
-				<c:url var="cDelete" value="customDesignDelete.na">
-					<c:param name="customCode" value="${customDesign.customCode }"></c:param>
-				</c:url>
-				<a href="${cModify }">수정하기</a>
-				<a href="${cDelete }" onclick="return deleteCustom();">삭제하기</a>
-				</c:if>
-            	</td>
-            </tr>
-		</table>
 		<script>
-		function deleteCustom() {
-		       return confirm("게시글을 삭제하시겠습니까?");
-		    }
+			function deleteCustom() {
+				return confirm("게시글을 삭제하시겠습니까?");
+			}
 		</script>
-    </section>
-    <section class="replyList">
+	</section>
+	<section id="testimonials" class="testimonials section-bg" class="replyList">
     	<!-- 댓글 목록 -->
-	<table align="center" cellpadding="10"  width="1000" id="ctb">
+	<table align="center" style="width:1100px;" id="ctb">
 		<thead>
 			<tr>
 				<td colspan="2"><b id="cCount"></b></td>
@@ -102,17 +101,17 @@
 		<tfoot></tfoot>
 	</table>
     </section>
-    <section>
+    <section id="testimonials" class="testimonials section-bg">
     	<c:if test="${loginArtist ne null }">
   		<!-- 댓글 등록 -->
 
-		<table align="center" cellpadding="10" width="1000">
+		<table align="center" style="width:1100px;">
 			<tr>
-				<td><input type="radio" name="cOnOff" value="0" checked><span>공개</span>
+				<td width="90px;">
+				<input type="radio" name="cOnOff" value="0" checked><span>공개</span>
+				<br><br>
 					<input type="radio" name="cOnOff" value="1"><span>비공개</span>
 				</td>
-			</tr>
-			<tr>
 				<td><textarea id="cContents" name="cContents"></textarea>
 				<td><script>
 					CKEDITOR.replace('cContents', {
@@ -121,7 +120,9 @@
 				</script>
 			</tr>
 			<tr>
-				<td align="right"><button id="cSubmit">댓글 등록</button></td>
+				<td colspan="2" align="right">
+					<input type="button" class="btn btn-default" value="댓글등록" id="cSubmit">
+				</td>
 			</tr>
 		</table>
 
@@ -228,7 +229,7 @@
 						for ( var i in data.ccList ) {
 							$tr = $("<tr>");
 							$tr2 = $("<tr>");
-							$tr3 = $("<tr>");
+							$tr3 = $("<tr class='datgle'>");
 							$artistId = $("<td><a href='artistInfoPage.na?artistId="+(data.ccList[i].artistId)+"'>"+data.ccList[i].artistId+"="+data.ccList[i].artistName+"</td>");
 							
 							$cContents = $("<td colspan='3' class='replyContent'>").html(decodeURIComponent(data.ccList[i].cContents.replace(/\+/g," "))); 
@@ -248,8 +249,10 @@
 							$tr3.append($tr,$tr2);
 							$tableBody.append($tr3);
 							}else{
-								$tr.append($secret);
-							$tableBody.append($tr);
+								$tr.append($artistId,$ccCreateDate);
+								$tr2.append($secret);
+								$tr3.append($tr,$tr2);
+							$tableBody.append($tr3);
 							}
 						}
 					}else{
@@ -303,7 +306,7 @@
 			$(".replyModal").fadeIn(1000);
 			
 			var customCCode = $(this).attr("data-customCCode");
-			var repCon = $(this).parent().parent().children(".replyContent").html();
+			var repCon = $(this).parent().parent().parent().children().children(".replyContent").html();
 			
 			
 			CKEDITOR.instances.cContentsModify.setData(repCon);
