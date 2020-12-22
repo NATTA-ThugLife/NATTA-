@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ArtistInfoMapper">
+
+	<!-- Info Map -->
 	<resultMap type="ArtistInfo" id="artistInfoMap">
 		<result property="myProfile" column="MY_PROFILE"/>
 		<result property="myReProfile" column="MY_REPROFILE"/>
@@ -10,11 +12,45 @@
 		<result property="workAddress" column="WORK_ADDRESS"/>
 		<result property="artistId" column="ARTIST_ID"/>
 	</resultMap>
+	
+	<!-- Follow Map -->
 	<resultMap type="ArtistFollow" id="followMap">
 		<result property="customerProfile" column="CUSTOMER_PROFILE"/>
 		<result property="customerId" column="CUSTOMER_ID"/>
 		<result property="artistId" column="ARTIST_ID"/>
 	</resultMap>
+	
+	<!-- Reservation Map -->
+	<resultMap type="Reservation" id="reservationResultMap">
+		<result property="reservationCode" column="RESERVATION_CODE"></result>
+		<result property="artistName" column="ARTIST_NAME"></result>
+		<result property="reservationDate" column="RESERVATION_DATE"></result>
+		<result property="reservationTime" column="RESERVATION_TIME"></result>
+		<result property="originalFilename" column="ORIGINAL_FILENAME"></result>
+		<result property="renameFilename" column="RENAME_FILENAME"></result>
+		<result property="tattooSize" column="TATTOO_SIZE"></result>
+		<result property="shopName" column="SHOP_NAME"></result>
+		<result property="customerId" column="CUSTOMER_ID"></result>
+		<result property="artistId" column="ARTIST_ID"></result>
+	</resultMap>
+	<update id="updateStatus">
+		UPDATE RESERVATION SET STATUS = STATUS + 1 
+		WHERE RESERVATION_CODE = #{ reservationCode }
+	</update>
+	
+	<delete id="deleteStatus">
+		DELETE FROM RESERVATION
+		WHERE RESERVATION_CODE = #{ reservationCode }
+	</delete>
+	
+	<!-- 고객 예약 리스트 -->
+	<select id="selectReservationList" resultMap="reservationResultMap">
+		SELECT * FROM RESERVATION
+		WHERE ARTIST_ID = #{ artistId } ORDER BY RESERVATION_DATE DESC
+	</select>
+	
+	
+	
 	
  	<select id="selectArtistFollow" resultMap="followMap">
 		SELECT * 
@@ -74,6 +110,12 @@
 		CREATE_DATE = SYSDATE, MODIFY_DATE = SYSDATE
 		WHERE ARTIST_ID = #{artistId}
 	</update>
+	
+	
+	
+	
+	
+	
 	
 	
 	

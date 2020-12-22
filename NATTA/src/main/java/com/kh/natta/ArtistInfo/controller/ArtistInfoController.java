@@ -27,6 +27,7 @@ import com.kh.natta.ArtistInfo.service.ArtistInfoService;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artistWork.domain.ArtistWork;
 import com.kh.natta.customer.domain.Customer;
+import com.kh.natta.reservation.domain.Reservation;
 
 @Controller
 public class ArtistInfoController {
@@ -61,6 +62,54 @@ public class ArtistInfoController {
 			model.addAttribute("artistPageId",artistId);
 			return "Artist-info/artistPage";
 		}
+	
+	
+	// 아티스트 예약목록 출력 
+	@RequestMapping(value="artistReservationList.na",method=RequestMethod.POST)
+	public void artistReList(HttpServletResponse response, String artistId) throws Exception {
+		ArrayList<Reservation> rList = infoService.selectReList(artistId);
+		if( !rList.isEmpty() ) {
+			for( Reservation r : rList ) {
+				r.setArtistName(URLEncoder.encode(r.getArtistName(),"utf-8"));
+				r.setAddress(URLEncoder.encode(r.getAddress(),"utf-8"));
+				r.setOriginalFilename(URLEncoder.encode(r.getOriginalFilename(),"utf-8"));
+				r.setRenameFilename(URLEncoder.encode(r.getRenameFilename(),"utf-8"));
+				r.setRequest(URLEncoder.encode(r.getRequest(),"utf-8"));
+				r.setStyle(URLEncoder.encode(r.getStyle(),"utf-8"));
+				r.setPart(URLEncoder.encode(r.getPart(),"utf-8"));
+				r.setShopName(URLEncoder.encode(r.getShopName(),"utf-8"));
+			}
+		}
+		Gson gson = new Gson(); 
+		gson.toJson(rList,response.getWriter()); 
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="updateStatus.na",method=RequestMethod.POST)
+	public String updateStatus(HttpServletResponse response, int reservationCode, int status){
+		int result = infoService.updateStatus(reservationCode);
+		if ( result > 0 ) {
+			if( status == 0 ) {
+				return "0";
+			} else  {
+				return "1";
+			} 
+		} else {
+			return "fail";
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value="deleteStatus.na",method=RequestMethod.POST)
+	public String deleteStatus(HttpServletResponse response, int reservationCode) {
+		int result = infoService.deleteStatus(reservationCode);
+		if( result > 0 ) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value="deleteFollowing.na", method=RequestMethod.POST)

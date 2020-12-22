@@ -11,6 +11,7 @@ import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artistWork.domain.ArtistWork;
+import com.kh.natta.reservation.domain.Reservation;
 
 @Repository
 public class ArtistInfoStoreLogic implements ArtistInfoStore {
@@ -77,6 +78,21 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 	@Override
 	public ArtistFollow selectFollowing(ArtistFollow af) {
 		return sqlSession.selectOne("ArtistInfoMapper.selectArtistFollow", af);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectReList(String artistId) {
+		return (ArrayList)sqlSession.selectList("ArtistInfoMapper.selectReservationList", artistId);
+	}
+
+	@Override
+	public int updateStatus(int reservationCode) {
+		return sqlSession.update("ArtistInfoMapper.updateStatus", reservationCode);
+	}
+
+	@Override
+	public int deleteStatus(int reservationCode) {
+		return sqlSession.delete("ArtistInfoMapper.deleteStatus", reservationCode);
 	}
 
 	

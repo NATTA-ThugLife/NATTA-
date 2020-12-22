@@ -45,12 +45,12 @@ header {height: 215px;}
 							<c:if
 								test="${empty sessionScope.loginCustomer && empty sessionScope.loginArtist  }">
 								<li><a href="/login.na">LOGIN</a></li>
-								<li><a href="/joinOption.na">SIGNUP</a></li>
+								<li><a href="/customerJoinView.na">SIGNUP</a></li>
 							</c:if>
 							<!-- 회원 로그인시 -->
 							<c:if test="${!empty sessionScope.loginCustomer }">
 								<li>${loginCustomer.customerName }님환영합니다.</li>
-								<li><a href="#">MyPage&nbsp;&nbsp;</a></li>
+								<li><a href="/customerInfo.na?customerId=${loginCustomer.customerId }">MyPage&nbsp;&nbsp;</a></li>
 								<li><a href="/customerLogout.na">LogOut</a></li>
 							</c:if>
 							<!-- 아티스트 로그인시 -->
@@ -80,13 +80,13 @@ header {height: 215px;}
 						<li><a href="#menu">ARTIST</a></li>
 						<li></li>
 						<li></li>
-						<li><a href="#" style="text-align: center">Customized<br>따뚜</a></li>
+						<li><a href="customDesignList.na" style="text-align: center">Customized<br>Tattoo</a></li>
 						<li></li>
 						<li></li>
-						<li><a href="#">NOTICE</a></li>
+						<li><a href="notice.na">NOTICE</a></li>
 						<li></li>
 						<li></li>
-						<li><a href="#">Q&A</a></li>
+						<li><a href="/qna.na">Q&A</a></li>
 					</ul>
 				</nav>
 				<!-- .nav-menu -->
@@ -156,7 +156,27 @@ header {height: 215px;}
 							<li><a
 								href="reservation.na?artistId=${artistInfo.artistId }"><i
 									class="icofont-calendar"></i> Reservation</a></li>
-							<li><a href="#resume"><i class="bx bx-user"></i><span>Resume</span></a></li>
+									
+									
+							<li><a href="javascript:void(0);" id="rListModal"
+							 data-toggle="modal"><i class="fas fa-bell"></i> <span>예약내역</span></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+							
+							
+							
+							
+							
 							<c:if test="${ artistPageId eq loginArtist.artistId }">
 								<li><a href="/chatting.na"><i class="bx bx-envelope"></i>
 										My Message</a></li>
@@ -176,9 +196,6 @@ header {height: 215px;}
 									onclick="insertFollowing();" id="clickChange"><i
 										class="far fa-heart" id="followCheck"></i>Follow</a></li>
 							</c:if>
-
-
-
 							<c:if test="${ artistPageId eq loginArtist.artistId }">
 								<li><a href="#modalFollowList" data-toggle="modal"
 									onclick="" id=""><i class="fas fa-fire-alt"
@@ -269,10 +286,9 @@ header {height: 215px;}
 		                  <a href=""><i class="icofont-facebook"></i></a>
 		                  <a href=""><i class="icofont-instagram"></i></a> -->
 											<a href="#" onclick="return confirm('예약하시겠습니까 ?')"><i
-												class="icofont-basket"></i></a> <a
-												href="resources/artistInfoFile/WorkFile/${ aWork.workReImgPath }"
-												class="venobox" data-gall="gallery-item"><i
-												class="icofont-camera"></i></a>
+												class="icofont-basket"></i></a> 
+												<a href="resources/artistInfoFile/WorkFile/${ aWork.workReImgPath }" class="venobox" data-gall="gallery-item">
+												<i class="icofont-camera"></i></a>
 
 											<c:url var="workDelete" value="deleteArtistWork.na">
 												<c:param name="workCode" value="${ aWork.workCode }" />
@@ -403,8 +419,8 @@ header {height: 215px;}
 		<div class="container" data-aos="fade-up">
 
 			<div class="section-title">
-				<h2>Contact</h2>
-				<p>Contact Us</p>
+				<h2>address</h2>
+				<p>Artist Shop</p>
 			</div>
 		</div>
 
@@ -414,10 +430,8 @@ header {height: 215px;}
 				frameborder="0" allowfullscreen></iframe>
 		</div>
 
-		<div class="container" data-aos="fade-up">
-
+	<!-- 	<div class="container" data-aos="fade-up">
 			<div class="row mt-5">
-
 				<div class="col-lg-4">
 					<div class="info">
 						<div class="address">
@@ -425,7 +439,6 @@ header {height: 215px;}
 							<h4>Location:</h4>
 							<p>A108 Adam Street, New York, NY 535022</p>
 						</div>
-
 						<div class="open-hours">
 							<i class="icofont-clock-time icofont-rotate-90"></i>
 							<h4>Open Hours:</h4>
@@ -433,25 +446,19 @@ header {height: 215px;}
 								Monday-Saturday:<br> 11:00 AM - 2300 PM
 							</p>
 						</div>
-
 						<div class="email">
 							<i class="icofont-envelope"></i>
 							<h4>Email:</h4>
 							<p>info@example.com</p>
 						</div>
-
 						<div class="phone">
 							<i class="icofont-phone"></i>
 							<h4>Call:</h4>
 							<p>+1 5589 55488 55s</p>
 						</div>
-
 					</div>
-
 				</div>
-
 				<div class="col-lg-8 mt-5 mt-lg-0">
-
 					<form action="resources/forms/contact.php" method="post"
 						role="form" class="php-email-form">
 						<div class="form-row">
@@ -490,12 +497,9 @@ header {height: 215px;}
 							<button type="submit">Send Message</button>
 						</div>
 					</form>
-
 				</div>
-
 			</div>
-
-		</div>
+		</div> -->
 	</section>
 	<!-- End Contact Section -->
 
@@ -664,8 +668,8 @@ header {height: 215px;}
 			</div>
 		</div>
 	</div>
-	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-		fasasf</div>
+	<!-- <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		</div> ???-->
 
 
 
@@ -736,7 +740,7 @@ header {height: 215px;}
 	</div>
 
 
-	<!--  ㅁㄴㅇ -->
+	
 	<div class="modal fade" id="modalFollowList" tabindex="-1"
 		role="dialog" aria-labelledby="ARTIST_TITLE" aria-hidden="true">
 		<div
@@ -859,13 +863,13 @@ header {height: 215px;}
 	 					data : { "artistId" : artistId },
 	 					dataType : "json",
 	 					success : function(style) {
+	 						/*ㄹㄹㄹㄹㄹㄹㄹㄹ  */
 	 						for( var i in style ) {
 	 							var aStyle = decodeURIComponent(style[i].pStyle.replace(/\+/g," "));
 	 							var aOption = $("<option class='styleDelete' value='"+ aStyle +"'>"+ aStyle + "</option>");
 	 							/* $("#optionKing").after("<option class='styleDelete' value='"+ aStyle + "'>" + aStyle + "</option>"); */
 	 							$("#optionKing").after(aOption);
 	 							$("#modalArtistWork").modal();
-	 							
 	 						}
 	 					}
 	 				});
@@ -987,15 +991,10 @@ header {height: 215px;}
 
 
 	<!-- 아티스트 가격등록 -->
-	<div class="modal fade" id="modalArtistPrice" tabindex="-1"
-		role="dialog" aria-labelledby="ARTIST_TITLE" aria-hidden="true"
-		style="">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
-			role="document">
+	<div class="modal fade" id="modalArtistPrice" tabindex="-1" role="dialog" aria-labelledby="ARTIST_TITLE" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
 			<!-- 센터모달창 추가  modal-dialog-centered -->
-			<div class="modal-content"
-				style="background-color: rgba(255, 255, 255, 0.4);">
+			<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
 				<div class="modal-header">
 					<h5 class="modal-title" id="TEST">
 						<b>ARTIST WORK Price</b>
@@ -1006,8 +1005,7 @@ header {height: 215px;}
 					</button>
 				</div>
 				<div class="modal-body book-a-table">
-					<form action="updateArtistPrice.na" method="post" role="form"
-						class="php-email-form priceActionCheck" data-aos="fade-up"
+					<form action="updateArtistPrice.na" method="post" role="form" class="php-email-form priceActionCheck" data-aos="fade-up"
 						data-aos-delay="100" enctype="multipart/form-data">
 						<div>
 							<!-- 스타일 -->
@@ -1140,5 +1138,170 @@ header {height: 215px;}
 		
   	
   	</script>
+  	
+  	
+  	
+  	
+  	
+  	
+	<div class="modal fade" id="modalrList" tabindex="-1" role="dialog" aria-labelledby="ARTIST_TITLE" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+			<div class="modal-content"><!-- style="background-color: rgba(255, 255, 255, 0.4);" -->
+				<div class="modal-header">
+					<h5 class="modal-title" id="TEST">
+						<b style="color:black;">고객 예약목록</b>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body book-a-table" style="font-size:13px;">
+						<table class="table addRv">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Picture</th>
+								<th>Size</th>
+								<th>Style</th>
+								<th>Part</th>
+								<th>Price</th>
+								<th>Request</th>
+								<th>Check</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+						</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">CLOSE</button>
+				</div>
+			</div>
+		</div>
+	</div>							 							
+
+	<!--ㅁㄴㅇㅁㄴㅇ  -->
+	<script>
+	
+		$("#rListModal").on("click",function(){
+			var artistId = "${ loginArtist.artistId }";
+			console.log(artistId);
+			$.ajax({
+				url : "artistReservationList.na",
+				type : "post",
+				data : { "artistId" : artistId },
+				dataType : "json",
+				success : function(data){
+					var $tBody = $(".addRv tbody");
+					var $tr;
+					$tBody.html("");
+					if( data.length > 0 ){
+						for( var r in data ){
+							var $artistName = $("<td>").text(decodeURIComponent(data[r].artistName.replace(/\+/g," ")));
+							var $renameFilename = $("<td>").text(decodeURIComponent(data[r].renameFilename.replace(/\+/g," ")));
+							var $originalFilename = $("<td><a target='_blank' href='resources/images/ruploadFiles/"+decodeURIComponent(data[r].renameFilename.replace(/\+/g," "))+"'>도안보기</a>");
+							 /* var $originalFilename = $("<td><img src='resources/images/ruploadFiles/"+decodeURIComponent(data[r].renameFilename.replace(/\+/g," "))+"' style='width:50px; height:50px;' class='imgBoom'>"); */
+							var $request = $("<td width='200'>").text(decodeURIComponent(data[r].request.replace(/\+/g," ")));
+							var $style = $("<td style='font-size:13px;'>").text(decodeURIComponent(data[r].style.replace(/\+/g," ")));
+							var $part = $("<td>").text(decodeURIComponent(data[r].part.replace(/\+/g," ")));
+							/* var $shopName = $("<td>").text(decodeURIComponent(data[r].shopName.replace(/\+/g," "))); */
+							var $customerId = $("<td>").text(data[r].customerId);
+							var $reservationDate = $("<td style='font-size:13px;'>").text(data[r].reservationDate);
+							var $reservationTime = $("<td>").text(data[r].reservationTime);
+							var $tattooSize = $("<td style='font-size:13px;'>").text(data[r].tattooSize);
+							var $price = $("<td>").html(data[r].price+"<br>won");
+							var $rCheck0 = $("<td>").html("<button value='"+data[r].reservationCode+"'  class='btn btn-outline-danger btn-sm' onclick='updateStatus(this,0);'>예약확정하기</button> <button value='"+data[r].reservationCode+"'  class='btn btn-outline-dark btn-sm rDelete' onclick='deleteStatus(this);'>예약취소</button>"); 
+							var $rCheck1 = $("<td>").html("<button value='"+data[r].reservationCode+"'  class='btn btn-outline-info btn-sm' onclick='updateStatus(this,1);'>타투완료하기</button>");
+							var $rCheck2 = $("<td>").html("<button value='"+data[r].reservationCode+"'  class='btn btn-success btn-sm' onclick='successStatus();'>타투완료</button>");
+							/* var $dCheck = $("<td>").html("<button value='"+data[r].reservationCode+"'  class='btn btn-outline-dark btn-sm nonono' onclick='deleteStatus(this,0);'>취소</button>"); */
+							$tr = $("<tr>");
+							$tr.append($customerId);
+							$tr.append($reservationDate);
+							$tr.append($reservationTime);
+							/* $tr.append($shopName); */
+							$tr.append($originalFilename);
+							$tr.append($tattooSize);
+							$tr.append($price);
+							$tr.append($style);
+							$tr.append($part);
+							$tr.append($price);
+							$tr.append($request);
+							if( data[r].status == 0){
+								$tr.append($rCheck0);
+								/* $tr.append($dCheck); */
+							}else if(data[r].status == 1) {
+								$tr.append($rCheck1);
+							} else {
+								$tr.append($rCheck2);
+							}
+							$tBody.append($tr);
+						}
+					} else {
+						$tr = $("<tr>");
+						var Message = $("<td colspan='10' style='text-align:center; font-size:15px;'>").text("예약한 고객이 없습니다.");
+						$tr.append(Message);
+						$tBody.append($tr);
+					}
+					$("#modalrList").modal();
+				}
+			});
+		});
+		/* 예약취소 */
+		function deleteStatus(obj){
+			var sDelete = confirm("예약을 취소하시겠습니까?");
+			var dStat = status;
+			if(sDelete) {
+				var rCode = $(obj).val();
+				$.ajax({
+					url : "deleteStatus.na",
+					type : "post",
+					data : { "reservationCode" : rCode },
+					success : function(data){
+						if ( data == "success") {
+							alert("예약이 취소되었습니다.");
+							$(obj).parent().parent().remove();
+						} else {
+							alert("실패 ! ");
+						} 
+					}
+				});						
+			}
+		}
+		/* 예약확정 및 작업완료 */
+ 		function updateStatus(obj,status){
+			var modify = confirm("예약 확정 및 작업 완료하시겠습니까?");
+			var uStat = status;
+			if(modify){
+				var rCode = $(obj).val();
+				$.ajax({
+					url : "updateStatus.na",
+					type : "post",
+					data : { "reservationCode" : rCode, "status" : uStat },
+					success : function(data){
+						if ( data == "0") {
+							alert("예약이 확정되었습니다.");
+							$(obj).attr("class","btn btn-outline-info btn-sm");
+							$(obj).attr("onclick","updateStatus(this,1)");
+							$(obj).next().remove(".rDelete");
+							$(obj).text("타투완료하기");
+						} else {
+								alert("도안 작업이 완료되었습니다.")
+								$(obj).attr("class","btn btn-success btn-sm");
+								$(obj).attr("onclick","successStatus();");
+								$(obj).text("타투완료");
+						} 
+					}
+				});		
+			}
+		}
+		/* 완료 후, 버튼 클릭시  */
+ 		function successStatus(){
+ 			alert("작업이 끝난 고객입니다.")
+ 		}
+	</script>  	
+  	
 </body>
 </html>
