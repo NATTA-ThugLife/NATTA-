@@ -14,9 +14,7 @@
 	rel="apple-touch-icon">
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-	rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <!--CDN 링크 -->
 <style>
 header {height: 215px;}
@@ -106,7 +104,6 @@ header {height: 215px;}
 							<i class="icofont-navigation-menu"></i>
 						</button>
 						<!-- 아티스트 프로필 메뉴바 -->
-
 						<ul style="list-style: none;">
 							<c:if test="${ artistPageId eq loginArtist.artistId }">
 								<li class="active"><a href="javascript:void(0);"
@@ -368,139 +365,76 @@ header {height: 215px;}
 
 	<!-- ======= 후기 섹션 ======= -->
 	<section id="testimonials" class="testimonials section-bg">
-
-		<div class="container" data-aos="fade-up">
+		<div class="container" data-aos="fade-up" id="reviewArea">
 			<div class="section-title">
 				<h2>후 기</h2>
 				<p>${ artistInfo.name }님의 타투는 어땠나요 ?</p>
 			</div>
-
-
-			<div class="testimonial-item">
-				<p>
-					<img src="resources/artistInfoFile/WorkFile/20201214184858.png"
-						class="img-fluid" alt="잉? 왜없을까?"
-						style="width: 50px; height: 50px;"> <a
-						href="resources/artistInfoFile/WorkFile/20201214184858.png"
-						class="venobox" data-gall="gallery-item"><i
-						class="icofont-linkedin"></i></a> <br> <i
-						class="bx bxs-quote-alt-left quote-icon-left"></i>
-					와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와우와 <i
-						class="bx bxs-quote-alt-right quote-icon-right"></i>
+			
+			<div class="testimonial-item" style="height:50px;" id="reviewAjax">
+<%-- 			<c:forEach items="${ aReview }" var="aR">
+				<p style=" margin : auto;">
+					<!-- <img src="resources/artistInfoFile/WorkFile/20201214184858.png" class="img-fluid" alt="잉? 왜없을까?"
+						style="width: 50px; height: 50px;">  -->
+						<span>henmo8</span>
+						<a href="resources/artistInfoFile/WorkFile/20201214184858.png" class="venobox" data-gall="gallery-item">
+						<i class="icofont-linkedin"></i></a> 
+						<br>
+					<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+					${ aR.reviewContents }
+					<i class="bx bxs-quote-alt-right quote-icon-right"></i>
 				</p>
-				<img
+				</c:forEach> --%>
+<%-- 				<img
 					src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }"
-					class="testimonial-img" alt="">qweqweqwe
+					class="testimonial-img" alt="">${ aR.customerId } --%>
 			</div>
-
-			<div class="testimonial-item">
-				<p>
-					<i class="bx bxs-quote-alt-left quote-icon-left"></i> Export tempor
-					illum tamen malis malis eram quae irure esse labore quem cillum
-					quid cillum eram malis quorum velit fore eram velit sunt aliqua
-					noster fugiat irure amet legam anim culpa. <i
-						class="bx bxs-quote-alt-right quote-icon-right"></i>
-				</p>
-				<img src="resources/assets/img/testimonials/testimonials-2.jpg"
-					class="testimonial-img" alt="">
-				<h3>Sara Wilsson</h3>
-				<h4>Designer</h4>
-			</div>
-
+       <!-- 페이징 시작 -->
+			<div id="pageArea" data-aos="fade-up" style="text-align: center;">
+			
+			<!-- 이전 -->
+			 <%-- <c:if test="${pi.currentPage <= 1 }">
+				[이전]&nbsp;
+			 </c:if>
+			 		<c:if test="${pi.currentPage >1 }">
+						<c:url var="before" value="artistInfoPage.na">
+							<c:param name="page" value="${pi.currentPage -1 }"/>
+							<c:param name="artistId" value="${ artistInfo.artistId }"/>
+						</c:url>
+					<a href="${before }">[이전]</a>
+					</c:if>
+		    			<!-- 페이지 -->
+					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+							<c:url var="pagination" value="artistInfoPage.na">
+								<c:param name="page" value="${p }"/>
+								<c:param name="artistId" value="${ artistInfo.artistId }"/>
+							</c:url>
+							<c:if test="${p eq pi.currentPage }">
+								<font color="#cda45e" size="4">[${ p }]</font>
+							</c:if>
+							<c:if test="${p ne pi.currentPage }">
+								<a href="${pagination }">${ p }</a>
+							</c:if>
+					</c:forEach> <!-- 다음 --> 
+					<c:if test="${pi.currentPage >= pi.maxPage }">
+						[다음]&nbsp;
+					</c:if> 
+					<c:if test="${pi.currentPage < pi.maxPage }">
+						<c:url var="after" value="artistInfoPage.na">
+							<c:param name="page" value="${pi.currentPage + 1 }"/>
+							<c:param name="artistId" value="${ artistInfo.artistId }"/>
+						</c:url>
+						<a href="${after }">[다음]</a>&nbsp;
+					</c:if> --%>
+					
+			</div>	        			
 		</div>
-
 	</section>
 	<!-- End Testimonials Section -->
 
-
-
-	<!-- ======= Contact Section ======= -->
-	<section id="contact" class="contact">
-		<div class="container" data-aos="fade-up">
-
-			<div class="section-title">
-				<h2>address</h2>
-				<p>Artist Shop</p>
-			</div>
-		</div>
-
-		<div data-aos="fade-up">
-			<iframe style="border: 0; width: 100%; height: 350px;"
-				src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
-				frameborder="0" allowfullscreen></iframe>
-		</div>
-
-	<!-- 	<div class="container" data-aos="fade-up">
-			<div class="row mt-5">
-				<div class="col-lg-4">
-					<div class="info">
-						<div class="address">
-							<i class="icofont-google-map"></i>
-							<h4>Location:</h4>
-							<p>A108 Adam Street, New York, NY 535022</p>
-						</div>
-						<div class="open-hours">
-							<i class="icofont-clock-time icofont-rotate-90"></i>
-							<h4>Open Hours:</h4>
-							<p>
-								Monday-Saturday:<br> 11:00 AM - 2300 PM
-							</p>
-						</div>
-						<div class="email">
-							<i class="icofont-envelope"></i>
-							<h4>Email:</h4>
-							<p>info@example.com</p>
-						</div>
-						<div class="phone">
-							<i class="icofont-phone"></i>
-							<h4>Call:</h4>
-							<p>+1 5589 55488 55s</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-8 mt-5 mt-lg-0">
-					<form action="resources/forms/contact.php" method="post"
-						role="form" class="php-email-form">
-						<div class="form-row">
-							<div class="col-md-6 form-group">
-								<input type="text" name="name" class="form-control" id="name"
-									placeholder="Your Name" data-rule="minlen:4"
-									data-msg="Please enter at least 4 chars" />
-								<div class="validate"></div>
-							</div>
-							<div class="col-md-6 form-group">
-								<input type="email" class="form-control" name="email" id="email"
-									placeholder="Your Email" data-rule="email"
-									data-msg="Please enter a valid email" />
-								<div class="validate"></div>
-							</div>
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" name="subject"
-								id="subject" placeholder="Subject" data-rule="minlen:4"
-								data-msg="Please enter at least 8 chars of subject" />
-							<div class="validate"></div>
-						</div>
-						<div class="form-group">
-							<textarea class="form-control" name="message" rows="8"
-								data-rule="required" data-msg="Please write something for us"
-								placeholder="Message"></textarea>
-							<div class="validate"></div>
-						</div>
-						<div class="mb-3">
-							<div class="loading">Loading</div>
-							<div class="error-message"></div>
-							<div class="sent-message">Your message has been sent. Thank
-								you!</div>
-						</div>
-						<div class="text-center">
-							<button type="submit">Send Message</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div> -->
-	</section>
+		
+		
+		
 	<!-- End Contact Section -->
 
 
@@ -1302,6 +1236,81 @@ header {height: 215px;}
  			alert("작업이 끝난 고객입니다.")
  		}
 	</script>  	
-  	
+  		<!-- ㅂㅈㄷ -->
+	<script>
+		$(function(){
+			getReviewList(1);
+			setInterval(function(){
+				getReviewList();
+			}, 50000);
+		});
+		function getReviewList(page) {
+			var artistId = "${ artistInfo.artistId }";
+			console.log("리뷰의 현재페이지 " + page);
+			console.log("아티스트 아이디 " + artistId);
+			$.ajax({
+				url : "ArtistReviewList.na",
+				type : "post",
+				data : { "artistId" : artistId, "page" : page },
+				dataType : "json" ,
+				success : function(data){
+					console.log("실행후" + data.pi.currentPage);
+					var $review = "";
+					/* var $pageArea = $("#pageArea");
+					$pageArea.html(""); */
+					$("#pageArea").html("");
+					console.log(data);
+					if( data.aReview.length > 0 ){
+						for(i = 0; i < data.aReview.length; i++ ) {
+							$review += "<div id='pageArea' data-aos='fade-up' style='text-align: center;'>";
+							$review += "<p><span>"+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+"</span>"
+								     + "<a href='resources/artistInfoFile/WorkFile/20201214184858.png' class='venobox' data-gall='gallery-item'><i class='icofont-linkedin'></i></a>"
+									 + "<br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
+									 + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
+									 + "<i class='bx bxs-quote-alt-left quote-icon-right'></i></p>";
+							$review += "</div>";									 
+						}
+					} else {
+						$review = "<h3 style='text-align:center;'>등록된 리뷰가 없습니다.</h3>";
+					}
+					$("#testimonials #reviewAjax").append($review);
+					
+					var $span = $("<span>");
+					var $1 = '[이전]';
+					var $2 = $("<a id='rrr' onclick='getReviewList("+parseInt(data.pi.currentPage-1)+")';>").text('[이전]');
+					var $3 = $("<font color='red' size='4'>");
+					var $4 = '[다음]';
+					var $5 = $("<a id='rrr' onclick='getReviewList("+parseInt(data.pi.currentPage+1)+")';>").text('[다음]');
+					var $6;
+				 	if(data.pi.currentPage <= 1 ) {
+				 		$span.append($1);
+					}
+					if(data.pi.currentPage > 1 ) {
+						$span.append($2);
+					} 
+					
+					for( var i = data.pi.startPage; i < data.pi.endPage+1; i++) {
+						if(i == parseInt(data.pi.currentPage)) {
+							$6 = $("<a style='color: red' onclick='getReviewList("+i+")';>").text('['+i+']');
+							$span.append($6);
+							console.log("rwqqwqwrwqrqwrqwr"+ $6);
+							
+						}else {
+							$6 = $("<a onclick='getReviewList("+i+")';>").text(i);
+							$span.append($6);
+							console.log("zzzzzzzzzzzzzzz"+$6);
+						}
+					}
+					if(data.pi.currentPage >= data.pi.maxPage) {
+						$span.append($4);
+					}
+					if(data.pi.currentPage < data.pi.maxPage){
+						$span.append($5);
+					}
+					$("#pageArea").append($span);
+				}
+			});
+		}
+	</script>		
 </body>
 </html>

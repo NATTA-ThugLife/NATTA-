@@ -7,6 +7,8 @@ import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artistWork.domain.ArtistWork;
+import com.kh.natta.common.PageInfo;
+import com.kh.natta.customerInfo.domain.Review;
 import com.kh.natta.reservation.domain.Reservation;
 
 public interface ArtistInfoStore {
@@ -42,7 +44,7 @@ public interface ArtistInfoStore {
 	 * artist List
 	 * @return
 	 */
-	public ArrayList<ArtistInfo> selectListArtist();
+	public ArrayList<ArtistInfo> selectListArtist(PageInfo pi);
 	
 	
 	
@@ -127,4 +129,9 @@ public interface ArtistInfoStore {
 	 * @return
 	 */
 	public int deleteStatus(int reservationCode);
+	
+	public int getListCount();
+	public int getListReviewCount(String artistId);
+	
+	public ArrayList<Review> selectListReview(String artistId, PageInfo pi);
 }
