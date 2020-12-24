@@ -217,11 +217,13 @@
 					var sessionCustomer = $("#sessionCustomer").val();
 					var Writer = $("#Writer").val();
 					var secret;
+					var $br;
 					var customCode = $("#Code").val();
 					// 댓글 페이징
 					var $tableFoot = $("#ctb tfoot");
 					$tableFoot.html("");
 					var $td;
+					var $br;
 					
 					$("#cCount").text("댓글 (" + data.pi.listCount + ")");  /* 댓글의 갯수 표시 */
 					if (data.ccList.length > 0) {
@@ -230,15 +232,18 @@
 							$tr = $("<tr>");
 							$tr2 = $("<tr>");
 							$tr3 = $("<tr class='datgle'>");
-							$artistId = $("<td><a href='artistInfoPage.na?artistId="+(data.ccList[i].artistId)+"'>"+data.ccList[i].artistId+"="+data.ccList[i].artistName+"</td>");
+							$artistId = $("<td float='left'><a href='artistInfoPage.na?artistId="+(data.ccList[i].artistId)+"'>"+data.ccList[i].artistId+"="+data.ccList[i].artistName+"</td>");
 							
-							$cContents = $("<td colspan='3' class='replyContent'>").html(decodeURIComponent(data.ccList[i].cContents.replace(/\+/g," "))); 
+							$cContents = $("<td float='left' colspan='3' class='replyContent'>").html(decodeURIComponent(data.ccList[i].cContents.replace(/\+/g," "))); 
 							
 							$ccCreateDate = $("<td>").text('작성일 : '+data.ccList[i].ccCreateDate);
 						
 							$modify = $("<td><button class='modify' data-customCCode='"+data.ccList[i].customCCode+"'>수정</button> <button class='delete' data-customCCode='"+data.ccList[i].customCCode+"'>삭제</button>");
 							
-							$secret = $("<td align='center' colspan='4'>").text('비밀글입니다.');
+							$secret = $("<td align='center' colspan='4'>").html('비밀글입니다.');
+							
+							$br = $("<tr><td>").html('<br><br><br>');
+							
 							
 							if((data.ccList[i].cOnOff == 1 && ((sessionArtist == data.ccList[i].artistId) || (Writer == sessionCustomer))) || (data.ccList[i].cOnOff == 0)){
 							$tr.append($artistId,$ccCreateDate);
@@ -246,12 +251,12 @@
 							if(sessionArtist == data.ccList[i].artistId){
 								$tr.append($modify);
 							}
-							$tr3.append($tr,$tr2);
+							$tr3.append($tr,$tr2,$br);
 							$tableBody.append($tr3);
 							}else{
 								$tr.append($artistId,$ccCreateDate);
 								$tr2.append($secret);
-								$tr3.append($tr,$tr2);
+								$tr3.append($tr,$tr2,$br);
 							$tableBody.append($tr3);
 							}
 						}

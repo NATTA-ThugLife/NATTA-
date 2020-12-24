@@ -116,9 +116,11 @@ header {height: 215px;}
 									id="artistInfoPrice"><i class="bx bx-file-blank"></i><span>
 											스타일별 가격</span></a></li>
 							</c:if>
-							<li><a
-								href="reservation.na?artistId=${ artistInfo.artistId }"><i
+							<c:if test="${!empty sessionScope.loginCustomer }">
+							<li>
+							<a href="reservation.na?artistId=${ artistInfo.artistId }"><i
 									class="icofont-calendar"></i> Reservation</a></li>
+							</c:if>
 							<li><a href="#resume"><i class="bx bx-user"></i><span>Resume</span></a></li>
 							<li><a href="#contact"><i class="bx bx-envelope"></i>
 									Contact</a></li>

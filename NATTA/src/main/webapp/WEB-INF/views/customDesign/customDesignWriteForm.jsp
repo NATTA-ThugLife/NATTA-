@@ -17,7 +17,7 @@
         <table align="center" cellpadding="10"  width="1000">
         	<tr>
         		<td>작성자</td>
-        		<td><input type="text" name="customerId" value="${loginCustomer.customerId }" readonly></td>
+        		<td><input  type="text" name="customerId" value="${loginCustomer.customerId }" readonly></td>
         	</tr>
         	<tr>
         		<td>제목</td>
@@ -42,7 +42,7 @@
         			<br><br>
         			<input type="radio" name="onOff" value="1"><span>비공개</span>
         		</td>
-       	 		<td><textarea id = "contents" name = "contents"></textarea>
+       	 		<td><textarea class="form-control" id = "contents" name = "contents"></textarea>
 				<script>
 							CKEDITOR.replace('contents',{filebrowserUploadUrl:'/mine/imageUpload.na'});
 				</script>
