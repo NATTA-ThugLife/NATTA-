@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,10 @@ import com.kh.natta.ArtistInfo.service.ArtistInfoService;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artist.service.ArtistService;
 import com.kh.natta.artistWork.domain.ArtistWork;
+import com.kh.natta.common.PageInfo;
+import com.kh.natta.common.Pagination;
 import com.kh.natta.customer.domain.Customer;
+import com.kh.natta.customerInfo.domain.Review;
 import com.kh.natta.reservation.domain.Reservation;
 
 @Controller
@@ -42,6 +46,7 @@ public class ArtistInfoController {
 	// 아티스트 상세페이지로 이동
 	@RequestMapping(value="artistInfoPage.na", method=RequestMethod.GET)
 	public String ArtistInfoPage(String artistId, Model model,HttpServletRequest request) {
+		 
 		HttpSession session = request.getSession();
 		if( session.getAttribute("loginCustomer") != null) {
 			Customer customer = (Customer)session.getAttribute("loginCustomer");
@@ -57,6 +62,11 @@ public class ArtistInfoController {
 		ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);
 		ArrayList<ArtistWork> workList = infoService.selectListArtistWork(artistId);
 		ArrayList<ArtistFollow> aFollow = infoService.selectArtistFollow(artistId);
+//		ArrayList<Review> aReview = infoService.selectListReview(artistId, pi);
+//		System.out.println("피아이리스트"+pi);
+//		System.out.println("리뷰리스트"+aReview);
+//			model.addAttribute("aReview", aReview);
+//			model.addAttribute("pi", pi);
 			model.addAttribute("artist", artist);
 			model.addAttribute("priceList", priceList);
 			model.addAttribute("workList", workList);
@@ -66,6 +76,29 @@ public class ArtistInfoController {
 			model.addAttribute("artistPageId",artistId);
 			return "Artist-info/artistPage";
 		}
+	
+	@ResponseBody
+	@RequestMapping(value="ArtistReviewList.na", method=RequestMethod.POST)
+	public HashMap<String, Object> getReviewList(HttpServletResponse response, String artistId
+												,@RequestParam(value="page", required=false) Integer page) throws Exception {
+		  int currentPage = (page != null) ? page : 1; 
+		  int listCount = infoService.getListReviewCount(artistId);
+		  System.out.println("아티스트아이디" + artistId);
+		  System.out.println("아티스트리뷰갯수"+listCount);
+		  
+		  PageInfo pi = Pagination.getPageInfo(currentPage, listCount);		
+		  ArrayList<Review> aReview = infoService.selectListReview(artistId, pi);
+		  System.out.println(pi);
+		  for( Review r : aReview ) {
+			  r.setReviewContents(URLEncoder.encode(r.getReviewContents(),"utf-8"));
+			  System.out.println(r);
+		  }
+		  HashMap<String, Object> reviewMap = new HashMap<String, Object>();
+		  reviewMap.put("pi", pi);
+		  reviewMap.put("aReview", aReview);
+		  return reviewMap;
+	}
+	
 	
 	
 	// 아티스트 예약목록 출력 
@@ -88,7 +121,7 @@ public class ArtistInfoController {
 		gson.toJson(rList,response.getWriter()); 
 	}
 	
-	
+	// 예약 상태 변경
 	@ResponseBody
 	@RequestMapping(value="updateStatus.na",method=RequestMethod.POST)
 	public String updateStatus(HttpServletResponse response, int reservationCode, int status){
@@ -103,6 +136,7 @@ public class ArtistInfoController {
 			return "fail";
 		}
 	}
+	// 예약 취소
 	@ResponseBody
 	@RequestMapping(value="deleteStatus.na",method=RequestMethod.POST)
 	public String deleteStatus(HttpServletResponse response, int reservationCode) {
@@ -113,8 +147,7 @@ public class ArtistInfoController {
 			return "fail";
 		}
 	}
-	
-	
+	// 팔로우 삭제
 	@ResponseBody
 	@RequestMapping(value="deleteFollowing.na", method=RequestMethod.POST)
 	public String goodByeFollow(ArtistFollow af) {
@@ -127,7 +160,7 @@ public class ArtistInfoController {
 	}
 	
 	
-	// AJAX ) 아티스트 정보 DB에 artistId 존재유무 확인
+	//  아티스트 정보 DB에 artistId 존재유무 확인
 	@RequestMapping(value="artistChecking.na", method=RequestMethod.POST)
 	public void artistIdCheck(HttpServletResponse response, String artistId) throws Exception {
 		ArtistInfo artistCheck = infoService.selectOneArtistInfo(artistId);
@@ -141,6 +174,7 @@ public class ArtistInfoController {
 		gson.toJson(artistCheck,response.getWriter());
 	}
 	
+	// 팔로잉 
 	@ResponseBody
 	@RequestMapping(value="InsertArtistFollow.na", method=RequestMethod.POST)
 	public String insertFollowing(ArtistFollow af, Model model) {
@@ -151,6 +185,7 @@ public class ArtistInfoController {
 			return "fail";
 		}
 	}
+	// 팔로잉 취소
 	@ResponseBody
 	@RequestMapping(value="deleteArtistFollow.na", method=RequestMethod.POST)
 	public String deleteFollowing(ArtistFollow af, Model model) {
@@ -212,10 +247,19 @@ public class ArtistInfoController {
 	
 	// ArtistInfo 에 등록되어있는 전체 아티스트 정보 가져옴
 	@RequestMapping(value="artistList.na", method=RequestMethod.GET)
-	public ModelAndView artistList(ModelAndView mv) {
-		ArrayList<ArtistInfo> aList = infoService.selectListArtist();
-			mv.addObject("aList", aList );
-			mv.setViewName("Artist-info/artistListView");
+	public ModelAndView artistList(ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
+		int currentPage = ( page != null ) ? page : 1;
+		int listCount = infoService.getListCount();
+		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<ArtistInfo> aList = infoService.selectListArtist(pi);
+		if( !aList.isEmpty() ) {
+			mv.addObject("aList", aList)
+				.addObject("pi", pi)
+					.setViewName("Artist-info/artistListView");
+		} else {
+			System.out.println("아이 씼팔");
+		}
 		return mv;
 	}
 	

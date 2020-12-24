@@ -1,7 +1,10 @@
 package com.kh.natta.ArtistInfo.store;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,6 +14,8 @@ import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artistWork.domain.ArtistWork;
+import com.kh.natta.common.PageInfo;
+import com.kh.natta.customerInfo.domain.Review;
 import com.kh.natta.reservation.domain.Reservation;
 
 @Repository
@@ -26,8 +31,10 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 
 	// Artist Info 등록된 아티스트 전체 출력
 	@Override
-	public ArrayList<ArtistInfo> selectListArtist() {
-		return (ArrayList)sqlSession.selectList("ArtistInfoMapper.selectListArtist");
+	public ArrayList<ArtistInfo> selectListArtist(PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("ArtistInfoMapper.selectListArtist",null,rowBounds);
 	}
 
 	@Override
@@ -115,6 +122,27 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 	@Override
 	public Artist selectOne(String artistId) {
 		return sqlSession.selectOne("ArtistInfoMapper.selectOne", artistId);
+	}
+
+	@Override
+	public int getListCount() {
+		return sqlSession.selectOne("ArtistInfoMapper.getListCount");
+	}
+
+	@Override
+	public ArrayList<Review> selectListReview(String artistId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", offset);
+		map.put("pi.getBoardLimit()", pi.getBoardLimit());
+		map.put("artistId", artistId);
+		return (ArrayList)sqlSession.selectList("ArtistInfoMapper.selectListReview",artistId, rowBounds);
+	}
+
+	@Override
+	public int getListReviewCount(String artistId) {
+		return sqlSession.selectOne("ArtistInfoMapper.getReviewListCount", artistId);
 	}
 
 	

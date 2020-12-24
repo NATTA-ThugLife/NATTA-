@@ -223,7 +223,7 @@
 					$tableFoot.html("");
 					var $td;
 					
-					$("#cCount").text("댓글 (" + data.pi.listCount + ")"); // 댓글의 갯수 표시
+					$("#cCount").text("댓글 (" + data.pi.listCount + ")");  /* 댓글의 갯수 표시 */
 					if (data.ccList.length > 0) {
 						console.log(data.pi)
 						for ( var i in data.ccList ) {

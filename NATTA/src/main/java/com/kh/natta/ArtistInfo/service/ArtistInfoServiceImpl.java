@@ -11,6 +11,8 @@ import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.store.ArtistInfoStore;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artistWork.domain.ArtistWork;
+import com.kh.natta.common.PageInfo;
+import com.kh.natta.customerInfo.domain.Review;
 import com.kh.natta.reservation.domain.Reservation;
 
 @Service
@@ -26,8 +28,8 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 	
 	// Artist Info 등록된 아티스트 전체 출력
 	@Override
-	public ArrayList<ArtistInfo> selectListArtist() {
-		return infoStore.selectListArtist();
+	public ArrayList<ArtistInfo> selectListArtist(PageInfo pi) {
+		return infoStore.selectListArtist(pi);
 	}
 
 	@Override
@@ -112,6 +114,21 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 	}
 
 	
+
+	@Override
+	public int getListCount() {
+		return infoStore.getListCount();
+	}
+
+	@Override
+	public ArrayList<Review> selectListReview(String artistId, PageInfo pi) {
+		return infoStore.selectListReview(artistId, pi);
+	}
+
+	@Override
+	public int getListReviewCount(String artistId) {
+		return infoStore.getListReviewCount(artistId);
+	}
 
 
 

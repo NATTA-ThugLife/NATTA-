@@ -8,6 +8,8 @@ import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artistWork.domain.ArtistWork;
 import com.kh.natta.customer.domain.Customer;
+import com.kh.natta.common.PageInfo;
+import com.kh.natta.customerInfo.domain.Review;
 import com.kh.natta.reservation.domain.Reservation;
 
 public interface ArtistInfoService {
@@ -30,7 +32,7 @@ public interface ArtistInfoService {
 	 * artist info selectList
 	 * @return
 	 */
-	public ArrayList<ArtistInfo> selectListArtist();
+	public ArrayList<ArtistInfo> selectListArtist(PageInfo pi);
 	
 	/**
 	 * artist info selectOne
@@ -134,4 +136,12 @@ public interface ArtistInfoService {
 	public Artist selectOne(String artistId);
 	
 	public Artist dupPwd2 (Artist artist);
+	/**
+	 * 페이징
+	 * @return
+	 */
+	public int getListCount();
+	public int getListReviewCount(String artistId);
+	
+	public ArrayList<Review> selectListReview(String artistId, PageInfo pi);
 }
