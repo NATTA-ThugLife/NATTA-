@@ -131,7 +131,7 @@ public class ReservationController {
 			}
 			return renameFilename;
 		}
-		
+		// 사이즈리스트
 		@ResponseBody
 		@RequestMapping(value="reservationSizeList.na",method=RequestMethod.POST)
 		public void reservationSizeList(String artistId,String pStyle, HttpServletResponse response)throws Exception{
@@ -144,6 +144,7 @@ public class ReservationController {
 			gson.toJson(sizeList,response.getWriter());
 			
 		}
+		// 날자별 예약가능시간
 		@ResponseBody
 		@RequestMapping(value="reservationTime.na",method=RequestMethod.POST)
 		public void reservationTimeList(String artistId, java.sql.Date reservationDate,HttpServletResponse response)throws Exception {

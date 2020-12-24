@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>예약 페이지2</title>
+<title>예약 페이지</title>
 <link rel="stylesheet" href="resources/css/menubar-style.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
@@ -19,7 +19,7 @@
  
 <style>
 	#preview  img{
-	width : 350px; 
+	width : 400px; 
 	height: 350px;
 	}
 	
@@ -27,6 +27,19 @@
    height: 55px;
    width: 972px;
    text-align: center;
+}
+.form-rrrow {
+  display: -ms-flexbox;
+  display: inline-flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+.form-rrrow > .col,
+.form-rrrow > [class*="col-"] {
+  padding-right: 5px;
+  padding-left: 5px;
 }
 </style>
  <style>
@@ -44,110 +57,187 @@
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
+	[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+[type=radio] + img {
+  cursor: pointer;
+}
+[type=radio]:checked + img {
+  outline: 2px solid #cda45e;
+}
 </style>
 </head>
 <body>
 	<header>
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
-	<section align="center">
-	<br><br><br><br><br><br><br><br>
-		<article>
-		<h1 align="center">예약 페이지</h1>
-		<br><br><br><br>
-		<div text-align="center">
-			<form text-align="center" name="sub" action="reservation.na" method="post" enctype="multipart/form-data">
-				<input type="hidden" id="customerId" name="customerId" value="${loginCustomer.customerId }">
-				
-				<c:forTokens items="${artist.workAddress }" var="addr" delims="," varStatus="status">
-				<c:if test="${status.index eq 1 }">
-				<input type="hidden" id="address" name="address" placeholder="주소" value="${addr}">
-				</c:if>
-				</c:forTokens>
-				
-				<input type="hidden" name="shopName" value="${artistInfo.name}" placeholder="샵이름">
-				<input type="hidden" id="artistId" name="artistId" placeholder="아티스트아이디" value="${artistInfo.artistId }">
-				<div class="col-lg-2 col-md-2 form-group" >
-				<input class="form-control" type="text" id="artistName" name="artistName" placeholder="아티스트이름" value=${artist.artistName } readonly>
-				
-				
-				<select class="form-control" id="style" name="style">
-					<option value="base">스타일을 선택해주세요</option>
-					<c:forEach items="${priceList }" var="style">
-						<option value="${style.pStyle }">${style.pStyle }</option>
-					</c:forEach>
-				</select>
-				
-				<select class="form-control" id="tattooSize" name="tattooSize">
-					<option value="base">사이즈를 선택해주세요</option>
-					<option value="38mmx38mm">38mmx38mm</option>
-					<option value="38mmx64mm">38mmx64mm</option>
-					<option value="65mmx76mm">65mmx76mm</option>
-					<option value="102mmx127mm">102mmx127mm</option>
-					<option value="152mmx152mm">152mmx152mm</option>
-					<option value="203mmx152mm">203mmx152mm</option>
-					<option value="210mmx297mm">210mmx297mm</option>				
-				</select>
-				
-				<input class="form-control" type="text" id="price" name="price" placeholder="가격" readonly>
-				<br><br><br>
-				
-				
-				<span><input class="form-control" type="radio" name="part" value="팔">팔
-					<img height=150px; width="150px" src="../resources/images/reservationImages/arm.jpg">
-				</span>
-				<span><input class="form-control" type="radio" name="part" value="등">등
-					<img height=150px; width="150px" src="../resources/images/reservationImages/back.jpg">
-				</span>
-				<span><input class="form-control" type="radio" name="part" value="다리">다리
-					<img height=150px; width="150px" src="../resources/images/reservationImages/leg.jpg">
-				</span>
-				<br><br><br>
-				
-				
-				  
-				<p>Date: <input class="form-control" type="text" name="reservationDate" id="datepicker" placeholder="예약일을 선택해주세요" readonly></p>
-				
-				<select class="form-control" id="reservationTime" name="reservationTime">
-					<option value="base">예약시간을 선택해주세요</option>
-			    	<option value="09:00 ~ 11:00">09:00 ~ 11:00</option>
-			    	<option value="11:00 ~ 13:00">11:00 ~ 13:00</option>
-			    	<option value="14:00 ~ 16:00">14:00 ~ 16:00</option>
-			    	<option value="16:00 ~ 18:00">16:00 ~ 18:00</option>
-			    </select>
-				
-				<!-- <input type="text" id="datepicker" name="reservationDate"> -->
-				
-				<br><br><br><br><br><br>
-				<div align="center">
-				<div id="map" style=" width: 350px; height: 350px; margin-top: 10px;">
-				</div>
-				<div id="preview" style=" margin-top: 10px;">
-				<!-- 미리보기 공간 -->
-				</div>
-				</div>
-				
-				
-				<br>
-				<input class="form-control" type="button" id="upfile" value="도안업로드">
-				<input type="file" id="upload" name="upload" style="display:none">
-				
-				<c:forEach items="${reservationDate }" var="reservation">
-				<input type="hidden" class="rDate" value="${reservation}">
-				</c:forEach>
-				
-				
-				<br><br><br><br><br><br><br><br><br><br><br><br><br>
-				<textarea class="form-control" rows="10" cols="100" id="request" name="request"></textarea>
-				</div>
-				<br><br><br><br><br><br><br><br><br><br><br><br>
-				<button class="form-control" id="btnr" type="button" onclick="return validate();">예약하기</button>
-			</form>
+	<section id="modifyInfo" class="about">
+		<div class="container">
+			<div class="modal-header">
+				<h5 class="modal-title">
+					<b>예약 페이지</b>
+					</h5>
 			</div>
-		</article>
-		
-		
-		
+			<div align="center">
+			<div class="col-lg-8 mt-14 mt-lg-0">
+			
+					<form name="sub" action="reservation.na" method="post" enctype="multipart/form-data">
+					<div class="form-rrrow">
+							<input type="hidden" id="customerId" name="customerId"
+								value="${loginCustomer.customerId }">
+							<c:forTokens items="${artist.workAddress }" var="addr" delims=","
+								varStatus="status">
+								<c:if test="${status.index eq 1 }">
+									<input type="hidden" id="address" name="address"
+										placeholder="주소" value="${addr}">
+								</c:if>
+							</c:forTokens>
+	
+							<input type="hidden" name="shopName" value="${artistInfo.name}" placeholder="샵이름"> 
+							<input type="hidden" id="artistId" name="artistId" placeholder="아티스트아이디" value="${artistInfo.artistId }"> 
+							
+							<div class="col-md-6 form-group">
+							<div style="float:left">아티스트 이름 :</div>
+							<input class="form-control" type="text" id="artistName" name="artistName" placeholder="아티스트이름" value=${artist.artistName } readonly> 
+							</div>
+							<div class="col-md-6 form-group">
+							<div style="float:left">타투 스타일 :</div>
+							<select class="form-control" id="style" name="style">
+								<option value="base">스타일을 선택해주세요</option>
+								<c:forEach items="${priceList }" var="style">
+									<option value="${style.pStyle }">${style.pStyle }</option>
+								</c:forEach>
+							</select> 
+							</div>
+							<br><br><br><br>
+							
+							<div class="col-md-6 form-group">
+							<div style="float:left">
+							타투 사이즈 : 
+							</div>
+							<select class="form-control" id="tattooSize" name="tattooSize">
+								<option value="base">사이즈를 선택해주세요</option>
+								<option value="38mmx38mm">38mmx38mm</option>
+								<option value="38mmx64mm">38mmx64mm</option>
+								<option value="65mmx76mm">65mmx76mm</option>
+								<option value="102mmx127mm">102mmx127mm</option>
+								<option value="152mmx152mm">152mmx152mm</option>
+								<option value="203mmx152mm">203mmx152mm</option>
+								<option value="210mmx297mm">210mmx297mm</option>
+							</select>
+							</div>
+							<div class="col-md-6 form-group">
+							<div style="float:left">
+							가격  :
+							</div>
+							<input class="form-control" type="text" id="price" name="price"placeholder="가격" readonly> <br>
+							</div>
+							<br><br><br><br>
+							<div class="col-md-6 form-group">
+							<div style="float:left">
+							타투 부위: 
+							</div>
+							</div>
+							<br>
+							<div style="width:1000px;">
+								<label>
+									<input type="radio" id="part" name="part" value="팔">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/arm.jpg">
+								</label>
+								<label>
+									<input type="radio" id="part" name="part" value="어깨">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/sholder.jpg">
+								</label>
+								<label>
+									<input type="radio" id="part" name="part" value="등">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/back.jpg">
+								</label>
+								<label>
+									<input type="radio" id="part" name="part" value="다리">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/leg1.jpg">
+								</label>
+							</div>
+							</div>
+	
+							<div class="form-rrrow">
+							<div class="col-md-6 form-group">
+							<div style="float:left">
+							예약일 : 
+							</div>
+							<input class="form-control" type="text" name="reservationDate" id="datepicker" placeholder="예약일을 선택해주세요" readonly>
+							
+							</div>
+							<div class="col-md-6 form-group">
+							<div style="float:left">
+							예약 시간 :
+							</div>
+							<select class="form-control" id="reservationTime"
+								name="reservationTime">
+								<option value="base">예약시간을 선택해주세요</option>
+								<option value="09:00 ~ 11:00">09:00 ~ 11:00</option>
+								<option value="11:00 ~ 13:00">11:00 ~ 13:00</option>
+								<option value="14:00 ~ 16:00">14:00 ~ 16:00</option>
+								<option value="16:00 ~ 18:00">16:00 ~ 18:00</option>
+							</select>
+							</div>
+
+							<div style="width: 1000px;">
+							<div style="width: 500px; float:left">타투샵 위치 : </div>
+							<div style="width: 500px; float:left">도안 미리보기 : </div>
+							</div>
+							<div style="width: 1000px;">
+								<div>
+									<div style="width: 500px; height: 400px; float: left">
+									<div id="preview"
+										style="width: 400x; height: 350px; float: center">
+										<!-- 미리보기 공간 -->
+									</div>
+									</div>
+									<div id="map" style="width: 400px; height: 350px; float: center"></div>
+									
+									
+								</div>
+							</div>
+
+							<div class="col-md-6 form-group">
+							<input class="form-control" type="button" id="upfile" value="도안업로드"> 
+							<input type="file" id="upload" name="upload" style="display: none">
+						</div>
+						<div class="col-md-6 form-group">
+							<c:forEach items="${reservationDate }" var="reservation">
+								<input type="hidden" class="rDate" value="${reservation}">
+							</c:forEach>
+						</div>
+							
+						
+						<div style="float:left">
+						요구 사항 :
+						</div>
+							<textarea class="form-control" rows="10" cols="10000" id="request" name="request"></textarea>
+						</div>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+						<div>
+							<button class="form-control" id="btnr" type="button" onclick="return validate();" >예약하기</button>
+						</div>
+						
+						</div>
+					</form>
+					</div>
+				</div>
+			</div>
+			
+	</section>
+	<section>
+	
+
 	</section>
 	<script>
 		function validate(){
@@ -161,7 +251,7 @@
 				$("#tattooSize").focus();
 				return false;
 			}
-			else if($("#part").val() == ""){
+			else if($(':radio[name="part"]:checked').length<1){
 				alert("타투 부위를 선택해주세요")
 				$("#part").focus();
 				return false;
@@ -269,9 +359,9 @@
 		$("#datepicker").datepicker({
 			changeMonth:true,
 			changeYear:true,
-			showOn:"both",
+			/* showOn:"both",
 			buttonImage:"resources/images/reservationImages/clock.jpg",
-			buttonImageOnly:true,
+			buttonImageOnly:true, */
 			dateFormat: 'yy-mm-dd',
 			showOtherMonths: true,
 			selectOtherMonths: true,

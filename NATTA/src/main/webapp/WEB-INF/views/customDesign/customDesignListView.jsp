@@ -13,6 +13,20 @@
 #custom:hover {
 	background: #cda45e;
 }
+.form-rrrow {
+  display: -ms-flexbox;
+  display: inline-flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+.form-rrrow > .col,
+.form-rrrow > [class*="col-"] {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
 </style>
 </head>
 <body>
@@ -104,26 +118,24 @@
 							</td>
 						</tr>
 
-						<tr>
-							<td colspan="5" align="right"><c:if
-									test="${!empty loginCustomer }">
-									<div class="btns">
-									<a href="customDesignWriteView.na" class="btn-book animated fadeInUp scrollto">게시글작성</a>
-									</div>
-								</c:if></td>
-						</tr>
-
 
 					</tbody>
+					
 				</table>
 			</div>
+			<c:if test="${!empty loginCustomer }">
+			<div style="float:right" class="btns">
+				<a href="customDesignWriteView.na" class="btn-book animated fadeInUp scrollto">게시글작성</a>
+			</div>
+			</c:if>
+		</div>
 	</section>
 	<section class="testimonials section-bg">
 		<!-- 게시물 검색하기 -->
 		<div align="center">
 		<div class="col-lg-8 mt-5 mt-lg-0">
 		<form action="customSearch.na" method="get">
-			<div class="form-row">
+			<div class="form-rrrow">
 				<div class="col-md-1.5 form-group">
 					<select class="form-control" id="name" id="searchCondition" name="searchCondition">
 						<option value="all"
@@ -136,11 +148,11 @@
 							<c:if test="${search.searchCondition == 'contents'}">selected</c:if>>내용</option>
 					</select> 
 				</div>
-				<div class="col-md-4 form-group">
+				<div class="col-md-6 form-group">
 					<input class="form-control" id="name" type="text" name="searchValue" value="${search.searchValue }"
 					placeholder="검색내용을 입력해주세요"> 
 				</div>
-				<div class="col-md-1 form-group">
+				<div class="col-md-2.5 form-group">
 					<input class="form-control" id="name" type="submit" value="검색">
 				</div>
 			</div>
