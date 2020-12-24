@@ -23,6 +23,7 @@
 		<typeAlias type="com.kh.natta.customerInfo.domain.Following" alias="Following"/>
 		<typeAlias type="com.kh.natta.ArtistInfo.domain.ArtistFollow" alias="ArtistFollow"/>
 		<typeAlias type="com.kh.natta.customerInfo.domain.Review" alias="Review"/>
+		<typeAlias type="com.kh.natta.chat.domain.ImgPath" alias="ImgPath"/>
 	</typeAliases>
 	
 	<mappers>

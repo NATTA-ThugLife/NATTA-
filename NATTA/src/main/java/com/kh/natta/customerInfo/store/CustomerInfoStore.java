@@ -92,4 +92,5 @@ public interface CustomerInfoStore {
 	 */
 	
 	public Reservation selectOneReservation(int reservationCode);
+	
 }

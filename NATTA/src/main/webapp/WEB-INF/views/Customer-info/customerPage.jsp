@@ -72,6 +72,21 @@
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
+
+.resTable th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
+.resTable td { padding: 20px;width: 800px;}
+.rseTable {border-spacing: 10px;border-top: 0.6px solid #cda45e;border-bottom: 0.6px solid #cda45e;text-align: center;}
+.resTable tr:hover {color: #cda45e;}
+
+
+	.btnA{
+	background: #cda45e;
+    border: 0;
+    padding: 10px; 10px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 10px;
+    }
  </style>
 
 </head>
@@ -143,13 +158,13 @@
   	    <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>    
        	<!-- 아티스트 프로필 메뉴바 -->
         <ul style="list-style : none;">
-        	<li><a href="#mypage" ><i class="icofont-page"></i><span>My page</span></li>
-          	<li><a href="#modifyInfo" ><i class="bx bx-user"></i><span>INFO MODIFY</span></a></li>
-          	<li><a href="#following"><i class="icofont-heart"></i><span>Following</span></a></li>
-          	<li><a href="#review"><i class="bx bx-file-blank"></i><span>Review</span></a></li>
-          	<li><a href="#reservationTable"><i class="icofont-calendar"></i> Reservation</a></li>
-          	<li><a href="/chatting.na"><i class="bx bx-envelope"></i> Chatting</a></li>
-          	<li><a href="#modalWork" data-toggle="modal"><i class="icofont-crying"></i> Good-Bye</a></li>    
+        	<li><a href="#mypage" ><i class="icofont-page"></i><span>처음으로</span></li>
+          	<li><a href="#modifyInfo" ><i class="bx bx-user"></i><span>정보 수정</span></a></li>
+          	<li><a href="#following"><i class="icofont-heart"></i><span>팔로잉</span></a></li>
+          	<li><a href="#review"><i class="bx bx-file-blank"></i><span>리뷰</span></a></li>
+          	<li><a href="#reservationTable"><i class="icofont-calendar"></i> 예약</a></li>
+          	<li><a href="/chatting.na"><i class="bx bx-envelope"></i> 채팅</a></li>
+          	<li><a href="#modalWork" data-toggle="modal"><i class="icofont-crying"></i> 탈퇴</a></li>    
         </ul>            
         </nav><!-- .nav-menu -->
       </div>      
@@ -176,12 +191,12 @@
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
             <h3>Customer Info </h3>
             <p class="font-italic">
-				<i class="icofont-ui-user"> Name : ${ loginCustomer.customerName }</i> <br>
-				<i class="icofont-id"> Id   : ${ loginCustomer.customerId }</i><br>
-				<i class="icofont-smart-phone"> Phone : ${ loginCustomer.phone }</i> <br>
-				<i class="icofont-email"> Email : ${loginCustomer.email }</i> <br>
-				<i class="icofont-wall-clock"> Enroll-Date : ${loginCustomer.enrollDate }</i><br>
-				<i class="icofont-ui-home"> Addr : 
+				<i class="icofont-ui-user"> 이름 : ${ loginCustomer.customerName }</i> <br>
+				<i class="icofont-id"> 아이디   : ${ loginCustomer.customerId }</i><br>
+				<i class="icofont-smart-phone"> 핸드폰 : ${ loginCustomer.phone }</i> <br>
+				<i class="icofont-email"> 이메일 : ${loginCustomer.email }</i> <br>
+				<i class="icofont-wall-clock"> 가입날 : ${loginCustomer.enrollDate }</i><br>
+				<i class="icofont-ui-home"> 주소 : 
 				
 					<c:forTokens items="${loginCustomer.address }" var="addr" delims="," varStatus="status">
 					<c:if test="${status.index eq 1}">
@@ -217,27 +232,29 @@
 	  
 	  	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
      <section id="modifyInfo" class="about">
-				<div class="container">
-					<div class="modal-header">
-						<h5 class="modal-title" >
-							<b>Customer INFO</b>
-						</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">							<span aria-hidden="true">&times;</span>
-						</button>
-
-					</div>
+				
 					<div class="modal-body book-a-table" >
+					<div class="container">
+						<div class="section-title">
+				          <p>정보 수정</p>
+				        </div>
 			 			<form action="/modifyCustomerInfo.na" 
 						method="post" role="form" class="php-email-form"  enctype="multipart/form-data" onsubmit="return dup();">
 				          <div style="margin-left: 330px;">
 				         	<!-- 이름 -->
 				            <div class="col-lg-7 col-md-6 form-group">
-				              Customer Name : 
+				              	이름 : 
 				              <input type="text" value="${ loginCustomer.customerName }" name="customerName" class="form-control"  placeholder="Your Name" readonly>
+
+				              <div class="validate"></div>
+				            </div>
+				            <!-- 이름 -->
+				            <div class="col-lg-7 col-md-6 form-group">
+				              	고객 아이디 : 
 				              <input type="text" value="${ loginCustomer.customerId }" name="customerId" class="form-control"  placeholder="Your Name" readonly>
 				              <div class="validate"></div>
 				            </div>
+				            				              
 				            <!-- 비밀번호 확인  -->
 				            <div class="col-lg-7 col-md-6 form-group">
 				              	현재 비밀번호를 입력해주세요 : 
@@ -247,20 +264,20 @@
 				            	
 				            <!-- 비밀번호 입력 -->
 				            <div class="col-lg-7 col-md-6 form-group">
-				              Modify Password : 
+				              	수정 비밀번호 : 
 				             <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" >
 				             <input type="password" name="confirmPassowrd" class="form-control" id="confirmPassowrd" placeholder="Confirm Password">
 				              <div class="validate"></div>
 				            </div>
 				            <!-- 프로필사진 업로드-->
 				            <div class="col-lg-7 col-md-3 form-group">
-				              MY PROFILE 
+				              	프로필 사진 변경 
 				              <input type="file" class="form-control" name="uploadFile" style="float: left">  
 				              <div class="validate"></div>
 				            </div>
 				            <!-- 근무지주소 -->
 				            <div class="col-lg-7 col-md-6 form-group">
-				            	ADDRESS<br>
+				            	주소<br>
 				            	
 								<c:forTokens items="${loginCustomer.address }" var="addr" delims="," varStatus="status">
 						            <c:if test="${status.index eq 0}">
@@ -279,12 +296,12 @@
 
  				            <!-- 핸드폰  -->
 				            <div class="col-lg-7 col-md-6 form-group">
-				               Phone
+				               	핸드폰
 				               <input type="text" name="phone" value="${ loginCustomer.phone }"class="form-control" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
 				            </div>	
 				            <!-- 이메일  -->
 				            <div class="col-lg-7 col-md-6 form-group">
-				               Email
+				               	이메일
 				               <input type="email" name="email" value="${ loginCustomer.email }"class="form-control" id="email" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
 				            </div>			            			            				            				            
 				          </div>
@@ -292,12 +309,10 @@
 				          <div class="mb-3">
 				            <div class="loading">Loading</div>
 				          </div>
-				          <div class="text-center"><button type="submit" >INFO UPDATE</button></div>
+				          <div class="text-center"><button type="submit" >정보 수정 완료</button></div>
 				        </form>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
-					</div>
+					
 				</div>
 
   </section>
@@ -357,7 +372,7 @@
 					<div class="col-lg-4 col-md-6" id="form${follow.artistId }">
             <div class="member" data-aos="zoom-in" data-aos-delay="100">
               <c:if test="${follow.myReprofile ne null }">
-              	<img src="resources/artistProfile/${follow.myReprofile }" class="img-fluid" alt="" style="width:400px; height:350px;">
+              	<img src="resources/artistInfoFile/Profile/${follow.myReprofile }" class="img-fluid" alt="" style="width:400px; height:350px;">
               </c:if>
               <c:if test="${follow.myReprofile eq null }">
               	<img src="resources/artistProfile/20201213015554.png" class="img-fluid" alt="" style="width:400px; height:350px;">
@@ -414,7 +429,57 @@
       </div>
 	</section> 
 	<!-- ======= 팔로잉 끝 ======= -->
+  <section id="reservationTable" class="specials">
+      <div class="container" data-aos="fade-up">
 
+        <div class="section-title">
+          <h2>My</h2>
+          <p>Reservation</p>
+        </div>
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+        	<table class="resTable" style="color : white; border: #cda45e">
+			 <thead>
+			   <tr style="text-align: center;">
+			      <th>아티스트 샵</th>
+			      <th>아티스트 명</th>
+			      <th>예약 스타일</th>
+			      <th>예약 날짜</th>
+			      <th>예약 상태</th>
+			      <th>상세보기</th>
+			   </tr>
+			 </thead>
+			 <tbody>
+			<c:forEach items="${resList }" var="res" >
+				<tr style="text-align: center;">
+			      <td id="shopName${res.reservationCode }">${res.shopName }</td>
+			      <td id="artistName${res.reservationCode }">${res.artistName }</td>
+			      <td id="style${res.reservationCode }">${res.style }</td>
+			      <td id="reservationDate${res.reservationCode }">${res.reservationDate }</td>
+			      <input type="hidden" value="${res.renameFilename }" id="resImg${res.reservationCode }">
+			      <input type="hidden" value="${res.tattooSize }" id="tattooSize${res.reservationCode }">
+			      <input type="hidden" value="${res.price }" id="price${res.reservationCode }">
+			      <input type="hidden" value="${res.part }" id="part${res.reservationCode }">
+			      <input type="hidden" value="${res.status}" id="status${res.reservationCode }">
+			      <input type="hidden" value="${res.artistId}" id="artistId${res.reservationCode }">
+			      <input type="hidden" value="${res.reservationTime}" id="reservationTime${res.reservationCode }">
+			      <c:forTokens items="${loginCustomer.address }" var="addr" delims="," varStatus="status">
+						<c:if test="${status.index eq 1}">
+						     <input type="hidden" value="${addr }" id="addr${res.reservationCode }">
+						 </c:if>
+			 	</c:forTokens>
+			 	<input type="hidden" value="${res.artistProfile }" id="artistProfile${res.reservationCode }">
+			      <c:if test="${res.status eq 0}"><td >예약 대기</td></c:if>
+			      <c:if test="${res.status eq 1}"><td>예약 확정</td></c:if>			      
+			      <c:if test="${res.status eq 2}"><td>타투 완료</td></c:if>			      
+			      <td><button value="${res.reservationCode }" class="detail btnA">상세보기</button></td>
+			   </tr>
+			</c:forEach>
+			 </tbody> 
+			</table>
+       </div>
+      </div>
+																																																																														
+    </section>
     <!-- ======= 리뷰 ======= -->
     <section id="review" class="specials">
       <div class="container" data-aos="fade-up">
@@ -455,11 +520,11 @@
 		                <div class="row">
 		                  <div class="col-lg-8 details order-2 order-lg-1">
 		                  	<div id="star${review.reviewCode }">
-		                  		<span style="color:yellow" id="grade1"><i class="far fa-star fa-2x"></i></span>
-			                  	<span style="color:yellow" id="grade2"><i class="far fa-star fa-2x"></i></span>
-			                  	<span style="color:yellow" id="grade3"><i class="far fa-star fa-2x"></i></span>
-			                  	<span style="color:yellow" id="grade4"><i class="far fa-star fa-2x"></i></span>
-			                  	<span style="color:yellow" id="grade5"><i class="far fa-star fa-2x"></i></span>
+		                  		<span style="color:#cda45e" id="grade1"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:#cda45e" id="grade2"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:#cda45e" id="grade3"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:#cda45e" id="grade4"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:#cda45e" id="grade5"><i class="far fa-star fa-2x"></i></span>
 		                  	</div>
 		                  	<script>
 								 $(function(){
@@ -489,11 +554,11 @@
 		                <div class="row">
 		                  <div class="col-lg-8 details order-2 order-lg-1">
 		                  	<div id="star${review.reviewCode }">
-		                  		<span style="color:yellow" id="grade1"><i class="far fa-star fa-2x"></i></span>
-			                  	<span style="color:yellow" id="grade2"><i class="far fa-star fa-2x"></i></span>
-			                  	<span style="color:yellow" id="grade3"><i class="far fa-star fa-2x"></i></span>
-			                  	<span style="color:yellow" id="grade4"><i class="far fa-star fa-2x"></i></span>
-			                  	<span style="color:yellow" id="grade5"><i class="far fa-star fa-2x"></i></span>
+		                  		<span style="color:#cda45e" id="grade1"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:#cda45e" id="grade2"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:#cda45e" id="grade3"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:#cda45e" id="grade4"><i class="far fa-star fa-2x"></i></span>
+			                  	<span style="color:#cda45e" id="grade5"><i class="far fa-star fa-2x"></i></span>
 		                  	</div>
 							 <script>
 								 $(function(){
@@ -558,105 +623,57 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body book-a-table">
+					<div class="modal-body book-a-table" >
 						<form action="/modifyReview.na" 
 						method="post" role="form" class="php-email-form modalActionCheck" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
-				          <div>
+				          <div style="width: 50%; float: left; padding-left: 50px;">
 				         	<!-- 타투샵이름 -->
-				            <div class="col-lg-4 col-md-6 form-group">
+				            <div class="col-lg-8 col-md-8 form-group">
 				              ARTIST SHOP NAME 
 				              <input type="text" value="" name="artistId" class="form-control artistShopName" id="artistId" readonly>
 				              <input type="hidden" value="" name="reviewCode" id="reviewCode">
 				              <div class="validate"></div>
 				            </div>
 				            <!-- 리뷰사진 업로드-->
-				            <div class="col-lg-4 col-md-6 form-group">
+				            <div class="col-lg-8 col-md-8 form-group">
 				              MY PROFILE 
-				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile"> 
+				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile" id="reviewModifyUplodFile"> 
 				              <input type="hidden" name="originFile" id="originFile" value="">
 				            </div>
 				            <!-- 리뷰 내용  -->
-				            <div class="form-group">
+				            <div class="form-group" style="padding-left: 10px;">
 				            <div id="star">
-		                  		<span style="color:yellow"><i class="far fa-star fa-2x grade" id="1"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="2"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="3"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="4"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="5"></i></span>
+		                  		<span style="color:#cda45e"><i class="far fa-star fa-2x grade" id="1"></i></span>
+			                  	<span style="color:#cda45e"><i class="far fa-star fa-2x grade" id="2"></i></span>
+			                  	<span style="color:#cda45e"><i class="far fa-star fa-2x grade" id="3"></i></span>
+			                  	<span style="color:#cda45e"><i class="far fa-star fa-2x grade" id="4"></i></span>
+			                  	<span style="color:#cda45e"><i class="far fa-star fa-2x grade" id="5"></i></span>
 			                  	<input type="hidden" name="reviewStar" id="reviewStar" value="">
 		                  	</div>
 				               CONTENT 
-				               <textarea class="form-control artistmodalInfo" id="reviewContents" name="reviewContents" cols="600" rows="5" style="resize: none;"></textarea>
+				               <textarea class="form-control artistmodalInfo" id="reviewContents" name="reviewContents" cols="10" rows="5" style="resize: none; width: 400px;"></textarea>
 				               <div class="validate"></div>
-				            </div>				            				            
+				            </div>			
+				            
+				            <div class="text-right"><button type="submit">리뷰 수정</button></div>	            				            
 				          </div>
 				          <div class="mb-3">
 				            <div class="loading">Loading</div>
 				          </div>
-				          <div class="text-center"><button type="submit">리뷰 수정</button></div>
+				          
 				        </form>
+				        <div style="float: left; width: 50%;">
+							<img src="" id="modifyReviewPhoto" style="width : 500px; height: 380px;">
+				        </div>
 					</div>
+					
+						
 				</div>
 			</div>
 		</div> 
 		<!-- 리뷰 수정 모달 끝-->
 		
-				<!-- 리뷰 수정 모달 -->
-		<div class="modal fade" id="modifyReview" tabindex="-1" role="dialog"
-			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
-			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
-				<!-- 센터모달창 추가  modal-dialog-centered -->
-				<div class="modal-content" style="background-color: black">
-					<div class="modal-header">
-						<h5 class="modal-title" id="TEST">
-							<b>리뷰 정보</b>
-						</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body book-a-table">
-						<form action="/modifyReview.na" 
-						method="post" role="form" class="php-email-form modalActionCheck" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
-				          <div>
-				         	<!-- 타투샵이름 -->
-				            <div class="col-lg-4 col-md-6 form-group">
-				              ARTIST SHOP NAME 
-				              <input type="text" value="" name="artistId" class="form-control artistShopName" id="artistId" readonly>
-				              <input type="hidden" value="" name="reviewCode" id="reviewCode">
-				              <div class="validate"></div>
-				            </div>
-				            <!-- 리뷰사진 업로드-->
-				            <div class="col-lg-4 col-md-6 form-group">
-				              MY PROFILE 
-				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile" > 
-				              <input type="hidden" name="originFile" id="originFile" value="">
-				            </div>
-				            <!-- 리뷰 내용  -->
-				            <div class="form-group">
-				            <div id="star">
-		                  		<span style="color:yellow"><i class="far fa-star fa-2x grade" id="1"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="2"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="3"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="4"></i></span>
-			                  	<span style="color:yellow"><i class="far fa-star fa-2x grade" id="5"></i></span>
-			                  	<input type="hidden" name="reviewStar" id="reviewStar" value="">
-		                  	</div>
-				               CONTENT 
-				               <textarea class="form-control artistmodalInfo" id="reviewContents" name="reviewContents" cols="600" rows="5" style="resize: none;"></textarea>
-				               <div class="validate"></div>
-				            </div>				            				            
-				          </div>
-				          <div class="mb-3">
-				            <div class="loading">Loading</div>
-				          </div>
-				          <div class="text-center"><button type="submit">리뷰 수정</button></div>
-				        </form>
-					</div>
-				</div>
-			</div>
-		</div> 
+
 		
 		
 						<!-- 리뷰 작성 -->
@@ -677,9 +694,9 @@
 					<div class="modal-body book-a-table">
 						<form action="/insertReview.na" 
 						method="post" role="form" class="php-email-form modalActionCheck" data-aos="fade-up" data-aos-delay="100" enctype="multipart/form-data">
-				          <div>
+				          <div style="width: 50%; float: left; padding-left: 50px;">
 				         	<!-- 타투샵이름 -->
-				            <div class="col-lg-4 col-md-6 form-group">
+				            <div class="col-lg-8 col-md-8 form-group">
 				              ARTIST SHOP NAME 
 				              <input type="text" value="" name="shopName" class="form-control artistShopName" id="insertShopName" readonly>
 				              <input type="hidden" value="" name="reservationCode" id="insertReservationCode">
@@ -687,88 +704,42 @@
 				              <div class="validate"></div>
 				            </div>
 				            <!-- 리뷰사진 업로드-->
-				            <div class="col-lg-4 col-md-6 form-group">
+				            <div class="col-lg-8 col-md-8 form-group">
 				              MY PROFILE 
-				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile" > 
+				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile" id="insertReviewFile"> 
 				            </div>
 				            <!-- 리뷰 내용  -->
-				            <div class="form-group">
+				            <div class="form-group" style="padding-left: 10px;">
 				            <div id="star">
-		                  		<span style="color:yellow" id="istar1"><i class="far fa-star fa-2x igrade 1" id="1"></i></span>
-			                  	<span style="color:yellow" id="istar2"><i class="far fa-star fa-2x igrade 2" id="2"></i></span>
-			                  	<span style="color:yellow" id="istar3"><i class="far fa-star fa-2x igrade 3" id="3"></i></span>
-			                  	<span style="color:yellow" id="istar4"><i class="far fa-star fa-2x igrade 4" id="4"></i></span>
-			                  	<span style="color:yellow" id="istar5"><i class="far fa-star fa-2x igrade 5" id="5"></i></span>
-			                  	<input type="text" name="reviewStar" id="ireviewStar" value="">
+		                  		<span style="color:#cda45e" id="istar1"><i class="far fa-star fa-2x igrade 1" id="1"></i></span>
+			                  	<span style="color:#cda45e" id="istar2"><i class="far fa-star fa-2x igrade 2" id="2"></i></span>
+			                  	<span style="color:#cda45e" id="istar3"><i class="far fa-star fa-2x igrade 3" id="3"></i></span>
+			                  	<span style="color:#cda45e" id="istar4"><i class="far fa-star fa-2x igrade 4" id="4"></i></span>
+			                  	<span style="color:#cda45e" id="istar5"><i class="far fa-star fa-2x igrade 5" id="5"></i></span>
+			                  	<input type="hidden" name="reviewStar" id="ireviewStar" value="">
 		                  	</div>
-		                  	
-		                  	
 				               CONTENT 
-				               <textarea class="form-control artistmodalInfo" id="insertReviewContents" name="reviewContents" cols="600" rows="5" style="resize: none;"></textarea>
+				               <textarea class="form-control artistmodalInfo" id="insertReviewContents" name="reviewContents" cols="600" rows="5" style="resize: none; width: 400px;"></textarea>
 				               <div class="validate"></div>
-				            </div>				            				            
+				            </div>	
+				            <div class="text-right"><button type="submit">리뷰 작성</button></div>			            				            
 				          </div>
+
 				          <div class="mb-3">
 				            <div class="loading">Loading</div>
 				          </div>
-				          <div class="text-center"><button type="submit">리뷰 작성</button></div>
+
 				        </form>
+				        
+				        <div id="insertImg" style="float: left; width: 50%;">
+					    </div>
 					</div>
 				</div>
 			</div>
 		</div> 
 		<!--  -->
 		
-   <section id="reservationTable" class="specials">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>My</h2>
-          <p>Reservation</p>
-        </div>
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-        	<table class="table" style="color:white">
-			 <thead>
-			   <tr style="text-align: center;">
-			      <th>아티스트 샵</th>
-			      <th>아티스트 명</th>
-			      <th>예약 스타일</th>
-			      <th>예약 날짜</th>
-			      <th>예약 상태</th>
-			      <th>상세보기</th>
-			   </tr>
-			 </thead>
-			 <tbody>
-			<c:forEach items="${resList }" var="res" >
-				<tr style="text-align: center;">
-			      <td id="shopName${res.reservationCode }">${res.shopName }</td>
-			      <td id="artistName${res.reservationCode }">${res.artistName }</td>
-			      <td id="style${res.reservationCode }">${res.style }</td>
-			      <td id="reservationDate${res.reservationCode }">${res.reservationDate }</td>
-			      <input type="hidden" value="${res.renameFilename }" id="resImg${res.reservationCode }">
-			      <input type="hidden" value="${res.tattooSize }" id="tattooSize${res.reservationCode }">
-			      <input type="hidden" value="${res.price }" id="price${res.reservationCode }">
-			      <input type="hidden" value="${res.part }" id="part${res.reservationCode }">
-			      <input type="hidden" value="${res.status}" id="status${res.reservationCode }">
-			      <input type="hidden" value="${res.artistId}" id="artistId${res.reservationCode }">
-			      <c:forTokens items="${loginCustomer.address }" var="addr" delims="," varStatus="status">
-						<c:if test="${status.index eq 1}">
-						     <input type="hidden" value="${addr }" id="addr${res.reservationCode }">
-						 </c:if>
-			 	</c:forTokens>
-			 	<input type="hidden" value="${res.artistProfile }" id="artistProfile${res.reservationCode }">
-			      <c:if test="${res.status eq 0}"><td >예약 대기</td></c:if>
-			      <c:if test="${res.status eq 1}"><td>예약 확정</td></c:if>			      
-			      <c:if test="${res.status eq 2}"><td>타투 완료</td></c:if>			      
-			      <td><button value="${res.reservationCode }" class="detail">상세보기</button></td>
-			   </tr>
-			</c:forEach>
-			 </tbody> 
-			</table>
-       </div>
-      </div>
-																																																																														
-    </section>
+ 
     
     
     	<!-- 예약 디테일 뷰-->
@@ -833,7 +804,7 @@
 				          </div>
 				          <div class="mb-3">
 				          </div>
-				          <div class="text-center"><button type="button" id="resButton" class="resButton">닫기</button></div>
+				          <div class="text-center"><button type="button" id="resButton" class="resButton btnA">닫기</button></div>
 				          </form>
 					</div>
 				</div>
@@ -859,6 +830,7 @@
 				var artistName = $("#artistName"+reservationCode).text();
 				var style = $("#style"+reservationCode).text();
 				var reservationDate = $("#reservationDate"+reservationCode).text();
+				var reservationTime = $("#reservationTime"+reservationCode).val();
 				var resImg = $("#resImg"+reservationCode).val();
 				var tattooSize = $("#tattooSize"+reservationCode).val();
 				var price = $("#price"+reservationCode).val();
@@ -868,12 +840,10 @@
 				var addr =  $("#addr"+reservationCode).val()
 				var artistProfile = $("#artistProfile"+reservationCode).val();
 				
-				
-				
 				$("#shopName").val(shopName);
 				$("#style").val(style);
 				$("#artistName").val(artistName);
-				$("#reservationDate").val(reservationDate);
+				$("#reservationDate").val(reservationDate +" " + reservationTime);
 				$("#price").val(price);
 				$("#tattooSize").val(tattooSize);
 				$("#part").val(part);
@@ -886,6 +856,7 @@
 					$(".resButton").attr("data-dismiss","");
 					$(".resButton").attr("aria-label","");
 					$(".resButton").attr("type","submit");
+					$(".resButton").attr("class","btnA");
 				}else if(status == 2){
 					$(".resButton").empty();
 					$(".resButton").text("리뷰 쓰기");
@@ -894,6 +865,7 @@
 					$(".resButton").attr("data-dismiss","");
 					$(".resButton").attr("aria-label","");
 					$(".resButton").attr("type","button");
+					$(".resButton").attr("class","btnA");
 				}else{
 					$(".resButton").empty();
 					$(".resButton").text("닫기");
@@ -901,6 +873,7 @@
 					$(".resButton").attr("data-dismiss","modal");
 					$(".resButton").attr("aria-label","Close");
 					$(".resButton").attr("type","button");
+					$(".resButton").attr("class","btnA");
 				}
 				
 				$("#detailReservation").modal("show");
@@ -964,7 +937,10 @@
 					var reviewCode = $("#"+review).find(".reviewCode").val();
 					var reviewContents = $("#"+review).find(".reviewContents").val();
 					var reviewPhoto = $("#"+review).find(".reviewPhoto").val();
+					var path = "resources/review/${ loginCustomer.customerId }/"+reviewCode+ "/" + reviewPhoto;
 					
+					/* modifyReviewPhoto */
+					/* resources/review/test1/3/20201217165410.jpg */
 				
 					$("#artistId").val(artist);
 					$("#originFile").val(reviewPhoto);
@@ -973,6 +949,7 @@
 					$("#"+reviewStar).parent().prevAll().children().attr("class","fas fa-star fa-2x grade");
 					$("#"+reviewStar).attr("class","fas fa-star fa-2x grade");
 					$("#reviewStar").val(reviewStar);
+					$("#modifyReviewPhoto").attr("src",path);
 				})
 				/* 별점 바꾸기  */
 				$(".grade").on("click", function(){
@@ -1007,8 +984,33 @@
 						}
 					})
 					}
-					/* $(this).parent().parent().remove(); */
+					
+					
+
+
 				})
+				
+					$(function() {
+			            $("#reviewModifyUplodFile").on('change', function(){
+			                readURL(this,"modify");
+			            });
+			            
+			            $("#insertReviewFile").on('change', function(){
+			            	$("#insertImg").empty();
+			            	$("#insertImg").append('<img src="" id="insertReviewPhoto" style="width : 500px; height: 380px;">');
+			            	readURL(this,"insert");
+			            });
+			            
+			        });
+			        function readURL(input,location) {
+			            if (input.files && input.files[0]) {
+			            var reader = new FileReader();
+			            reader.onload = function (e) {
+			                    $('#'+location+'ReviewPhoto').attr('src', e.target.result);
+			                }
+			              reader.readAsDataURL(input.files[0]);
+			            }
+     				  }
 			</script>
 			
 	<script>
@@ -1076,6 +1078,11 @@
 		
  
 	} 
+
+  	
+
+
+
 
 	</script>
 			

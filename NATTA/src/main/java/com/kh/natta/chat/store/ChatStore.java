@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.natta.chat.domain.Chat;
 import com.kh.natta.chat.domain.ChattingRoom;
+import com.kh.natta.chat.domain.ImgPath;
 
 public interface ChatStore {
 	/**
@@ -47,4 +48,17 @@ public interface ChatStore {
 	 * @return
 	 */
 	public ArrayList<Chat> chataddList(Chat chat);
+	
+	/**
+	 * 고객 사진 가져오기
+	 * @param userId
+	 * @return
+	 */
+	public ImgPath selectCustomerImg(String userId);
+	
+	/**
+	 * 아티스트 사진 가져오기
+	 */
+	
+	public ImgPath selectArtistImg(String userId);
 }

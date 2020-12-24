@@ -365,10 +365,6 @@ input::placeholder {
 			});
 		}
 	}
-	
-	function getimg(){
-		
-	}
 </script>
 </body>
 </html>

@@ -42,6 +42,7 @@
 		<result property="customerId" column="CUSTOMER_ID"></result>
 		<result property="artistId" column="ARTIST_ID"></result>
 		<result property="artistProfile" column="MY_REPROFILE"></result>
+		<result property="reservationTime" column="RESERVATION_TIME"></result>
 	</resultMap>
 	
 	<update id="modifyCusotmer">

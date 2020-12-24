@@ -29,6 +29,7 @@ import com.google.gson.JsonIOException;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.chat.domain.Chat;
 import com.kh.natta.chat.domain.ChattingRoom;
+import com.kh.natta.chat.domain.ImgPath;
 import com.kh.natta.chat.service.ChatService;
 import com.kh.natta.customer.domain.Customer;
 
@@ -87,7 +88,6 @@ public class ChatController {
 			Artist artist = (Artist)session.getAttribute("loginArtist");
 			 loginUser = artist.getArtistId();
 		}
-		//채팅방 만들때 loginUser를 너무 많이 사용해서 수정을 위해서는 너무 많은 시간과 노력이 필요.. 그냥 loginUser세션 하나를 추가하는것으로 타협..
 		session.setAttribute("loginUser", loginUser);
 		//채팅방 체크를 위해서  set
 		chattingRoom.setCustomerId(loginUser);
@@ -115,6 +115,28 @@ public class ChatController {
 					
 					chat.setChatContent("새로운 채팅방이 생성되었습니다.");
 					chat.setRoomCode(roomCode);
+					
+					String userId;
+					
+					if(!loginUser.equals(chattingRoom.getArtistId()) && session.getAttribute("loginCustomer") != null) {
+						// 아티스트랑 같지 않다는건 아티스트가 상대방
+						userId = chattingRoom.getArtistId();
+						ImgPath imgPath = service.selectArtistImg(userId);
+						if(imgPath.getImgPath() == null) {
+							imgPath.setImgPath("fail");
+						}
+						model.addAttribute("imgArtist",imgPath);
+					}else {
+						// 아티스트랑 같다는건 고객이 상대방
+						userId = chattingRoom.getArtistId();
+						ImgPath imgPath = service.selectCustomerImg(userId);
+						imgPath.setId(userId);
+						if(imgPath.getImgPath() == null) {
+							imgPath.setImgPath("fail");
+						}
+						model.addAttribute("imgCustomer",imgPath);
+					}
+					
 					int create = service.insertChat(chat);
 					if(create > 0) {
 						chatList = service.viewChatContent(roomCode);
@@ -125,6 +147,27 @@ public class ChatController {
 		}else {
 			// 채팅방이 있을때 이전에 모든 내용을 가져옴
 			chatList = service.viewChatContent(check.getRoomCode());
+			
+			String userId;
+			if(!loginUser.equals(chattingRoom.getArtistId()) && session.getAttribute("loginCustomer") != null) {
+				// 아티스트랑 같지 않다는건 아티스트가 상대방
+				userId = chattingRoom.getArtistId();
+				ImgPath imgPath = service.selectArtistImg(userId);
+				if(imgPath.getImgPath() == null) {
+					imgPath.setImgPath("fail");
+				}
+				model.addAttribute("imgArtist",imgPath);
+			}else {
+				// 아티스트랑 같다는건 고객이 상대방
+				userId = chattingRoom.getArtistId();
+				ImgPath imgPath = service.selectCustomerImg(userId);
+				imgPath.setId(userId);
+				if(imgPath.getImgPath() == null) {
+					imgPath.setImgPath("fail");
+				}
+				model.addAttribute("imgCustomer",imgPath);
+			}
+			
 			model.addAttribute("chatList",chatList);
 			model.addAttribute("roomCode",check.getRoomCode());
 			

@@ -44,7 +44,6 @@ public class CustomerInfoController {
 		model.addAttribute("resList",resList);
 		model.addAttribute("fList",fList);
 		model.addAttribute("rList",rList);
-		System.out.println(resList);
 		return "Customer-info/customerPage";
 	}
 	
@@ -175,6 +174,7 @@ public class CustomerInfoController {
 				String renameFileName = saveReviewFile(uploadFile,request,customerId, review.getReservationCode());
 				review.setReviewPhoto(renameFileName);
 			}
+			System.out.println(review);
 			int result = service.insertReview(review);
 			return "redirect:/customerInfo.na?customerId="+customerId;
 		}

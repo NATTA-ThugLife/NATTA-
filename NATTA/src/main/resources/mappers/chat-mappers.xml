@@ -14,6 +14,15 @@
 		<result property="chatChatDate" column="CHAT_CHATDATE"></result>
 		<result property="chatChatDateFormat" column="CHAT_CHATDATEFORMAT"></result>
 	</resultMap>
+	
+	<resultMap type="ImgPath" id="imgPathResult">
+		<result property="imgPath" column="CUSTOMER_PROFILE"></result>
+	</resultMap>
+	
+	<resultMap type="ImgPath" id="imgPathResult2">
+		<result property="imgPath" column="MY_REPROFILE"></result>
+	</resultMap>
+	
 	<select id="checkChattingRoom" resultMap="resultMapChattingRoom">
 		select * from CHATTINGROOM where (ARTIST_ID = #{artistId} AND CUSTOMER_ID = #{customerId}) OR (ARTIST_ID = #{customerId} AND CUSTOMER_ID = #{artistId})
 	</select>
@@ -40,5 +49,12 @@
 		select * from (select * from chat where (room_code, chat_chatDate) in (select room_code, max(chat_chatDate) as chat_chatDate from chat group by room_code) order by chat_chatDate desc) where sender = #{userId} or reciver = #{userId}
 	</select>
 	
+	<select id="selectCustomerImg" resultMap="imgPathResult">
+		SELECT CUSTOMER_PROFILE FROM CUSTOMER WHERE CUSTOMER_ID = #{userId}
+	</select>
+	
+	<select id="selectArtistImg" resultMap="imgPathResult2">
+		select my_reprofile from artistinfo where artist_id = #{userId}
+	</select>
 	
 </mapper>
