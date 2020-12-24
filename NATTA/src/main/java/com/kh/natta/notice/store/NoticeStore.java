@@ -16,9 +16,9 @@ public interface NoticeStore {
 	public int updateNotice(Notice notice);
 	
 	public int deleteNotice(int noticeCode);
-	
-	public ArrayList<Notice> selectSearchList(Search search);
 
 	public int addReadCount(int noticeCode);
+	
+	public ArrayList<Notice> selectListSearch(Search search);
 
 }

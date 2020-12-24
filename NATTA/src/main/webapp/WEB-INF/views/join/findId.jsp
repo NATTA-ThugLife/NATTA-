@@ -4,6 +4,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+
+#button {
+	background: #cda45e;
+	border: 0;
+	padding: 10px 35px;
+	color: #fff;
+	transition: 0.4s;
+	border-radius: 70px;
+	top: 50%;
+	left: 50%;
+}
+
+#button:hover {
+	background: #E0B94F;
+}
+</style>
 <title>ID 찾기</title>
 </head>
 <body>
@@ -12,7 +29,7 @@
 	</header>
 
 	<section class="about">
-		<div class="container" data-aos="fade-up">
+		<div class="container" data-aos="fade-up" style="width: 100%; margin: 0 auto;">
 			<div class="section-title">
 				<h2>Find ID</h2>
 				<p>아이디 찾기</p>
@@ -20,28 +37,26 @@
 
 				<table align="center">
 					<tr>
-						<td><input type="radio" name="checkOption" id="checkEmail" onchange="setDisplay()" checked>이메일</td>
-						<td><input type="radio" name="checkOption" onchange="setDisplay()" >휴대폰</td>
-					</tr>
-					
+						<td><input type="radio" name="checkOption" id="checkEmail" onchange="setDisplay()" checked>&nbsp;이메일&nbsp;&nbsp;</td>
+						<td><input type="radio" name="checkOption" onchange="setDisplay()" >&nbsp;휴대폰</td>
+					</tr><tr><td><br></td></tr>
+										
 						<table align="center">
 							<tr>
 								<td>이름</td>
-								<td><input type="text" name="customerName" id="customerName">
+								<td><input type="text" placeholder="이름을 입력하세요" name="customerName" id="customerName" class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;">
 								</td>
-							</tr>
+							</tr><tr><td><br></td></tr>
 							<tr id="emailForm">
-								<td id="changeText">이메일</td>
-								<td><input type="text" name="email" id="chageInput"></td>
-							</tr>
-							
+								<td id="changeText">이메일&nbsp;&nbsp;</td>
+								<td><input type="text" placeholder="이메일을 입력하세요" name="email" id="chageInput" class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
+							</tr></tr><tr><td><br></td></tr>							
 							<tr>
 								<td colspan="2" align="center">
-									<button id="next"><a href="#modalArtistPrice" data-toggle="modal" id="findEmail" onclick="emailCheck()">확인</button>
+									<button id="button"><a href="#modalArtistPrice" data-toggle="modal" id="findEmail" onclick="emailCheck()" style="color: white;">확인</button>
 								</td>
 							</tr>
 						</table>
-					
 				</table>
 			</div>
 	</section>

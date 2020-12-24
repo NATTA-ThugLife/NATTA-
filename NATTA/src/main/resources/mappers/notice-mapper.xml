@@ -44,4 +44,20 @@
 		WHERE NOTICE_CODE = #{noticeCode}
 	</update>
 	
+	<select id="searchList" resultMap="noticeResultMap">
+	SELECT * FROM NOTICE
+	<where>
+		<if test="searchCondition.toString() == 'all'">
+			NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
+			OR NOTICE_CONTENTS LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchCondition.toString() == 'customTitle'">
+			NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchCondition.toString() == 'tattooType'">
+			NOTICE_CONTENTS LIKE '%' || #{searchValue} || '%'
+		</if>
+	</where>
+	</select>
+	
 </mapper>

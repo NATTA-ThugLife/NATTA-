@@ -27,7 +27,7 @@ position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0,
 }
 
 #button:hover {
-	background: #d3af71;
+	background: #F2CB61;
 }
 
 /*
@@ -90,9 +90,9 @@ rotate(
 			<table align="center">
 				<tr>
 					<td><input type="radio" id="customer" name="loginOption"
-						onchange="setDisplay()" checked>일반 회원&nbsp;&nbsp;</td>
+						onchange="setDisplay()" checked>&nbsp;일반 회원&nbsp;&nbsp;</td>
 					<td><input type="radio" id="artist" name="loginOption"
-						onchange="setDisplay()">아티스트</td>
+						onchange="setDisplay()">&nbsp;아티스트</td>
 				</tr>
 
 				<form action="customerLogin.na" method="post" id="formId">
@@ -101,7 +101,7 @@ rotate(
 							<td><input type="text" name="customerId" id="id"
 								class="form-control" placeholder="아이디를 입력하세요"
 								data-rule="minlen:4" data-msg="올바른 아이디를 입력하세요"
-								style="height: 44px; border-radius: 0; box-shadow: none; font-size: 14px; background: #0c0b09; border-color: #625b4b; color: white;">
+								style="height: 44px; border-radius: 10px; box-shadow: none; font-size: 14px; background: #0c0b09; border-color: #625b4b; color: white;">
 							</td>
 							<br>
 							<td>
@@ -190,44 +190,8 @@ rotate(
 					</div>
 				</section> -->
 
-
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</footer>
-
-
-
-
-<!-- 	<div class="modal">
-		<form action="findCustomerId.na" method="post" id="formId">
-			<table align="center">
-				<tr>
-					<td>이름</td>
-					<td><input type="text" name="customerName"></td>
-				</tr>
-				<tr id="email">
-					<td>이메일</td>
-					<td><input type="text" name="email"></td>
-				</tr>
-				<tr id="phone" style="display: none;">
-					<td>폰</td>
-					<td><input type="text" name="phone"></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">
-						<button id="next">다음</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-		<div class="modalBackground"></div>
-		
-	</div>
-
-	<script>
-					   $(document).on("click",".find1",function(){
-						   $(.modal).show();
-					   });
-					</script> -->
 </body>
 </html>

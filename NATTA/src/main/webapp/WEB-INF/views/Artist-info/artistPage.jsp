@@ -125,6 +125,10 @@ header {height: 215px;}
 							<li><a href="#resume"><i class="bx bx-user"></i><span>Resume</span></a></li>
 							<li><a href="#contact"><i class="bx bx-envelope"></i>
 									Contact</a></li>
+							<li><a href="modifyArtistInfo.na?artistId=${loginArtist.artistId }"><i class="bx bx-user"></i>
+									정보 수정</a></li>
+							<li><a href="deleteArtist.na?artistId=${loginArtist.artistId }"><i class="icofont-crying"></i>
+									회원 탈퇴</a></li>
 						</ul>
 					</nav>
 					<!-- .nav-menu -->

@@ -33,6 +33,17 @@
 		<result property="customerId" column="CUSTOMER_ID"></result>
 		<result property="artistId" column="ARTIST_ID"></result>
 	</resultMap>
+	<resultMap type="Artist" id="artistResultMap">
+		<result property="artistId" column="ARTIST_ID"></result>
+		<result property="artistName" column="ARTIST_NAME"></result>
+		<result property="workAddress" column="WORK_ADDRESS"></result>
+		<result property="enrollDate"    column="ENROLL_DATE"></result>
+		<result property="businessNo"    column="BUSINESS_NO"></result>
+		<result property="enrollStatus"    column="ENROLL_STATUS"></result>
+		<result property="email2"    column="EMAIL"></result>
+		
+	</resultMap>
+	
 	<update id="updateStatus">
 		UPDATE RESERVATION SET STATUS = STATUS + 1 
 		WHERE RESERVATION_CODE = #{ reservationCode }
@@ -111,7 +122,42 @@
 		WHERE ARTIST_ID = #{artistId}
 	</update>
 	
+	<!-- 아티스트 회원 탈퇴 -->
+	<delete id="deleteArtist">
+	     DELETE FROM ARTIST
+	     WHERE ARTIST_ID = #{artistId}
+	</delete>
 	
+ 	<!-- 아티스트 정보 수정 -->
+	<update id="modifyArtistInfo">
+		UPDATE ARTIST
+		<set>
+		<if test="password != ''">
+			PASSWORD = #{password},
+		</if>
+		<if test="phone != null">
+			PHONE = #{phone},
+		</if>
+		<if test="email2 != null">
+			EMAIL = #{email2},
+		</if>
+		<if test="workAddress != ',,,'">
+			WORK_ADDRESS = #{workAddress}
+		</if>		
+		
+		</set>
+		WHERE ARTIST_ID = #{artistId}
+	</update> 
+	
+	<select resultMap="artistResultMap" id="selectOne">
+		SELECT * FROM ARTIST
+		WHERE ARTIST_ID = #{artistId}
+	</select>
+	
+	<select resultMap="artistResultMap" id="dupPwd2">
+		SELECT * FROM ARTIST
+		WHERE ARTIST_ID = #{artistId} AND PASSWORD = #{password}
+	</select>
 	
 	
 	

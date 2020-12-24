@@ -49,6 +49,10 @@ span.error {
 #join:hover {
 	background: #d3af71;
 }
+
+.customDesign th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
+.customDesign td {padding: 20px;width: 800px;}
+.customDesign {border-spacing: 10px;border-top: 0.6px solid #cda45e;border-bottom: 0.6px solid #cda45e;text-align: center;}
 </style>
 </head>
 <body>
@@ -56,7 +60,8 @@ span.error {
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 
-	<section class="about">
+	<section id="modifyInfo" class="about">
+	<div class="modal-body book-a-table" >
 		<div class="container" data-aos="fade-up" style="width: 100%; margin: 0 auto;">
 			<div class="section-title">
 				<h2>Join</h2>
@@ -68,9 +73,9 @@ span.error {
 					<td><input type="radio" name="join" id="customerJoin" onchange="setDisplay()" checked>일반 회원</td>
 					<td><input type="radio" name="join" onchange="setDisplay()">아티스트</td>
 				</tr><tr><td><hr></td></tr>
-
+                 
 				<form action="customerRegister.na" method="post">
-					<table align="center" id="customerRegister">
+					<table align="center" id="customerRegister" >
 						<tr>
 							<td>아이디</td>
 							<td><input type="text" name="customerId" id="customerId" required>
@@ -210,12 +215,12 @@ span.error {
 					$(function() {
 						$("#postcodify_search_button2").postcodifyPopUp();
 					})
-				</script>
+				       </script>
 
 						<tr>
 							<td>사업자 등록증</td>
 							<td>
-							    <input type="file" name="uploadFile" style="float: left">  
+							    <input type="file" name="uploadFile" id="businessNo" style="float: left">  
 							</td>
 						</tr><tr><td><hr></td></tr>
 						<tr>
@@ -226,7 +231,8 @@ span.error {
 						</form>
 					</table>
 				
-			</div>				
+			</div>		
+			</div>		
 	</section>
 
 	<footer>
@@ -248,6 +254,7 @@ span.error {
 	    }
 	}		
 
+	//가입버튼 누를때 빈칸 체크 (회원)
  	    function validate() {
 			if($("#idDuplicateCheck").val() == 0){
 				alert("아이디 중복 확인을 해주세요.")
@@ -271,7 +278,8 @@ span.error {
 			}
 		}
  	    
- 	    
+	
+ 	   //가입버튼 누를때 빈칸 체크 (아티스트)
   	   function validate2() {
  		  if($("#idDuplicateCheck2").val() == 0){
 				alert("아이디 중복 확인을 해주세요.")
@@ -285,6 +293,9 @@ span.error {
 				return false;				
 			}if($("#workAddress").val() == ""){
 				alert('주소를 검색해주세요.');
+				return false;
+			}if($("#businessNo").val() == ""){
+				alert('사업자등록증을 등록해주세요.');
 				return false;
 			}
 			else {

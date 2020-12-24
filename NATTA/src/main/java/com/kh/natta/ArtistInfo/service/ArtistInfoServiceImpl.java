@@ -89,6 +89,29 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 	public int deleteStatus(int reservationCode) {
 		return infoStore.deleteStatus(reservationCode);
 	}
+	
+//아티스트 탈퇴
+	@Override
+	public int deleteArtist(String artistId) {
+		return infoStore.deleteArtist(artistId);
+	}
+//아티스트 정보 수정
+	@Override
+	public int modifyArtistInfo(Artist artist) {
+		return infoStore.modifyArtistInfo(artist);
+	}
+//정보 수정시 비번 체크
+	@Override
+	public Artist dupPwd2(Artist artist) {
+		return infoStore.dupPwd2(artist);
+	}
+
+	@Override
+	public Artist selectOne(String artistId) {
+		return infoStore.selectOne(artistId);
+	}
+
+	
 
 
 

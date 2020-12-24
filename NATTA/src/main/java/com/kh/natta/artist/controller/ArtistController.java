@@ -38,8 +38,8 @@ public class ArtistController {
 			session.setAttribute("loginArtist", loginArtist);
 			mv.setViewName("main/mainPage");
 		}else {	
-			mv.addObject("msg","로그인 실패!");
-			mv.setViewName("common/errorPage");
+			mv.addObject("msg","올바른 아이디와 비밀번호를 입력해주세요");
+			mv.setViewName("join/login");
 		}
 		return mv;
 	}
@@ -53,7 +53,7 @@ public class ArtistController {
 	}
 	
 	//회원가입 페이지
-	@RequestMapping(value="artistJoinView.na",method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="artistJoinView.na")
 	public String enrollView() {
 		return "join/artistjoin";
 	}
@@ -68,8 +68,7 @@ public class ArtistController {
 			if (renameFileName != null) {
 				artist.setBusinessNo(uploadFile.getOriginalFilename());
 			}
-		}
-	
+		}	
 		int result = 0;
 		String path = null;
 		result = service.registerArtist(artist);
@@ -79,7 +78,6 @@ public class ArtistController {
 			model.addAttribute("msg", "회원 가입 실패");
 		}
 		return path;
-
 	}
 
 	// 사업자등록증 사진 파일 등록

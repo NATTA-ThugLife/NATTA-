@@ -29,6 +29,31 @@
 	})
 </script> -->
 
+<style>
+#test{
+ margin-top: 30px;
+ background: #28251f;
+ padding: 6px 10px;
+ position: relative;
+ border-radius: 50px;
+ border: 1px solid #454035;
+ }
+
+.button{
+	background: #cda45e;
+	border: 0;
+	padding: 10px 35px;
+	color: #fff;
+	transition: 0.4s;
+	border-radius: 50px;
+	top: 50%;
+	left: 50%;
+}
+
+.button:hover {
+	background: #F2CB61;
+}
+</style>
 <title>비번 찾기</title>
 </head>
 <body>
@@ -45,32 +70,30 @@
 			
 				<table align="center">
 					<tr>
-						<td><input type="radio" name="checkOption" id="checkEmail" onchange="setDisplay()" checked>이메일</td>
-						<td><input type="radio" name="checkOption" onchange="setDisplay()" >휴대폰</td>
+						<td><input type="radio" name="checkOption" id="checkEmail" onchange="setDisplay()" checked>&nbsp;이메일&nbsp;&nbsp;&nbsp;</td>
+						<td><input type="radio" name="checkOption" onchange="setDisplay()" >&nbsp;휴대폰</td>
 					</tr>
 					<form action="mailSending.na" method="post" id="formId">
 						<table align="center">
 							<tr>
-								<td>ID</td>
-								<td><input type="text" name="customerId">
-								</td>
+								<td >ID</td>
+								<td><input type="text" placeholder="아이디를 입력하세요" name="customerId" id="test"></td>
 							</tr>
 							<tr>
 								<td>이름</td>
-								<td><input type="text" name="customerName">
-								</td>
+								<td><input type="text" name="customerName" id="test"></td>
 							</tr>
 							<tr id="email">
 								<td>이메일</td>
-								<td><input type="text" name="email"></td>
+								<td><input type="text" name="email" id="test"></td>
 							</tr>
 							<tr id="phone" style="display:none;">
 								<td>휴대폰</td>
-								<td><input type="text" name="phone"></td>
-							</tr>
+								<td><input type="text" name="phone" id="test"></td>
+							</tr></tr><tr><td><br></td></tr>
 							<tr>
 								<td colspan="2" align="center">
-									<button type="submit" id="findBtn">확인</button>
+									<button type="submit" id="findBtn" class="button">확인</button>
 								</td>
 							</tr>
 

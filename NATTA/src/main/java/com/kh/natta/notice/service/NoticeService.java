@@ -17,8 +17,8 @@ public interface NoticeService {
 	
 	public Notice selectOne(int noticeCode);
 	
-	public ArrayList<Notice> selectSearchList(Search search);
-	
 	public int addReadCount(int noticeCode);
+	
+	public ArrayList<Notice> selectListSearch(Search search);
 
 }

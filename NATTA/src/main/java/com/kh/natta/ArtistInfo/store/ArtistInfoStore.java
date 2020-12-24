@@ -127,4 +127,24 @@ public interface ArtistInfoStore {
 	 * @return
 	 */
 	public int deleteStatus(int reservationCode);
+	
+// 아티스트 회원 탈퇴 
+	public int deleteArtist(String artistId);
+	
+	/**
+	 * 회원 정보 수정
+	 * @return
+	 */
+	public int modifyArtistInfo(Artist artist);
+	
+	/**
+	 * 
+	 * 비밀번호 체크
+	 * @param pwd
+	 * @param Id
+	 * @return
+	 */
+	public Artist selectOne(String artistId);
+	
+	public Artist dupPwd2 (Artist artist);
 }

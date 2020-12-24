@@ -16,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.notice.domain.Notice;
+import com.kh.natta.notice.domain.Search;
 import com.kh.natta.notice.service.NoticeService;
-import com.kh.natta.qna.domain.Qna;
 
 @Controller
 public class NoticeController {
@@ -116,7 +116,21 @@ public class NoticeController {
 			return "common/errorPage";
 		}
 	}	
-
+	
+	//공지 검색
+	@RequestMapping(value="noticeSearch.na",method=RequestMethod.GET)
+	public String customSearch(Search search, Model model) {
+		ArrayList<Notice> searchList = nService.selectListSearch(search);
+		System.out.println(searchList);
+		System.out.println(search);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("List",searchList);
+			model.addAttribute("search",search);
+			return "notice/noticeListView";
+		}else {
+			return "notice/noticeListView";
+		}
+	}
 
 
 }

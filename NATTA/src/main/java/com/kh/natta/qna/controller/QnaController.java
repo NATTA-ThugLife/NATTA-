@@ -146,7 +146,7 @@ public class QnaController {
 		}
 	}
 	
-	// 댓글 전체 조회
+	//댓글 전체 조회
 	@RequestMapping(value="QnaCommentList.na", method=RequestMethod.GET)
 	public void getQnaCommentList(HttpServletResponse response, int qnaCode) throws Exception{
 		ArrayList<QnaComment> qcList = qService.selectQnaCommentList(qnaCode);

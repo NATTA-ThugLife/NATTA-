@@ -47,8 +47,8 @@ public class CustomerController {
 			session.setAttribute("loginCustomer", loginCustomer);
 			mv.setViewName("main/mainPage");
 		} else {
-			mv.addObject("msg", "로그인 실패!");
-			mv.setViewName("common/errorPage");
+			mv.addObject("msg", "올바른 아이디와 비밀번호를 입력해주세요.");
+			mv.setViewName("join/login");
 		}
 		return mv;
 	}
@@ -77,11 +77,10 @@ public class CustomerController {
 		if (result > 0) {
 			model.addAttribute("msg","회원 가입 성공");
 			model.addAttribute("url","login.na");			
-			return "common/Alert";
-			
+			return "common/Alert";			
 		} else {
 			model.addAttribute("msg", "회원 가입 실패");
-			return "common/errorPage";
+			return "join/customerjoin";
 		}
 	}
 
@@ -192,7 +191,9 @@ public class CustomerController {
 		model.addAttribute("url","join/login");			
 		return "common/Alert";
 	} else {
-		return "redirect:findPwd.na";
+		model.addAttribute("msg","올바른 정보를 입력해주세요.");
+		model.addAttribute("url","join/findPwd");			
+		return "common/Alert";
 	}
 }
 		

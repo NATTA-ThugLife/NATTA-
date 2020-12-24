@@ -25,6 +25,7 @@ import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.service.ArtistInfoService;
 import com.kh.natta.artist.domain.Artist;
+import com.kh.natta.artist.service.ArtistService;
 import com.kh.natta.artistWork.domain.ArtistWork;
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.reservation.domain.Reservation;
@@ -33,6 +34,9 @@ import com.kh.natta.reservation.domain.Reservation;
 public class ArtistInfoController {
 	@Autowired
 	private ArtistInfoService infoService;
+	
+	@Autowired
+	private ArtistService aService;
 
 	
 	// 아티스트 상세페이지로 이동
@@ -247,10 +251,68 @@ public class ArtistInfoController {
 		}
 	}
 	
+	//아티스트 정보 수정 페이지
+	@RequestMapping(value = "modifyArtistInfo.na")
+	public String enrollView(String artistId,Model model) {
+		Artist artist = infoService.selectOne(artistId);
+		model.addAttribute("loginArtist",artist);
+		//System.out.println(artist);
+		return "Artist-info/artistMyPage";
+	}
 	
-	
-	
-	
+	//아티스트 정보 수정
+	@RequestMapping(value="modifyArtistInfoPage.na" , method = RequestMethod.POST)
+	public String modifyCArtistInfo(Artist artist, String dupPwd2, String post, String workAddress, String address2,
+			HttpServletRequest request, Model model) {
+		artist.setWorkAddress(post + "," + workAddress + "," + address2);
+		int result = infoService.modifyArtistInfo(artist);
+		//System.out.println(artist);
+		if (result > 0) {
+			HttpSession session = request.getSession();
+			if (artist.getPassword().isEmpty()) {
+				artist.setPassword(dupPwd2);
+			}
+			Artist updateArtist = aService.loginArtist(artist);
+			session.setAttribute("loginArtist", updateArtist);
+		}
+		model.addAttribute("msg","회원 정보가 수정되었습니다.");
+		model.addAttribute("url","artistInfoPage.na");			
+		return "common/Alert"; 		
+		/* return "Artist-info/artistMyPage"; */
+	}
+
+	//아티스트 정보수정 비번 체크
+	@ResponseBody
+	@RequestMapping(value = "dupPwd2.na", method = RequestMethod.POST)
+	public String dupPwd2(String dupPwd2, String artistId) {
+		Artist artist = new Artist();
+		artist.setPassword(dupPwd2);
+		artist.setArtistId(artistId);
+		Artist check = infoService.dupPwd2(artist);
+		if (check != null) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+
+	//아티스트 회원 탈퇴
+	@RequestMapping(value="deleteArtist.na",method=RequestMethod.GET)
+	public String deleteArtist(String artistId, HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		int result = infoService.deleteArtist(artistId);
+		//System.out.println(artistId);
+		if(result>0) {
+			session.invalidate(); 
+			model.addAttribute("msg","회원 탈퇴 처리되었습니다.");
+			model.addAttribute("url","main.na");			
+			return "common/Alert"; 
+		}else {
+			model.addAttribute("msg","회원 탈퇴 실패");
+			model.addAttribute("url","artistInfoPage.na");			
+			return "common/Alert"; 
+		}
+	}
 	
 	
 	

@@ -94,6 +94,28 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 	public int deleteStatus(int reservationCode) {
 		return sqlSession.delete("ArtistInfoMapper.deleteStatus", reservationCode);
 	}
+    
+	//아티스트 회원탈퇴
+	@Override
+	public int deleteArtist(String artistId) {
+		int result = sqlSession.delete("ArtistInfoMapper.deleteArtist", artistId);
+		return result;
+	}
+
+	@Override
+	public int modifyArtistInfo(Artist artist) {
+		return sqlSession.update("ArtistInfoMapper.modifyArtistInfo",artist);
+	}
+
+	@Override
+	public Artist dupPwd2(Artist artist) {
+		return sqlSession.selectOne("ArtistInfoMapper.dupPwd2",artist);
+	}
+
+	@Override
+	public Artist selectOne(String artistId) {
+		return sqlSession.selectOne("ArtistInfoMapper.selectOne", artistId);
+	}
 
 	
 

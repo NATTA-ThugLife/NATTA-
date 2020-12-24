@@ -43,13 +43,13 @@ public class NoticeStoreLogic implements NoticeStore{
 	}
 
 	@Override
-	public ArrayList<Notice> selectSearchList(Search search) {
-		return (ArrayList)sqlSession.selectList("noticeMapper.searchList",search);
+	public int addReadCount(int noticeCode) {
+		return sqlSession.update("noticeMapper.updateCount",noticeCode);
 	}
 
 	@Override
-	public int addReadCount(int noticeCode) {
-		return sqlSession.update("noticeMapper.updateCount",noticeCode);
+	public ArrayList<Notice> selectListSearch(Search search) {
+		return (ArrayList)sqlSession.selectList("noticeMapper.searchList",search);
 	}
 
 	
