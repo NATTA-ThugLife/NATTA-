@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.natta.chat.domain.Chat;
 import com.kh.natta.chat.domain.ChattingRoom;
+import com.kh.natta.chat.domain.ImgPath;
 
 @Repository
 public class ChatStoreLogic implements ChatStore{
@@ -42,6 +43,16 @@ public class ChatStoreLogic implements ChatStore{
 	@Override
 	public ArrayList<Chat> chataddList(Chat chat) {
 		return (ArrayList)session.selectList("chatMapper.chataddList",chat);
+	}
+
+	@Override
+	public ImgPath selectCustomerImg(String userId) {
+		return session.selectOne("chatMapper.selectCustomerImg",userId);
+	}
+
+	@Override
+	public ImgPath selectArtistImg(String userId) {
+		return session.selectOne("chatMapper.selectArtistImg",userId);
 	}
 
 	

@@ -77,6 +77,8 @@ public class CustomerInfoStoreLogic implements CustomerInfoStore {
 	public Reservation selectOneReservation(int reservationCode) {
 		return session.selectOne("customerInfoMapper.selectOneReservation",reservationCode);
 	}
+
+
 	
 	
 }

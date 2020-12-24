@@ -307,7 +307,6 @@ public class CustomDesignController {
     	
     	PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
     	ArrayList<CustomComment> ccList = cService.selectListComment(customCode,pi);
-    	System.out.println(pi);
     	for(CustomComment c : ccList) {
     		c.setcContents(URLEncoder.encode(c.getcContents(),"utf-8"));
     	}

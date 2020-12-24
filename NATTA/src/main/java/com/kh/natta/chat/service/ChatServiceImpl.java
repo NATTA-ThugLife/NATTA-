@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.natta.chat.domain.Chat;
 import com.kh.natta.chat.domain.ChattingRoom;
+import com.kh.natta.chat.domain.ImgPath;
 import com.kh.natta.chat.store.ChatStore;
 @Service
 public class ChatServiceImpl implements ChatService {
@@ -42,6 +43,16 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public ArrayList<Chat> chataddList(Chat chat) {
 		return store.chataddList(chat);
+	}
+
+	@Override
+	public ImgPath selectCustomerImg(String userId) {
+		return store.selectCustomerImg(userId);
+	}
+
+	@Override
+	public ImgPath selectArtistImg(String userId) {
+		return store.selectArtistImg(userId);
 	}
 
 
