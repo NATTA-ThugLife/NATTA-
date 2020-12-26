@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.natta.chat.domain.Chat;
+import com.kh.natta.chat.domain.ChattingRoom;
+import com.kh.natta.chat.service.ChatService;
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.customer.service.CustomerService;
 import com.kh.natta.customerInfo.domain.Following;
@@ -35,6 +38,9 @@ public class CustomerInfoController {
 	
 	@Autowired
 	private CustomerService cService;
+	
+	@Autowired
+	private ChatService chatService;
 	
 	@RequestMapping(value="/customerInfo.na" , method = RequestMethod.GET)
 	public String customerInfoView(String customerId, Model model) {
@@ -109,6 +115,30 @@ public class CustomerInfoController {
 		      }
 		   }
 		
+		public void deleteFile(String customerId, HttpServletRequest request ) {
+		      String root = request.getSession().getServletContext().getRealPath("resources");
+		      String savePath = root + "\\customerProfile\\" + customerId;
+		      
+		      File file = new File(savePath);
+		      
+		      try {
+		  	    while(file.exists()) {
+		  		File[] folder_list = file.listFiles(); //파일리스트 얻어오기
+		  				
+		  		for (int j = 0; j < folder_list.length; j++) {
+		  			folder_list[j].delete(); //파일 삭제 
+		  					
+		  		}
+		  				
+		  		if(folder_list.length == 0 && file.isDirectory()){ 
+		  			file.delete(); //대상폴더 삭제
+		  		}
+		              }
+		  	 } catch (Exception e) {
+		  		e.getStackTrace();
+		  	}
+		   }
+		
 		@ResponseBody
 		@RequestMapping(value="/dupPwd.na" , method = RequestMethod.POST)
 		public String dupPwd(String dupPwd,String customerId) {
@@ -174,7 +204,7 @@ public class CustomerInfoController {
 				String renameFileName = saveReviewFile(uploadFile,request,customerId, review.getReservationCode());
 				review.setReviewPhoto(renameFileName);
 			}
-			System.out.println(review);
+
 			int result = service.insertReview(review);
 			return "redirect:/customerInfo.na?customerId="+customerId;
 		}
@@ -246,6 +276,31 @@ public class CustomerInfoController {
 			String customerId = customer.getCustomerId();
 			deleteReservationFile(reservation.getRenameFilename(), request);
 		    int result = service.deleteResvertion(reservationCode);
+		    if(result > 0 ) {
+		    	ChattingRoom customerRoom = new ChattingRoom();
+		    	customerRoom.setArtistId("admin");
+		    	customerRoom.setCustomerId(reservation.getCustomerId());
+		    	ChattingRoom checkCustomer = chatService.checkChattingRoom(customerRoom);
+				
+		    	ChattingRoom artistRoom = new ChattingRoom();
+		    	artistRoom.setArtistId(reservation.getArtistId());
+		    	artistRoom.setCustomerId("admin");
+		    	ChattingRoom checkArtist = chatService.checkChattingRoom(artistRoom);
+		    	
+					Chat chat = new Chat();
+					chat.setRoomCode(checkCustomer.getRoomCode());
+					chat.setChatContent(reservation.getArtistId() + "님에게 신청한 예약이 취소 되었습니다.");
+					chat.setSender("admin");
+					chat.setReciver(checkCustomer.getCustomerId());
+					chatService.insertChat(chat);
+					
+					chat = new Chat();
+					chat.setRoomCode(checkArtist.getRoomCode());
+					chat.setChatContent(reservation.getCustomerId() + "님이 예약을 취소 하였습니다.");
+					chat.setSender("admin");
+					chat.setReciver(checkArtist.getArtistId());
+					chatService.insertChat(chat);
+		    }
 			return "redirect:/customerInfo.na?customerId="+customerId;
 		}
 		
@@ -259,4 +314,12 @@ public class CustomerInfoController {
 		         file.delete();
 		      }
 		   }
+		@RequestMapping(value="/deleteCustomer.na")
+		public String deleteCustomer(String customerId, HttpServletRequest request) {
+			service.deleteCustomer(customerId);
+			deleteFile(customerId,request);
+			HttpSession session = request.getSession();
+			session.invalidate();
+			return "redirect:/";
+		}
 }

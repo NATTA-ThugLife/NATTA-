@@ -118,6 +118,7 @@ public class ChatController {
 					
 					String userId;
 					
+					
 					if(!loginUser.equals(chattingRoom.getArtistId()) && session.getAttribute("loginCustomer") != null) {
 						// 아티스트랑 같지 않다는건 아티스트가 상대방
 						userId = chattingRoom.getArtistId();
@@ -128,13 +129,18 @@ public class ChatController {
 						model.addAttribute("imgArtist",imgPath);
 					}else {
 						// 아티스트랑 같다는건 고객이 상대방
-						userId = chattingRoom.getArtistId();
+						userId = chattingRoom.getCustomerId();
 						ImgPath imgPath = service.selectCustomerImg(userId);
-						imgPath.setId(userId);
-						if(imgPath.getImgPath() == null) {
-							imgPath.setImgPath("fail");
+						
+						if(imgPath == null) {
+							ImgPath imgPath2 = new ImgPath();
+							imgPath2.setId(userId);
+							imgPath2.setImgPath("fail");
+							model.addAttribute("imgCustomer",imgPath2);
+						}else {
+							imgPath.setId(userId);
+							model.addAttribute("imgCustomer",imgPath);
 						}
-						model.addAttribute("imgCustomer",imgPath);
 					}
 					
 					int create = service.insertChat(chat);
@@ -147,11 +153,11 @@ public class ChatController {
 		}else {
 			// 채팅방이 있을때 이전에 모든 내용을 가져옴
 			chatList = service.viewChatContent(check.getRoomCode());
-			
+			System.out.println("여기가 동작");
 			String userId;
-			if(!loginUser.equals(chattingRoom.getArtistId()) && session.getAttribute("loginCustomer") != null) {
+			if(!loginUser.equals(check.getArtistId()) && session.getAttribute("loginCustomer") != null) {
 				// 아티스트랑 같지 않다는건 아티스트가 상대방
-				userId = chattingRoom.getArtistId();
+				userId = check.getArtistId();
 				ImgPath imgPath = service.selectArtistImg(userId);
 				if(imgPath.getImgPath() == null) {
 					imgPath.setImgPath("fail");
@@ -159,13 +165,18 @@ public class ChatController {
 				model.addAttribute("imgArtist",imgPath);
 			}else {
 				// 아티스트랑 같다는건 고객이 상대방
-				userId = chattingRoom.getArtistId();
+				userId = check.getCustomerId();
 				ImgPath imgPath = service.selectCustomerImg(userId);
-				imgPath.setId(userId);
-				if(imgPath.getImgPath() == null) {
-					imgPath.setImgPath("fail");
+				
+				if(imgPath == null) {
+					ImgPath imgPath2 = new ImgPath();
+					imgPath2.setId(userId);
+					imgPath2.setImgPath("fail");
+					model.addAttribute("imgCustomer",imgPath2);
+				}else {
+					imgPath.setId(userId);
+					model.addAttribute("imgCustomer",imgPath);
 				}
-				model.addAttribute("imgCustomer",imgPath);
 			}
 			
 			model.addAttribute("chatList",chatList);
@@ -267,4 +278,73 @@ public class ChatController {
 		}
 	}
 	}
+	
+	// 채팅 사진
+	@RequestMapping(value="getImg.na",method=RequestMethod.GET)
+	public void getImg(String sender, String reciver,HttpServletRequest request , HttpServletResponse response ) throws JsonIOException, IOException {
+		String id;
+		HttpSession session = request.getSession();
+		String loginUser = (String)session.getAttribute("loginUser");
+		
+		if(loginUser.equals(sender)) {
+			id = reciver;
+		}else {
+			id = sender;
+		} 
+		
+		ImgPath img = null;
+		if(session.getAttribute("loginCustomer") == null) {
+		    img = service.selectCustomerImg(id);
+		    if(img == null) {
+		    	img = new ImgPath();
+		    	img.setImgPath("fail");
+		    	img.setId(id);
+		    }else {
+		    	img.setId(id);
+		    }
+		}else {
+			img = service.selectArtistImg(id);
+			if(img == null) {
+		    	img = new ImgPath();
+		    	img.setImgPath("fail");
+		    }
+		}
+		Gson gson = new Gson();
+		gson.toJson(img, response.getWriter());
+	}
+	
+	//채팅방 사진
+	@RequestMapping(value="getImgRoom.na",method=RequestMethod.GET)
+	public void getImgRoom(String sender, String reciver,HttpServletRequest request , HttpServletResponse response ) throws JsonIOException, IOException {
+		String id;
+		HttpSession session = request.getSession();
+		String loginUser = (String)session.getAttribute("loginUser");
+		
+		if(loginUser.equals(sender)) {
+			id = reciver;
+		}else {
+			id = sender;
+		} 
+		
+		ImgPath img = null;
+		if(session.getAttribute("loginCustomer") == null) {
+		    img = service.selectCustomerImg(id);
+		    if(img == null) {
+		    	img = new ImgPath();
+		    	img.setImgPath("fail");
+		    	img.setId(id);
+		    }else {
+		    	img.setId(id);
+		    }
+		}else {
+			img = service.selectArtistImg(id);
+			if(img == null) {
+		    	img = new ImgPath();
+		    	img.setImgPath("fail");
+		    }
+		}
+		Gson gson = new Gson();
+		gson.toJson(img, response.getWriter());
+	}
+	
 }

@@ -13,7 +13,7 @@
    
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script> 
 
 
  
@@ -276,6 +276,7 @@
 				$("#request").focus();
 				return false;
 			}
+			
 			var IMP = window.IMP;
 			var customerId = $("#customerId").val();
 			IMP.init('imp79373058');
@@ -306,8 +307,9 @@
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
 			        alert(msg);
-			    }
-			});
+			    } 
+			    
+			}); 
 			
 		}
 	</script>

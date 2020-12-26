@@ -23,8 +23,10 @@ public class ImgPath {
 
 	@Override
 	public String toString() {
-		return "ImgPath [imgPath=" + imgPath + "]";
+		return "ImgPath [imgPath=" + imgPath + ", id=" + id + "]";
 	}
+
+	
 	
 	
 }

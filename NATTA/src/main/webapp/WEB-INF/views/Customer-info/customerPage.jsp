@@ -35,7 +35,7 @@
    }
  
  .modify{
-  background: #513B3B;
+  background: #b78839;
   border: 0;
   padding: 10px 35px;
   color: #fff;
@@ -43,7 +43,7 @@
   border-radius: 50px;	
  }
  .delete{
-  background: #513B3B;
+  background: #b78839;
   border: 0;
   padding: 10px 35px;
   color: #fff;
@@ -73,19 +73,29 @@
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
 
-.resTable th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
-.resTable td { padding: 20px;width: 800px;}
-.rseTable {border-spacing: 10px;border-top: 0.6px solid #cda45e;border-bottom: 0.6px solid #cda45e;text-align: center;}
-.resTable tr:hover {color: #cda45e;}
 
+.resTable th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
+.resTable td {padding: 20px;width: 800px;}
+.resTable {
+    border-spacing: 10px;
+    border-top: 0.6px solid #cda45e;
+    border-bottom: 0.6px solid #cda45e;
+    text-align: center;
+}
+#res:hover {
+	background: #cda45e;
+}
 
 	.btnA{
-	background: #cda45e;
+	background: #b78839;
     border: 0;
     padding: 10px; 10px;
     color: #fff;
     transition: 0.4s;
     border-radius: 10px;
+    }
+    #modal-center{
+    	padding-left: 30%;
     }
  </style>
 
@@ -137,16 +147,16 @@
           <li class="active"> <a href="main.na">Home</a></li>
           <li></li>
           <li></li>
-          <li><a href="#menu">ARTIST</a></li>
+          <li><a href="artistList.na">ARTIST</a></li>
           <li></li>
           <li></li>
-          <li><a href="#" style="text-align: center">Customized<br>Tatto</a></li>
+          <li><a href="customDesignList.na" style="text-align: center">Customized<br>Tatto</a></li>
           <li></li>
           <li></li>
-          <li><a href="#">NOTICE</a></li>
+          <li><a href="notice.na">NOTICE</a></li>
           <li></li>
           <li></li>
-          <li><a href="#">Q&A</a></li>
+          <li><a href="/qna.na">Q&A</a></li>
         </ul>
       </nav><!-- .nav-menu -->
     </div>
@@ -162,14 +172,27 @@
         	<li><a href="#mypage" ><i class="icofont-page"></i><span>처음으로</span></li>
           	<li><a href="#modifyInfo" ><i class="bx bx-user"></i><span>정보 수정</span></a></li>
           	<li><a href="#following"><i class="icofont-heart"></i><span>팔로잉</span></a></li>
-          	<li><a href="#review"><i class="bx bx-file-blank"></i><span>리뷰</span></a></li>
           	<li><a href="#reservationTable"><i class="icofont-calendar"></i> 예약</a></li>
+          	<li><a href="#review"><i class="bx bx-file-blank"></i><span>리뷰</span></a></li>
           	<li><a href="/chatting.na"><i class="bx bx-envelope"></i> 채팅</a></li>
-          	<li><a href="#modalWork" data-toggle="modal"><i class="icofont-crying"></i> 탈퇴</a></li>    
+          	<li><a href="" onclick="deleteCustomer()" data-toggle="modal"><i class="icofont-crying"></i> 탈퇴</a></li>    
         </ul>            
         </nav><!-- .nav-menu -->
       </div>      
   </div>
+  
+  <script>
+  	function deleteCustomer(){
+  		var yes = confirm("정말 탈퇴 하시겠습니까?");
+  		if(yes == true){
+  			var yes2 = confirm("정말요?");
+	  			if(yes2 == true){
+	  				alert("탈퇴가 완료되었습니다");
+	  				location.href="/deleteCustomer.na?customerId=${loginCustomer.customerId}";
+	  			}
+  		}
+  	}
+  </script>
 </header>  
 												<!--=========== 헤더 끝  ============-->   
 												<!--=============섹션 시작=============  -->
@@ -237,7 +260,8 @@
                <div class="modal-body book-a-table" >
                <div class="container">
                   <div class="section-title">
-                      <p>정보 수정</p>
+                      <h2>Modify</h2>
+         			   <p>Info</p>
                     </div>
                    <form action="/modifyCustomerInfo.na" 
                   method="post" role="form" class="php-email-form"  enctype="multipart/form-data" onsubmit="return dup();">
@@ -427,6 +451,8 @@
       </div>
 	</section> 
 	<!-- ======= 팔로잉 끝 ======= -->
+	
+	
   <section id="reservationTable" class="specials">
       <div class="container" data-aos="fade-up">
 
@@ -448,7 +474,7 @@
 			 </thead>
 			 <tbody>
 			<c:forEach items="${resList }" var="res" >
-				<tr style="text-align: center;">
+				<tr style="text-align: center;" id="res">
 			      <td id="shopName${res.reservationCode }">${res.shopName }</td>
 			      <td id="artistName${res.reservationCode }">${res.artistName }</td>
 			      <td id="style${res.reservationCode }">${res.style }</td>
@@ -614,7 +640,7 @@
 			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
 				<!-- 센터모달창 추가  modal-dialog-centered -->
-				<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
+				<div class="modal-content" style="background: #242624;">
 					<div class="modal-header">
 						<h5 class="modal-title" id="TEST">
 							<b>리뷰 정보</b>
@@ -681,10 +707,12 @@
 		<div class="modal fade" id="insertReviewModal" tabindex="-1" role="dialog"
 			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
+			
+			
 				<!-- 센터모달창 추가  modal-dialog-centered -->
-				<div class="modal-content" style="background-color: black">
+				<div class="modal-content" style="background: #242624;">
 					<div class="modal-header">
-						<h5 class="modal-title" id="TEST">
+						<h5 class="modal-title" id="TEST" >
 							<b>리뷰 정보</b>
 						</h5>
 						<button type="button" class="close" data-dismiss="modal"
@@ -746,12 +774,12 @@
       
     	<!-- 예약 디테일 뷰-->
 		<div class="modal fade" id="detailReservation" tabindex="-1" role="dialog"
-			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
+			aria-labelledby="ARTIST_TITLE" aria-hidden="true" >
 			
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
 			
 				<!-- 센터모달창 추가  modal-dialog-centered -->
-				<div class="modal-content" style="background-color: black;">
+				<div class="modal-content" style="background: #242624;">
 					<div class="modal-header">
 						<h5 class="modal-title" id="TEST">
 							<b>예약 정보</b>
@@ -762,42 +790,44 @@
 						</button>
 					</div>
 					<div class="modal-body book-a-table">
+					
 					<form action="/deleteResvertion.na" method="post" role="form" class="php-email-form modalActionCheck" enctype="multipart/form-data" onsubmit="return checkDelete();">
 				          <div>
-				            <div class="col-lg-4 col-md-6 form-group">
+				          <div id="modal-center">
+				            <div class="col-lg-6 col-md-8 form-group">
 				              Artist Shop Name 
 				              <input type="text" value="" name="shopName" class="form-control" id="shopName" readonly>
 				              <input type="hidden" value="" name="reservationCode" class="form-control" id="reservationCode" readonly>
 				              <div class="validate"></div>
 				            </div>
-				            <div class="col-lg-4 col-md-6 form-group">
+				            <div class="col-lg-6 col-md-8 form-group">
 				              Artist Name
 				              <input type="text" class="form-control" id="artistName" readonly> 
 				            </div>
-				            <div class="col-lg-4 col-md-6 form-group">
+				            <div class="col-lg-6 col-md-8 form-group">
 				              reservation Date
 				              <input type="text" class="form-control" id="reservationDate" readonly> 
 				            </div>
-				            <div class="col-lg-4 col-md-6 form-group">
+				            <div class="col-lg-6 col-md-8 form-group">
 				              Part
 				              <input type="text" class="form-control" id="part" readonly> 
 				            </div>
-				            <div class="col-lg-4 col-md-6 form-group">
+				            <div class="col-lg-6 col-md-8 form-group">
 				              Style
 				              <input type="text" class="form-control" id="style" readonly> 
 				            </div>
-				            <div class="col-lg-4 col-md-6 form-group">
+				            <div class="col-lg-6 col-md-8 form-group">
 				              Tattoo Size
 				              <input type="text" class="form-control" id="tattooSize" readonly> 
 				            </div>
-				            <div class="col-lg-4 col-md-6 form-group">
+				            <div class="col-lg-6 col-md-8 form-group">
 				              Price
 				              <input type="text" class="form-control" id="price" readonly> 
 				            </div>
 				            <div class="col form-group">
 				                    Design<br>
 								<img src="" id="resImg" style="width : 300px; heigth:250px;'">              
-				               
+				             </div>
 				            </div>
 				            <div class="col form-group">
 				            <div id="map" style=" width: 100%; height: 350px; margin-top: 10px;">
@@ -808,9 +838,10 @@
 				          </div>
 				          <div class="text-center"><button type="button" id="resButton" class="resButton btnA">닫기</button></div>
 				          </form>
+				          </div>
 					</div>
 				</div>
-			</div>
+			
 		</div> 
   	<footer>
 		 <jsp:include page="../common/footer.jsp"/>  	 
@@ -861,7 +892,7 @@
 					$(".resButton").attr("data-dismiss","");
 					$(".resButton").attr("aria-label","");
 					$(".resButton").attr("type","submit");
-					$(".resButton").attr("class","btnA");
+					$(".resButton").attr("class","resButton btnA");
 				}else if(status == 2){
 					$(".resButton").empty();
 					$(".resButton").text("리뷰 쓰기");
@@ -870,7 +901,7 @@
 					$(".resButton").attr("data-dismiss","");
 					$(".resButton").attr("aria-label","");
 					$(".resButton").attr("type","button");
-					$(".resButton").attr("class","btnA");
+					$(".resButton").attr("class","resButton btnA");
 				}else{
 					$(".resButton").empty();
 					$(".resButton").text("닫기");
@@ -878,7 +909,7 @@
 					$(".resButton").attr("data-dismiss","modal");
 					$(".resButton").attr("aria-label","Close");
 					$(".resButton").attr("type","button");
-					$(".resButton").attr("class","btnA");
+					$(".resButton").attr("class","resButton btnA");
 				}
 				
 				$("#detailReservation").modal("show");

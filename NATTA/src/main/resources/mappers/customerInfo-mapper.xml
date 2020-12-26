@@ -116,4 +116,9 @@
 		SELECT * FROM RESERVATION
 		WHERE RESERVATION_CODE = #{reservationCode}
 	</select>
+	
+	<delete id="deleteCustomer">
+		DELETE FROM CUSTOMER
+		WHERE CUSTOMER_ID = #{customerId}
+	</delete>
 </mapper>

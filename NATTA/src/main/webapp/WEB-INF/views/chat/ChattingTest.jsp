@@ -61,8 +61,7 @@ input::placeholder {
     <header>
     	<jsp:include page="../common/headerNone.jsp"></jsp:include>
     </header>
-    
-    <br><br>
+    <section id="testimonials" class="about testimonials section-bg">
 <div class="container py-5 px-4">
   <!-- Start -->
 	<!-- 아티스트가 채팅방 로그인시 jsp를 그대로 이용할 수 있도록 보내는사람과 받는 사람을 바꿔주는작업 -->
@@ -101,10 +100,16 @@ input::placeholder {
     <!-- Chat Box-->
     <div class="col-7 px-0" id="chat">
       <div class="px-4 py-5 chat-box bg-white" id="chat-box">
+      <div class="media w-50 ml-auto mb-3">
+					     <div class="media-body">
+					     </div>
+					   </div>
 		     <c:forEach items="${chatList }" var="chat" varStatus="status">
 		     		<c:if test="${status.last}">
 					<input type="hidden" id="lastChatTime" value="${chat.chatChatDateFormat }">
 					<input type="hidden" id="roomCode" value="${chat.roomCode }">
+					<input type="hidden" id="sender" value="${chat.sender }">
+					<input type="hidden" id="reciver" value="${chat.reciver }">
 					</c:if>
 		    	<c:if test="${status.first }">
 		    		<div class="bg-light rounded py-2 px-3 mb-2">
@@ -180,10 +185,12 @@ input::placeholder {
     </div>
   </div>
 </div>
+</section>
 <!-- 채팅 ajax -->
 <script>
 
 		$(document).ready(function(){
+			
 			
 			$("#chat-box").scrollTop($("#chat-box")[0].scrollHeight); 
 			getChattingRoom();
@@ -191,7 +198,7 @@ input::placeholder {
 		
 
 		
-		<!-- 엔터키 전송 -->
+		/* <!-- 엔터키 전송 --> */
 		$("#chatContent").keydown(function (key) {
 			 
 		    if(key.keyCode == 13){//엔터키 이벤트
@@ -201,7 +208,7 @@ input::placeholder {
 		
 		});
 		
-		<!-- img 아이콘 파일 업로딩 -->		
+		/* <!-- img 아이콘 파일 업로딩 --> */		
 	$(".uploadFile").click(function () {
 	    $("input[type='file']").trigger('click');
 	  });
@@ -237,7 +244,7 @@ input::placeholder {
 				getChattingRoom();
 			},1000);   
 
-	
+	//dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 	function getChattingRoom(){
 		var loginUser = "${loginUser}";
 		
@@ -252,7 +259,7 @@ input::placeholder {
 					$("#RoomBox").empty();
 					if(data.length>0){
 						for(var i in data ){
-							
+							var img = getImgRoom(data[i].reciver,data[i].sender);
 				            var opponent;
 				            if(data[i].sender == $("#loginUser").val()){
 				            	opponent = data[i].reciver;
@@ -261,9 +268,9 @@ input::placeholder {
 				            }
 
 				            if(data[i].roomCode == $("#roomCode").val()){
-				            	$("#RoomBox").append('<a class="list-group-item list-group-item-action active text-white rounded-0"><div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">'+opponent+'</h6><small class="small font-weight-bold">'+data[i].chatChatDate+'</small></div><p class="font-italic mb-0 text-small">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div></div></a>');
+				            	$("#RoomBox").append('<a class="list-group-item list-group-item-action active text-white rounded-0"><div class="media"><img src="'+img+'" alt="user" width="50px" height="50px;" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">'+opponent+'</h6><small class="small font-weight-bold">'+data[i].chatChatDate+'</small></div><p class="font-italic mb-0 text-small">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div></div></a>');
 				            }else{
-				            	$("#RoomBox").append('<a href="chatting.na?artistId='+opponent+'" class="list-group-item list-group-item-action list-group-item-light rounded-0"><div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">'+opponent+'</h6><small class="small font-weight-bold">'+data[i].chatChatDate+'</small></div><p class="font-italic text-muted mb-0 text-small">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div></div></a>');
+				            	$("#RoomBox").append('<a href="chatting.na?artistId='+opponent+'" class="list-group-item list-group-item-action list-group-item-light rounded-0"><div class="media"><img src="'+img+'" alt="user" width="50px" height="50px" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">'+opponent+'</h6><small class="small font-weight-bold">'+data[i].chatChatDate+'</small></div><p class="font-italic text-muted mb-0 text-small">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div></div></a>');
 				            }
 
 						}
@@ -336,6 +343,7 @@ input::placeholder {
 					if(data == "nodata"){
 						
 					}else{
+						var img = getimg();
 					if(data.length > 0){
 						
 						for( var i in data){
@@ -343,7 +351,7 @@ input::placeholder {
 							if(data[i].sender == $("#loginUser").val()){
 								$("#chat-box").append('<div class="media w-50 ml-auto mb-3"><div class="media-body"><div class="bg-primary rounded py-2 px-3 mb-2"><p class="text-small mb-0 text-white">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
 							}else{
-								$("#chat-box").append('<div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle"><div class="media-body ml-3"><div class="bg-light rounded py-2 px-3 mb-2" ><p class="text-small mb-0 text-muted">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
+								$("#chat-box").append('<div class="media w-50 mb-3"><img src="'+img+'" alt="user" width="50px" height="50px" class="rounded-circle"><div class="media-body ml-3"><div class="bg-light rounded py-2 px-3 mb-2" ><p class="text-small mb-0 text-muted">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
 							}
  							
 							if(data[i].chatImgPath != null){
@@ -367,7 +375,62 @@ input::placeholder {
 	}
 	
 	function getimg(){
+		var sender = $("#sender").val();
+		var reciver = $("#reciver").val();
+		var src;
+		$.ajax({
+				url : "getImg.na",
+				type : "get",
+				data : {
+					"sender" : sender,
+					"reciver" : reciver
+				},
+				dataType : "json",
+				async : false,
+				success : function(data){
+					console.log(data)
+					if(data.id == null){
+						src = "resources/artistInfoFile/Profile/"+data.imgPath;
+					}else if(data.imgPath == "fail"){
+						src = "https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg";
+					}else{
+						src = "resources/customerProfile/"+data.id+"/"+data.imgPath;
+					}
+				}
+		});
+		return src;
+	}
+	
+	
+	//ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+	function getImgRoom(r,s){
+		var sender = r;
+		var reciver = s;
 		
+		
+		var src;
+		$.ajax({
+				url : "getImgRoom.na",
+				type : "get",
+				data : {
+					"sender" : sender,
+					"reciver" : reciver
+				},
+				dataType : "json",
+				async : false,
+				success : function(data){
+					
+					if(data.id == null && data.imgPath != "fail"){
+						src = "resources/artistInfoFile/Profile/"+data.imgPath;
+						
+					}else if(data.imgPath == "fail"){
+						src = "https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg";
+					}else{
+						src = "resources/customerProfile/"+data.id+"/"+data.imgPath;
+					}
+				}
+		});
+		return src;
 	}
 </script>
 </body>

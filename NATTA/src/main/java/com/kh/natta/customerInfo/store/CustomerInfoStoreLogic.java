@@ -78,6 +78,11 @@ public class CustomerInfoStoreLogic implements CustomerInfoStore {
 		return session.selectOne("customerInfoMapper.selectOneReservation",reservationCode);
 	}
 
+	@Override
+	public int deleteCustomer(String customerId) {
+		return session.delete("customerInfoMapper.deleteCustomer",customerId);
+	}
+
 
 	
 	

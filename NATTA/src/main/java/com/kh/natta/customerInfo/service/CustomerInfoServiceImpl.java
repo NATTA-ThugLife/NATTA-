@@ -77,6 +77,11 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 		return store.selectOneReservation(reservationCode);
 	}
 
+	@Override
+	public int deleteCustomer(String customerId) {
+		return store.deleteCustomer(customerId);
+	}
+
 
 
 	

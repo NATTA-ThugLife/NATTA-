@@ -28,10 +28,14 @@ import com.kh.natta.ArtistInfo.service.ArtistInfoService;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artist.service.ArtistService;
 import com.kh.natta.artistWork.domain.ArtistWork;
+import com.kh.natta.chat.domain.Chat;
+import com.kh.natta.chat.domain.ChattingRoom;
+import com.kh.natta.chat.service.ChatService;
 import com.kh.natta.common.PageInfo;
 import com.kh.natta.common.Pagination;
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.customerInfo.domain.Review;
+import com.kh.natta.customerInfo.service.CustomerInfoService;
 import com.kh.natta.reservation.domain.Reservation;
 
 @Controller
@@ -42,6 +46,11 @@ public class ArtistInfoController {
 	@Autowired
 	private ArtistService aService;
 
+	@Autowired
+	private ChatService chatService;
+	
+	@Autowired
+	private CustomerInfoService service;
 	
 	// 아티스트 상세페이지로 이동
 	@RequestMapping(value="artistInfoPage.na", method=RequestMethod.GET)
@@ -126,10 +135,45 @@ public class ArtistInfoController {
 	@RequestMapping(value="updateStatus.na",method=RequestMethod.POST)
 	public String updateStatus(HttpServletResponse response, int reservationCode, int status){
 		int result = infoService.updateStatus(reservationCode);
+		
+		
+		
 		if ( result > 0 ) {
+			Reservation reservation = service.selectOneReservation(reservationCode);
+			ChattingRoom customerRoom = new ChattingRoom();
+	    	customerRoom.setArtistId("admin");
+	    	customerRoom.setCustomerId(reservation.getCustomerId());
+	    	ChattingRoom checkCustomer = chatService.checkChattingRoom(customerRoom);
+			
+	    	ChattingRoom artistRoom = new ChattingRoom();
+	    	artistRoom.setArtistId(reservation.getArtistId());
+	    	artistRoom.setCustomerId("admin");
+	    	
+	    	ChattingRoom checkArtist = chatService.checkChattingRoom(artistRoom);
+	    	Chat chat = new Chat();
+			chat.setRoomCode(checkCustomer.getRoomCode());
+			chat.setSender("admin");
+			chat.setReciver(checkCustomer.getCustomerId());
+			
+			
+			Chat chat1 = new Chat();
+			chat1.setRoomCode(checkArtist.getRoomCode());
+			chat1.setSender("admin");
+			chat1.setReciver(checkArtist.getArtistId());
+			
+			
+			
 			if( status == 0 ) {
+				chat.setChatContent(reservation.getArtistId() + "님에게 신청한 예약이 확정되었습니다.");
+				chat1.setChatContent(reservation.getCustomerId() + "님의 예약을 확정 하였습니다.");
+				chatService.insertChat(chat);
+				chatService.insertChat(chat1);
 				return "0";
 			} else  {
+				chat.setChatContent(reservation.getArtistId() + "님에게 신청한 타투가 완료 되었습니다. <br> 더 좋은 서비스를 위해 리뷰를 입력해주세요~");
+				chat1.setChatContent(reservation.getCustomerId() + "님의 타투가 완료 되었습니다.");
+				chatService.insertChat(chat);
+				chatService.insertChat(chat1);
 				return "1";
 			} 
 		} else {
@@ -140,8 +184,38 @@ public class ArtistInfoController {
 	@ResponseBody
 	@RequestMapping(value="deleteStatus.na",method=RequestMethod.POST)
 	public String deleteStatus(HttpServletResponse response, int reservationCode) {
+		Reservation reservation = service.selectOneReservation(reservationCode);
+		
 		int result = infoService.deleteStatus(reservationCode);
+		
+		
+		
 		if( result > 0 ) {
+			
+			ChattingRoom customerRoom = new ChattingRoom();
+	    	customerRoom.setArtistId("admin");
+	    	customerRoom.setCustomerId(reservation.getCustomerId());
+	    	ChattingRoom checkCustomer = chatService.checkChattingRoom(customerRoom);
+			
+	    	ChattingRoom artistRoom = new ChattingRoom();
+	    	artistRoom.setArtistId(reservation.getArtistId());
+	    	artistRoom.setCustomerId("admin");
+	    	ChattingRoom checkArtist = chatService.checkChattingRoom(artistRoom);
+	    	
+				Chat chat = new Chat();
+				chat.setRoomCode(checkCustomer.getRoomCode());
+				chat.setChatContent(reservation.getArtistId() + "님이  예약을 취소 하였습니다.");
+				chat.setSender("admin");
+				chat.setReciver(checkCustomer.getCustomerId());
+				chatService.insertChat(chat);
+				
+				chat = new Chat();
+				chat.setRoomCode(checkArtist.getRoomCode());
+				chat.setChatContent(reservation.getCustomerId() + "님의 예약을 취소 하였습니다.");
+				chat.setSender("admin");
+				chat.setReciver(checkArtist.getArtistId());
+				chatService.insertChat(chat);
+				
 			return "success";
 		}else {
 			return "fail";

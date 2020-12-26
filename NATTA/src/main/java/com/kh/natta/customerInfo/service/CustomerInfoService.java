@@ -92,5 +92,11 @@ public interface CustomerInfoService {
 	
 	public Reservation selectOneReservation(int reservationCode);
 	
-	
+	/**
+	 * 
+	 * 회원 탈퇴
+	 * @param customerId
+	 * @return
+	 */
+	public int deleteCustomer(String customerId);
 }

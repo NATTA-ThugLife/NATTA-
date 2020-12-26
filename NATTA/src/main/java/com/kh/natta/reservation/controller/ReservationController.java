@@ -29,6 +29,9 @@ import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.service.ArtistInfoService;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artist.service.ArtistService;
+import com.kh.natta.chat.domain.Chat;
+import com.kh.natta.chat.domain.ChattingRoom;
+import com.kh.natta.chat.service.ChatService;
 import com.kh.natta.reservation.domain.Reservation;
 import com.kh.natta.reservation.service.ReservationService;
 
@@ -39,7 +42,8 @@ public class ReservationController {
 	private ArtistInfoService infoService;
 	@Autowired
 	private ReservationService rService;
-	
+	@Autowired
+	private ChatService cService;
 		
 		
 		
@@ -77,7 +81,7 @@ public class ReservationController {
 		// 예약 등록
 		@RequestMapping(value="reservation.na",method=RequestMethod.POST)
 		public String reservationInsert(Reservation reservation,String tattooSize,Model model,HttpServletRequest request,
-										@RequestParam(name="upload",required=false)MultipartFile uploadFile){
+										@RequestParam(name="upload",required=false)MultipartFile uploadFile) throws InterruptedException{
 			String size = tattooSize.substring(tattooSize.indexOf(",")+1,tattooSize.length());
 			
 			reservation.setTattooSize(size);
@@ -94,6 +98,59 @@ public class ReservationController {
 			String path = null;
 			result = rService.insertReservation(reservation);
 			if(result>0) {
+				// 예약완료시 예약 완료 메세지 보내기
+				ChattingRoom artistRoom = new ChattingRoom();
+				artistRoom.setCustomerId("admin");
+				artistRoom.setArtistId(reservation.getArtistId());
+				ChattingRoom customerRoom = new ChattingRoom();
+				customerRoom.setArtistId("admin");
+				customerRoom.setCustomerId(reservation.getCustomerId());
+				ChattingRoom checkArtist = cService.checkChattingRoom(artistRoom);
+				if(checkArtist == null) {
+					cService.insertChattingRoom(artistRoom);
+					checkArtist = cService.checkChattingRoom(artistRoom);
+					Chat chat = new Chat();
+					chat.setRoomCode(checkArtist.getRoomCode());
+					chat.setChatContent("새로운 채팅방이 생성되었습니다.");
+					chat.setSender("admin");
+					chat.setReciver(checkArtist.getArtistId());
+					cService.insertChat(chat);
+					Thread.sleep(1000);
+					chat.setChatContent(reservation.getCustomerId() + "님의 예약이 신청되었습니다.<br>예약 날짜 :"+reservation.getReservationDate()+" <br> 예약 시간 : " + reservation.getReservationTime());
+					cService.insertChat(chat);
+				}else {
+					Chat chat = new Chat();
+					chat.setRoomCode(checkArtist.getRoomCode());
+					chat.setSender("admin");
+					chat.setReciver(checkArtist.getArtistId());
+					chat.setChatContent(reservation.getCustomerId() + "님의 예약이 신청되었습니다.<br>예약 날짜 :"+reservation.getReservationDate()+" <br> 예약 시간 : " + reservation.getReservationTime());
+					cService.insertChat(chat);
+					
+				}
+				
+				ChattingRoom checkCustomer = cService.checkChattingRoom(customerRoom);
+				if(checkCustomer == null) {
+					cService.insertChattingRoom(customerRoom);
+					checkCustomer = cService.checkChattingRoom(customerRoom);
+					Chat chat = new Chat();
+					chat.setRoomCode(checkCustomer.getRoomCode());
+					chat.setChatContent("새로운 채팅방이 생성되었습니다.");
+					chat.setSender("admin");
+					chat.setReciver(checkCustomer.getCustomerId());
+					cService.insertChat(chat);
+					Thread.sleep(1000);
+					chat.setChatContent(reservation.getArtistId() + "님에게 예약이 신청되었습니다.<br>예약 날짜 :"+reservation.getReservationDate()+" <br> 예약 시간 : " + reservation.getReservationTime());
+					cService.insertChat(chat);
+				}else {
+					Chat chat = new Chat();
+					chat.setRoomCode(checkCustomer.getRoomCode());
+					chat.setChatContent(reservation.getArtistId() + "님에게 예약이 신청되었습니다.<br>예약 날짜 :"+reservation.getReservationDate()+" <br> 예약 시간 : " + reservation.getReservationTime());
+					chat.setSender("admin");
+					chat.setReciver(checkCustomer.getCustomerId());
+					cService.insertChat(chat);
+				}
+				
+				
 				path="redirect:main.na";
 			}else {
 				model.addAttribute("msg","예약 등록 실패!");
