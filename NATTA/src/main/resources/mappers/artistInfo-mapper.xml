@@ -71,7 +71,7 @@
 	
 	<select id="selectListReview" resultMap="ReviewResultMap">
 		SELECT * FROM REVIEW 
-		WHERE ARTIST_ID = #{artistId}
+		WHERE ARTIST_ID = #{artistId} ORDER BY REVIEW_CODE DESC
 	</select>
 	
 	
