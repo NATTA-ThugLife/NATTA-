@@ -38,4 +38,5 @@ public interface ArtistWorkStore {
 	
 	public ArtistWork selectArtistWork(int workCode);
 	
+	
 }

@@ -39,6 +39,8 @@ public class ArtistWorkServiceImpl implements ArtistWorkService {
 	public ArtistWork selectArtistWork(int workCode) {
 		return awStore.selectArtistWork(workCode);
 	}
+
+	
 	
 	
 }

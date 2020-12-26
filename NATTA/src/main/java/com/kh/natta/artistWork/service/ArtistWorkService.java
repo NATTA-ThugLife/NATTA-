@@ -41,4 +41,5 @@ public interface ArtistWorkService {
 	public ArtistWork selectArtistWork(int workCode);
 	
 	
+	
 }

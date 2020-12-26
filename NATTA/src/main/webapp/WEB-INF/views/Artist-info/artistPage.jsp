@@ -156,9 +156,11 @@ header {height: 215px;}
 									id="artistInfoPrice"><i class="fas fa-hand-holding-usd"></i><span>
 											스타일별 가격</span></a></li>
 							</c:if>
-							<li><a
-								href="reservation.na?artistId=${artistInfo.artistId }"><i
+							<c:if test="${!empty sessionScope.loginCustomer }">
+							<li>
+							<a href="reservation.na?artistId=${ artistInfo.artistId }"><i
 									class="icofont-calendar"></i> Reservation</a></li>
+							</c:if>
 									
 									
 							<li><a href="javascript:void(0);" id="rListModal"

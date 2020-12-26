@@ -145,6 +145,11 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 		return sqlSession.selectOne("ArtistInfoMapper.getReviewListCount", artistId);
 	}
 
+	@Override
+	public ArrayList<ArtistInfo> selectListArtistInfo() {
+		return (ArrayList)sqlSession.selectList("ArtistInfoMapper.selectListArtistInfo");
+	}
+
 	
 
 }

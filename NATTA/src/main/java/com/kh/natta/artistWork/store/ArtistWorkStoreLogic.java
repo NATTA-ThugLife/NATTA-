@@ -39,6 +39,8 @@ public class ArtistWorkStoreLogic implements ArtistWorkStore {
 	public ArtistWork selectArtistWork(int workCode) {
 		return sqlSession.selectOne("ArtistWorkMapper.selectArtistWork", workCode);
 	}
+
+
 	
 	
 }

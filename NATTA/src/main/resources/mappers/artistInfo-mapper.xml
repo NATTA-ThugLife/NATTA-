@@ -191,6 +191,13 @@
 	</select>
 	
 	
+	<select id="selectListArtistInfo" resultMap="artistInfoMap">
+		SELECT * FROM (SELECT ARTIST_ID,NAME,MY_REPROFILE,MY_INFO FROM WORK JOIN ARTISTINFO USING(ARTIST_ID)
+		GROUP BY ARTIST_ID,NAME,MY_REPROFILE,MY_INFO
+		ORDER BY COUNT(*) DESC)
+        <![CDATA[WHERE ROWNUM <=10]]>
+	</select>
+	
 	
 	
 	
