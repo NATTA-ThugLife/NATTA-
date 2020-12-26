@@ -24,12 +24,12 @@ import com.google.gson.Gson;
 import com.kh.natta.ArtistInfo.domain.ArtistFollow;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
+import com.kh.natta.ArtistInfo.domain.Pagination;
 import com.kh.natta.ArtistInfo.service.ArtistInfoService;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artist.service.ArtistService;
 import com.kh.natta.artistWork.domain.ArtistWork;
 import com.kh.natta.common.PageInfo;
-import com.kh.natta.common.Pagination;
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.customerInfo.domain.Review;
 import com.kh.natta.reservation.domain.Reservation;
@@ -62,11 +62,6 @@ public class ArtistInfoController {
 		ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);
 		ArrayList<ArtistWork> workList = infoService.selectListArtistWork(artistId);
 		ArrayList<ArtistFollow> aFollow = infoService.selectArtistFollow(artistId);
-//		ArrayList<Review> aReview = infoService.selectListReview(artistId, pi);
-//		System.out.println("피아이리스트"+pi);
-//		System.out.println("리뷰리스트"+aReview);
-//			model.addAttribute("aReview", aReview);
-//			model.addAttribute("pi", pi);
 			model.addAttribute("artist", artist);
 			model.addAttribute("priceList", priceList);
 			model.addAttribute("workList", workList);
@@ -83,15 +78,11 @@ public class ArtistInfoController {
 												,@RequestParam(value="page", required=false) Integer page) throws Exception {
 		  int currentPage = (page != null) ? page : 1; 
 		  int listCount = infoService.getListReviewCount(artistId);
-		  System.out.println("아티스트아이디" + artistId);
-		  System.out.println("아티스트리뷰갯수"+listCount);
 		  
 		  PageInfo pi = Pagination.getPageInfo(currentPage, listCount);		
 		  ArrayList<Review> aReview = infoService.selectListReview(artistId, pi);
-		  System.out.println(pi);
 		  for( Review r : aReview ) {
 			  r.setReviewContents(URLEncoder.encode(r.getReviewContents(),"utf-8"));
-			  System.out.println(r);
 		  }
 		  HashMap<String, Object> reviewMap = new HashMap<String, Object>();
 		  reviewMap.put("pi", pi);
@@ -232,9 +223,7 @@ public class ArtistInfoController {
 		String ProFileName = file.getOriginalFilename();
 	    String reProFileName = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
 								+ ProFileName.substring(ProFileName.lastIndexOf(".")+1);
-	    
 	    String filePath = folder + "\\" + reProFileName;
-	    
 	    try {
 			file.transferTo(new File(filePath));
 		} catch (Exception e) {
@@ -250,8 +239,7 @@ public class ArtistInfoController {
 	public ModelAndView artistList(ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
 		int currentPage = ( page != null ) ? page : 1;
 		int listCount = infoService.getListCount();
-		System.out.println(listCount);
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		PageInfo pi = com.kh.natta.ArtistInfo.domain.Pagination.getPageInfo(currentPage, listCount);
 		ArrayList<ArtistInfo> aList = infoService.selectListArtist(pi);
 		if( !aList.isEmpty() ) {
 			mv.addObject("aList", aList)

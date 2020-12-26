@@ -34,6 +34,8 @@ public class ArtistWorkController {
 	@RequestMapping(value="artistStyle.na", method=RequestMethod.POST)
 	public void artistIdCheck(HttpServletResponse response, String artistId) throws Exception {
 		ArrayList<ArtistInfoPrice> styleList = awService.selectArtistStyle(artistId);
+		System.out.println(artistId);
+		System.out.println(styleList);
 		if( !styleList.isEmpty()) {
 			for( ArtistInfoPrice p : styleList ) {
 				p.setpStyle(URLEncoder.encode(p.getpStyle(), "utf-8"));

@@ -15,7 +15,16 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-<!--CDN 링크 -->
+<!--   <!-- Vendor CSS Files -->
+  <link href="resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="resources/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="resources/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="resources/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="resources/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="resources/assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="resources/assets/vendor/aos/aos.css" rel="stylesheet">
+<!--   Template Main CSS File -->
+<link href="resources/assets/css/style.css" rel="stylesheet"> 
 <style>
 header {height: 215px;}
 #header {height: 175px;}
@@ -23,6 +32,140 @@ header {height: 215px;}
 .artistPriceTable td {padding: 20px;width: 800px;}
 .artistPriceTable {border-spacing: 10px;border-top: 0.6px solid #cda45e;border-bottom: 0.6px solid #cda45e;text-align: center;}
 .artistPriceTable td:hover {color: #cda45e;}
+.testimonials .testimonial-item {box-sizing: content-box; min-height: 200px;}
+#pageArea { font-size: 30px; }
+.pageColor:hover { color : red; }
+
+
+.FFabout {
+  background: url("resources/assets/img/nattaBack/background1.jpg") center center;
+  background-size: cover;
+  position: relative;
+  padding: 80px 0;
+}
+
+/* .FFabout:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+} */
+
+.FFabout .about-img {
+  position: relative;
+  transition: .5s;
+}
+
+.FFabout .about-img img {
+  max-width: 100%;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.FFabout .about-img::before {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 1;
+  content: '';
+  border-left: 5px solid #cda45e;
+  border-top: 5px solid #cda45e;
+  transition: .5s;
+}
+
+.FFabout .about-img::after {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+  content: '';
+  border-right: 5px solid #cda45e;
+  border-bottom: 5px solid #cda45e;
+  transition: .5s;
+}
+
+.FFabout .about-img:hover {
+  transform: scale(1.03);
+}
+
+.FFabout .about-img:hover::before {
+  left: 10px;
+  top: 10px;
+}
+
+.FFabout .about-img:hover::after {
+  right: 10px;
+  bottom: 10px;
+}
+
+.FFabout .content h3 {
+  font-weight: 600;
+  font-size: 26px;
+}
+
+.FFabout .content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.FFabout .content ul li {
+  padding-bottom: 10px;
+}
+
+.FFabout .content ul i {
+  font-size: 20px;
+  padding-right: 4px;
+  color: #cda45e;
+}
+
+.FFabout .content p:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+  .FFabout {
+    background-attachment: fixed;
+  }
+}
+
+.events {
+  background: url("resources/assets/img/nattaBack/ta8.jpg") center center no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.events::before {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.events .section-title h2 {
+  color: #fff;
+}
+
+.events .container {
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .events {
+    background-attachment: fixed;
+  }
+}
+
+
 </style>
 </head>
 <body>
@@ -40,8 +183,7 @@ header {height: 215px;}
 					<div class="languages">
 						<ul>
 							<!--로그인 세션 비어있을 때 -->
-							<c:if
-								test="${empty sessionScope.loginCustomer && empty sessionScope.loginArtist  }">
+							<c:if test="${empty sessionScope.loginCustomer && empty sessionScope.loginArtist  }">
 								<li><a href="/login.na">LOGIN</a></li>
 								<li><a href="/customerJoinView.na">SIGNUP</a></li>
 							</c:if>
@@ -75,7 +217,7 @@ header {height: 215px;}
 						<li class="active"><a href="main.na">Home</a></li>
 						<li></li>
 						<li></li>
-						<li><a href="#menu">ARTIST</a></li>
+						<li><a href="artistList.na">ArtistList</a></li>
 						<li></li>
 						<li></li>
 						<li><a href="customDesignList.na" style="text-align: center">Customized<br>Tattoo</a></li>
@@ -93,13 +235,11 @@ header {height: 215px;}
 			<div class="profile container d-flex align-items-center"
 				style="margin-top: 10px;">
 
-				<c:if test="${ artistInfo.myReProfile eq null }">
-					<img src="resources/artistInfoFile/Profile/NATTAprofile.png" alt=""
-						class="img-fluid rounded-circle"
+				<c:if test="${ empty artistInfo }">
+					<img src="resources/artistInfoFile/Profile/NATTAprofile.png" class="img-fluid rounded-circle"
 						style="margin-left: 15px auto; display: block; width: 100px; height: 100px; border: 8px solid #2c2f3f;">
 					<nav class="nav-menu d-none d-lg-block" data-aos="fade-in">
-						<h4 class="text-light" style="margin-left: 25px;">타투숍 이름이
-							없습니다.</h4>
+						<h4 class="text-light" style="margin-left: 25px;">타투숍 이름이 없습니다.</h4>
 						<button type="button" class="mobile-nav-toggle d-xl-none">
 							<i class="icofont-navigation-menu"></i>
 						</button>
@@ -110,20 +250,16 @@ header {height: 215px;}
 									data-toggle="modal" id="insertInfo"><i class="bx bx-home"></i><span>
 											타투숍 소개</span></a></li>
 								<li><a href="javascript:void(0);" data-toggle="modal"
-									id="artistInfoWork"><i class="bx bx-book-content"></i> 내
+									id="artistInfoWork"><i class="fas fa-pencil-alt"></i> 내
 										작품등록하기</a></li>
 								<li><a href="#modalArtistPrice" data-toggle="modal"
-									id="artistInfoPrice"><i class="bx bx-file-blank"></i><span>
+									id="artistInfoPrice"><i class="fas fa-hand-holding-usd"></i><span>
 											스타일별 가격</span></a></li>
 							</c:if>
 							<c:if test="${!empty sessionScope.loginCustomer }">
-							<li>
-							<a href="reservation.na?artistId=${ artistInfo.artistId }"><i
-									class="icofont-calendar"></i> Reservation</a></li>
+								<li><a href="reservation.na?artistId=${ artistInfo.artistId }">
+									<i class="icofont-calendar"></i> Reservation</a></li>
 							</c:if>
-							<li><a href="#resume"><i class="bx bx-user"></i><span>Resume</span></a></li>
-							<li><a href="#contact"><i class="bx bx-envelope"></i>
-									Contact</a></li>
 							<li><a href="modifyArtistInfo.na?artistId=${loginArtist.artistId }"><i class="bx bx-user"></i>
 									정보 수정</a></li>
 							<li><a href="deleteArtist.na?artistId=${loginArtist.artistId }"><i class="icofont-crying"></i>
@@ -155,14 +291,14 @@ header {height: 215px;}
 								<li><a href="#modalArtistPrice" data-toggle="modal"
 									id="artistInfoPrice"><i class="fas fa-hand-holding-usd"></i><span>
 											스타일별 가격</span></a></li>
+								<li><a href="javascript:void(0);" id="rListModal"
+								 data-toggle="modal"><i class="fas fa-bell"></i> <span>예약내역</span></a></li>											
 							</c:if>
 							<li><a
 								href="reservation.na?artistId=${artistInfo.artistId }"><i
 									class="icofont-calendar"></i> Reservation</a></li>
 									
-									
-							<li><a href="javascript:void(0);" id="rListModal"
-							 data-toggle="modal"><i class="fas fa-bell"></i> <span>예약내역</span></a></li>
+								
 
 
 
@@ -217,8 +353,8 @@ header {height: 215px;}
 	<!--=========== 헤더 끝  ============-->
 	<!--=============섹션 시작=============  -->
 
-	<!--============ 아티스트 소개 섹션 ==========  -->
-	<section id="about" class="about">
+	<!--============ 아티스트 소개 섹션 ========== about -->
+	<section id="about" class="FFabout">
 		<div class="container" data-aos="fade-up">
 
 			<div class="row">
@@ -262,7 +398,7 @@ header {height: 215px;}
 
 
 	<!-- ======= 아티스트 작품 섹션 ======= -->
-	<section id="events" class="events">
+	<section id="events" class="events"> <!-- events -->
 		<div id="chefs" class="chefs">
 			<div class="container" data-aos="fade-up">
 				<div class="section-title">
@@ -281,13 +417,10 @@ header {height: 215px;}
 										style="width: 400px; height: 350px;">
 									<div class="member-info">
 										<div class="member-info-content">
-											<h5>${ aWork.workStyle }</h5>
-											<span>${ artistInfo.name }</span>
+											<h6>${ aWork.workInfo }</h6>
+											<span>${ aWork.workStyle }</span>
 										</div>
 										<div class="social">
-											<!-- <a href=""><i class="icofont-twitter"></i></a>
-		                  <a href=""><i class="icofont-facebook"></i></a>
-		                  <a href=""><i class="icofont-instagram"></i></a> -->
 											<a href="#" onclick="return confirm('예약하시겠습니까 ?')"><i
 												class="icofont-basket"></i></a> 
 												<a href="resources/artistInfoFile/WorkFile/${ aWork.workReImgPath }" class="venobox" data-gall="gallery-item">
@@ -369,75 +502,44 @@ header {height: 215px;}
 
 
 
+
+
+
+
+
+
+
 	<!-- ======= 후기 섹션 ======= -->
-	<section id="testimonials" class="testimonials section-bg">
-		<div class="container" data-aos="fade-up" id="reviewArea">
-			<div class="section-title">
+	<section id="testimonials" class="testimonials section-bg" id="focusArea">
+		<div class="container" data-aos="fade-up">
+			<div class="section-title" id="nextReview">
 				<h2>후 기</h2>
 				<p>${ artistInfo.name }님의 타투는 어땠나요 ?</p>
 			</div>
-			
-			<div class="testimonial-item" style="height:50px;" id="reviewAjax">
-<%-- 			<c:forEach items="${ aReview }" var="aR">
-				<p style=" margin : auto;">
-					<!-- <img src="resources/artistInfoFile/WorkFile/20201214184858.png" class="img-fluid" alt="잉? 왜없을까?"
-						style="width: 50px; height: 50px;">  -->
-						<span>henmo8</span>
-						<a href="resources/artistInfoFile/WorkFile/20201214184858.png" class="venobox" data-gall="gallery-item">
-						<i class="icofont-linkedin"></i></a> 
-						<br>
-					<i class="bx bxs-quote-alt-left quote-icon-left"></i>
-					${ aR.reviewContents }
-					<i class="bx bxs-quote-alt-right quote-icon-right"></i>
-				</p>
-				</c:forEach> --%>
-<%-- 				<img
-					src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }"
-					class="testimonial-img" alt="">${ aR.customerId } --%>
-			</div>
-       <!-- 페이징 시작 -->
-			<div id="pageArea" data-aos="fade-up" style="text-align: center;">
-			
-			<!-- 이전 -->
-			 <%-- <c:if test="${pi.currentPage <= 1 }">
-				[이전]&nbsp;
-			 </c:if>
-			 		<c:if test="${pi.currentPage >1 }">
-						<c:url var="before" value="artistInfoPage.na">
-							<c:param name="page" value="${pi.currentPage -1 }"/>
-							<c:param name="artistId" value="${ artistInfo.artistId }"/>
-						</c:url>
-					<a href="${before }">[이전]</a>
-					</c:if>
-		    			<!-- 페이지 -->
-					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-							<c:url var="pagination" value="artistInfoPage.na">
-								<c:param name="page" value="${p }"/>
-								<c:param name="artistId" value="${ artistInfo.artistId }"/>
-							</c:url>
-							<c:if test="${p eq pi.currentPage }">
-								<font color="#cda45e" size="4">[${ p }]</font>
-							</c:if>
-							<c:if test="${p ne pi.currentPage }">
-								<a href="${pagination }">${ p }</a>
-							</c:if>
-					</c:forEach> <!-- 다음 --> 
-					<c:if test="${pi.currentPage >= pi.maxPage }">
-						[다음]&nbsp;
-					</c:if> 
-					<c:if test="${pi.currentPage < pi.maxPage }">
-						<c:url var="after" value="artistInfoPage.na">
-							<c:param name="page" value="${pi.currentPage + 1 }"/>
-							<c:param name="artistId" value="${ artistInfo.artistId }"/>
-						</c:url>
-						<a href="${after }">[다음]</a>&nbsp;
-					</c:if> --%>
-					
-			</div>	        			
 		</div>
+       <!-- 페이징 시작 -->
+			<div id="pageArea" data-aos="fade-up" style="text-align: center;"></div>	        			
 	</section>
+	
+	<section id="contact" class="contact">
+		<div class="container" data-aos="fade-up">
+			<div class="section-title">
+				<h2>${ artistinfo.name }</h2>
+				<p>${ artistInfo.name } 의 작업실 </p>
+			</div>
+			<div id="map" class="info" style="width:1200px; height: 607px;"></div>
+		</div>
+		<c:forTokens items="${artist.workAddress }" var="addr" delims=","
+			varStatus="status">
+			<c:if test="${status.index eq 1 }">
+				<input type="hidden" id="address" name="address"
+					placeholder="주소" value="${addr}">
+			</c:if>
+		</c:forTokens>
+	</section>
+	
+  
 	<!-- End Testimonials Section -->
-
 		
 		
 		
@@ -458,6 +560,104 @@ header {height: 215px;}
 	<script src="resources/assets/vendor/aos/aos.js"></script>
 	<!-- Template Main JS File -->
 	<script src="resources/assets/js/main.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a8e5007416460a5bee56aaba2bb1ea6d&libraries=services"></script>
+
+
+		<script>
+		// 지도
+		var workAddress = document.getElementById('address').value;
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+		    };  
+		
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch(workAddress, function(result, status) {
+		
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+		
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new kakao.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+		     // 커스텀 오버레이에 표시할 컨텐츠 입니다
+		    	// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+		    	// 별도의 이벤트 메소드를 제공하지 않습니다 
+		        var    content='<div class="wrap">' + 
+		                    '    <div class="info">' + 
+		                    '        <div class="title">' + 
+		                    '            타투샵 : ${artistInfo.name}' + 
+		                    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+		                    '        </div>' + 
+		                    '        <div class="body">' + 
+		                    '            <div class="img">' +
+		                    '                <img src="resources/artistInfoFile/Profile/${ artistInfo.myReProfile }" width="73" height="70">' +
+		                    '           </div>' + 
+		                    '            <div class="desc">' + 
+		                    '                <div class="ellipsis">'+workAddress+'</div>' + 
+		                    '            </div>' + 
+		                    '        </div>' + 
+		                    '    </div>' +    
+		                    '</div>';
+		            	
+		        // 마커 위에 커스텀오버레이를 표시합니다
+		        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+		        var overlay = new kakao.maps.CustomOverlay({
+		            content: content,
+		            map: map,
+		            position: marker.getPosition()       
+		        });
+		   		// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+			
+		    	 // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+		        kakao.maps.event.addListener(marker, 'click', function() {
+		            overlay.setMap(map);
+		        });
+		     // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+		        function closeOverlay() {
+		            overlay.setMap(null);     
+		        }
+			}
+		});
+		
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<!-- 아티스트 모달 업데이트  -->
 	<div class="modal fade" id="modalUpdateWork" tabindex="-1"
@@ -617,7 +817,7 @@ header {height: 215px;}
 	<div class="modal fade" id="modalArtistWork" tabindex="-1"
 		role="dialog" aria-labelledby="ARTIST_TITLE" aria-hidden="true">
 		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl"
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
 			role="document">
 			<!-- 센터모달창 추가  modal-dialog-centered -->
 			<div class="modal-content"
@@ -720,8 +920,8 @@ header {height: 215px;}
 							</c:if>
 							<c:if test="${ fList.customerProfile ne null }">
 								<img
-									src="resources/artistInfoFile/Profile/${ fList.customerProfile }"
-									alt="" class="img-fluid rounded-circle"
+									src="resources/customerProfile/${ fList.customerId }/${ fList.customerProfile }"
+									class="img-fluid rounded-circle"
 									style="margin-left: 15px auto; width: 30px; height: 30px; border: 3px solid #2c2f3f;">
 								<nav class="nav-menu d-none d-lg-block" data-aos="fade-in"
 									style="width: 80%">
@@ -735,6 +935,23 @@ header {height: 215px;}
 									</button>
 								</div>
 							</c:if>
+							<c:if test="${ fList.customerProfile eq null }">
+								<img
+									src="resources/artistInfoFile/Profile/NATTAprofile.png"
+									alt="" class="img-fluid rounded-circle"
+									style="margin-left: 15px auto; width: 30px; height: 30px; border: 3px solid #2c2f3f;">
+								<nav class="nav-menu d-none d-lg-block" data-aos="fade-in"
+									style="width: 80%">
+									<h3 style="float: left; margin-left: 25px;">${ fList.customerId }
+									</h3>
+								</nav>
+								<div style="width: 20%; float: left;">
+									<button type="button" class="close followDelete"
+										value="${ fList.customerId }" aria-label="Close">
+										<i class="fas fa-user-minus" style="color: black;"></i>
+									</button>
+								</div>
+							</c:if>							
 						</div>
 						<br>
 					</c:forEach>
@@ -796,28 +1013,32 @@ header {height: 215px;}
 	 			$("#artistInfoWork").on("click", function(){
 	 				$("option").remove(".styleDelete");
 	 				var artistId = "${ loginArtist.artistId }";
-	 				console.log(artistId)
 	 				$.ajax({
 	 					url : "artistStyle.na",
 	 					type : "post",
 	 					data : { "artistId" : artistId },
 	 					dataType : "json",
 	 					success : function(style) {
-	 						/*ㄹㄹㄹㄹㄹㄹㄹㄹ  */
-	 						for( var i in style ) {
-	 							var aStyle = decodeURIComponent(style[i].pStyle.replace(/\+/g," "));
-	 							var aOption = $("<option class='styleDelete' value='"+ aStyle +"'>"+ aStyle + "</option>");
-	 							/* $("#optionKing").after("<option class='styleDelete' value='"+ aStyle + "'>" + aStyle + "</option>"); */
-	 							$("#optionKing").after(aOption);
-	 							$("#modalArtistWork").modal();
-	 						}
-	 					}
+	 						console.log(style);
+	 							if( style.length > 0 ){
+		 						for( var i in style ) {
+		 							var aStyle = decodeURIComponent(style[i].pStyle.replace(/\+/g," "));
+		 							var aOption = $("<option class='styleDelete' value='"+ aStyle +"'>"+ aStyle + "</option>");
+		 							/* $("#optionKing").after("<option class='styleDelete' value='"+ aStyle + "'>" + aStyle + "</option>"); */
+		 							$("#optionKing").after(aOption);
+		 							$("#modalArtistWork").modal();
+		 						}
+	 							} else {
+	 								alert("스타일별 가격을 먼저 등록해주세요 ! ");
+	 							}
+	 							} 
 	 				});
 	 			});
 	 			
  			
  			$(".tattoStyle").on("change", function() {
 				var artistId = "${ loginArtist.artistId }";
+				console.log(artistId);
 				var tattoStyleOptionValue = $(this).find(":selected").val();
 				if( tattoStyleOptionValue == 'pleaseSelect' ) {
 					$('.tattolayer').css("display","none");
@@ -888,8 +1109,8 @@ header {height: 215px;}
 					});
 				});
 	 		});
-		
-		
+			
+			
 			/* 작품 수정버튼 클릭시 작품정보 및 스타일 출력  */
 			$(".updateWork").on("click", function(){
 				 $("option").remove(".styleDelete");
@@ -1023,7 +1244,7 @@ header {height: 215px;}
 	</div>
 
 	<footer>
-		<jsp:include page="../common/footer.jsp" />
+		<jsp:include page="../common/InfoFooter.jsp" />
 	</footer>
 	<script>
 		function insertFollowing(){
@@ -1032,7 +1253,7 @@ header {height: 215px;}
 			console.log(customerId);
 			console.log(artistId);
 			if( customerId == "") {
-				alert("로그인은 기본이다 씻팔");
+				alert("로그인 후, 이용가능합니다 ! ");
 			}else {
 				$.ajax({
 					url : "InsertArtistFollow.na",
@@ -1248,7 +1469,7 @@ header {height: 215px;}
 			getReviewList(1);
 			setInterval(function(){
 				getReviewList();
-			}, 50000);
+			}, 90000);
 		});
 		function getReviewList(page) {
 			var artistId = "${ artistInfo.artistId }";
@@ -1264,29 +1485,41 @@ header {height: 215px;}
 					var $review = "";
 					/* var $pageArea = $("#pageArea");
 					$pageArea.html(""); */
+					/* $("#reviewAjax").children().html(""); */
+					/* $("#nextReview").parent().html("html",""); */
 					$("#pageArea").html("");
+					$("#nextReview").parent().children("#reviewAjax").remove();
 					console.log(data);
 					if( data.aReview.length > 0 ){
 						for(i = 0; i < data.aReview.length; i++ ) {
-							$review += "<div id='pageArea' data-aos='fade-up' style='text-align: center;'>";
-							$review += "<p><span>"+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+"</span>"
-								     + "<a href='resources/artistInfoFile/WorkFile/20201214184858.png' class='venobox' data-gall='gallery-item'><i class='icofont-linkedin'></i></a>"
-									 + "<br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
-									 + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
-									 + "<i class='bx bxs-quote-alt-left quote-icon-right'></i></p>";
-							$review += "</div>";									 
+								if( data.aReview[i].reviewPhoto != null ){
+									$review += "<div class='testimonial-item' style='height:50px;' id='reviewAjax' data-aos='fade-up'>";
+									$review += "<p><span>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' 님의 후기입니다. </span>"
+										     + "<a href='resources/artistInfoFile/WorkFile/20201214171218.png' target='_blank'><i class='icofont-camera'></i></a>"
+											 + "<br><br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
+											 + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
+											 + "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p>";
+									$review += "</div>";
+							} 
+								if( data.aReview[i].reviewPhoto == null ){
+								$review += "<div class='testimonial-item' style='height:50px;' id='reviewAjax' data-aos='fade-up'>";
+								$review += "<p><span>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' 님의 후기입니다.</span>"
+										 + "<br><br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
+										 + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
+										 + "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p>";
+								$review += "</div>";								
+							}	
 						}
 					} else {
 						$review = "<h3 style='text-align:center;'>등록된 리뷰가 없습니다.</h3>";
 					}
-					$("#testimonials #reviewAjax").append($review);
+					$("#nextReview").parent().append($review);
 					
 					var $span = $("<span>");
-					var $1 = '[이전]';
-					var $2 = $("<a id='rrr' onclick='getReviewList("+parseInt(data.pi.currentPage-1)+")';>").text('[이전]');
-					var $3 = $("<font color='red' size='4'>");
-					var $4 = '[다음]';
-					var $5 = $("<a id='rrr' onclick='getReviewList("+parseInt(data.pi.currentPage+1)+")';>").text('[다음]');
+					var $1 = ' < ';
+					var $2 = $("<a class='pageColor' onclick='getReviewList("+parseInt(data.pi.currentPage-1)+")';>").text(' < ');
+					var $4 = ' > ';
+					var $5 = $("<a class='pageColor' onclick='getReviewList("+parseInt(data.pi.currentPage+1)+")';>").text(' > ');
 					var $6;
 				 	if(data.pi.currentPage <= 1 ) {
 				 		$span.append($1);
@@ -1297,14 +1530,12 @@ header {height: 215px;}
 					
 					for( var i = data.pi.startPage; i < data.pi.endPage+1; i++) {
 						if(i == parseInt(data.pi.currentPage)) {
-							$6 = $("<a style='color: red' onclick='getReviewList("+i+")';>").text('['+i+']');
+							$6 = $("<a style='text-decoration: underline; color:orange;' onclick='getReviewList("+ i +")';>").text(i);
 							$span.append($6);
-							console.log("rwqqwqwrwqrqwrqwr"+ $6);
 							
 						}else {
-							$6 = $("<a onclick='getReviewList("+i+")';>").text(i);
+							$6 = $("<a onclick='getReviewList("+ i +")';>").text(i);
 							$span.append($6);
-							console.log("zzzzzzzzzzzzzzz"+$6);
 						}
 					}
 					if(data.pi.currentPage >= data.pi.maxPage) {
@@ -1314,9 +1545,14 @@ header {height: 215px;}
 						$span.append($5);
 					}
 					$("#pageArea").append($span);
+					
+					/* var offset = $("#focusArea").offset(); //선택한 태그의 위치를 반환
+					$("html").animate({scrollTop : offset.top}, 600); */			
 				}
 			});
 		}
+		
 	</script>		
+
 </body>
 </html>

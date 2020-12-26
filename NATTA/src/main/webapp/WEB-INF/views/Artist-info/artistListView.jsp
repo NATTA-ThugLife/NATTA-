@@ -7,15 +7,32 @@
 <head>
 <meta charset="UTF-8">
 <title>NATTA @ ArtistList</title>
+<style>
+	.Fabout {
+	  background: url("resources/assets/img/nattaBack/background1.jpg") center center;
+	  background-size: cover;
+	  position: relative;
+	  padding: 80px 0;
+	}
+/* 	.Fabout:before {
+	  content: "";
+	  background: rgba(0, 0, 0, 0.8);
+	  position: absolute;
+	  bottom: 0;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	} */
+</style>
 </head>
 <body>
 	<header>
 		<jsp:include page="../common/headerNone.jsp"/>
 	</header>
-	<br><br><br><br><br><br>
-<!-- 	    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">  css 파일 about section-bg-->
-	<section id="testimonials" class="about testimonials section-bg">
+
+	<br><br>
+
+	<section id="testimonials" class="Fabout testimonials section-bg">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
           <h2>All</h2>
@@ -26,8 +43,8 @@
 			   <c:url var="artistInfoPage" value="artistInfoPage.na">
 			   		<c:param name="artistId" value="${ artist.artistId }"/>
 			   </c:url>
-	          <div class="testimonial-item" style="float:left;">
-	            <p style="width:300px;">Artist Name<br>
+	          <div class="testimonial-item" style="display:inline-block;">
+	            <p style="width:300px;">Artist Shop<br>
 	              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
 	             	 <a href="${ artistInfoPage }">${ artist.name }</a>
 	             	 
@@ -39,7 +56,7 @@
 	            </c:if>
 	            <c:if test="${ artist.myReProfile ne null }">
 	          	  <img src="resources/artistInfoFile/Profile/${ artist.myReProfile }" style="width:80px; height:80px;" class="testimonial-img" alt="">
-	          	  Follow : ${ artist.count+9291 }
+	          	  Follow : ${ artist.count }
 	          	  <!-- 팔로우 일단은 .. 있어보이기 위해 강제로 + 해드렸음  -->
 	            </c:if>
 	          </div>
@@ -50,42 +67,44 @@
 	</c:if>
         </div>
        <!-- 페이징 시작 -->
-		<div data-aos="fade-up">
-			<c:if test="${ pi.currentPage <= 1 }">[이전] </c:if>
-			<c:if test="${ pit.currentPage > 1 }">
-				<c:url var="before" value="artistList.na">
-					<c:param name="page" value="${ pi.currentPage -1 }"/>
-				</c:url>
-				<a href="${ before }">[이전]</a>
-			</c:if>
-			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-				<c:url var="pagination" value="artistList.na">
-					<c:param name="page" value="${ p }"/>
-				</c:url>
-				<c:if test="${ p eq pi.currentPage }">
-					<font color="#cda45e" size="5">[${ p }]</font>
-				</c:if>
-				<c:if test="${ p ne pi.currentPage }">
-					<a href="${ pagination }">${ p }</a>
-				</c:if>
-			</c:forEach>
-			<c:if test="${ pi.currentPage >= pi.maxPage }">
-				[다음]
-			</c:if>
-			<c:if test="${ pi.currentPage < pi.maxPage }">
-				<c:url var="after" value="artistList.na">
-					<c:param name="page" value="${ pi.currentPage + 1 }"/>
-				</c:url>
-				<a href="${ after }">[다음]</a>
-			</c:if>
+		<div data-aos="fade-up" style="text-align: center;">
+								<!-- 이전 --> 
+					<c:if test="${pi.currentPage <= 1 }">
+						[이전]&nbsp;
+					</c:if> 
+					<c:if test="${pi.currentPage >1 }">
+						<c:url var="before" value="artistList.na">
+							<c:param name="page" value="${pi.currentPage -1 }"></c:param>
+						</c:url>
+						<a href="${before }">[이전]</a>
+						</c:if>
+						 <!-- 페이지 --> 
+						<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+							<c:url var="pagination" value="artistList.na">
+								<c:param name="page" value="${p }"/>
+							</c:url>
+							<c:if test="${p eq pi.currentPage }">
+								<font color="#cda45e" size="4">[${ p }]</font>
+							</c:if>
+							<c:if test="${p ne pi.currentPage }">
+								<a href="${ pagination }">${ p }</a>
+							</c:if>
+						</c:forEach> 
+						<!-- 다음 --> 
+						<c:if test="${pi.currentPage >= pi.maxPage }">
+							[다음]&nbsp;
+						</c:if>
+						 <c:if test="${pi.currentPage < pi.maxPage }">
+							<c:url var="after" value="artistList.na">
+								<c:param name="page" value="${pi.currentPage + 1 }"/>
+							</c:url>
+							<a href="${after }">[다음]</a>&nbsp;
+						 </c:if>
 			
 		</div>	        
     </section>
-    
-	
-
 	<footer>
-		 <jsp:include page="../common/footer.jsp"/>  	 
+		 <jsp:include page="../common/InfoFooter.jsp"/>  	 
   	</footer>
 </body>
 </html>
