@@ -72,8 +72,9 @@
 
 	<!-- 댓글 등록 -->
 	<table align="center" width="500" border="1" cellspacing="0">
+	
 		<tr>
-			<td><textarea rows="3" cols="55" id="qcContents"></textarea></td>
+			<td><textarea rows="3" cols="55" id="qcContents" name="qcContents"></textarea></td>
 			<td>
 				<button id="qcSubmit">등록하기</button>
 			</td>
@@ -103,17 +104,19 @@
 			getQnaCommentList();
 			setInterval(function(){
 				getQnaCommentList();
-			}, 5000);
+			}, 5000); 
 			
 			$("#qcSubmit").on("click",function(){
 				// 댓글 등록 
 				var qcContents = $("#qcContents").val();
-				var refBid = ${qna.qnaCode};
+				var refBid = ${Qna.qnaCode};
+				console.log(refBid)
+				console.log(qcContents)
 				
 				$.ajax({
 					url : "addQnaComment.na",
 					type :"post",
-					data : {"qcContents" : qcContents, "refBid" : refBid },
+					data : {"qcContents" : qcContents, "qnaCode" : refBid },
 					success : function(data) {
 						if ( data == "success") {
 							getQnaCommentList() 
@@ -127,8 +130,8 @@
 		});
 		
 		// 댓글 리스트
-		function getQnaCommentList() {
-			var qnaCode = ${qna.qnaCode };
+		 function getQnaCommentList() {
+			var qnaCode = ${Qna.qnaCode };
 			$.ajax({
 				url : "QnaCommentList.na",
 				type : "get",
@@ -164,7 +167,7 @@
 					}
 				}
 			});			
-		}
+		} 
 	</script>
 	<br><br>
 

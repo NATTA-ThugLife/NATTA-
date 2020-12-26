@@ -17,7 +17,6 @@
 	
 	<resultMap type="QnaComment" id="qnacommentResultMap">
 		<result property="qcCode" column="QC_CODE"/>
-		<result property="qcTitle" column="QC_TITLE"/>
 		<result property="qcContents" column="QC_CONTENTS"/>
 		<result property="qcWriter" column="QC_WRITER"/>
 		<result property="qcCreateDate" column="QC_CREATEDATE"/>
@@ -46,14 +45,14 @@
 		WHERE QNA_CODE = #{qnaCode}
 	</select>
 	
-	<insert id="insertQnacomment">
+	<insert id="insertQnaComment">
 		INSERT INTO QNA_COMMENT
-		VALUES(QC_SEQ.NEXTVAL, #{qnaContents},#{qcCode},#{qcWriter},SYSDATE,SYSDATE,DEFAULT)
+		VALUES(QC_SEQ.NEXTVAL, #{qcContents},#{qcWriter},SYSDATE,SYSDATE,DEFAULT,#{qnaCode})
 	</insert>
 	
 	<select id="selectQnacommentList" resultMap="qnacommentResultMap">
 		SELECT * FROM QNA_COMMENT
-		WHERE QC_CODE = #{qnaCode}
+		WHERE QNA_CODE = #{qnaCode}
 		ORDER BY QC_CODE DESC
 	</select>
 	

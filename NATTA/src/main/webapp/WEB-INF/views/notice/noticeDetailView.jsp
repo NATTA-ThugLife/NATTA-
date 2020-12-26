@@ -51,13 +51,17 @@
 				</c:url>
 				<c:url var="nList" value="notice.na"></c:url>
 				<a href="${nUpdate }">수정</a>
-				<a href="${nDelete}">삭제</a>
+				<a href="${nDelete}"onclick="return deleteNotice();">삭제</a>
 				<a href="${nList }">목록</a>
 			</td>
 		</tr>
 		</c:if>
 	</table>
-	
+			<script>
+			function deleteNotice() {
+				return confirm("게시글을 삭제하시겠습니까?");
+			}
+		</script>
 	</section>
         
 	<footer>

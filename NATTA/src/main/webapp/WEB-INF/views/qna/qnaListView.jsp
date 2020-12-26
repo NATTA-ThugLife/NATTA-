@@ -54,12 +54,20 @@
 		</thead>
 		<tbody>
 		<c:forEach items="${qList }" var="qna">
-		<tr id="custom" onclick="location.href='${qDetail}'">
-			<td align="center">${qna.qnaCode }</td>
+		
+			
+			<!--로그인 상태에서만 상세보기 가능. 로그인 상태가 아닌 경우 제목만 출력 -->
+			<c:if test="${!empty loginCustomer }">
 				<c:url var="qDetail" value="qnaDetailView.na">
 					<c:param name="qnaCode" value="${qna.qnaCode }"></c:param>
 					<c:param name="page" value="${pi.currentPage }"></c:param>
-				</c:url>				
+				</c:url>
+				<tr id="custom" onclick="location.href='${qDetail}'">
+			</c:if>			
+			<c:if test="${empty loginCustomer }">
+			   <tr id="custom" onclick="warning();">
+			</c:if>	
+			<td align="center">${qna.qnaCode }</td>
 			<td align="center">${qna.qnaTitle }</td>
 			<td align="center">${qna.qnaWriter }</td>
 			<td align="center">${qna.qnaCreateDate }</td>
@@ -116,6 +124,12 @@
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</footer>
+	
+	<script>
+	function warning(){
+		alert("로그인 후에 이용 가능합니다.");
+	}
+	</script>
 	
 </body>
 </html>

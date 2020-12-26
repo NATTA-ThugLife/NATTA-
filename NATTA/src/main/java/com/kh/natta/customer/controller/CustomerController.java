@@ -47,8 +47,7 @@ public class CustomerController {
 			session.setAttribute("loginCustomer", loginCustomer);
 			mv.setViewName("main/mainPage");
 		} else {
-			mv.addObject("msg", "올바른 아이디와 비밀번호를 입력해주세요.");
-			mv.setViewName("join/login");
+			mv.addObject("msg", "올바른 아이디와 비밀번호를 입력해주세요.").addObject("url","login.na").setViewName("common/Alert");
 		}
 		return mv;
 	}
@@ -151,6 +150,7 @@ public class CustomerController {
 	}	
 	
 	// 비번 찾기 페이지
+	
 	@RequestMapping(value = "findPwd.na", method = RequestMethod.GET)
 	public String finPwdView() {
 		return "join/findPwd";
@@ -188,11 +188,11 @@ public class CustomerController {
 			System.out.println(e);
 		}
 		model.addAttribute("msg","이메일이 전송되었습니다.");
-		model.addAttribute("url","join/login");			
+		model.addAttribute("url","login.na");			
 		return "common/Alert";
 	} else {
 		model.addAttribute("msg","올바른 정보를 입력해주세요.");
-		model.addAttribute("url","join/findPwd");			
+		model.addAttribute("url","/findPwd.na");			
 		return "common/Alert";
 	}
 }

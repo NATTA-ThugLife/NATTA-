@@ -120,11 +120,11 @@ public class NoticeController {
 	//공지 검색
 	@RequestMapping(value="noticeSearch.na",method=RequestMethod.GET)
 	public String customSearch(Search search, Model model) {
-		ArrayList<Notice> searchList = nService.selectListSearch(search);
-		System.out.println(searchList);
-		System.out.println(search);
+		ArrayList<Notice> searchList = nService.selectListSearch(search);		
 		if(!searchList.isEmpty()) {
-			model.addAttribute("List",searchList);
+	    //System.out.println(searchList);
+	    //System.out.println(search);
+			model.addAttribute("nList",searchList);
 			model.addAttribute("search",search);
 			return "notice/noticeListView";
 		}else {
