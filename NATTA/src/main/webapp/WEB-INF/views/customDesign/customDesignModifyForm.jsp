@@ -29,8 +29,12 @@
         		<td>타투스타일</td>
         		<td>
         		<select name="tattooType">
-        		<option value="올드스쿨">올드스쿨</option>
-        		<option value="이레즈미">이레즈미</option>
+				<option value="올드스쿨">올드스쿨</option>
+				<option value="이레즈미">이레즈미</option>
+				<option value="트라이벌">트라이벌</option>
+				<option value="리얼리스틱">리얼리스틱</option>
+				<option value="레터링">레터링</option>
+				<option value="치카노">치카노</option>
         		</select>
         		</td>
         	</tr>

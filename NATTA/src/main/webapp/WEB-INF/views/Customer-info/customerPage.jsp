@@ -728,7 +728,7 @@
 				            <div class="col-lg-8 col-md-8 form-group">
 				              ARTIST SHOP NAME 
 				              <input type="text" value="" name="shopName" class="form-control artistShopName" id="insertShopName" readonly>
-				              <input type="hidden" value="" name="reservationCode" id="insertReservationCode">
+				              <input type="text" value="" name="reservationCode" id="insertReservationCode">
 				              <input type="hidden" value="" name="artistId" id="insertArtistId">
 				              <div class="validate"></div>
 				            </div>
@@ -862,6 +862,7 @@
 			$(".detail").on("click",function(){
 				
 				var reservationCode = $(this).val();
+				console.log(reservationCode)
 				var shopName = $("#shopName"+reservationCode).text();
 				var artistName = $("#artistName"+reservationCode).text();
 				var style = $("#style"+reservationCode).text();
@@ -922,6 +923,8 @@
 				/* 리뷰 추가 */
 				$("#insertReview").on("click",function(){
 					var reservation = $(this).val();
+					$("#reservationCode").val(reservation);
+					console.log(reservation);
 					$("#detailReservation").modal("hide");
 					$.ajax({
 						type: "post",

@@ -130,6 +130,11 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 		return infoStore.getListReviewCount(artistId);
 	}
 
+	@Override
+	public ArrayList<ArtistInfo> selectListArtistInfo() {
+		return infoStore.selectListArtistInfo();
+	}
+
 
 
 

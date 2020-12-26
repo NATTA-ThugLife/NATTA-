@@ -301,9 +301,11 @@ header {height: 215px;}
 								<li><a href="javascript:void(0);" id="rListModal"
 								 data-toggle="modal"><i class="fas fa-bell"></i> <span>예약내역</span></a></li>											
 							</c:if>
-							<li><a
-								href="reservation.na?artistId=${artistInfo.artistId }"><i
+							<c:if test="${!empty sessionScope.loginCustomer }">
+							<li>
+							<a href="reservation.na?artistId=${ artistInfo.artistId }"><i
 									class="icofont-calendar"></i> Reservation</a></li>
+							</c:if>
 									
 								
 

@@ -227,13 +227,10 @@
 						<div>
 							<button class="form-control" id="btnr" type="button" onclick="return validate();" >예약하기</button>
 						</div>
-						
+						</form>
 						</div>
-					</form>
 					</div>
 				</div>
-			</div>
-			
 	</section>
 	<section>
 	

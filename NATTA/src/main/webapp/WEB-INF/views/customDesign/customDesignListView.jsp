@@ -33,7 +33,7 @@
 	<header>
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
-	<section id="testimonials" class="testimonials section-bg">
+	<section id="testimonials" class="testimonials section-bg about">
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
 				<h2>CustomDesign</h2>
