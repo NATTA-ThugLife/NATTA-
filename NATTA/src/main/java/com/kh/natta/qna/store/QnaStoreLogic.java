@@ -62,7 +62,7 @@ public class QnaStoreLogic implements QnaStore{
 
 	@Override
 	public ArrayList<QnaComment> selectQnaCommentList(int qnaCode) {
-		return (ArrayList)sqlSession.selectList("qnaMapper.selectQnaCommentList",qnaCode);
+		return (ArrayList)sqlSession.selectList("qnaMapper.selectQnacommentList",qnaCode);
 	}
 
 	

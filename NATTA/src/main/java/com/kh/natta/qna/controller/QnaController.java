@@ -133,11 +133,13 @@ public class QnaController {
 	//qna 댓글 작성
 	@ResponseBody
 	@RequestMapping(value="addQnaComment.na", method=RequestMethod.POST)
-	public String addQnaComment(QnaComment QnaComment, HttpSession session) {
-		Customer loginUser = (Customer)session.getAttribute("loginUser"); // 로그인 하지 않으면 Exception 발생
-		String QcWriter = loginUser.getCustomerId();
+	public String addQnaComment(QnaComment QnaComment, HttpSession session) {		
+		//System.out.println(QnaComment);
+		Customer loginCustomer= (Customer)session.getAttribute("loginCustomer"); // 로그인 하지 않으면 Exception 발생
+		//System.out.println(loginCustomer.getCustomerId());
+		String QcWriter = loginCustomer.getCustomerId();
 		QnaComment.setQcWriter(QcWriter);
-		System.out.println(QnaComment);
+		//System.out.println(QnaComment);
 		int result = qService.insertQnaComment(QnaComment);
 		if(result>0) {
 			return "success";
@@ -149,7 +151,9 @@ public class QnaController {
 	//댓글 전체 조회
 	@RequestMapping(value="QnaCommentList.na", method=RequestMethod.GET)
 	public void getQnaCommentList(HttpServletResponse response, int qnaCode) throws Exception{
+		//System.out.println("조회"+qnaCode);
 		ArrayList<QnaComment> qcList = qService.selectQnaCommentList(qnaCode);
+		//System.out.println(qcList);
 		for(QnaComment qc : qcList) {
 			qc.setQcContents(URLEncoder.encode(qc.getQcContents(),"utf-8"));
 		}

@@ -56,17 +56,10 @@
 						<c:forEach items="${nList }" var="notice">
 							<tr id="custom" onclick="location.href='${noticeDetail}'">
 								<td align="center">${notice.noticeCode }</td>
-								<!--로그인 상태에서만 상세보기 가능
-			                                        로그인 상태가 아닌 경우 공지사항 제목만 출력 -->
-								<td><c:if test="${!empty loginCustomer }">
 										<c:url var="noticeDetail" value="noticeDetailView.na">
 											<c:param name="noticeCode" value="${notice.noticeCode }"></c:param>
-										</c:url>
-										<a href="${noticeDetail }">${notice.noticeTitle }</a>
-									</c:if>
-									<c:if test="${empty loginCustomer }">${notice.noticeTitle }</c:if>
-								</td>
-								<%-- <td align="center">${notice.noticeTitle }</td> --%>
+										</c:url>																
+								<td align="center">${notice.noticeTitle }</td>								
 								<td align="center">${notice.noticeCreateDate }</td>
 								<td align="center">${notice.noticeHits }</td>
 							</tr>
@@ -80,10 +73,10 @@
 						<select id="searchCondition" name="searchCondition">
 							<option value="all"
 								<c:if test="${search.searchCondition == 'all'}">selected</c:if>>전체</option>
-							<option value="title"
-								<c:if test="${search.searchCondition == 'title'}">selected</c:if>>제목</option>
-							<option value="content"
-								<c:if test="${search.searchCondition == 'content'}">selected</c:if>>내용</option>
+							<option value="noticeTitle"
+								<c:if test="${search.searchCondition == 'noticeTitle'}">selected</c:if>>제목</option>
+							<option value="noticeContents"
+								<c:if test="${search.searchCondition == 'noticeContents'}">selected</c:if>>내용</option>
 						</select> 
 						<input type="text" name="searchValue" value="${search.searchValue }"> 
 							<input type="submit" value="검색">

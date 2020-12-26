@@ -51,10 +51,10 @@
 			NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
 			OR NOTICE_CONTENTS LIKE '%' || #{searchValue} || '%'
 		</if>
-		<if test="searchCondition.toString() == 'customTitle'">
+		<if test="searchCondition.toString() == 'noticeTitle'">
 			NOTICE_TITLE LIKE '%' || #{searchValue} || '%'
 		</if>
-		<if test="searchCondition.toString() == 'tattooType'">
+		<if test="searchCondition.toString() == 'noticeContents'">
 			NOTICE_CONTENTS LIKE '%' || #{searchValue} || '%'
 		</if>
 	</where>

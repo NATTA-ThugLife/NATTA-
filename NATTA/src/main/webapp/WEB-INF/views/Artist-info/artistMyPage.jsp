@@ -61,8 +61,7 @@
 				            <!-- 근무지주소 -->
 							<div class="col-lg-7 col-md-6 form-group">
 								근무지 주소<br>
-								<c:forTokens items="${loginArtist.workAddress }" var="addr"
-									delims="," varStatus="status">
+								<c:forTokens items="${loginArtist.workAddress }" var="addr" delims="," varStatus="status">
 									<c:if test="${status.index eq 0}">
 										<input type="text" name="post" value="${addr }"
 											class=" postcodify_postcode5 address" id="address"

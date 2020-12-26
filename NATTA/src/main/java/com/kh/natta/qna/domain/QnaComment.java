@@ -5,7 +5,6 @@ import java.sql.Date;
 public class QnaComment {
 	
 	private int qcCode;
-	private String qcTitle;
 	private String qcContents;
 	private String qcWriter;
 	private Date qcCreateDate;
@@ -17,11 +16,10 @@ public class QnaComment {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public QnaComment(int qcCode, String qcTitle, String qcContents, String qcWriter, Date qcCreateDate,
+	public QnaComment(int qcCode, String qcContents, String qcWriter, Date qcCreateDate,
 			Date qcModifyDate, int onOff, int qnaCode) {
 		super();
 		this.qcCode = qcCode;
-		this.qcTitle = qcTitle;
 		this.qcContents = qcContents;
 		this.qcWriter = qcWriter;
 		this.qcCreateDate = qcCreateDate;
@@ -31,7 +29,7 @@ public class QnaComment {
 	}
 	@Override
 	public String toString() {
-		return "QnaComment [qcCode=" + qcCode + ", qcTitle=" + qcTitle + ", qcContents=" + qcContents + ", qcWriter="
+		return "QnaComment [qcCode=" + qcCode + ", qcContents=" + qcContents + ", qcWriter="
 				+ qcWriter + ", qcCreateDate=" + qcCreateDate + ", qcModifyDate=" + qcModifyDate + ", onOff=" + onOff
 				+ ", qnaCode=" + qnaCode + "]";
 	}
@@ -40,12 +38,6 @@ public class QnaComment {
 	}
 	public void setQcCode(int qcCode) {
 		this.qcCode = qcCode;
-	}
-	public String getQcTitle() {
-		return qcTitle;
-	}
-	public void setQcTitle(String qcTitle) {
-		this.qcTitle = qcTitle;
 	}
 	public String getQcContents() {
 		return qcContents;

@@ -38,8 +38,7 @@ public class ArtistController {
 			session.setAttribute("loginArtist", loginArtist);
 			mv.setViewName("main/mainPage");
 		}else {	
-			mv.addObject("msg","올바른 아이디와 비밀번호를 입력해주세요");
-			mv.setViewName("join/login");
+			mv.addObject("msg", "올바른 아이디와 비밀번호를 입력해주세요.").addObject("url","login.na").setViewName("common/Alert");
 		}
 		return mv;
 	}
@@ -73,7 +72,9 @@ public class ArtistController {
 		String path = null;
 		result = service.registerArtist(artist);
 		if(result > 0) {
-			path ="join/login";
+			model.addAttribute("msg","회원 가입 성공");
+			model.addAttribute("url","login.na");			
+			return "common/Alert";			
 		}else {
 			model.addAttribute("msg", "회원 가입 실패");
 		}

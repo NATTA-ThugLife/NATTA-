@@ -126,12 +126,19 @@ header {height: 215px;}
 									Contact</a></li>
 							<li><a href="modifyArtistInfo.na?artistId=${loginArtist.artistId }"><i class="bx bx-user"></i>
 									정보 수정</a></li>
-							<li><a href="deleteArtist.na?artistId=${loginArtist.artistId }"><i class="icofont-crying"></i>
+							<li><a href="deleteArtist.na?artistId=${loginArtist.artistId }" onclick="return deleteArtist();"><i class="icofont-crying"></i>
 									회원 탈퇴</a></li>
 						</ul>
 					</nav>
 					<!-- .nav-menu -->
 				</c:if>
+				
+				<!-- 회원 탈퇴 하쉴?-->
+									<script>
+								    function deleteArtist(){
+										return confirm("진짜 탈퇴하쉴?"); 
+									}
+									</script>
 
 				<c:if test="${ artistInfo.myReProfile ne null }">
 					<img

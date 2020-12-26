@@ -4,32 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<!-- <script>
-	$(function(){
-		$("#findBtn").click(function(){
-			$.ajax({
-				url : "findPwd.na",
-				type : "POST",
-				data : {
-					id : $("#customerId").val(),
-					name : $("#customerName").val(),
-					email : $("#email").val()
-				},
-				success : function(result) {
-					alert(result);
-				},
-			})
-		});
-	})
-</script> -->
-
 <style>
+
+.findForm{
+box-shadow: none;
+background: #0c0b09;
+border-color: #625b4b;
+color: white;
+font-size: 14px;
+}
+
 #test{
  margin-top: 30px;
  background: #28251f;
@@ -72,24 +61,24 @@
 					<tr>
 						<td><input type="radio" name="checkOption" id="checkEmail" onchange="setDisplay()" checked>&nbsp;이메일&nbsp;&nbsp;&nbsp;</td>
 						<td><input type="radio" name="checkOption" onchange="setDisplay()" >&nbsp;휴대폰</td>
-					</tr>
+					</tr></tr><tr><td><br></td></tr>
 					<form action="mailSending.na" method="post" id="formId">
 						<table align="center">
 							<tr>
-								<td >ID</td>
-								<td><input type="text" placeholder="아이디를 입력하세요" name="customerId" id="test"></td>
-							</tr>
+								<td>ID</td>
+								<td><input type="text" placeholder="아이디를 입력하세요" name="customerId" class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
+							</tr></tr><tr><td><br></td></tr>
 							<tr>
 								<td>이름</td>
-								<td><input type="text" name="customerName" id="test"></td>
-							</tr>
+								<td><input type="text" placeholder="이름을 입력하세요" name="customerName" class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
+							</tr></tr><tr><td><br></td></tr>
 							<tr id="email">
 								<td>이메일</td>
-								<td><input type="text" name="email" id="test"></td>
+								<td><input type="text" placeholder="이메일을 입력하세요" name="email" class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 							</tr>
 							<tr id="phone" style="display:none;">
 								<td>휴대폰</td>
-								<td><input type="text" name="phone" id="test"></td>
+								<td><input type="text" name="phone" placeholder="휴대폰 번호를 입력하세요"  class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 							</tr></tr><tr><td><br></td></tr>
 							<tr>
 								<td colspan="2" align="center">

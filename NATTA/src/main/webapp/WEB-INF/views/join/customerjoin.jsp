@@ -53,6 +53,19 @@ span.error {
 .customDesign th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
 .customDesign td {padding: 20px;width: 800px;}
 .customDesign {border-spacing: 10px;border-top: 0.6px solid #cda45e;border-bottom: 0.6px solid #cda45e;text-align: center;}
+
+.form-control2 {
+display: block;
+  height: $input-height;
+  padding: $input-padding-y $input-padding-x;
+  font-family: $input-font-family;
+  @include font-size($input-font-size);
+  font-weight: $input-font-weight;
+  line-height: $input-line-height;
+  color: $input-color;
+  background-color: $input-bg;
+  background-clip: padding-box;
+  border: $input-border-width solid $input-border-color;
 </style>
 </head>
 <body>
@@ -78,29 +91,29 @@ span.error {
 					<table align="center" id="customerRegister" >
 						<tr>
 							<td>아이디</td>
-							<td><input type="text" name="customerId" id="customerId" required>
+							<td><input type="text" name="customerId" id="customerId" required  size="8" class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;">
 						        <input type="button" value="중복 확인" onclick="checkDuplicate();">
 						        <input type="hidden" id="idDuplicateCheck" value="0">
 						    </td>
 						</tr>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" name="password" id="pwd1" required></td>
+							<td><input type="password" name="password" id="pwd1" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 
 						</tr>
 						<tr>
 							<td>비밀번호 확인</td>
-							<td><input type="password" name="password2" id="pwd2" required>
+							<td><input type="password" name="password2" id="pwd2" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;">
 								<span id="success" style="color:green;">비밀번호가 일치합니다.</span>
 								<span id="fail" style="color:red;">비밀번호가 일치하지 않습니다.</span></td>
 						</tr>
 						<tr>
 							<td>이름</td>
-							<td><input type="text" name="customerName" required></td>
+							<td><input type="text" name="customerName" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 						</tr>
 						<tr>
 							<td>나이</td>
-							<td><input type="number" min="20" max="100" name="age" required></td>
+							<td><input type="number" min="20" max="100" name="age" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 						</tr>
 						<tr>
 							<td>성별</td>
@@ -109,28 +122,28 @@ span.error {
 						</tr>
 						<tr>
 							<td>휴대폰 번호</td>
-							<td><input type="text" name="phone" required></td>
+							<td><input type="text" name="phone" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 						</tr>
 						<tr>
 							<td>이메일</td>
-							<td><input type="email" name="email" id="email" required>
+							<td><input type="email" name="email" id="email" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;">
 							    <input type="button" value="중복 확인" onclick="checkEmail();">
 							    <input type="hidden" id="emailDuplicateCheck" value="0">
 							</td>
 						</tr>
 						<tr>
 							<td>우편번호</td>
-							<td><input type="text" name="post" class="postcodify_postcode5" size="6" readonly>
+							<td><input type="text" name="post" class="postcodify_postcode5 form-control" size="6" readonly style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;">
 								<button type="button" id="postcodify_search_button">검색</button>
 							</td>
 						</tr>
 						<tr>
 							<td>도로명 주소</td>
-							<td><input type="text" name="address" id="address" class="postcodify_address" readonly></td>
+							<td><input type="text" name="address" id="address" class="postcodify_address form-control" readonly style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 						</tr>
 						<tr>
 							<td>상세 주소</td>
-							<td><input type="text" name="address2" class="postcodify_extra_info"></td>
+							<td><input type="text" name="address2" class="postcodify_extra_info form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 						</tr>
 
 						<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
@@ -154,29 +167,29 @@ span.error {
 					<form action="artistRegister.na" method="post" id="artistRegister" enctype="multipart/form-data">
 						<tr>
 							<td>아이디</td>
-							<td><input type="text" name="artistId" id="artistId" required>
+							<td><input type="text" name="artistId" id="artistId" required class="form-control2" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;">
 								<input type="button" value="중복 확인" onclick="checkDuplicate2();">
 								<input type="hidden" id="idDuplicateCheck2" value="0">
 						    </td>
 						</tr>
 						<tr>
 							<td>비밀번호</td>
-							<td><input type="password" name="password" id="pwd3" required></td>
+							<td><input type="password" name="password" id="pwd3" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 
 						</tr>
 						<tr>
 							<td>비밀번호 확인</td>
-							<td><input type="password" name="password2" id="pwd4" required>
+							<td><input type="password" name="password2" id="pwd4" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;">
 								<span id="success2" style="color:green;">비밀번호가 일치합니다.</span>
 								<span id="fail2" style="color:red;">비밀번호가 일치하지 않습니다.</span></td>
 						</tr>
 						<tr>
 							<td>이름</td>
-							<td><input type="text" name="artistName" required></td>
+							<td><input type="text" name="artistName" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 						</tr>
 						<tr>
 							<td>나이</td>
-							<td><input type="number" min="20" max="100" name="age" required></td>
+							<td><input type="number" min="20" max="100" name="age" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;></td">
 						</tr>
 						<tr>
 							<td>성별</td>
@@ -185,11 +198,11 @@ span.error {
 						</tr>
 						<tr>
 							<td>휴대폰 번호</td>
-							<td><input type="text" name="phone" required></td>
+							<td><input type="text" name="phone" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 						</tr>
 						<tr>
 							<td>이메일</td>
-							<td><input type="email" name="email2" id="email2" required>
+							<td><input type="email" name="email2" id="email2" required class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;">
 							    <input type="button" value="중복 확인" onclick="checkEmail2();">
 							    <input type="hidden" id="emailDuplicateCheck2" value="0">
 							</td>
@@ -197,17 +210,17 @@ span.error {
 
 						<tr>
 							<td>우편번호</td>
-							<td><input type="text" name="post" class="postcodify_postcode5" size="6" readonly>
+							<td><input type="text" name="post" class="postcodify_postcode5 form-control" size="6" readonly style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;">
 								<button type="button" id="postcodify_search_button2">검색</button>
 							</td>
 						</tr>
 						<tr>
 							<td>도로명 주소</td>
-							<td><input type="text" name="workAddress" id="workAddress" class="postcodify_address" readonly></td>
+							<td><input type="text" name="workAddress" id="workAddress" class="postcodify_address form-control" readonly style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 						</tr>
 						<tr>
 							<td>상세 주소</td>
-							<td><input type="text" name="address2" class="postcodify_extra_info"></td>
+							<td><input type="text" name="address2" class="postcodify_extra_info form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 						</tr>
 
 						<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
@@ -225,7 +238,7 @@ span.error {
 						</tr><tr><td><hr></td></tr>
 						<tr>
 							<td colspan="2" align="center">
-								<button id="join2" onclick="return validate2();">가입하기</button>
+								<button id="join" onclick="return validate2();">가입하기</button>
 							</td>
 						</tr>
 						</form>
