@@ -24,6 +24,8 @@
 	  left: 0;
 	  right: 0;
 	}
+.workhover { color : white; }
+.workhover:hover { color : #cda45e; }
 </style>
 </head>
 <body>
@@ -68,7 +70,7 @@
 	</c:if>
         </div>
        <!-- 페이징 시작 -->
-		<div data-aos="fade-up" style="text-align: center;">
+		<div data-aos="fade-up" style="text-align: center; font-size: 25px;">
 								<!-- 이전 --> 
 					<c:if test="${pi.currentPage <= 1 }">
 						< &nbsp;
@@ -77,7 +79,7 @@
 						<c:url var="before" value="artistList.na">
 							<c:param name="page" value="${pi.currentPage -1 }"></c:param>
 						</c:url>
-						<a href="${before }"> < &nbsp; </a>
+						<a class="workhover" href="${before }"> < &nbsp; </a>
 						</c:if>
 						 <!-- 페이지 --> 
 						<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
@@ -85,10 +87,10 @@
 								<c:param name="page" value="${p }"/>
 							</c:url>
 							<c:if test="${p eq pi.currentPage }">
-								<font color="#cda45e" size="4">[${ p }]</font>
+								<font color="#cda45e" style="text-decoration:underline;">${ p }</font>
 							</c:if>
 							<c:if test="${p ne pi.currentPage }">
-								<a href="${ pagination }">${ p }</a>
+								<a class="workhover" href="${ pagination }">${ p }</a>
 							</c:if>
 						</c:forEach> 
 						<!-- 다음 --> 
@@ -99,7 +101,7 @@
 							<c:url var="after" value="artistList.na">
 								<c:param name="page" value="${pi.currentPage + 1 }"/>
 							</c:url>
-							<a href="${after }"> &nbsp; > </a>&nbsp;
+							<a class="workhover" href="${after }"> &nbsp; > </a>&nbsp;
 						 </c:if>
 			
 		</div>	        

@@ -53,8 +53,8 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 	}
 
 	@Override
-	public ArrayList<ArtistWork> selectListArtistWork(String artistId) {
-		return infoStore.selectListArtistWork(artistId);
+	public ArrayList<ArtistWork> selectListArtistWork(String artistId, PageInfo pi) {
+		return infoStore.selectListArtistWork(artistId, pi);
 	}
 
 	@Override
@@ -146,6 +146,11 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 	}
 
 
+
+	@Override
+	public int getWorkCount(String artistId) {
+		return infoStore.getWorkCount(artistId);
+	}
 
 
 

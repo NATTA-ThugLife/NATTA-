@@ -41,10 +41,7 @@
 		<result property="businessNo"    column="BUSINESS_NO"></result>
 		<result property="enrollStatus"    column="ENROLL_STATUS"></result>
 		<result property="email2"    column="EMAIL"></result>
-		
 	</resultMap>
-	
-	
 	<resultMap type="Review" id="ReviewResultMap">
 		<result property="reviewCode" column="REVIEW_CODE"></result>
 		<result property="customerId" column="CUSTOMER_ID"></result>
@@ -59,6 +56,11 @@
 		<result property="myReProfile" column="MY_REPROFILE"></result>
 		<result property="reservationCode" column="RESERVATION_CODE"></result>
 	</resultMap>	
+	<select id="getWorkCount" resultType="int">
+		SELECT COUNT(*)
+		FROM WORK
+		WHERE ARTIST_ID = #{ artistId }
+	</select>
 	<select id="getListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM ARTISTINFO

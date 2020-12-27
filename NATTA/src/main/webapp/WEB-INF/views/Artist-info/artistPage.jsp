@@ -34,16 +34,14 @@ header {height: 215px;}
 .testimonials .testimonial-item {box-sizing: content-box; min-height: 200px;}
 #pageArea { font-size: 30px; }
 .pageColor:hover { color : red; }
-
-
-.FFabout {
-  background: url("resources/assets/img/nattaBack/background1.jpg") center center;
+.tattolayer > input {width:500px; vertical-align:middle;}
+.FFFabout {
+  background: url("resources/assets/img/nattaBack/a16.png") center center;
   background-size: cover;
   position: relative;
   padding: 80px 0;
 }
-
-/* .FFabout:before {
+ .FFFabout:before {
   content: "";
   background: rgba(0, 0, 0, 0.8);
   position: absolute;
@@ -51,19 +49,27 @@ header {height: 215px;}
   top: 0;
   left: 0;
   right: 0;
-} */
-
+} 
+@media (min-width: 1024px) {
+  .FFFabout {
+    background-attachment: fixed;
+  }
+}
+.FFabout {
+  background: url("resources/assets/img/nattaBack/background1.jpg") center center;
+  background-size: cover;
+  position: relative;
+  padding: 80px 0;
+}
 .FFabout .about-img {
   position: relative;
   transition: .5s;
 }
-
 .FFabout .about-img img {
   max-width: 100%;
   border: 4px solid rgba(255, 255, 255, 0.2);
   position: relative;
 }
-
 .FFabout .about-img::before {
   position: absolute;
   left: 20px;
@@ -76,7 +82,6 @@ header {height: 215px;}
   border-top: 5px solid #cda45e;
   transition: .5s;
 }
-
 .FFabout .about-img::after {
   position: absolute;
   right: 20px;
@@ -89,31 +94,25 @@ header {height: 215px;}
   border-bottom: 5px solid #cda45e;
   transition: .5s;
 }
-
 .FFabout .about-img:hover {
   transform: scale(1.03);
 }
-
 .FFabout .about-img:hover::before {
   left: 10px;
   top: 10px;
 }
-
 .FFabout .about-img:hover::after {
   right: 10px;
   bottom: 10px;
 }
-
 .FFabout .content h3 {
   font-weight: 600;
   font-size: 26px;
 }
-
 .FFabout .content ul {
   list-style: none;
   padding: 0;
 }
-
 .FFabout .content ul li {
   padding-bottom: 10px;
 }
@@ -123,7 +122,6 @@ header {height: 215px;}
   padding-right: 4px;
   color: #cda45e;
 }
-
 .FFabout .content p:last-child {
   margin-bottom: 0;
 }
@@ -135,36 +133,18 @@ header {height: 215px;}
 }
 
 .events {
-  background: url("resources/assets/img/nattaBack/ta8.jpg") center center no-repeat;
+  background: url("resources/assets/img/nattaBack/b3.jpg") center center no-repeat;
   background-size: cover;
   position: relative;
 }
-
-.events::before {
-  content: '';
-  background-color: rgba(0, 0, 0, 0.8);
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
-
-.events .section-title h2 {
-  color: #fff;
-}
-
-.events .container {
-  position: relative;
-}
-
 @media (min-width: 1024px) {
   .events {
     background-attachment: fixed;
   }
 }
-
-
+#workPaging {font-size: 25px; text-align:center;}
+.workhover { color : white; }
+.workhover:hover { color : #cda45e; }
 </style>
 </head>
 <body>
@@ -269,11 +249,11 @@ header {height: 215px;}
 				</c:if>
 				
 				<!-- 회원 탈퇴 하쉴?-->
-									<script>
-								    function deleteArtist(){
-										return confirm("진짜 탈퇴하쉴?"); 
-									}
-									</script>
+				<script>
+			    function deleteArtist(){
+					return confirm("진짜 탈퇴하쉴?"); 
+				}
+				</script>
 
 				<c:if test="${ artistInfo.myReProfile ne null }">
 					<img
@@ -382,7 +362,7 @@ header {height: 215px;}
 				</div>
 				<div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
 					<h3>Artist Self Introduction</h3>
-					<p class="font-italic">name ${ artistInfo.name }</p>
+					<p class="font-italic" style="color:orange;">ShopName :  ${ artistInfo.name }</p>
 					<ul>
 						<li><i class="icofont-check-circled"></i> 아티스트의 작품을 보고, 마음에
 							드는 작품을 예약하세요 !</li>
@@ -390,8 +370,10 @@ header {height: 215px;}
 							문의하세요 !</li>
 						<li><i class="icofont-check-circled"></i> 아티스트에게 솔직한 후기를
 							남겨주세요 !</li>
+						<li><i class="icofont-check-circled"></i> <font style="color:orange;">" ${ artistInfo.name } "</font> 님의 작품은  <br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange;">${ wCount }</span> 개 등록되어 있습니다.</li>
 					</ul>
-					<p>${ artistInfo.myInfo }</p>
+					아티스트의 한 마디 ..<p style="color:orange;"> ${ artistInfo.myInfo }</p>
 				</div>
 			</div>
 		</div>
@@ -404,8 +386,7 @@ header {height: 215px;}
 
 
 
-
-	<!-- ======= 아티스트 작품 섹션 ======= -->
+	<!-- ======= 아티스트 작품 섹션 ======= fffffffff-->
 	<section id="events" class="events"> <!-- events -->
 		<div id="chefs" class="chefs">
 			<div class="container" data-aos="fade-up">
@@ -415,7 +396,7 @@ header {height: 215px;}
 				</div>
 
 				<div class="row">
-					<c:if test="${ workList ne null }">
+					<c:if test="${ !empty workList }">
 						<c:forEach items="${ workList }" var="aWork">
 							<div class="col-lg-4 col-md-6">
 								<div class="member" data-aos="zoom-in" data-aos-delay="100">
@@ -462,6 +443,43 @@ header {height: 215px;}
 					<c:if test="${ empty workList  }">
 						<h3>등록된 작품이 없습니다.</h3>
 					</c:if>
+				</div>
+				<br><br>
+				<div id="workPaging" data-aos="fade-up">
+					<!-- 이전 --> 
+					<c:if test="${pi.currentPage <= 1 }">
+						< &nbsp;
+					</c:if> 
+					<c:if test="${pi.currentPage >1 }">
+						<c:url var="before" value="artistInfoPage.na">
+							<c:param name="page" value="${pi.currentPage -1 }"/>
+						</c:url>
+						<a class="workhover" href="${before }"> < &nbsp; </a>
+						</c:if>
+						 <!-- 페이지 --> 
+						<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+							<c:url var="pagination" value="artistInfoPage.na">
+								<c:param name="artistId" value="${ artistInfo.artistId }"/>
+								<c:param name="page" value="${p }"/>
+							</c:url>
+							<c:if test="${p eq pi.currentPage }">
+								<font color="#cda45e" style="text-decoration:underline;">${ p }</font><!-- ddddddddddddd -->
+							</c:if>
+							<c:if test="${p ne pi.currentPage }">
+								<a class="workhover" href="${ pagination }">${ p }</a>
+							</c:if>
+						</c:forEach> 
+						<!-- 다음 --> 
+						<c:if test="${pi.currentPage >= pi.maxPage }">
+							&nbsp; > 
+						</c:if>
+						 <c:if test="${pi.currentPage < pi.maxPage }">
+							<c:url var="after" value="artistInfoPage.na">
+								<c:param name="artistId" value="${ artistInfo.artistId }"/>
+								<c:param name="page" value="${pi.currentPage + 1 }"/>
+							</c:url>
+							<a class="workhover" href="${after }"> &nbsp; > </a>&nbsp;
+						 </c:if>
 				</div>
 			</div>
 		</div>
@@ -522,7 +540,7 @@ header {height: 215px;}
 
 
 	<!-- ======= 후기 섹션 ======= -->
-	<section id="testimonials" class="testimonials section-bg" id="focusArea">
+	<section id="testimonials" class="FFFabout testimonials section-bg" id="focusArea">
 		<div class="container" data-aos="fade-up">
 			<div class="section-title" id="nextReview">
 				<h2>후 기</h2>
@@ -550,14 +568,7 @@ header {height: 215px;}
 		</c:forTokens>
 	</section>
 	
-  
-	<!-- End Testimonials Section -->
-		
-		
-		
-	<!-- End Contact Section -->
-
-
+	
 	<!-- Vendor JS Files -->
 	<script src="resources/assets/vendor/jquery/jquery.min.js"></script>
 	<script
@@ -572,9 +583,7 @@ header {height: 215px;}
 	<script src="resources/assets/vendor/aos/aos.js"></script>
 	<!-- Template Main JS File -->
 	<script src="resources/assets/js/main.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a8e5007416460a5bee56aaba2bb1ea6d&libraries=services"></script>
-
-
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a8e5007416460a5bee56aaba2bb1ea6d&libraries=services"></script>
 		<script>
 		// 지도
 		var workAddress = document.getElementById('address').value;
@@ -583,23 +592,15 @@ header {height: 215px;}
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 	        level: 3 // 지도의 확대 레벨
 		    };  
-		
 		// 지도를 생성합니다    
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
-		
-		
-		
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
-		
 		// 주소로 좌표를 검색합니다
 		geocoder.addressSearch(workAddress, function(result, status) {
-		
 		    // 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {
-		
 		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		
 		        // 결과값으로 받은 위치를 마커로 표시합니다
 		        var marker = new kakao.maps.Marker({
 		            map: map,
@@ -624,7 +625,6 @@ header {height: 215px;}
 		                    '        </div>' + 
 		                    '    </div>' +    
 		                    '</div>';
-		            	
 		        // 마커 위에 커스텀오버레이를 표시합니다
 		        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
 		        var overlay = new kakao.maps.CustomOverlay({
@@ -645,30 +645,7 @@ header {height: 215px;}
 		        }
 			}
 		});
-		
 	</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<!-- 아티스트 모달 업데이트  -->
@@ -858,7 +835,6 @@ header {height: 215px;}
 								WorkFile <input type="file" class="form-control fileCheck changeWork"
 									name="uploadFile">
 							</div>
-<!--ㅇㅇㅇㅇㅇㅇㅇㅇㅇ  -->
 							<!-- 작품 스타일 -->
 							<div class="col-lg-4 col-md-6 form-group">
 								Tatto Style <select name="workStyle"
@@ -981,15 +957,6 @@ header {height: 215px;}
 				});
 			});
 		</script>
-
-
-
-
-
-
-
-
-
 	<script>
 		function optionCheck(){
  			var fileCheck = $(".fileCheck").val();
@@ -1192,7 +1159,7 @@ header {height: 215px;}
 
 	<!-- 아티스트 가격등록 -->
 	<div class="modal fade" id="modalArtistPrice" tabindex="-1" role="dialog" aria-labelledby="ARTIST_TITLE" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
 			<!-- 센터모달창 추가  modal-dialog-centered -->
 			<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
 				<div class="modal-header">
@@ -1204,14 +1171,14 @@ header {height: 215px;}
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body book-a-table">
+				<div class="modal-body book-a-table" style="align:center;">
 					<form action="updateArtistPrice.na" method="post" role="form" class="php-email-form priceActionCheck" data-aos="fade-up"
 						data-aos-delay="100" enctype="multipart/form-data">
 						<div>
 							<!-- 스타일 -->
 							<div class="col-lg-4 col-md-6 form-group">
 								Tatto Style <select name="pStyle"
-									class="form-control tattoStyle" id="name">
+									class="form-control tattoStyle" id="name" style="width:500px;">
 									<option value="pleaseSelect" selected>작품 스타일</option>
 									<option value="올드스쿨">올드스쿨</option>
 									<option value="이레즈미">이레즈미</option>
@@ -1224,42 +1191,37 @@ header {height: 215px;}
 							</div>
 
 							<!-- 사이즈에 따른 가격 -->
-							<div class="col-lg-4 col-md-6 form-group tattolayer"
-								style="display: none;">
-								38x38mm <input type="text"
-									onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-									name="pSize1" class="form-control" id="name"
-									placeholder="가격을 정해주세요." data-rule="minlen:1"
-									data-msg="가격을 정해주세요"><br> 38x64mm <input
-									type="text"
-									onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-									name="pSize2" class="form-control" id="name"
-									placeholder="가격을 정해주세요." data-rule="minlen:1"
-									data-msg="가격을 정해주세요"><br> 65x76mm <input
-									type="text"
-									onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-									name="pSize3" class="form-control" id="name"
-									placeholder="가격을 정해주세요." data-rule="minlen:1"
-									data-msg="가격을 정해주세요"><br> 102x127mm <input
-									type="text"
-									onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-									name="pSize4" class="form-control" id="name"
-									placeholder="가격을 정해주세요." data-rule="minlen:1"
-									data-msg="가격을 정해주세요"><br> 152x152mm <input
-									type="text"
-									onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-									name="pSize5" class="form-control" id="name"
-									placeholder="가격을 정해주세요." data-rule="minlen:1"
-									data-msg="가격을 정해주세요"><br> 203x152mm <input
-									type="text"
-									onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-									name="pSize6" class="form-control" id="name"
-									placeholder="가격을 정해주세요." data-rule="minlen:1"
-									data-msg="가격을 정해주세요"><br> 210x297mm <input
-									type="text"
-									onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-									name="pSize7" class="form-control" id="name"
-									placeholder="가격을 정해주세요." data-rule="minlen:1"
+							<div class="col-lg-4 col-md-6 form-group tattolayer" style="display: none;">
+								38x38mm 
+								<input type="text" style="width:500px;" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+									name="pSize1" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1"
+									data-msg="가격을 정해주세요"><br>
+								38x64mm 
+								<input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+									name="pSize2" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1"
+									data-msg="가격을 정해주세요"><br> 
+								65x76mm 
+								<input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+									name="pSize3" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1"
+									data-msg="가격을 정해주세요"><br> 
+									
+								102x127mm
+								<input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+									name="pSize4" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1"
+									data-msg="가격을 정해주세요"><br>
+									 
+								152x152mm 
+								<input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+									name="pSize5" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1"
+									data-msg="가격을 정해주세요"><br>
+									
+								203x152mm
+								<input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+									name="pSize6" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1"
+									data-msg="가격을 정해주세요"><br>
+								210x297mm 
+								<input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+									name="pSize7" class="form-control" id="name" placeholder="가격을 정해주세요." data-rule="minlen:1"
 									data-msg="가격을 정해주세요"><br>
 								<div class="validate"></div>
 							</div>
@@ -1281,7 +1243,6 @@ header {height: 215px;}
 			</div>
 		</div>
 	</div>
-
 	<footer>
 		<jsp:include page="../common/InfoFooter.jsp" />
 	</footer>
@@ -1310,7 +1271,6 @@ header {height: 215px;}
 				});
 			}
 		}
-		
 		function deleteFollowing(){
 			var artistId2 = "${ artistInfo.artistId }";
 			var customerId2 = "${ loginCustomer.customerId }";
@@ -1335,8 +1295,6 @@ header {height: 215px;}
 				});
 			}
 		}  	
-		
-  	
   	</script>
   	
   	
@@ -1509,7 +1467,6 @@ header {height: 215px;}
  			alert("작업이 끝난 고객입니다.")
  		}
 	</script>  	
-  		<!-- ㅂㅈㄷ -->
 	<script>
 		$(function(){
 			getReviewList(1);
@@ -1529,11 +1486,6 @@ header {height: 215px;}
 				success : function(data){
 					console.log("실행후" + data.pi.currentPage);
 					var $review = "";
-					/* var $pageArea = $("#pageArea");
-					$pageArea.html(""); */
-					/* $("#reviewAjax").children().html(""); */
-					/* $("#nextReview").parent().html("html",""); */
-					/* 리뷰뿌려주기 */
 					$("#pageArea").html("");
 					$("#nextReview").parent().children("#reviewAjax").remove();
 					console.log(data);
@@ -1577,11 +1529,11 @@ header {height: 215px;}
 					
 					for( var i = data.pi.startPage; i < data.pi.endPage+1; i++) {
 						if(i == parseInt(data.pi.currentPage)) {
-							$6 = $("<a style='text-decoration: underline; color:orange;' onclick='getReviewList("+ i +")';>").text(i);
+							$6 = $("<a class='workhover' style='text-decoration: underline; color:orange;' onclick='getReviewList("+ i +")';>").text(i);
 							$span.append($6);
 							
 						}else {
-							$6 = $("<a onclick='getReviewList("+ i +")';>").text(i);
+							$6 = $("<a class='workhover' onclick='getReviewList("+ i +")';>").text(i);
 							$span.append($6);
 						}
 					}
@@ -1593,8 +1545,6 @@ header {height: 215px;}
 					}
 					$("#pageArea").append($span);
 					
-					/* var offset = $("#focusArea").offset(); //선택한 태그의 위치를 반환
-					$("html").animate({scrollTop : offset.top}, 600); */			
 				}
 			});
 		}

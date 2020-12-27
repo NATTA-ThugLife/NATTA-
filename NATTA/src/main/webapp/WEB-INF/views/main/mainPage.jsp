@@ -119,7 +119,7 @@
   <!-- <main id="main"> -->
 
     <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+    <section id="about" class="mainAbout">
       <div class="container" data-aos="fade-up">
 
         <div class="row" style="margin-left:250px;">

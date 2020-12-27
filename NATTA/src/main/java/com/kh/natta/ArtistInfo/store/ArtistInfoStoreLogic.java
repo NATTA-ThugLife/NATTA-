@@ -63,8 +63,10 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 	}
 
 	@Override
-	public ArrayList<ArtistWork> selectListArtistWork(String artistId) {
-		return (ArrayList)sqlSession.selectList("ArtistWorkMapper.selectOneArtist", artistId);
+	public ArrayList<ArtistWork> selectListArtistWork(String artistId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("ArtistWorkMapper.selectOneArtist", artistId, rowBounds);
 	}
 
 	@Override
@@ -161,6 +163,11 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 	}
 
 
+
+	@Override
+	public int getWorkCount(String artistId) {
+		return sqlSession.selectOne("ArtistInfoMapper.getWorkCount",artistId);
+	}
 
 	
 
