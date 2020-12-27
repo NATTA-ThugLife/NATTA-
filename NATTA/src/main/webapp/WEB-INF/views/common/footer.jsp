@@ -9,6 +9,7 @@
   <title>NATTA!</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
+  <link href="resources/images/tugcat.png" rel="shortcut icon">
   
 
 

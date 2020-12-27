@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>맞춤도안 게시글 리스트</title>
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 <style>
 .customDesign th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
 .customDesign td {padding: 20px;width: 800px;}

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    	<link href="resources/images/tugcat.png" rel="shortcut icon">
         <meta charset="utf-8">
         <title>맞춤도안 게시판 수정</title>
         <!-- Make sure the path to CKEditor is correct. -->

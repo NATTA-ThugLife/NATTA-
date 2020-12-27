@@ -6,6 +6,7 @@
     <head>
         <meta charset="utf-8">
         <title>맞춤도안 게시판 디테일</title>
+        <link href="resources/images/tugcat.png" rel="shortcut icon">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <!-- Make sure the path to CKEditor is correct. -->
         <script src="/resources/ckeditor/ckeditor.js"></script>

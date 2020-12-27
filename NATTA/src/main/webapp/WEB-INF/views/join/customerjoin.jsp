@@ -4,6 +4,7 @@
 <html> 
 <head>
 <meta charset="UTF-8">
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 <script type="text/javascript"
    src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>회원 가입</title>

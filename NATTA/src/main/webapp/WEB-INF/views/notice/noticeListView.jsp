@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항</title>
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 <style>
 .customDesign th {
 	border-bottom: 0.01px solid dimgrey;

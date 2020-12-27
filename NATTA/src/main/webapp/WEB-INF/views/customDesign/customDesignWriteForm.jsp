@@ -5,6 +5,7 @@
     <head>
         <meta charset="utf-8">
         <title>맞춤도안 게시판 등록</title>
+        <link href="resources/images/tugcat.png" rel="shortcut icon">
         <!-- Make sure the path to CKEditor is correct. -->
         <script src="/resources/ckeditor/ckeditor.js"></script>
         <style>

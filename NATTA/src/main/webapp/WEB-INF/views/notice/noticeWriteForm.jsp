@@ -19,6 +19,7 @@
 	border-radius: 0.25rem;
 }
 </style>
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 </head>
 <body>
 	<header>

@@ -48,6 +48,7 @@
 		border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 </style>
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 </head>
 <body>
 	<header>

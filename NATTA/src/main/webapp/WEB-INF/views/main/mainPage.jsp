@@ -14,9 +14,6 @@
 	<!-- 고양이 아이콘   -->
   <link href="resources/images/tugcat.png" rel="shortcut icon">
 
-  <!-- Google Fonts -->
-  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> -->
-
   <!-- Vendor CSS Files -->
   <link href="resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="resources/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
@@ -102,14 +99,14 @@
         <div class="col-lg-8">
           <h1><span>NATTA ! </span></h1>
           <h2>다양한 아티스트들을 만나보세요.</h2>
-
-          <!-- <div class="btns">
-            <a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Menu</a>
+		<div class="btns">
+            <a href="artistList.na" class="btn-menu animated fadeInUp scrollto">아티스트 목록보기</a>
             <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Book a Table</a>
-          </div> -->
+          </div>
+          
         </div>
         <div class="col-lg-4 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="200">
-          <a href="https://www.youtube.com/watch?v=GlrxcuEDyF8" class="venobox play-btn" data-vbtype="video" data-autoplay="true"></a>
+          <a href="https://www.youtube.com/watch?v=0k1VPlOZoSM" class="venobox play-btn" data-vbtype="video" data-autoplay="true"></a>
         </div>
 
       </div>
@@ -123,11 +120,6 @@
       <div class="container" data-aos="fade-up">
 
         <div class="row" style="margin-left:250px;">
-          <!-- <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
-            <div class="about-img">
-              <img src="resources/assets/img/about.jpg" alt="">
-            </div>
-          </div> -->
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
             <h3>타투란? </h3>
             <p style="width:800px;">
@@ -135,9 +127,6 @@
 				우리나라에서의 타투는 과거 조직폭력의 상징으로 여겨지면서 그동안 타투에 대한 부정적 편견으로 인하여 대중적인 호응을 많이 받지 못하였지만 
 				<br>요즈음은 보통 사람들도 다양한 동기와 개성의 표현으로 몸에 문신을 새기고 있고,<br>이제는 시대가 바뀌었습니다.
             </p>
-<!--             <ul>
-              <li><i class="icofont-check-circled"></i>asdasddassadsaddsasadsdaad</li>
-            </ul> -->
             <p style="width:800px;">
 				최근 10여 년간 타투기술과 장비의 급속한 발전으로 국내에서도
 				 타투를 하는 사람들이 크게 증가하여 이제는 우리나라에서도 인정하지 않을 수 없는 또 하나의 “토착문화”로 이미 정착되었으며<br> 
@@ -148,67 +137,27 @@
 
       </div>
     </section><!-- End About Section -->
-
-    <!-- ======= Why Us Section ======= -->
- <!--    <section id="why-us" class="why-us">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Why Us</h2>
-          <p>Why Choose Our Restaurant</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-4">
-            <div class="box" data-aos="zoom-in" data-aos-delay="100">
-              <span>01</span>
-              <h4>Lorem Ipsum</h4>
-              <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="zoom-in" data-aos-delay="200">
-              <span>02</span>
-              <h4>Repellat Nihil</h4>
-              <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="zoom-in" data-aos-delay="300">
-              <span>03</span>
-              <h4> Ad ad velit qui</h4>
-              <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>End Why Us Section -->
     <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
 	<script type="text/javascript">
         $(document).ready(function() {
-        $("#workList").trigger("click");
+ 	       $("#workList").trigger("click");
         });
     </script>
     <!-- ======= Menu Section ======= -->
 	<section id="artistRank" class="menu section-bg">
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
-				<h2>아티스트 순위</h2>
-				<p>종목별 아티스트 순위</p>
+				<h2>Rank</h2>
+				<p>아티스트 랭킹</p>
 			</div>
 
 			<div class="row" data-aos="fade-up" data-aos-delay="100">
 				<div class="col-lg-12 d-flex justify-content-center">
 					<ul id="menu-flters">
-						<li id="workList" data-filter=".filter-work" class="filter-active">작품순위</li>
-						<li data-filter=".filter-review">리뷰순위</li>
-						<li data-filter=".filter-follow">팔로우순위</li>
-						<li><a href="artistList.na">ArtistList</a></li>
+						<li id="workList" data-filter=".filter-work" class="filter-active">작품</li>
+						<li data-filter=".filter-review">리뷰</li>
+						<li data-filter=".filter-follow">팔로우</li>
+						<li><a href="artistList.na">리스트</a></li>
 					</ul>
 				</div>
 			</div>
@@ -222,7 +171,7 @@
 							src="resources/artistInfoFile/Profile/${ artList.myReProfile }"
 							class="menu-img" alt="">
 						<div class="menu-contents">
-							<a href="artistInfoPage.na?artistId=${artList.artistId }">${artList.name }</a><span></span>
+							<a href="artistInfoPage.na?artistId=${artList.artistId }">&nbsp;&nbsp;&nbsp;${artList.name }</a><span></span>
 						</div>
 						<div class="menu-ingredients">${artList.myInfo }</div>
 					</div>
@@ -259,7 +208,7 @@
     
 
     <!-- ======= Specials Section ======= -->
-<!--     <section id="specials" class="specials">
+  <!--    <section id="specials" class="specials">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -354,10 +303,10 @@
         </div>
 
       </div>
-    </section>End Specials Section -->
+    </section> -->
 
     <!-- ======= Events Section ======= -->
-   <!--  <section id="events" class="events">
+<!--     <section id="events" class="events">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title" style="">
@@ -421,7 +370,8 @@
         </div>
 
       </div>
-    </section> --><!-- End Events Section -->
+    </section>  -->
+    <!-- End Events Section -->
 
     <!-- ======= Book A Table Section ======= -->
  
@@ -501,8 +451,8 @@
 
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>오늘의 아티스트 작품</h2>
-          <p>최신 작품리스트</p>
+          <h2>Recently Added</h2>
+          <p>최근 등록된 작품</p>
         </div>
       </div>
 
@@ -514,7 +464,7 @@
 		<c:forEach items="${latelyWork }" var="artList">
 		<div class="col-lg-3 col-md-4">
           <div class="gallery-item">
-              <a href="resources/artistInfoFile/WorkFile/${ artList.workReImgPath }" class="venobox" data-gall="gallery-item">
+              <a href="artistInfoPage.na?artistId=${ artList.artistId }">
                 <img style="width:500px; height:500px;" src="resources/artistInfoFile/WorkFile/${ artList.workReImgPath }" alt="" class="img-fluid">
               </a>
             </div>

@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 <title>공지사항</title>
 <style>
        div.replyModal { position:relative; z-index:1; display:none;}

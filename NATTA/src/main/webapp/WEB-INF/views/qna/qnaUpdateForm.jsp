@@ -27,6 +27,7 @@
 <head>
 <meta charset="UTF-8">
 <title>QnA 수정</title>
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 </head>
 <body>
     <header>
