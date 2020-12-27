@@ -63,26 +63,26 @@
 				<div class="col-lg-16 mt-8 mt-lg-0">
 					<form action="customDesignInsert.na" method="post"
 						enctype="multipart/form-data">
+						<br><br>
 						<div class="form-rrrow">
 							
 								<input class="form-control" type="hidden" name="customerId"
 								value="${loginCustomer.customerId }" readonly>
 								
-							
 
 							<div class="col-md-7 form-group">
 								<div style="width: 200px; float: left"></div>
 								<div class="col-md-7 form-group">
-									<div style="float: left">제목 :</div>
-									<input class="form-control" type="text" id="customTitle"
-										name="customTitle">
+									<div style="float: left">제목</div>
+									
+									<input class="form-control" type="text" id="customTitle" name="customTitle">
 								</div>
 							</div>
 
 							<div class="col-md-7 form-group">
 								<div style="width: 200px; float: left"></div>
 								<div class="col-md-7 form-group">
-									<div style="float: left">타투스타일 :</div>
+									<div style="float: left">타투스타일</div>
 									<select class="form-control" name="tattooType">
 										<option value="올드스쿨">올드스쿨</option>
 										<option value="이레즈미">이레즈미</option>
