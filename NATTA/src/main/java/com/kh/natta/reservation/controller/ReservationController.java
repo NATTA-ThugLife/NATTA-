@@ -48,13 +48,12 @@ public class ReservationController {
 		
 		
 		@RequestMapping(value="reservation.na",method=RequestMethod.GET)
-		public  String reservation(String artistId, Model model,HttpServletResponse response) throws Exception {
+		public  String reservation(String artistId,String img,Model model,HttpServletResponse response) throws Exception {
 			ArtistInfo infoPage = infoService.selectOneArtistInfo(artistId);
 			Artist artist = rService.selectOneArtist(artistId);
 			ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);	
 			ArrayList<Reservation> date = rService.selectListDate(artistId);
-			System.out.println(date);
-			
+			System.out.println("아티스트작품"+img);
 			ArrayList<String> reservedList = new ArrayList<String>();
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 			try {
@@ -73,6 +72,7 @@ public class ReservationController {
 			model.addAttribute("priceList",priceList);
 			model.addAttribute("artist",artist);
 			model.addAttribute("artistInfo",infoPage);
+			model.addAttribute("work",img);
 			return "Reservation/reservation";
 		}
 		
@@ -85,13 +85,16 @@ public class ReservationController {
 			String size = tattooSize.substring(tattooSize.indexOf(",")+1,tattooSize.length());
 			
 			reservation.setTattooSize(size);
-			
+			System.out.println("예약전"+reservation);
+			System.out.println(uploadFile);
+			if(uploadFile != null) {
 			if(!uploadFile.getOriginalFilename().equals("")) {
 				String renameFilename = saveFile(uploadFile,request);
 				if(renameFilename != null) {
 					reservation.setOriginalFilename(uploadFile.getOriginalFilename());
 					reservation.setRenameFilename(renameFilename);
 				}
+			}
 			}
 			
 			int result = 0;
@@ -161,6 +164,7 @@ public class ReservationController {
 		
 		// 예약 도안 등록
 		public String saveFile(MultipartFile file, HttpServletRequest request) {
+			
 			// 파일 저장 경로
 			String root = request.getSession().getServletContext().getRealPath("resources/images");
 			String savePath = root + "\\ruploadFiles";
@@ -171,8 +175,6 @@ public class ReservationController {
 			if(!folder.exists()) {
 				folder.mkdir();
 			}
-			// 공지사항 첨부파일은 파일명 변환없이 바로 저장했지만
-			// 게시판 같은 경우 많은 회원들이 동시에 올릴 수도 있고, 같은 이름의 파일을 올릴 수도 있기 때문에
 			// 파일명을 rename하는 과정이 필요함. rename할땐 "년월시분초.확장자"로 변경 필요
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 			String originalFilename = file.getOriginalFilename();

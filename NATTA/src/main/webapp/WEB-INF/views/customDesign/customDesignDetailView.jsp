@@ -12,7 +12,7 @@
         <style>
 		 div.replyModal { position:relative; z-index:1; display:none;}
 		 div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:-1; }
-		 div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:500px; height:400px; padding:20px 10px; background:#fff; border:2px solid #666; }
+		 div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:700px; height:430px; padding:20px 10px; background:#fff; border:2px solid #666; }
 		 div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
 		 div.modalContent button.modal_cancel { margin-left:20px; }
 		</style>
@@ -28,6 +28,26 @@
 		  .datgle{
 		  	 border-bottom: 1px solid #cda45e;
 		  }
+		</style>
+		<style>
+		.btnl {
+		  display: inline-block;
+		  font-weight: 400;
+		  color: #cda45e;
+		  text-align: center;
+		  vertical-align: middle;
+		  -webkit-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		  background-color: transparent;
+		  border: 1px solid transparent;
+		  padding: 0.375rem 0.75rem;
+		  font-size: 1rem;
+		  line-height: 1.5;
+		  border-radius: 0.25rem;
+		  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+		}
 		</style>
 		<style>
 			.customDesign th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
@@ -121,7 +141,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="right">
-					<input type="button" class="btn btn-default" value="댓글등록" id="cSubmit">
+					<input type="button" class="btnl btn-default" value="댓글등록" id="cSubmit">
 				</td>
 			</tr>
 		</table>
@@ -145,9 +165,9 @@
 		 <script>CKEDITOR.replace('cContentsModify',{filebrowserUploadUrl:'/mine/imageUpload.na'});</script>
 		</div>
 		
-		<div>
-		 <button type="button" class="modal_modify_btn">수정</button>
-		 <button type="button" class="modal_cancel">취소</button>
+		<div align="right">
+		 <button type="button" class="modal_modify_btn btnl">수정</button>
+		 <button type="button" class="modal_cancel btnl">취소</button>
 		</div>
 		 
 		</div>
@@ -238,7 +258,8 @@
 							
 							$ccCreateDate = $("<td>").text('작성일 : '+data.ccList[i].ccCreateDate);
 						
-							$modify = $("<td><button class='modify' data-customCCode='"+data.ccList[i].customCCode+"'>수정</button> <button class='delete' data-customCCode='"+data.ccList[i].customCCode+"'>삭제</button>");
+							//$modify = $("<td><button class='modify' data-customCCode='"+data.ccList[i].customCCode+"'>수정</button> <button class='delete' data-customCCode='"+data.ccList[i].customCCode+"'>삭제</button>");
+							$modify = $("<td><input type='button' class='modify btnl btn-default' data-customCCode='"+data.ccList[i].customCCode+"' value='수정'> <input type='button' class='delete btnl btn-default' data-customCCode='"+data.ccList[i].customCCode+"' value='삭제'>");
 							
 							$secret = $("<td align='center' colspan='4'>").html('비밀글입니다.');
 							
