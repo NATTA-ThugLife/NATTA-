@@ -1,6 +1,5 @@
 package com.kh.natta.ArtistInfo.controller;
 
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletResponse;

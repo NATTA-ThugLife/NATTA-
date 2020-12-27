@@ -17,13 +17,15 @@
 	}
 	
 	.video-background {
-		background: #000;
-		position: fixed;
-		top: 0;
+		/* background: #000; */
+		background : url("resources/assets/img/nattaBack/mainback.jpg") center center;
+		background-size: cover;
+		 position: fixed; 
+		 top: 0;
 		right: 0;
 		bottom: 0;
-		left: 0;
-		z-index: -99;
+		left: 0; 
+		z-index: -99; 
 	}
 	
 	.video-foreground, .video-background iframe {
@@ -89,19 +91,20 @@
 </head>
 <body>
 	<h1 style="text-align: center; color: #fff">
-		<img src="resources/images/tugcat.png">
+		<!-- <img src="resources/images/tugcat.png"> -->
 	</h1>
 
 	<div id="indexBtn" class="center">
 		<!-- url 요청을 *.kh로 받도록 web.xml에서 설정을 해주어야 함. -->
 		<!-- 고침? -->
-		<button id="visual-btn" onclick="location.href='main.na';">NATTA!</button>
+		<button id="visual-btn" onclick="location.href='main.na';">N A T T A</button>
 	</div>
 
 	<div class="video-background">
-		<div class="video-background">
+		<!-- <div class="video-background">|
 			<div id="muteYouTubeVideoPlayer"></div>
-		</div>
+			<img alt="" src="resources/assets/img/nattaBack/mainback.jpg">
+		</div> -->
 	</div>
 	
 	<div class="video-film"></div>

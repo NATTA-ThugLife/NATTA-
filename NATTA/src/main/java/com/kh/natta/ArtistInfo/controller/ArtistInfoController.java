@@ -278,7 +278,7 @@ public class ArtistInfoController {
 		String path = null;
 		result = infoService.registerArtistInfo(artistInfo);
 		if( result > 0 ) {
-			path ="main/mainPage";
+			path ="redirect:main.na";
 		}else {
 			System.out.println("ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ");
 		}

@@ -10,8 +10,7 @@
 <title>NATTA!</title>
 <meta content="" name="descriptison">
 <meta content="" name="keywords">
-<link href="resources/assets/img/apple-touch-icon.png"
-	rel="apple-touch-icon">
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
@@ -472,7 +471,7 @@ header {height: 215px;}
 				<p>타투 견적</p>
 			</div>
 			<div class="artistPriceTable">
-				<table>
+				<table style="width:1100px;">
 					<thead>
 						<tr>
 							<th>Style</th>
@@ -483,7 +482,7 @@ header {height: 215px;}
 							<th>152 x 152</th>
 							<th>203 x 152 (A5)</th>
 							<th>210 x 297 (A4)</th>
-							<td>mm/원</td>
+							<th rowspan="4" style="width:20px;">mm/원</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -523,7 +522,7 @@ header {height: 215px;}
 		<div class="container" data-aos="fade-up">
 			<div class="section-title" id="nextReview">
 				<h2>후 기</h2>
-				<p>${ artistInfo.name }님의 타투는 어땠나요 ?</p>
+				<p>${ artistInfo.name } 님의 타투 후기</p>
 			</div>
 		</div>
        <!-- 페이징 시작 -->
@@ -534,7 +533,7 @@ header {height: 215px;}
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
 				<h2>${ artistinfo.name }</h2>
-				<p>${ artistInfo.name } 의 작업실 </p>
+				<p>${ artistInfo.name } 주소 </p>
 			</div>
 			<div id="map" class="info" style="width:1200px; height: 607px;"></div>
 		</div>
@@ -769,7 +768,7 @@ header {height: 215px;}
 						<div>
 							<!-- 타투샵이름 -->
 							<div class="col-lg-4 col-md-6 form-group">
-								ARTIST SHOP NAME <input type="text" value="" name="name"
+								아티스트 숍 이름 <input type="text" value="" name="name"
 									class="form-control artistShopName" id="name"
 									placeholder="Your Name" data-rule="minlen:4"
 									data-msg="1글자 이상 입력해주세요.">
@@ -780,15 +779,19 @@ header {height: 215px;}
 								<c:if test="${ empty artistInfo.myProfile }">
 				                             프로필 사진 선택 
 				              <input type="file"
-										class="form-control artistmodalProfileName" name="reloadFile">
+										class="form-control artistmodalProfileName changeProfile" name="reloadFile">
 								</c:if>
 								<c:if test="${ !empty artistInfo.myProfile }">
 				              	기존 사진<input type="text" class="form-control"
 										id="InfoProfile" name="myProfile" value="" readonly>
 				              	수정할 사진<input type="file"
-										class="form-control artistmodalProfileName" name="uploadFile">
+										class="form-control artistmodalProfileName changeProfile" name="uploadFile">
 								</c:if>
+								 <div style="display:inline-block;">
+									<img src="" id="modifyPhoto" style="width : 330px; height: 200px; color:red;" alt="첨부된 이미지가 없습니다.">
+								</div>	
 							</div>
+
 							<!-- 자기소개  -->
 							<div class="form-group">
 								INFO
@@ -848,10 +851,10 @@ header {height: 215px;}
 						<div>
 							<!-- 작품 사진파일-->
 							<div class="col-lg-4 col-md-6 form-group">
-								WorkFile <input type="file" class="form-control fileCheck"
+								WorkFile <input type="file" class="form-control fileCheck changeWork"
 									name="uploadFile">
 							</div>
-
+<!--ㅇㅇㅇㅇㅇㅇㅇㅇㅇ  -->
 							<!-- 작품 스타일 -->
 							<div class="col-lg-4 col-md-6 form-group">
 								Tatto Style <select name="workStyle"
@@ -859,9 +862,10 @@ header {height: 215px;}
 									<option value="pleaseSelect" id="optionKing" selected>등록할
 										타투스타일</option>
 								</select>
+								<img src="" id="modifyPhoto2" style="width : 330px; height: 200px; color:red;" alt="첨부된 이미지가 없습니다.">
 								<div class="validate"></div>
 							</div>
-
+							
 							<!-- 작품소개  -->
 							<div class="form-group">
 								작품소개
@@ -931,7 +935,7 @@ header {height: 215px;}
 								<img
 									src="resources/customerProfile/${ fList.customerId }/${ fList.customerProfile }"
 									class="img-fluid rounded-circle"
-									style="margin-left: 15px auto; width: 30px; height: 30px; border: 3px solid #2c2f3f;">
+									style="margin-left: 15px auto; width: 80px; height: 80px; border: 3px solid #2c2f3f;">
 								<nav class="nav-menu d-none d-lg-block" data-aos="fade-in"
 									style="width: 80%">
 									<h3 style="float: left; margin-left: 25px;">${ fList.customerId }
@@ -943,24 +947,7 @@ header {height: 215px;}
 										<i class="fas fa-user-minus" style="color: black;"></i>
 									</button>
 								</div>
-							</c:if>
-							<c:if test="${ fList.customerProfile eq null }">
-								<img
-									src="resources/artistInfoFile/Profile/NATTAprofile.png"
-									alt="" class="img-fluid rounded-circle"
-									style="margin-left: 15px auto; width: 30px; height: 30px; border: 3px solid #2c2f3f;">
-								<nav class="nav-menu d-none d-lg-block" data-aos="fade-in"
-									style="width: 80%">
-									<h3 style="float: left; margin-left: 25px;">${ fList.customerId }
-									</h3>
-								</nav>
-								<div style="width: 20%; float: left;">
-									<button type="button" class="close followDelete"
-										value="${ fList.customerId }" aria-label="Close">
-										<i class="fas fa-user-minus" style="color: black;"></i>
-									</button>
-								</div>
-							</c:if>							
+							</c:if>					
 						</div>
 						<br>
 					</c:forEach>
@@ -1089,9 +1076,10 @@ header {height: 215px;}
 					}
 				});
 			
-				
+				/* ddddddddd */
 			$("#insertInfo").on("click", function(){
 				var artistId = "${ loginArtist.artistId }";
+				var path = "resources/artistInfoFile/Profile/${ artistInfo.myReProfile }";
 				$.ajax({
 					url : "artistChecking.na",
 					type : "post",
@@ -1107,6 +1095,7 @@ header {height: 215px;}
 								$("#InfoReProfile").prop("value", decodeURIComponent(check.myReProfile.replace(/\+/g," ")));
 								$(".modalActionCheck").prop("action", "UpdateArtistInfo.na");
 								$(".artistInfoButton").html("MyInfo Update");
+								$("#modifyPhoto").attr("src",path);
 								$("#modalInfo").modal();
 							}else {
 								$(".modalActionCheck").prop("action", "InsertArtistInfo.na");
@@ -1118,8 +1107,45 @@ header {height: 215px;}
 					});
 				});
 	 		});
-			
-			
+		
+		/* 이미지 변경될 때 마다 그거 ㅇㅇ  */
+		$(function() {
+		     function readURL(input) {
+	             if (input.files && input.files[0]) {
+	                 var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+	                 reader.onload = function (e) {
+	                 //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	                     $('#modifyPhoto').attr('src', e.target.result);
+	                     //이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
+	                     //(아래 코드에서 읽어들인 dataURL형식)
+	                 }                   
+	                 reader.readAsDataURL(input.files[0]);
+	                 //File내용을 읽어 dataURL형식의 문자열로 저장
+	             }
+		     }
+		     function readURL2(input) {
+	             if (input.files && input.files[0]) {
+	                 var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+	                 reader.onload = function (e) {
+	                 //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	                     $('#modifyPhoto2').attr('src', e.target.result);
+	                     //이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
+	                     //(아래 코드에서 읽어들인 dataURL형식)
+	                 }                   
+	                 reader.readAsDataURL(input.files[0]);
+	                 //File내용을 읽어 dataURL형식의 문자열로 저장
+	             }
+		     }		     
+            $(".changeProfile").on('change', function(){
+                readURL(this);
+            });
+            $(".changeWork").on('change', function(){
+            	readURL2(this);
+            });
+        });
+
+
+
 			/* 작품 수정버튼 클릭시 작품정보 및 스타일 출력  */
 			$(".updateWork").on("click", function(){
 				 $("option").remove(".styleDelete");
@@ -1185,9 +1211,9 @@ header {height: 215px;}
 									<option value="pleaseSelect" selected>작품 스타일</option>
 									<option value="올드스쿨">올드스쿨</option>
 									<option value="이레즈미">이레즈미</option>
+									<option value="레터링">레터링</option>
 									<option value="트라이벌">트라이벌</option>
 									<option value="리얼리스틱">리얼리스틱</option>
-									<option value="레터링">레터링</option>
 									<option value="치카노">치카노</option>
 								</select>
 								<div class="validate"></div>
@@ -1496,6 +1522,7 @@ header {height: 215px;}
 					$pageArea.html(""); */
 					/* $("#reviewAjax").children().html(""); */
 					/* $("#nextReview").parent().html("html",""); */
+					/* 리뷰뿌려주기 */
 					$("#pageArea").html("");
 					$("#nextReview").parent().children("#reviewAjax").remove();
 					console.log(data);
@@ -1504,7 +1531,7 @@ header {height: 215px;}
 								if( data.aReview[i].reviewPhoto != null ){
 									$review += "<div class='testimonial-item' style='height:50px;' id='reviewAjax' data-aos='fade-up'>";
 									$review += "<p><span>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' 님의 후기입니다. </span>"
-										     + "<a href='resources/artistInfoFile/WorkFile/20201214171218.png' target='_blank'><i class='icofont-camera'></i></a>"
+										     + "<a href='resources/review/"+(data.aReview[i].reviewCode)+"/"+(data.aReview[i].reviewPhoto)+"' target='_blank'><i class='icofont-camera'></i></a>"
 											 + "<br><br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
 											 + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
 											 + "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p>";
