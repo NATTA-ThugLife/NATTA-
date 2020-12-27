@@ -40,6 +40,11 @@ public class ArtistWorkStoreLogic implements ArtistWorkStore {
 		return sqlSession.selectOne("ArtistWorkMapper.selectArtistWork", workCode);
 	}
 
+	@Override
+	public ArrayList<ArtistWork> selectListLately() {
+		return (ArrayList)sqlSession.selectList("ArtistWorkMapper.selectListLately");
+	}
+
 
 	
 	

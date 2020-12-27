@@ -310,6 +310,7 @@ public class CustomDesignController {
     	for(CustomComment c : ccList) {
     		c.setcContents(URLEncoder.encode(c.getcContents(),"utf-8"));
     	}
+
     	HashMap<String, Object> commentMap = new HashMap<String, Object>();
     	commentMap.put("pi", pi);
     	commentMap.put("ccList", ccList);

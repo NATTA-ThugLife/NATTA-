@@ -8,6 +8,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>NATTA!</title>
+  
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 	<!-- 고양이 아이콘   -->
@@ -187,62 +188,73 @@
 
       </div>
     </section>End Why Us Section -->
-
+    <script src="resources/assets/vendor/jquery/jquery.min.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function() {
+        $("#workList").trigger("click");
+        });
+    </script>
     <!-- ======= Menu Section ======= -->
-    <section id="artistRank" class="menu section-bg">
-      <div class="container" data-aos="fade-up">
+	<section id="artistRank" class="menu section-bg">
+		<div class="container" data-aos="fade-up">
+			<div class="section-title">
+				<h2>아티스트 순위</h2>
+				<p>종목별 아티스트 순위</p>
+			</div>
 
-        <div class="section-title">
-          <h2>Menu</h2>
-          <p>Check Our Tasty Menu</p>
-        </div>
+			<div class="row" data-aos="fade-up" data-aos-delay="100">
+				<div class="col-lg-12 d-flex justify-content-center">
+					<ul id="menu-flters">
+						<li id="workList" data-filter=".filter-work" class="filter-active">작품순위</li>
+						<li data-filter=".filter-review">리뷰순위</li>
+						<li data-filter=".filter-follow">팔로우순위</li>
+						<li><a href="artistList.na">ArtistList</a></li>
+					</ul>
+				</div>
+			</div>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="menu-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-work">작품순위</li>
-              <li data-filter=".filter-review">리뷰순위</li>
-              <li data-filter=".filter-follow">팔로우순위</li>
-              <li><a href="artistList.na">ArtistList</a></li>
-            </ul>
-          </div>
-        </div>
-		
-        <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
-       
-         <c:forEach items="${artistInfo }" var="artList">
-          <div class="col-lg-6 menu-item filter-work">
-            <img src="resources/artistInfoFile/Profile/${ artList.myReProfile }" class="menu-img" alt="">
-            <div class="menu-contents">
-              <a href="artistInfoPage.na?artistId=${artList.artistId }">${artList.name }</a><span></span>
-            </div>
-            <div class="menu-ingredients">
-            ${artList.myInfo }
-            </div>
-          </div>
-		</c:forEach>
-          <div class="col-lg-6 menu-item filter-review">
-            <img src="resources/assets/img/menu/cake.jpg" class="menu-img" alt="">
-            <div class="menu-contents">
-              <a href="#">Crab Cake</a><span>$7.95</span>
-            </div>
-            <div class="menu-ingredients">
-              A delicate crab cake served on a toasted roll with lettuce and tartar sauce
-            </div>
-          </div>
+			<div class="row menu-container" data-aos="fade-up"
+				data-aos-delay="200">
 
-          <div class="col-lg-6 menu-item filter-follow">
-            <img src="resources/assets/img/menu/caesar.jpg" class="menu-img" alt="">
-            <div class="menu-contents">
-              <a href="#">Caesar Selections</a><span>$8.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
-      </div>
-    </section><!-- End Menu Section -->
+				<c:forEach items="${artistInfo }" var="artList">
+					<div class="col-lg-6 menu-item filter-work">
+						<img style="width: 70px; height: 70.27px;"
+							src="resources/artistInfoFile/Profile/${ artList.myReProfile }"
+							class="menu-img" alt="">
+						<div class="menu-contents">
+							<a href="artistInfoPage.na?artistId=${artList.artistId }">${artList.name }</a><span></span>
+						</div>
+						<div class="menu-ingredients">${artList.myInfo }</div>
+					</div>
+				</c:forEach>
+
+				<c:forEach items="${reviewInfo }" var="artList">
+					<div class="col-lg-6 menu-item filter-review">
+						<img style="width: 70px; height: 70.27px;"
+							src="resources/artistInfoFile/Profile/${ artList.myReProfile }"
+							class="menu-img" alt="">
+						<div class="menu-contents">
+							<a href="artistInfoPage.na?artistId=${artList.artistId }">${artList.name }</a><span></span>
+						</div>
+						<div class="menu-ingredients">${artList.myInfo }</div>
+					</div>
+				</c:forEach>
+
+				<c:forEach items="${followInfo }" var="artList">
+					<div class="col-lg-6 menu-item filter-follow">
+						<img style="width: 70px; height: 70.27px;"
+							src="resources/artistInfoFile/Profile/${ artList.myReProfile }"
+							class="menu-img" alt="">
+						<div class="menu-contents">
+							<a href="artistInfoPage.na?artistId=${artList.artistId }">${artList.name }</a><span></span>
+						</div>
+						<div class="menu-ingredients">${artList.myInfo }</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</section>
+	<!-- End Menu Section -->
     
     
 
@@ -345,7 +357,7 @@
     </section>End Specials Section -->
 
     <!-- ======= Events Section ======= -->
-    <section id="events" class="events">
+   <!--  <section id="events" class="events">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title" style="">
@@ -363,10 +375,10 @@
               </p>              
             </div>
             <div class="col-lg-6 pt-4 pt-lg-0 content">
-<!--               <h3>Birthday Parties</h3>
+              <h3>Birthday Parties</h3>
               <div class="price">
                 <p><span>$189</span></p>
-              </div> -->
+              </div>
               <img src="resources/assets/img/nattaBack/ta8.jpg"style="width:500px; height:350px;"class="img-fluid" alt="">
               <p>
                	사진
@@ -409,7 +421,7 @@
         </div>
 
       </div>
-    </section><!-- End Events Section -->
+    </section> --><!-- End Events Section -->
 
     <!-- ======= Book A Table Section ======= -->
  
@@ -494,76 +506,23 @@
         </div>
       </div>
 
-      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+      <div style="width:70%;" class="container-fluid" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row no-gutters">
 			<!-- 훔치기2 -->
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="resources/assets/img/gallery/gallery-1.jpg" class="venobox" data-gall="gallery-item">
-                <img src="resources/assets/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
+          
+		<c:forEach items="${latelyWork }" var="artList">
+		<div class="col-lg-3 col-md-4">
+          <div class="gallery-item">
+              <a href="resources/artistInfoFile/WorkFile/${ artList.workReImgPath }" class="venobox" data-gall="gallery-item">
+                <img style="width:500px; height:500px;" src="resources/artistInfoFile/WorkFile/${ artList.workReImgPath }" alt="" class="img-fluid">
               </a>
             </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="resources/assets/img/gallery/gallery-2.jpg" class="venobox" data-gall="gallery-item">
-                <img src="resources/assets/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
-              </a>
             </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="resources/assets/img/gallery/gallery-3.jpg" class="venobox" data-gall="gallery-item">
-                <img src="resources/assets/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="resources/assets/img/gallery/gallery-4.jpg" class="venobox" data-gall="gallery-item">
-                <img src="resources/assets/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="resources/assets/img/gallery/gallery-5.jpg" class="venobox" data-gall="gallery-item">
-                <img src="resources/assets/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="resources/assets/img/gallery/gallery-6.jpg" class="venobox" data-gall="gallery-item">
-                <img src="resources/assets/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="resources/assets/img/gallery/gallery-7.jpg" class="venobox" data-gall="gallery-item">
-                <img src="resources/assets/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="resources/assets/img/gallery/gallery-8.jpg" class="venobox" data-gall="gallery-item">
-                <img src="resources/assets/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
+        </c:forEach>
+          
 
         </div>
-
       </div>
     </section><!-- End Gallery Section -->
 

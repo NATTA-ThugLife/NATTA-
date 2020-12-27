@@ -38,5 +38,5 @@ public interface ArtistWorkStore {
 	
 	public ArtistWork selectArtistWork(int workCode);
 	
-	
+	public ArrayList<ArtistWork> selectListLately();
 }

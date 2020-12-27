@@ -150,6 +150,18 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 		return (ArrayList)sqlSession.selectList("ArtistInfoMapper.selectListArtistInfo");
 	}
 
+	@Override
+	public ArrayList<ArtistInfo> selectListReviewInfo() {
+		return (ArrayList)sqlSession.selectList("ArtistInfoMapper.selectListReviewInfo");
+	}
+
+	@Override
+	public ArrayList<ArtistInfo> selectListFollowInfo() {
+		return (ArrayList)sqlSession.selectList("ArtistInfoMapper.selectListFollowInfo");
+	}
+
+
+
 	
 
 }

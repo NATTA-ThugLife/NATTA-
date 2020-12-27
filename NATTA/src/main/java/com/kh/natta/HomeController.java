@@ -29,6 +29,7 @@ public class HomeController {
 	
 	@Autowired
 	private ArtistInfoService infoService;
+	
 	@Autowired
 	private ArtistWorkService awService;
 	
@@ -38,9 +39,19 @@ public class HomeController {
 	
 	@RequestMapping(value = "main.na", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		ArrayList<ArtistInfo> artistInfo = infoService.selectListArtistInfo();
-		System.out.println(artistInfo);
-		model.addAttribute("artistInfo",artistInfo);
+		// 작품 탑10
+		ArrayList<ArtistInfo> workInfo = infoService.selectListArtistInfo();
+		// 리뷰 탑10
+		ArrayList<ArtistInfo> reviewInfo = infoService.selectListReviewInfo();
+		// 팔로우 탑10
+		ArrayList<ArtistInfo> followInfo = infoService.selectListFollowInfo();
+		// 최신 작품
+		ArrayList<ArtistWork> latelyWork = awService.selectListLately();
+		
+		model.addAttribute("artistInfo",workInfo);
+		model.addAttribute("reviewInfo",reviewInfo);
+		model.addAttribute("followInfo",followInfo);
+		model.addAttribute("latelyWork",latelyWork);
 		return "/main/mainPage";
 	}
 	

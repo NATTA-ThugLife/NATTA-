@@ -191,17 +191,28 @@
 		WHERE ARTIST_ID = #{artistId} AND PASSWORD = #{password}
 	</select>
 	
-	
+	<!-- 작품 TOP10 -->
 	<select id="selectListArtistInfo" resultMap="artistInfoMap">
 		SELECT * FROM (SELECT ARTIST_ID,NAME,MY_REPROFILE,MY_INFO FROM WORK JOIN ARTISTINFO USING(ARTIST_ID)
 		GROUP BY ARTIST_ID,NAME,MY_REPROFILE,MY_INFO
 		ORDER BY COUNT(*) DESC)
         <![CDATA[WHERE ROWNUM <=10]]>
 	</select>
+	<!-- 리뷰 TOP10 -->
+	<select id="selectListReviewInfo" resultMap="artistInfoMap">
+		SELECT * FROM (SELECT ARTIST_ID,NAME,MY_REPROFILE,MY_INFO FROM REVIEW JOIN ARTISTINFO USING(ARTIST_ID)
+		GROUP BY ARTIST_ID,NAME,MY_REPROFILE,MY_INFO
+		ORDER BY COUNT(*) DESC)
+        <![CDATA[WHERE ROWNUM <=10]]>
+	</select>
 	
-	
-	
-	
+	<!-- 팔로우 TOP10 -->
+	<select id="selectListFollowInfo" resultMap="artistInfoMap">
+		SELECT * FROM (SELECT ARTIST_ID,NAME,MY_REPROFILE,MY_INFO FROM FOLLOWING JOIN ARTISTINFO USING(ARTIST_ID)
+		GROUP BY ARTIST_ID,NAME,MY_REPROFILE,MY_INFO
+		ORDER BY COUNT(*) DESC)
+        <![CDATA[WHERE ROWNUM <=10]]>
+	</select>
 	
 	
 </mapper>

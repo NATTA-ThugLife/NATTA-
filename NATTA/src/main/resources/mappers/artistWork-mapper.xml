@@ -40,4 +40,11 @@
 		WHERE WORK_CODE = #{workCode}
 	</select>
 	
+	<select id="selectListLately" resultMap="artistWorkMap">
+		SELECT * FROM 
+		(SELECT * FROM WORK
+		ORDER BY ROWNUM DESC)
+		<![CDATA[WHERE ROWNUM <=8]]>
+	</select>
+	
 </mapper>

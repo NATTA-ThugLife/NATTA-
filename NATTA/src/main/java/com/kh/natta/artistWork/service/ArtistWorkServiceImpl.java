@@ -40,6 +40,11 @@ public class ArtistWorkServiceImpl implements ArtistWorkService {
 		return awStore.selectArtistWork(workCode);
 	}
 
+	@Override
+	public ArrayList<ArtistWork> selectListLately() {
+		return awStore.selectListLately();
+	}
+
 	
 	
 	

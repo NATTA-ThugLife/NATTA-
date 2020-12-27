@@ -135,6 +135,18 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 		return infoStore.selectListArtistInfo();
 	}
 
+	@Override
+	public ArrayList<ArtistInfo> selectListReviewInfo() {
+		return infoStore.selectListReviewInfo();
+	}
+
+	@Override
+	public ArrayList<ArtistInfo> selectListFollowInfo() {
+		return infoStore.selectListFollowInfo();
+	}
+
+
+
 
 
 

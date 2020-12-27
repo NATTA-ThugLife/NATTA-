@@ -40,6 +40,8 @@ public interface ArtistWorkService {
 	
 	public ArtistWork selectArtistWork(int workCode);
 	
+	public ArrayList<ArtistWork> selectListLately();
+	
 	
 	
 }

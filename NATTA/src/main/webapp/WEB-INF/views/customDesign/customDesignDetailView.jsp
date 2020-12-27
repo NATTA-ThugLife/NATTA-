@@ -12,7 +12,7 @@
         <style>
 		 div.replyModal { position:relative; z-index:1; display:none;}
 		 div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:-1; }
-		 div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:700px; height:430px; padding:20px 10px; background:#fff; border:2px solid #666; }
+		 div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:700px; height:480px; padding:20px 10px; border:2px solid #666; }
 		 div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
 		 div.modalContent button.modal_cancel { margin-left:20px; }
 		</style>
@@ -84,7 +84,8 @@
 							<td colspan="2" align="center"><c:url var="cList"
 									value="customDesignList.na">
 									<c:param name="page" value="${currentPage }"></c:param>
-								</c:url> <a href="${cList }">목록으로</a> <c:if
+									</c:url> 
+									 <c:if
 									test="${customDesign.customerId eq loginCustomer.customerId}">
 									<c:url var="cModify" value="customDesignModifyView.na">
 										<c:param name="customCode" value="${customDesign.customCode }"></c:param>
@@ -93,8 +94,9 @@
 									<c:url var="cDelete" value="customDesignDelete.na">
 										<c:param name="customCode" value="${customDesign.customCode }"></c:param>
 									</c:url>
-									<a href="${cModify }">수정하기</a>
-									<a href="${cDelete }" onclick="return deleteCustom();">삭제하기</a>
+									<a href="${cModify }">수정</a>
+									<a href="${cDelete }" onclick="return deleteCustom();">삭제</a>
+									<a href="${cList }">목록</a>
 								</c:if></td>
 						</tr>
 					</tfoot>
@@ -126,19 +128,23 @@
   		<!-- 댓글 등록 -->
 
 		<table align="center" style="width:1100px;">
+			
+			
 			<tr>
 				<td width="90px;">
-				<input type="radio" name="cOnOff" value="0" checked><span>공개</span>
-				<br><br>
+					<input type="radio" name="cOnOff" value="0" checked><span>공개</span>
 					<input type="radio" name="cOnOff" value="1"><span>비공개</span>
 				</td>
+			</tr>
+			<tr>
+				
 				<td><textarea id="cContents" name="cContents"></textarea>
-				<td><script>
+			<script>
 					CKEDITOR.replace('cContents', {
 						filebrowserUploadUrl : '/mine/imageUpload.na'
 					});
-				</script>
-			</tr>
+			</script>
+			
 			<tr>
 				<td colspan="2" align="right">
 					<input type="button" class="btnl btn-default" value="댓글등록" id="cSubmit">
@@ -153,12 +159,18 @@
 	<input type="hidden" id=Code value="${customDesign.customCode }">
 	
 	<!-- 댓글수정 모달창 -->
-	<div class="replyModal">
+	<div class="replyModal" style="background-color: rgba(255, 255, 255, 0.4);">
 	
 		<div class="modalContent">
 		<div>
-			<input type="radio" name="cOnOffModify" value="0" checked><span style="color:black;'">공개</span>
-			<input type="radio" name="cOnOffModify" value="1"><span style="color:black;'">비공개</span>
+			<h5 class="modal-title" id="TEST">
+				<b>댓글 수정</b>
+				<br><br>
+			</h5>
+		</div>
+		<div>
+			<input type="radio" name="cOnOffModify" value="0" checked><span style="color:white;'">공개</span>
+			<input type="radio" name="cOnOffModify" value="1"><span style="color:white;'">비공개</span>
 		</div>
 		<div>
 		 <textarea class="modal_repCon" name="cContentsModify"></textarea>
@@ -292,10 +304,10 @@
 					$tr = $("<tr align='center' height='20'>");
 					$td = $("<td colspan='3'>");
 					var $1 = '[이전]';
-					var $2 = $("<a id='iii' onclick='getCommentList("+parseInt(data.pi.currentPage-1)+")';>").text('[이전]');
-					var $3 = $("<font color='red' size='4'>");
+					var $2 = $("<a style='color: #cda45e' id='iii' onclick='getCommentList("+parseInt(data.pi.currentPage-1)+")';>").text('[이전]');
+					var $3 = $("<font color='#cda45e' size='4'>");
 					var $4 = '[다음]';
-					var $5 = $("<a id='iii'  onclick='getCommentList("+parseInt(data.pi.currentPage+1)+")';>").text('[다음]');
+					var $5 = $("<a style='color: #cda45e' id='iii'  onclick='getCommentList("+parseInt(data.pi.currentPage+1)+")';>").text('[다음]');
 					var $6;
 					if(data.pi.currentPage<=1){
 						$td.append($1);
@@ -305,7 +317,7 @@
 					}
 					for(var i = data.pi.startPage; i < data.pi.endPage+1; i++ ){
 						if(i == parseInt(data.pi.currentPage)){
-						$6 = $("<a style='color: red' onclick='getCommentList("+i+")';>").text('['+i+']');
+						$6 = $("<a style='color: #cda45e' onclick='getCommentList("+i+")';>").text('['+i+']');
 						$td.append($6);
 						}
 						else{

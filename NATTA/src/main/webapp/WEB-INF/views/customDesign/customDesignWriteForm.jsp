@@ -93,14 +93,21 @@
 									</select>
 								</div>
 							</div>
+							<div class="col-md-7 form-group" >
+								<div style="float:left;">
+								&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+									<input type="radio" name="onOff" value="0" checked><span>공개</span>
+									<input type="radio" name="onOff" value="1"><span>비공개</span>
+								</div>
+							</div>
 							<div style="width: 1000px;">
 								<div style="width: 150px; height: 340px; float: left">
-									<div id="radio">
+									<!-- <div id="radio">
 										<div style="width: 200px; align: center;">
 											<input type="radio" name="onOff" value="0" checked><span>공개</span>
 											<input type="radio" name="onOff" value="1"><span>비공개</span>
 										</div>
-									</div>
+									</div> -->
 								</div>
 								<div style="width: 800px; float: left">
 
@@ -117,8 +124,7 @@
 							</script>
 
 							<div style="width:1120px; align:center;">
-							<input type="button" class="btnl btn-default" value="게시글 작성"
-								onclick="return validate();"> 
+								<input type="submit" class="btnl btn-default" value="게시글 작성" onclick="return validate();"> 
 								<a href="customDesignList.na">목록으로</a>
 							</div>
 						</div>
@@ -137,7 +143,7 @@
 			if (CKEDITOR.instances.contents.getData() == "") {
 				alert("내용을 입력해주세요.")
 				return false;
-			} else {
+			}else{
 				return true;
 			}
 		}

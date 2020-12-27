@@ -91,7 +91,8 @@ span.error {
 						<tr>
 							<td>아이디</td>
 							<td><input type="text" name="customerId" id="customerId" required class="form-control2" style="border-color: #625b4b;">
-						        <input type="button" style="height: calc(1.5em + .75rem + 2px); vertical-align:middle;" value="중복 확인" onclick="checkDuplicate();">
+						        <!-- <input type="button" style="height: calc(1.5em + .75rem + 2px); vertical-align:middle;" value="중복 확인" onclick="checkDuplicate();"> -->
+						        <input type="button" style="height:35px; vertical-align:middle;" value="중복 확인" onclick="checkDuplicate();">
 						        <input type="hidden" id="idDuplicateCheck" value="0">
 						    </td>
 						</tr>

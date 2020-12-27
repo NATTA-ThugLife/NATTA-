@@ -146,4 +146,9 @@ public interface ArtistInfoService {
 	public ArrayList<Review> selectListReview(String artistId, PageInfo pi);
 	
 	public ArrayList<ArtistInfo> selectListArtistInfo();
+	
+	public ArrayList<ArtistInfo> selectListReviewInfo();
+	
+	public ArrayList<ArtistInfo> selectListFollowInfo();
+	
 }
