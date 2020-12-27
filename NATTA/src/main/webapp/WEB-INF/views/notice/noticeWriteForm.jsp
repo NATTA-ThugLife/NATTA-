@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 작성</title>
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 </head>
 <body>
     <header>

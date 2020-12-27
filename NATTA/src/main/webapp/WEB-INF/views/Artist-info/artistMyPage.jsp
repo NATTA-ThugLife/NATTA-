@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>아티스트 정보 수정</title>
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 </head>
 <body>
 <header>

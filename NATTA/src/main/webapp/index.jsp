@@ -18,7 +18,7 @@
 	
 	.video-background {
 		/* background: #000; */
-		background : url("resources/assets/img/nattaBack/mainback.jpg") center center;
+		background : url("resources/assets/img/nattaBack/bg1.jpg") center center;
 		background-size: cover;
 		 position: fixed; 
 		 top: 0;

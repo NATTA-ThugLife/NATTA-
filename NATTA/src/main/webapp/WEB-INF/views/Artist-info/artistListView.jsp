@@ -39,7 +39,7 @@
       <div class="container" data-aos="fade-up">
         <div class="section-title">
           <h2>All</h2>
-          <p>Artist List</p>
+          <p>아티스트 리스트</p>
         </div>
 	<c:if test="${ !empty aList }">
 		<c:forEach items="${ aList }" var="artist">
@@ -47,10 +47,9 @@
 			   		<c:param name="artistId" value="${ artist.artistId }"/>
 			   </c:url>
 	          <div class="testimonial-item" style="display:inline-block;">
-	            <p style="width:300px;">Artist Shop<br>
+	            <p style="width:300px;">Shop name<br>
 	              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
 	             	 <a href="${ artistInfoPage }">${ artist.name }</a>
-	             	 
 	              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
 	            </p>
 	            <c:if test="${ artist.myReProfile eq null }">

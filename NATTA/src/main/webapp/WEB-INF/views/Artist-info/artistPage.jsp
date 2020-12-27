@@ -145,6 +145,20 @@ header {height: 215px;}
 #workPaging {font-size: 25px; text-align:center;}
 .workhover { color : white; }
 .workhover:hover { color : #cda45e; }
+.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px; color:black; font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+.wrap * {padding: 0;margin: 0;}
+.wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+.info .close:hover {cursor: pointer;}
+.info .body {position: relative;overflow: hidden;}
+.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+.info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+.info .link {color: #5085BB;}
 </style>
 </head>
 <body>
@@ -283,7 +297,7 @@ header {height: 215px;}
 							<c:if test="${!empty sessionScope.loginCustomer }">
 							<li>
 							<a href="reservation.na?artistId=${ artistInfo.artistId }"><i
-									class="icofont-calendar"></i> Reservation</a></li>
+									class="icofont-calendar"></i> 예약하기</a></li>
 							</c:if>
 									
 								
@@ -306,7 +320,7 @@ header {height: 215px;}
 							
 							<c:if test="${ artistPageId eq loginArtist.artistId }">
 								<li><a href="/chatting.na"><i class="bx bx-envelope"></i>
-										My Message</a></li>
+										내 채팅</a></li>
 							</c:if>
 							<c:if test="${ artistPageId ne loginArtist.artistId }">
 								<li><a href="/chatting.na?artistId=${artistPageId }"><i
@@ -370,8 +384,9 @@ header {height: 215px;}
 							문의하세요 !</li>
 						<li><i class="icofont-check-circled"></i> 아티스트에게 솔직한 후기를
 							남겨주세요 !</li>
-						<li><i class="icofont-check-circled"></i> <font style="color:orange;">" ${ artistInfo.name } "</font> 님의 작품은  <br>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:orange;">${ wCount }</span> 개 등록되어 있습니다.</li>
+						<li><i class="icofont-check-circled"></i> <font style="color:orange;">" ${ artistInfo.name } "</font> 님 <br>
+							작품은  <span style="color:orange;">${ wCount }</span> 개 등록되어 있습니다. <br> 
+							리뷰는  <span style="color:orange;">${ rCount }</span> 개 등록되어 있습니다.</li>
 					</ul>
 					아티스트의 한 마디 ..<p style="color:orange;"> ${ artistInfo.myInfo }</p>
 				</div>
@@ -735,7 +750,7 @@ header {height: 215px;}
 				style="background-color: rgba(255, 255, 255, 0.4);">
 				<div class="modal-header">
 					<h5 class="modal-title" id="TEST">
-						<b>ARTIST INFO</b>
+						<b>아티스트 숍 소개</b>
 					</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -832,13 +847,12 @@ header {height: 215px;}
 						<div>
 							<!-- 작품 사진파일-->
 							<div class="col-lg-4 col-md-6 form-group">
-								WorkFile <input type="file" class="form-control fileCheck changeWork"
+								작품사진 <input type="file" class="form-control fileCheck changeWork"
 									name="uploadFile">
 							</div>
 							<!-- 작품 스타일 -->
 							<div class="col-lg-4 col-md-6 form-group">
-								Tatto Style <select name="workStyle"
-									class="form-control workStyle" id="name">
+								타투 스타일 <select name="workStyle" class="form-control workStyle" id="name">
 									<option value="pleaseSelect" id="optionKing" selected>등록할
 										타투스타일</option>
 								</select>
@@ -1164,7 +1178,7 @@ header {height: 215px;}
 			<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
 				<div class="modal-header">
 					<h5 class="modal-title" id="TEST">
-						<b>ARTIST WORK Price</b>
+						<b>아티스트 스타일별 가격 등록</b>
 					</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -1177,7 +1191,7 @@ header {height: 215px;}
 						<div>
 							<!-- 스타일 -->
 							<div class="col-lg-4 col-md-6 form-group">
-								Tatto Style <select name="pStyle"
+								타투 스타일 <select name="pStyle"
 									class="form-control tattoStyle" id="name" style="width:500px;">
 									<option value="pleaseSelect" selected>작품 스타일</option>
 									<option value="올드스쿨">올드스쿨</option>
@@ -1374,7 +1388,7 @@ header {height: 215px;}
 							var $reservationTime = $("<td>").text(data[r].reservationTime);
 							var $tattooSize = $("<td style='font-size:13px;'>").text(data[r].tattooSize);
 							var $price = $("<td>").html(data[r].price+"<br>won");
-							var $rCheck0 = $("<td>").html("<button value='"+data[r].reservationCode+"'  class='btn btn-outline-danger btn-sm' onclick='updateStatus(this,0);'>예약확정하기</button> <button value='"+data[r].reservationCode+"'  class='btn btn-outline-dark btn-sm rDelete' onclick='deleteStatus(this);'>예약취소</button>"); 
+							var $rCheck0 = $("<td>").html("<button value='"+data[r].reservationCode+"'  class='btn btn-outline-danger btn-sm' onclick='updateStatus(this,0);'>예약확정하기</button> <button value='"+data[r].reservationCode+"'  class='btn btn-outline-dark btn-sm rDelete' onclick='deleteStatus(this);'>예약취소</button>");
 							var $rCheck1 = $("<td>").html("<button value='"+data[r].reservationCode+"'  class='btn btn-outline-info btn-sm' onclick='updateStatus(this,1);'>타투완료하기</button>");
 							var $rCheck2 = $("<td>").html("<button value='"+data[r].reservationCode+"'  class='btn btn-success btn-sm' onclick='successStatus();'>타투완료</button>");
 							/* var $dCheck = $("<td>").html("<button value='"+data[r].reservationCode+"'  class='btn btn-outline-dark btn-sm nonono' onclick='deleteStatus(this,0);'>취소</button>"); */
@@ -1493,7 +1507,7 @@ header {height: 215px;}
 						for(i = 0; i < data.aReview.length; i++ ) {
 								if( data.aReview[i].reviewPhoto != null ){
 									$review += "<div class='testimonial-item' style='height:50px;' id='reviewAjax' data-aos='fade-up'>";
-									$review += "<p><span>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' 님의 후기입니다. </span>"
+									$review += "<p><span style='color:orange;'>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' </span> 님의 후기입니다. "
 										     + "<a href='resources/review/"+(data.aReview[i].reviewCode)+"/"+(data.aReview[i].reviewPhoto)+"' target='_blank'><i class='icofont-camera'></i></a>"
 											 + "<br><br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
 											 + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
@@ -1502,7 +1516,7 @@ header {height: 215px;}
 							} 
 								if( data.aReview[i].reviewPhoto == null ){
 								$review += "<div class='testimonial-item' style='height:50px;' id='reviewAjax' data-aos='fade-up'>";
-								$review += "<p><span>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' 님의 후기입니다.</span>"
+								$review += "<p><span style='color:orange;'>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' </span> 님의 후기입니다."
 										 + "<br><br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
 										 + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
 										 + "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p>";

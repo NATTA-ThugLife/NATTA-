@@ -12,6 +12,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
   />
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 <title>제목</title>
     <style>
 body {

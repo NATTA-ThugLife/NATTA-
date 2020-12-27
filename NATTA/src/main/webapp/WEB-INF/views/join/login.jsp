@@ -5,6 +5,7 @@
 <html> 
 <head>
 <meta charset="UTF-8">
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 <style>
 
 div.modal{ 

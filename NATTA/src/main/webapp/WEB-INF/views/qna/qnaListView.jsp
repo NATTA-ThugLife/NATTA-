@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 <style>
 .customDesign th {
    border-bottom: 0.01px solid dimgrey;
