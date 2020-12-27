@@ -78,7 +78,7 @@
 		</c:if>
 	</table>
 	</div><br><br>
-	
+	 
 	<!-- 댓글 등록 -->
 	<table align="center" width="250" >	
 		<tr>

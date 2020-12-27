@@ -50,7 +50,7 @@ public class QnaController {
 				mv.setViewName("qna/qnaListView");
 			return mv;
 	}
-	
+	 
 	//qna 상세 보기
 	@RequestMapping(value="qnaDetailView.na",method=RequestMethod.GET)
 		public ModelAndView qnaDetailView(ModelAndView mv, int qnaCode, Integer page){	

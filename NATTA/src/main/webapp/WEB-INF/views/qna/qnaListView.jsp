@@ -61,7 +61,7 @@
 				<c:url var="qDetail" value="qnaDetailView.na">
 					<c:param name="qnaCode" value="${qna.qnaCode }"></c:param>
 					<c:param name="page" value="${pi.currentPage }"></c:param>
-				</c:url>
+				</c:url> 
 				<tr id="custom" onclick="location.href='${qDetail}'">
 			<%-- </c:if>			
 			<c:if test="${empty loginCustomer && !empty loginArtist}">
