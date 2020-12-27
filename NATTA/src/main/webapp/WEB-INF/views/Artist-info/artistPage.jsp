@@ -430,7 +430,11 @@ header {height: 215px;}
 											<span>${ aWork.workStyle }</span>
 										</div>
 										<div class="social">
-											<a href="#" onclick="return confirm('예약하시겠습니까 ?')"><i
+											<c:url var="workReservation" value="reservation.na">
+												<c:param name="artistId" value="${aWork.artistId }"></c:param>
+												<c:param name="img" value="${aWork.workReImgPath }"></c:param>
+											</c:url>
+											<a href="${workReservation }" onclick="return confirm('예약하시겠습니까 ?')"><i
 												class="icofont-basket"></i></a> 
 												<a href="resources/artistInfoFile/WorkFile/${ aWork.workReImgPath }" class="venobox" data-gall="gallery-item">
 												<i class="icofont-camera"></i></a>
@@ -1372,7 +1376,10 @@ header {height: 215px;}
 						for( var r in data ){
 							var $artistName = $("<td>").text(decodeURIComponent(data[r].artistName.replace(/\+/g," ")));
 							var $renameFilename = $("<td>").text(decodeURIComponent(data[r].renameFilename.replace(/\+/g," ")));
+							var original = decodeURIComponent(data[r].originalFilename.replace(/\+/g," "));
+							
 							var $originalFilename = $("<td><a target='_blank' href='resources/images/ruploadFiles/"+decodeURIComponent(data[r].renameFilename.replace(/\+/g," "))+"'>도안보기</a>");
+							var $originalFilenameWork = $("<td><a target='_blank' href='resources/artistInfoFile/WorkFile/"+decodeURIComponent(data[r].renameFilename.replace(/\+/g," "))+"'>도안보기</a>");
 							 /* var $originalFilename = $("<td><img src='resources/images/ruploadFiles/"+decodeURIComponent(data[r].renameFilename.replace(/\+/g," "))+"' style='width:50px; height:50px;' class='imgBoom'>"); */
 							var $request = $("<td width='200'>").text(decodeURIComponent(data[r].request.replace(/\+/g," ")));
 							var $style = $("<td style='font-size:13px;'>").text(decodeURIComponent(data[r].style.replace(/\+/g," ")));
@@ -1392,7 +1399,11 @@ header {height: 215px;}
 							$tr.append($reservationDate);
 							$tr.append($reservationTime);
 							/* $tr.append($shopName); */
-							$tr.append($originalFilename);
+							if(original=='아티스트작품'){
+								$tr.append($originalFilenameWork)
+							}else{
+								$tr.append($originalFilename);
+							}
 							$tr.append($tattooSize);
 							$tr.append($price);
 							$tr.append($style);

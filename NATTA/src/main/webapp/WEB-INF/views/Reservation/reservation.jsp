@@ -186,38 +186,50 @@
 							</div>
 
 							<div style="width: 1000px;">
-							<div style="width: 500px; float:left">타투샵 위치 : </div>
 							<div style="width: 500px; float:left">도안 미리보기 : </div>
+							<div style="width: 500px; float:left">타투샵 위치 : </div>
 							</div>
 							<div style="width: 1000px;">
 								<div>
 									<div style="width: 500px; height: 400px; float: left">
+									<c:if test="${work eq null }">
 									<div id="preview"
 										style="width: 400x; height: 350px; float: center">
 										<!-- 미리보기 공간 -->
 									</div>
+									</c:if>
+									<c:if test="${work ne null}">
+									<div style="width: 400x; height: 350px; float: center">
+										<img style="width:400px; height: 350px;" src="resources/artistInfoFile/WorkFile/${ work }">
+									</div>
+									<input type="hidden" name="originalFilename" value="아티스트작품">
+									<input type="hidden" name="renameFilename" value="${work }">
+									<input type="hidden" name="upload" value="나니모나카타">
+									</c:if>
 									</div>
 									<div id="map" style="width: 400px; height: 350px; float: center"></div>
 									
 									
 								</div>
 							</div>
-
+							
+							<c:if test="${work eq null}">
 							<div class="col-md-6 form-group">
 							<input class="form-control" type="button" id="upfile" value="도안업로드"> 
 							<input type="file" id="upload" name="upload" style="display: none">
-						</div>
+							</div>
+							</c:if>
 						<div class="col-md-6 form-group">
 							<c:forEach items="${reservationDate }" var="reservation">
 								<input type="hidden" class="rDate" value="${reservation}">
 							</c:forEach>
 						</div>
-							
-						
+						<div>
 						<div style="float:left">
 						요구 사항 :
 						</div>
 							<textarea class="form-control" rows="10" cols="10000" id="request" name="request"></textarea>
+						</div>
 						</div>
 							<br>
 							<br>

@@ -479,6 +479,7 @@
 			      <td id="artistName${res.reservationCode }">${res.artistName }</td>
 			      <td id="style${res.reservationCode }">${res.style }</td>
 			      <td id="reservationDate${res.reservationCode }">${res.reservationDate }</td>
+			      <input type="hidden" value="${res.originalFilename }" id="originalImg${res.reservationCode }">
 			      <input type="hidden" value="${res.renameFilename }" id="resImg${res.reservationCode }">
 			      <input type="hidden" value="${res.tattooSize }" id="tattooSize${res.reservationCode }">
 			      <input type="hidden" value="${res.price }" id="price${res.reservationCode }">
@@ -868,6 +869,7 @@
 				var style = $("#style"+reservationCode).text();
 				var reservationDate = $("#reservationDate"+reservationCode).text();
 				var reservationTime = $("#reservationTime"+reservationCode).val();
+				var originalImg = $("#originalImg"+reservationCode).val();
 				var resImg = $("#resImg"+reservationCode).val();
 				var tattooSize = $("#tattooSize"+reservationCode).val();
 				var price = $("#price"+reservationCode).val();
@@ -884,7 +886,12 @@
 				$("#price").val(price);
 				$("#tattooSize").val(tattooSize);
 				$("#part").val(part);
+				if(originalImg =='아티스트작품' ){
+				$("#resImg").attr("src","resources/artistInfoFile/WorkFile/" + resImg);
+				}else{
 				$("#resImg").attr("src","/resources/images/ruploadFiles/" + resImg);
+				}
+				
 				$("#reservationCode").val(reservationCode);
 				if(status == 0){
 					$(".resButton").text("예약 취소");

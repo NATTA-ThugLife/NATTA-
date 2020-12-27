@@ -113,9 +113,10 @@ public class ArtistWorkController {
 	// 작품 삭제
 	@RequestMapping(value="deleteArtistWork.na", method=RequestMethod.GET)
 	public String artistWorkDelete(ArtistWork work, int workCode, HttpServletRequest request, Model model) {
-		if( work.getWorkImgPath() != null ) {
-			deleteWork(work.getWorkReImgPath(), request);
-		}
+		/*
+		 * if( work.getWorkImgPath() != null ) { deleteWork(work.getWorkReImgPath(),
+		 * request); }
+		 */
 		int result = awService.deleteArtistWork(workCode);
 		if ( result > 0 ) {
 			model.addAttribute("msg","선택하신 작품이 삭제되었습니다.");
@@ -128,14 +129,13 @@ public class ArtistWorkController {
 		}
 	}
 	// 수정시 파일삭제 메소드
-	public void deleteWork(String fileName, HttpServletRequest request) {
-		String root = request.getSession().getServletContext().getRealPath("resources/artistInfoFile");
-		String deletePath = root + "\\WorkFile";
-		File deleteWork = new File(deletePath + "\\" + fileName);
-		if( deleteWork.exists() ) {
-			deleteWork.delete();
-		}
-	}	
+	/*
+	 * public void deleteWork(String fileName, HttpServletRequest request) { String
+	 * root = request.getSession().getServletContext().getRealPath(
+	 * "resources/artistInfoFile"); String deletePath = root + "\\WorkFile"; File
+	 * deleteWork = new File(deletePath + "\\" + fileName); if( deleteWork.exists()
+	 * ) { deleteWork.delete(); } }
+	 */
 	
 	
 	
@@ -148,9 +148,10 @@ public class ArtistWorkController {
 		System.out.println(work);
 		System.out.println(reloadFile);
 		if( reloadFile != null && !reloadFile.isEmpty() ) {
-			if( work.getWorkImgPath() != null ) {
-				deleteWork(work.getWorkReImgPath(), request);
-			}
+			/*
+			 * if( work.getWorkImgPath() != null ) { deleteWork(work.getWorkReImgPath(),
+			 * request); }
+			 */
 			String renameFileName = saveFile(reloadFile, request);
 			if( renameFileName != null ) {
 				work.setWorkImgPath(reloadFile.getOriginalFilename());

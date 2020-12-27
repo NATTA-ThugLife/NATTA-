@@ -45,7 +45,7 @@ public class CustomerController {
 		// System.out.println(loginCustomer);
 		if (loginCustomer != null) {
 			session.setAttribute("loginCustomer", loginCustomer);
-			mv.setViewName("main/mainPage");
+			mv.setViewName("redirect:main.na");
 		} else {
 			mv.addObject("msg", "올바른 아이디와 비밀번호를 입력해주세요.").addObject("url","login.na").setViewName("common/Alert");
 		}
@@ -57,7 +57,7 @@ public class CustomerController {
 	public String customerLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "main/mainPage";
+		return "redirect:main.na";
 	}
 
 	// 회원가입 페이지
