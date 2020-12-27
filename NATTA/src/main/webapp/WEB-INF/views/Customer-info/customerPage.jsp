@@ -58,6 +58,15 @@
   border-color: #625b4b;
   color: white;
  }      
+ 
+ input[type=password] {
+        font-family: "나눔스퀘어 아닐때 쓸 글꼴";
+        
+        &::placeholder {
+        	font-family: "NanumSquare";
+        }
+    }
+ 
      .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px; color:black; font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
@@ -86,6 +95,22 @@
 	background: #cda45e;
 }
 
+.detailTable th { width: 800px; padding: 10px; }
+
+#detailTh{
+border-bottom: 0.01px solid #cda45e; width: 800px; padding: 10px;
+}
+.detailTable td {
+padding: 20px;
+width: 800px;
+}
+.detailTable {
+	border-spacing: 10px;
+    border-top: 0.6px solid #cda45e;
+    border-bottom: 0.6px solid #cda45e;
+    text-align: center;
+}
+
 	.btnA{
 	background: #b78839;
     border: 0;
@@ -97,6 +122,7 @@
     #modal-center{
     	padding-left: 30%;
     }
+    
  </style>
 
 </head>
@@ -169,7 +195,7 @@
           <!-- 고객 프로필 메뉴바 -->
         <ul style="list-style : none;">
              
-        	<li><a href="#mypage" ><i class="icofont-page"></i><span>처음으로</span></li>
+        	<li><a href="#mypage" ><i class="icofont-page"></i><span>맨 위로</span></li>
           	<li><a href="#modifyInfo" ><i class="bx bx-user"></i><span>정보 수정</span></a></li>
           	<li><a href="#following"><i class="icofont-heart"></i><span>팔로잉</span></a></li>
           	<li><a href="#reservationTable"><i class="icofont-calendar"></i> 예약</a></li>
@@ -283,7 +309,7 @@
                         <!-- 비밀번호 확인  -->
                         <div class="col-lg-7 col-md-6 form-group">
                              현재 비밀번호 
-                          <input type="text"  name="dupPwd" class="form-control" id="dupPwd" placeholder="Password">
+                          <input type="password"  name="dupPwd" class="form-control" id="dupPwd" placeholder="Password">
                           <div class="validate"></div>
                         </div>
                            
@@ -460,7 +486,7 @@
           <p>Reservation</p>
         </div>
         <div class="row" data-aos="fade-up" data-aos-delay="100">
-        	<table class="resTable" style="color : white; border: #cda45e">
+        	<table class="resTable" style="color : white;">
 			 <thead>
 			   <tr style="text-align: center;">
 			      <th>아티스트 샵</th>
@@ -640,7 +666,7 @@
 			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
 				<!-- 센터모달창 추가  modal-dialog-centered -->
-				<div class="modal-content" style="background: #242624;">
+				<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
 					<div class="modal-header">
 						<h5 class="modal-title" id="TEST">
 							<b>리뷰 정보</b>
@@ -656,14 +682,14 @@
 				          <div style="width: 50%; float: left; padding-left: 50px;">
 				         	<!-- 타투샵이름 -->
 				            <div class="col-lg-8 col-md-8 form-group">
-				              ARTIST SHOP NAME 
+				              	타투샵 명
 				              <input type="text" value="" name="artistId" class="form-control artistShopName" id="artistId" readonly>
 				              <input type="hidden" value="" name="reviewCode" id="reviewCode">
 				              <div class="validate"></div>
 				            </div>
 				            <!-- 리뷰사진 업로드-->
 				            <div class="col-lg-8 col-md-8 form-group">
-				              MY PROFILE 
+				              	리뷰 사진 
 				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile" id="reviewModifyUplodFile"> 
 				              <input type="hidden" name="originFile" id="originFile" value="">
 				            </div>
@@ -677,7 +703,7 @@
 			                  	<span style="color:#cda45e"><i class="far fa-star fa-2x grade" id="5"></i></span>
 			                  	<input type="hidden" name="reviewStar" id="reviewStar" value="">
 		                  	</div>
-				               CONTENT 
+				               	리뷰 내용 
 				               <textarea class="form-control artistmodalInfo" id="reviewContents" name="reviewContents" cols="10" rows="5" style="resize: none; width: 400px;"></textarea>
 				               <div class="validate"></div>
 				            </div>			
@@ -710,7 +736,7 @@
 			
 			
 				<!-- 센터모달창 추가  modal-dialog-centered -->
-				<div class="modal-content" style="background: #242624;">
+				<div class="modal-content" style="background-color: rgba(255, 255, 255, 0.4);">
 					<div class="modal-header">
 						<h5 class="modal-title" id="TEST" >
 							<b>리뷰 정보</b>
@@ -726,7 +752,7 @@
 				          <div style="width: 50%; float: left; padding-left: 50px;">
 				         	<!-- 타투샵이름 -->
 				            <div class="col-lg-8 col-md-8 form-group">
-				              ARTIST SHOP NAME 
+				              	타투샵 명 
 				              <input type="text" value="" name="shopName" class="form-control artistShopName" id="insertShopName" readonly>
 				              <input type="hidden" value="" name="reservationCode" id="insertReservationCode">
 				              <input type="hidden" value="" name="artistId" id="insertArtistId">
@@ -734,7 +760,7 @@
 				            </div>
 				            <!-- 리뷰사진 업로드-->
 				            <div class="col-lg-8 col-md-8 form-group">
-				              MY PROFILE 
+				              	리뷰 사진 
 				              <input type="file" class="form-control artistmodalProfileName" name="uploadFile" id="insertReviewFile"> 
 				            </div>
 				            <!-- 리뷰 내용  -->
@@ -747,7 +773,7 @@
 			                  	<span style="color:#cda45e" id="istar5"><i class="far fa-star fa-2x igrade 5" id="5"></i></span>
 			                  	<input type="hidden" name="reviewStar" id="ireviewStar" value="">
 		                  	</div>
-				               CONTENT 
+				               	리뷰 내용 
 				               <textarea class="form-control artistmodalInfo" id="insertReviewContents" name="reviewContents" cols="600" rows="5" style="resize: none; width: 400px;"></textarea>
 				               <div class="validate"></div>
 				            </div>	
@@ -773,13 +799,13 @@
     
       
     	<!-- 예약 디테일 뷰-->
+    	<form action="/deleteResvertion.na" method="post" role="form" class="php-email-form modalActionCheck" enctype="multipart/form-data" onsubmit="return checkDelete();">
 		<div class="modal fade" id="detailReservation" tabindex="-1" role="dialog"
-			aria-labelledby="ARTIST_TITLE" aria-hidden="true" >
+			aria-labelledby="ARTIST_TITLE" aria-hidden="true" style="">
 			
-			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document" >
-			
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
 				<!-- 센터모달창 추가  modal-dialog-centered -->
-				<div class="modal-content" style="background: #242624;">
+				<div class="modal-content" style="background-color: rgba(0, 0, 0, 0.8)">
 					<div class="modal-header">
 						<h5 class="modal-title" id="TEST">
 							<b>예약 정보</b>
@@ -789,60 +815,74 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
+					
 					<div class="modal-body book-a-table">
 					
-					<form action="/deleteResvertion.na" method="post" role="form" class="php-email-form modalActionCheck" enctype="multipart/form-data" onsubmit="return checkDelete();">
+					<div style="margin: 0 auto;">
+					
 				          <div>
-				          <div id="modal-center">
-				            <div class="col-lg-6 col-md-8 form-group">
-				              Artist Shop Name 
-				              <input type="text" value="" name="shopName" class="form-control" id="shopName" readonly>
-				              <input type="hidden" value="" name="reservationCode" class="form-control" id="reservationCode" readonly>
-				              <div class="validate"></div>
-				            </div>
-				            <div class="col-lg-6 col-md-8 form-group">
-				              Artist Name
-				              <input type="text" class="form-control" id="artistName" readonly> 
-				            </div>
-				            <div class="col-lg-6 col-md-8 form-group">
-				              reservation Date
-				              <input type="text" class="form-control" id="reservationDate" readonly> 
-				            </div>
-				            <div class="col-lg-6 col-md-8 form-group">
-				              Part
-				              <input type="text" class="form-control" id="part" readonly> 
-				            </div>
-				            <div class="col-lg-6 col-md-8 form-group">
-				              Style
-				              <input type="text" class="form-control" id="style" readonly> 
-				            </div>
-				            <div class="col-lg-6 col-md-8 form-group">
-				              Tattoo Size
-				              <input type="text" class="form-control" id="tattooSize" readonly> 
-				            </div>
-				            <div class="col-lg-6 col-md-8 form-group">
-				              Price
-				              <input type="text" class="form-control" id="price" readonly> 
-				            </div>
-				            <div class="col form-group">
-				                    Design<br>
-								<img src="" id="resImg" style="width : 300px; heigth:250px;'">              
+				            <table class="detailTable">
+				            <thead>
+				            	<tr id="detailTh"><th colspan="2">고객님의 예약 정보입니다.</th></tr>
+				            </thead>
+				            	<tr>
+				            		<th>타투샵 명</th>
+				            		<td>asd</td>
+				            	</tr>
+				            	<tr>
+				            		<th>아티스트 명</th>
+				            		<td>asd</td>
+				            	</tr>
+				            	<tr>
+				            		<th>예약 날짜/시간</th>
+				            		<td>asd</td>
+				            	</tr>
+				            	<tr>
+				            		<th>부위</th>
+				            		<td>asd</td>
+				            	</tr>
+				            	<tr>
+				            		<th>스타일</th>
+				            		<td>asd</td>
+				            	</tr>
+				            	<tr>
+				            		<th>타투 사이즈</th>
+				            		<td>asd</td>
+				            	</tr>
+				            	<tr>
+				            		<th>가격</th>
+				            		<td>asd</td>
+				            	</tr>
+				            </table>
+				            <div class="col form-group" style="margin-top:10px;">
+				                   	디자인 사진
+				                   	<span style="padding-left: 450px;">주소</span><br>
+				                   	
+				                 <div style="float: left; width : 50%; height:50%; margin-top : 10px;">
+								<img src="" id="resImg" style=" width: 100%; heigth:100%; float: left;">   
+								</div>
+							<div id="map" style=" width: 50%; height: 395px; float: left; margin-top : 10px;">
+							</div>	           
 				             </div>
-				            </div>
-				            <div class="col form-group">
-				            <div id="map" style=" width: 100%; height: 350px; margin-top: 10px;">
-							</div>		
-							</div>		            				            
+				                        				            
+				         
 				          </div>
-				          <div class="mb-3">
+				           
+				          
+				          
 				          </div>
-				          <div class="text-center"><button type="button" id="resButton" class="resButton btnA">닫기</button></div>
-				          </form>
+				          
+				          
 				          </div>
+					<div class="text-center">
+				         <button type="button" id="resButton" class="resButton btnA"  style="margin-top:25px;">닫기</button>
+				     </div>
+				          
 					</div>
 				</div>
 			
 		</div> 
+	</form>
   	<footer>
 		 <jsp:include page="../common/footer.jsp"/>  	 
   	</footer>
