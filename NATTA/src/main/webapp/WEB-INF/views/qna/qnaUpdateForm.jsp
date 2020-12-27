@@ -3,9 +3,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<style>
+.btnl {
+	display: inline-block;
+	font-weight: 400;
+	color: #cda45e;
+	text-align: center;
+	vertical-align: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-color: transparent;
+	border: 1px solid transparent;
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: 0.25rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+</style>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QnA 수정</title>
 </head>
 <body>
     <header>
@@ -21,9 +42,7 @@
 			</div>
 		</div>
 	    </section>
-
-	<br>
-	
+	<br>	
 	<form action="qnaUpdate.na" method="post">
 		<input type="hidden" name="page" value="${currentPage }">
 		<input type="hidden" name="qnaCode" value="${Qna.qnaCode }">				
@@ -51,8 +70,7 @@
 				</td>
 			</tr>
 		</table>
-	</form>
-	
+	</form>	
 	</section>
 	<br><br>
         

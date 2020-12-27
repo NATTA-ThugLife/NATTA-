@@ -78,6 +78,20 @@ input[type=button] {
 line-height:300%;
 }
 
+ .btn-new {
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+  line-height: 1;
+  color: #fff;
+  border: 2px solid #cda45e;
+  background: #cda45e;
+}
+}
+
 </style>
 </head>
 <body>
@@ -102,7 +116,7 @@ line-height:300%;
                   <tr>
                      <td>아이디</td>
                      <td><input type="text" name="customerId" id="customerId" required class="form-control2" style="border-color: #625b4b;">
-                          <input type="button" style="line-height:165%;" value="중복 확인" onclick="checkDuplicate();">
+                          <input type="button" class="btn-new" style="line-height:165%;" value="중복 확인" onclick="checkDuplicate();">
                           <input type="hidden" id="idDuplicateCheck" value="0">
                       </td>
                   </tr>
@@ -137,14 +151,14 @@ line-height:300%;
                   <tr>
                      <td>이메일</td>
                      <td><input type="email" name="email" id="email" required class="form-control2" style="border-color: #625b4b;">
-                         <input type="button" style="line-height:165%;" value="중복 확인" onclick="checkEmail();">
+                         <input type="button"  class="btn-new" style="line-height:165%;" value="중복 확인" onclick="checkEmail();">
                          <input type="hidden" id="emailDuplicateCheck" value="0">
                      </td>
                   </tr>
                   <tr>
                      <td>우편번호</td>
                      <td><input type="text" name="post" class="postcodify_postcode5 form-control2" size="6" readonly style="border-color: #625b4b;">
-                        <button type="button" style="line-height:165%;" id="postcodify_search_button">검색</button>
+                        <button type="button" class="btn-new" style="line-height:165%;" id="postcodify_search_button">검색</button>
                      </td>
                   </tr>
                   <tr>
@@ -178,7 +192,7 @@ line-height:300%;
                   <tr>
                      <td>아이디</td>
                      <td><input type="text" name="artistId" id="artistId" required class="form-control2" style="border-color: #625b4b;">
-                        <input type="button" style="line-height:165%;" value="중복 확인" onclick="checkDuplicate2();">
+                        <input type="button" class="btn-new" style="line-height:165%;" value="중복 확인" onclick="checkDuplicate2();">
                         <input type="hidden" id="idDuplicateCheck2" value="0">
                       </td>
                   </tr>
@@ -213,7 +227,7 @@ line-height:300%;
                   <tr>
                      <td>이메일</td>
                      <td><input type="email" name="email2" id="email2" required class="form-control2" style="border-color: #625b4b;">
-                         <input type="button" style="line-height:165%;" value="중복 확인" onclick="checkEmail2();">
+                         <input type="button" class="btn-new" style="line-height:165%;" value="중복 확인" onclick="checkEmail2();">
                          <input type="hidden" id="emailDuplicateCheck2" value="0">
                      </td>
                   </tr>
@@ -221,7 +235,7 @@ line-height:300%;
                   <tr>
                      <td>우편번호</td>
                      <td><input type="text" name="post" class="postcodify_postcode5 form-control2" size="6" readonly style="border-color: #625b4b;">
-                        <button type="button" style="line-height:165%;" id="postcodify_search_button2">검색</button>
+                        <button type="button" class="btn-new" style="line-height:165%;" id="postcodify_search_button2">검색</button>
                      </td>
                   </tr>
                   <tr>
@@ -230,7 +244,7 @@ line-height:300%;
                   </tr>
                   <tr>
                      <td>상세 주소</td>
-                     <td><input type="text" name="address2" class="postcodify_extra_info form-control2" style="border-color: #625b4b;"></td>
+                     <td><input type="text" class="btn-new" name="address2" class="postcodify_extra_info form-control2" style="border-color: #625b4b;"></td>
                   </tr>
 
                   <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
