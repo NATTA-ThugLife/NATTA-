@@ -11,23 +11,6 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <style>
 
-.findForm{
-box-shadow: none;
-background: #0c0b09;
-border-color: #625b4b;
-color: white;
-font-size: 14px;
-}
-
-#test{
- margin-top: 30px;
- background: #28251f;
- padding: 6px 10px;
- position: relative;
- border-radius: 50px;
- border: 1px solid #454035;
- }
-
 .button{
 	background: #cda45e;
 	border: 0;
@@ -73,7 +56,7 @@ font-size: 14px;
 								<td><input type="text" placeholder="이름을 입력하세요" name="customerName" class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 							</tr></tr><tr><td><br></td></tr>
 							<tr id="email">
-								<td>이메일</td>
+								<td>이메일&nbsp;&nbsp;</td>
 								<td><input type="text" placeholder="이메일을 입력하세요" name="email" class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 							</tr>
 							<tr id="phone" style="display:none;">

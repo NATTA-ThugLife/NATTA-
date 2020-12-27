@@ -48,7 +48,7 @@
 								</td>
 							</tr><tr><td><br></td></tr>
 							<tr id="emailForm">
-								<td id="changeText">이메일&nbsp;&nbsp;</td>
+								<td id="changeText">이메일</td>
 								<td><input type="text" placeholder="이메일을 입력하세요" name="email" id="chageInput" class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 							</tr></tr><tr><td><br></td></tr>							
 							<tr>
