@@ -5,16 +5,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="resources/images/tugcat.png" rel="shortcut icon">
 <meta charset="UTF-8">
-<title>NATTA @ ArtistList</title>
+<title>NATTA ArtistList</title>
 <style>
 	.Fabout {
-	  background: url("resources/assets/img/nattaBack/background1.jpg") center center;
+	  background: url("resources/assets/img/nattaBack/infoPage.jpg") center center;
 	  background-size: cover;
 	  position: relative;
 	  padding: 80px 0;
 	}
-/* 	.Fabout:before {
+ 	.Fabout:before {
 	  content: "";
 	  background: rgba(0, 0, 0, 0.8);
 	  position: absolute;
@@ -22,7 +23,7 @@
 	  top: 0;
 	  left: 0;
 	  right: 0;
-	} */
+	}
 </style>
 </head>
 <body>
@@ -70,13 +71,13 @@
 		<div data-aos="fade-up" style="text-align: center;">
 								<!-- 이전 --> 
 					<c:if test="${pi.currentPage <= 1 }">
-						[이전]&nbsp;
+						< &nbsp;
 					</c:if> 
 					<c:if test="${pi.currentPage >1 }">
 						<c:url var="before" value="artistList.na">
 							<c:param name="page" value="${pi.currentPage -1 }"></c:param>
 						</c:url>
-						<a href="${before }">[이전]</a>
+						<a href="${before }"> < &nbsp; </a>
 						</c:if>
 						 <!-- 페이지 --> 
 						<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
@@ -92,13 +93,13 @@
 						</c:forEach> 
 						<!-- 다음 --> 
 						<c:if test="${pi.currentPage >= pi.maxPage }">
-							[다음]&nbsp;
+							&nbsp; > 
 						</c:if>
 						 <c:if test="${pi.currentPage < pi.maxPage }">
 							<c:url var="after" value="artistList.na">
 								<c:param name="page" value="${pi.currentPage + 1 }"/>
 							</c:url>
-							<a href="${after }">[다음]</a>&nbsp;
+							<a href="${after }"> &nbsp; > </a>&nbsp;
 						 </c:if>
 			
 		</div>	        
