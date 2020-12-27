@@ -1,25 +1,6 @@
-/**
-* Template Name: Restaurantly - v1.1.0
-* Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-/* body {
-  font-family: "Open Sans", sans-serif;
-  background: #0c0b09;
-  color: #fff;
-}
- */
- /* @font-face {
-    font-family: 'Bazzi';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-} */
 @font-face {
     font-family: 'JSDongkang-Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/JSDongkang-RegularA1.woff') format('woff');
@@ -32,12 +13,8 @@ background: #0c0b09;
 color: #fff;
 }
 
-/* li {
-  font-size : 20px;
-} */
 a {
 	color: #cda45e;
-/* 	font-size : 20px; */
 }
 
 a:hover {
@@ -45,9 +22,7 @@ a:hover {
   text-decoration: none;
 }
 
-/* ������������  */
 h1, h2, h3, h4, h5, h6 {
-  /* font-family: "Playfair Display", serif; */
   font-family: 'JSDongkang-Regular';
 }
 
@@ -212,7 +187,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
   letter-spacing: 1px;
   text-transform: uppercase;
-  /* font-family: "Poppins", sans-serif; */
+  font-family: 'JSDongkang-Regular';
 }
 
 #header .logo a {
@@ -250,7 +225,7 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
   transition: 0.3s;
   font-size: 14px;
-  /* font-family: "Open Sans", sans-serif; */
+  font-family: 'JSDongkang-Regular';
 }
 
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
@@ -313,7 +288,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu .drop-down > a:after {
   content: "\ea99";
-  /* font-family: IcoFont; */
+  font-family: 'JSDongkang-Regular';
   padding-left: 5px;
 }
 
@@ -334,7 +309,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu .drop-down .drop-down > a:after {
   content: "\eaa0";
-  /* font-family: IcoFont; */
+  font-family: 'JSDongkang-Regular';
   position: absolute;
   right: 15px;
 }
@@ -429,7 +404,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .mobile-nav .drop-down > a:after {
   content: "\ea99";
-  /* font-family: IcoFont; */
+  font-family: 'JSDongkang-Regular';
   padding-left: 10px;
   position: absolute;
   right: 15px;
@@ -535,7 +510,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 56px;
   color: #fff;
-  /* font-family: "Poppins", sans-serif; */
+  font-family: 'JSDongkang-Regular';
 }
 
 #hero h1 span {
@@ -726,7 +701,7 @@ section {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #aaaaaa;
-  /* font-family: "Poppins", sans-serif; */
+  font-family: 'JSDongkang-Regular';
 }
 
 .section-title h2::after {
@@ -818,6 +793,31 @@ section {
   left: 0;
   right: 0;
 }
+
+.mainAbout {
+  background: url("../img/nattaBack/b2.jpg") center center;
+  background-size: cover;
+  position: relative;
+  padding: 80px 0;
+}
+
+.mainAbout:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+@media (min-width: 1024px) {
+  .mainAbout {
+    background-attachment: fixed;
+  }
+}
+
+
+
 
 .about .about-img {
   position: relative;
@@ -964,7 +964,7 @@ section {
   margin-bottom: 10px;
   transition: all ease-in-out 0.3s;
   border-radius: 50px;
-  /* font-family: "Playfair Display", serif; */
+  font-family: 'JSDongkang-Regular';
 }
 
 .menu #menu-flters li:hover, .menu #menu-flters li.filter-active {
@@ -1004,6 +1004,7 @@ section {
   z-index: 1;
   color: #bab3a6;
   /* font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; */
+  font-family: 'JSDongkang-Regular';
 }
 
 .menu .menu-content a {
@@ -1034,6 +1035,7 @@ section {
   /* font-style: italic; */
   font-size: 14px;
   /* font-family: "Poppins", sans-serif; */
+  font-family: 'JSDongkang-Regular';
   color: rgba(255, 255, 255, 0.5);
 }
 
@@ -1151,6 +1153,7 @@ section {
 .events .event-item .price {
   font-size: 26px;
   /* font-family: "Open Sans", sans-serif; */
+  font-family: 'JSDongkang-Regular';
   font-weight: 700;
   margin-bottom: 15px;
 }
@@ -1526,7 +1529,7 @@ section {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 5px;
-  /* font-family: "Poppins", sans-serif; */
+  font-family: 'JSDongkang-Regular';
 }
 
 .contact .info p {
@@ -1694,6 +1697,7 @@ section {
   font-weight: 300;
   text-transform: uppercase;
   /* font-family: "Poppins", sans-serif; */
+  font-family: 'JSDongkang-Regular';
 }
 
 #footer .footer-top .footer-info p {
@@ -1701,6 +1705,7 @@ section {
   line-height: 24px;
   margin-bottom: 0;
   /* font-family: "Playfair Display", serif; */
+  font-family: 'JSDongkang-Regular';
   color: #fff;
 }
 

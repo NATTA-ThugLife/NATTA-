@@ -25,6 +25,7 @@ import com.kh.natta.ArtistInfo.domain.ArtistFollow;
 import com.kh.natta.ArtistInfo.domain.ArtistInfo;
 import com.kh.natta.ArtistInfo.domain.ArtistInfoPrice;
 import com.kh.natta.ArtistInfo.domain.Pagination;
+import com.kh.natta.ArtistInfo.domain.WorkPagination;
 import com.kh.natta.ArtistInfo.service.ArtistInfoService;
 import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.artist.service.ArtistService;
@@ -54,8 +55,11 @@ public class ArtistInfoController {
 	
 	// 아티스트 상세페이지로 이동
 	@RequestMapping(value="artistInfoPage.na", method=RequestMethod.GET)
-	public String ArtistInfoPage(String artistId, Model model,HttpServletRequest request) {
-		 
+	public String ArtistInfoPage(String artistId, Model model,HttpServletRequest request, 
+									@RequestParam(value="page", required=false) Integer page) {
+		int currentPage = ( page != null ) ? page : 1;
+		int listCount = infoService.getWorkCount(artistId);
+		PageInfo pi = WorkPagination.getPageInfo(currentPage, listCount);
 		HttpSession session = request.getSession();
 		if( session.getAttribute("loginCustomer") != null) {
 			Customer customer = (Customer)session.getAttribute("loginCustomer");
@@ -69,11 +73,13 @@ public class ArtistInfoController {
 		Artist artist = infoService.selectOneArtist(artistId);
 		ArtistInfo infoPage = infoService.selectOneArtistInfo(artistId);
 		ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);
-		ArrayList<ArtistWork> workList = infoService.selectListArtistWork(artistId);
+		ArrayList<ArtistWork> workList = infoService.selectListArtistWork(artistId, pi);
 		ArrayList<ArtistFollow> aFollow = infoService.selectArtistFollow(artistId);
 			model.addAttribute("artist", artist);
 			model.addAttribute("priceList", priceList);
 			model.addAttribute("workList", workList);
+			model.addAttribute("pi", pi);
+			model.addAttribute("wCount",listCount);
 			model.addAttribute("artistInfo", infoPage);
 			model.addAttribute("followList", aFollow);
 			// 세션id 값이랑 해당 상세페이지 아티스트 정보랑 유효성검사 채크할 때 사용하려고 넘겼음.

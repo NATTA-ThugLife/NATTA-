@@ -61,7 +61,7 @@ public interface ArtistInfoService {
 	 * @param artistId
 	 * @return
 	 */
-	public ArrayList<ArtistWork> selectListArtistWork(String artistId);
+	public ArrayList<ArtistWork> selectListArtistWork(String artistId, PageInfo pi);
 	
 
 	/**
@@ -142,6 +142,7 @@ public interface ArtistInfoService {
 	 */
 	public int getListCount();
 	public int getListReviewCount(String artistId);
+	public int getWorkCount(String artistId);
 	
 	public ArrayList<Review> selectListReview(String artistId, PageInfo pi);
 	
