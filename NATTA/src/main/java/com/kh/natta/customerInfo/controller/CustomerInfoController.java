@@ -213,7 +213,7 @@ public class CustomerInfoController {
 		// 파일 저장
 		public String saveReviewFile(MultipartFile file, HttpServletRequest request, String customerId, int reviewCode) {
 			String root = request.getSession().getServletContext().getRealPath("resources");
-			String savePath = root + "\\review\\" + customerId + "\\" + reviewCode;
+			String savePath = root + "\\review\\" + reviewCode;
 			File folder = new File(savePath);
 			
 			if(!folder.exists()) {
@@ -239,7 +239,7 @@ public class CustomerInfoController {
 		
 		public void deleteReviewFile(String fileName,String customerId, HttpServletRequest request , int reviewCode) {
 		      String root = request.getSession().getServletContext().getRealPath("resources");
-		      String savePath = root + "\\review\\" + customerId + "\\" + reviewCode;
+		      String savePath = root + "\\review\\" + reviewCode;
 		      
 		      File file = new File(savePath + "\\" + fileName);
 		      if (file.exists()) {
@@ -249,7 +249,7 @@ public class CustomerInfoController {
 		
 		public void deleteFolder(String customerId,HttpServletRequest request,int reviewCode) {
 			String root = request.getSession().getServletContext().getRealPath("resources");
-			String deletePath = root + "\\review\\" + customerId + "\\" + reviewCode;
+			String deletePath = root + "\\review\\" + reviewCode;
 			File folder = new File(deletePath);
 			folder.delete();
 		}

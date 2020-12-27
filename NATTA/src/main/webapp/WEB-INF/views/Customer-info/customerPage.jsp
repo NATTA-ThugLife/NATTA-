@@ -160,13 +160,13 @@
         </ul>
       </nav><!-- .nav-menu -->
     </div>
-    	<!-- 아티스트 프로필 헤더! -->
+    	<!-- 고객 프로필 헤더! -->
        <div class="profile container d-flex align-items-center" style="float:left;">
-       <div style="width:380px; float:left;"></div>
+       <div style="width:35%; float:left;"></div>
      <nav class="nav-menu d-none d-lg-block" data-aos="fade-in">
         <h2 class="text-light" style="margin-left:25px;">${ artistInfo.name }</h2>
          <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>    
-          <!-- 아티스트 프로필 메뉴바 -->
+          <!-- 고객 프로필 메뉴바 -->
         <ul style="list-style : none;">
              
         	<li><a href="#mypage" ><i class="icofont-page"></i><span>처음으로</span></li>
@@ -432,7 +432,6 @@
                       if(res.length>0){
                          $("#form"+artistId).remove();
                          alert(res + "의 팔로잉가 삭제 되었습니다.");
-                         console.log("#form"+artistId);
                          
                       }
                    }
@@ -728,7 +727,7 @@
 				            <div class="col-lg-8 col-md-8 form-group">
 				              ARTIST SHOP NAME 
 				              <input type="text" value="" name="shopName" class="form-control artistShopName" id="insertShopName" readonly>
-				              <input type="text" value="" name="reservationCode" id="insertReservationCode">
+				              <input type="hidden" value="" name="reservationCode" id="insertReservationCode">
 				              <input type="hidden" value="" name="artistId" id="insertArtistId">
 				              <div class="validate"></div>
 				            </div>
@@ -989,8 +988,9 @@
 					$("#"+reviewStar).parent().prevAll().children().attr("class","fas fa-star fa-2x grade");
 					$("#"+reviewStar).attr("class","fas fa-star fa-2x grade");
 					$("#reviewStar").val(reviewStar);
-					$("#modifyReviewPhoto").attr("src",path);
+				    $("#modifyReviewPhoto").attr("src",path);
 				})
+				
 				/* 별점 바꾸기  */
 				$(".grade").on("click", function(){
 					var grade = $(this).attr("id");

@@ -100,10 +100,6 @@ input::placeholder {
     <!-- Chat Box-->
     <div class="col-7 px-0" id="chat">
       <div class="px-4 py-5 chat-box bg-white" id="chat-box">
-      <div class="media w-50 ml-auto mb-3">
-					     <div class="media-body">
-					     </div>
-					   </div>
 		     <c:forEach items="${chatList }" var="chat" varStatus="status">
 		     		<c:if test="${status.last}">
 					<input type="hidden" id="lastChatTime" value="${chat.chatChatDateFormat }">
