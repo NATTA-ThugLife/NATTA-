@@ -101,9 +101,8 @@ rotate(
 							<td><input type="text" name="customerId" id="id"
 								class="form-control" placeholder="아이디를 입력하세요"
 								data-rule="minlen:4" data-msg="올바른 아이디를 입력하세요"
-								style="height: 44px; border-radius: 10px; box-shadow: none; font-size: 14px; background: #0c0b09; border-color: #625b4b; color: white;">
+								style="height: 44px; border-radius: 5px; box-shadow: none; font-size: 14px; background: #0c0b09; border-color: #625b4b; color: white;">
 							</td>
-							<br>
 							<td>
 								<button id="button" class="btn btn-login" style="margin-right: 30px;">로그인</button>
 							</td>
@@ -112,9 +111,9 @@ rotate(
 							<td><input type="password" name="password"
 								class="form-control" placeholder="비밀번호를 입력하세요"
 								data-rule="minlen:4" data-msg="올바른 비밀번호를 입력하세요"
-								style="height: 44px; border-radius: 0; box-shadow: none; font-size: 14px; background: #0c0b09; border-color: #625b4b; color: white;"></td>
+								style="height: 44px; border-radius: 5px; box-shadow: none; font-size: 14px; background: #0c0b09; border-color: #625b4b; color: white;"></td>
 
-							<td><input id="button" type="button"
+							<td><input id="button" type="button" class="btn btn-login" 
 								onClick="location.href='customerJoinView.na'" value="회원가입"
 								style="margin-right: 30px;"></td>
 						</tr>
@@ -128,10 +127,8 @@ rotate(
 									class="php-email-form" data-aos="fade-up" data-aos-delay="100"> -->
 								<br> <!-- <input id="button" type="button" onClick="location.href='joinOption.na'" value="회원가입"
 										style="margin-right: 30px;">  --> 
-								<input data-target=".modal" data-toggle="modal" class="find1" id="button" type="button" onClick="location.href='findId.na'" value="ID 찾기" style="margin-left: 30px"> 
-								<input class="find2" id="button" type="button" onClick="location.href='findPwd.na'" value="PW 찾기" style="margin-left: 30px"> <!-- </form> -->
-								<!-- <br><br><a id="kakao-login-btn"></a>
-							<a href="http://developers.kakao.com/logout"></a> -->
+								<input data-target=".modal" data-toggle="modal" class="find1 btn btn-login" id="button" type="button" onClick="location.href='findId.na'" value="ID 찾기" style="margin-left: 30px"> 
+								<input class="find2 btn btn-login" id="button" type="button" onClick="location.href='findPwd.na'" value="PW 찾기" style="margin-left: 30px">
 							</td>
 						</tr>
 					</table>
@@ -150,45 +147,8 @@ rotate(
 		    	$('#id').attr("name","artistId")
 		    }
 		}            
-		
-/* 		Kakao.init('8dffdaf5568eceb8d7c16e4a8cd5eb67');
-		Kakao.Auth.createLoginButton({ 
-		   container: '#kakao-login-btn',
-		   success: function(authObj) {
-		      alert(JSON.stringify(authObj));
-		      },
-		      fail: function(err) {
-		         alert(JSON.stringify(err));
-		         }
-		      });
- */
+
         </script>
-
-
-
-	<!--         <section id="book-a-table" class="book-a-table">
-					<div class="container" data-aos="fade-up">
-						<form action="/login.na" method="post" role="form"
-							class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-
-							<div class="form-row">
-								<div class="col-lg-4 col-md-6 form-group">
-									<input type="text" name="customerId" class="form-control"
-										id="customerId" placeholder="아이디를 입력하세요" data-rule="minlen:4"
-										data-msg="올바른 아이디를 입력하세요">
-									<div class="validate"></div>
-								</div><br>
-
-								<div class="col-lg-4 col-md-6 form-group">
-									<input type="password" name="password" class="form-control"
-										id="password" placeholder="비밀번호를 입력하세요" data-rule="minlen:4"
-										data-msg="올바른 비밀번호를 입력하세요">
-									<div class="validate"></div>
-								</div>
-							</div>
-						</form>
-					</div>
-				</section> -->
 
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
