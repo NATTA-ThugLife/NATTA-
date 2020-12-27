@@ -70,11 +70,11 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${nList }" var="notice">
+								<c:url var="noticeDetail" value="noticeDetailView.na">
+									<c:param name="noticeCode" value="${notice.noticeCode }"></c:param>
+								</c:url>	
 							<tr id="custom" onclick="location.href='${noticeDetail}'">
-								<td align="center">${notice.noticeCode }</td>
-										<c:url var="noticeDetail" value="noticeDetailView.na">
-											<c:param name="noticeCode" value="${notice.noticeCode }"></c:param>
-										</c:url>																
+								<td align="center">${notice.noticeCode }</td>																
 								<td align="center">${notice.noticeTitle }</td>								
 								<td align="center">${notice.noticeCreateDate }</td>
 								<td align="center">${notice.noticeHits }</td>

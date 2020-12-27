@@ -70,22 +70,38 @@
 [type=radio]:checked + img {
   outline: 2px solid #cda45e;
 }
+.aabout {
+  background: url("../resources/assets/img/nattaBack/a15.jpg") center center;
+  background-size: cover;
+  position: relative;
+  padding: 80px 0;
+}
+
+.aabout:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
 </style>
 </head>
 <body>
 	<header>
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
-	<section id="modifyInfo" class="about">
-		<div class="container">
+	<section id="modifyInfo" class="aabout">
+		<div class="container" data-aos="fade-up">
 			<div class="modal-header">
 				<h5 class="modal-title">
-					<b>예약 페이지</b>
+					예약 페이지
 					</h5>
 			</div>
-			<div align="center">
+			<div>
 			<div class="col-lg-8 mt-14 mt-lg-0">
-			
+					<br><br>
 					<form name="sub" action="reservation.na" method="post" enctype="multipart/form-data">
 					<div class="form-rrrow">
 							<input type="hidden" id="customerId" name="customerId"
@@ -144,20 +160,36 @@
 							</div>
 							</div>
 							<br>
-							<div style="width:1000px;">
+							<div>
+							<table style="width:1000px; text-align:center;">
+								<tr>
+								<td style="width:40px;"></td>
+								<td style="width:225px;">팔</td>
+								<td style="width:225px;">어깨</td>
+								<td style="width:225px;">등</td>
+								<td style="width:225px;">다리</td>
+								<td style="width:40px;"></td>
+								</tr >
+							</table>
+							</div>
+							<div style="width:1000px; text-align:center;">
 								<label>
+									
 									<input type="radio" id="part" name="part" value="팔">
 									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/arm.jpg">
 								</label>
 								<label>
+									
 									<input type="radio" id="part" name="part" value="어깨">
 									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/sholder.jpg">
 								</label>
 								<label>
+									
 									<input type="radio" id="part" name="part" value="등">
 									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/back.jpg">
 								</label>
 								<label>
+									
 									<input type="radio" id="part" name="part" value="다리">
 									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/leg1.jpg">
 								</label>
@@ -200,7 +232,7 @@
 									</div>
 									</c:if>
 									<c:if test="${work ne null}">
-									<div style="width: 400x; height: 350px; float: center">
+									<div style="width: 400x; height: 350px; float: center;">
 										<img style="width:400px; height: 350px;" src="resources/artistInfoFile/WorkFile/${ work }">
 									</div>
 									<input type="hidden" name="originalFilename" value="아티스트작품">
@@ -208,9 +240,7 @@
 									<input type="hidden" name="upload" value="나니모나카타">
 									</c:if>
 									</div>
-									<div id="map" style="width: 400px; height: 350px; float: center"></div>
-									
-									
+									<div id="map" style="width: 400px; height: 350px; float: center;"></div>
 								</div>
 							</div>
 							

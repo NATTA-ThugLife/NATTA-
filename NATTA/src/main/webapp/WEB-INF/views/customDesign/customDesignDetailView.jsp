@@ -67,12 +67,13 @@
 				<p>맞춤 도안 게시판 게시글</p>
 			</div>
 			<div class="customDesign" align="center">
-				<table  align="center">
-					<thead>
+				<table style="width:1100px;">
+					<thead style="text-align:left;">
 						<tr>
-							<th>제목 : ${customDesign.customTitle }<br>
-							작성자 : ${customDesign.customerId }  타투스타일 : ${customDesign.tattooType }
-							</th>
+							<th style="width:1100px;">
+							제목 : ${customDesign.customTitle }
+						<br>작성자 : ${customDesign.customerId }
+						<br>타투스타일 : ${customDesign.tattooType }</th>
 						</tr>
 					</thead>
 					<tbody align="left">
@@ -258,7 +259,7 @@
 					var $td;
 					var $br;
 					
-					$("#cCount").text("댓글 (" + data.pi.listCount + ")");  /* 댓글의 갯수 표시 */
+					$("#cCount").text("─────────────────────── 총  " + data.pi.listCount + " 개의 댓글  ─────────────────────── ");  /* 댓글의 갯수 표시 */
 					if (data.ccList.length > 0) {
 						console.log(data.pi)
 						for ( var i in data.ccList ) {
