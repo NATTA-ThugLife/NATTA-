@@ -593,7 +593,7 @@ width: 800px;
 		                    <input type="hidden" value="${review.reviewCode }" class="reviewCode">
 		                    <input type="hidden" value="${review.reviewContents }" class="reviewContents">
 		                  	<c:if test="${review.reviewPhoto ne null}">
-		                  	  <img src="resources/review/${review.customerId }/${review.reviewCode}/${review.reviewPhoto }" alt="" class="img-fluid">
+		                  	  <img src="resources/review/${review.reviewCode}/${review.reviewPhoto }" alt="" class="img-fluid">
 		                  	  <input type="hidden" value="${review.reviewPhoto }" class="reviewPhoto" id="reviewPhoto${review.reviewCode }">
 		                    </c:if>
 		                  </div>
@@ -622,7 +622,7 @@ width: 800px;
 		                  </div>
 		                  <div class="col-lg-4 text-center order-1 order-lg-2">
 		                  	<c:if test="${review.reviewPhoto ne null}">
-		                  	  <img src="resources/review/${review.customerId }/${review.reviewCode}/${review.reviewPhoto }" alt="" class="img-fluid">
+		                  	  <img src="resources/review/${review.reviewCode}/${review.reviewPhoto }" alt="" class="img-fluid">
 		                  	  <input type="hidden" value="${review.reviewPhoto }" class="reviewPhoto" id="reviewPhoto${review.reviewCode }">
 		                    </c:if>
 		                    <input type="hidden" value="${review.artistId }" class="artistId">
@@ -819,7 +819,7 @@ width: 800px;
 					<div class="modal-body book-a-table">
 					
 					<div style="margin: 0 auto;">
-					
+						<input type="hidden" id="reservationCode">
 				          <div>
 				            <table class="detailTable">
 				            <thead>
@@ -827,41 +827,43 @@ width: 800px;
 				            </thead>
 				            	<tr>
 				            		<th>타투샵 명</th>
-				            		<td>asd</td>
+				            		<td id="shopName"></td>
 				            	</tr>
 				            	<tr>
 				            		<th>아티스트 명</th>
-				            		<td>asd</td>
+				            		<td id="artistName"></td>
 				            	</tr>
 				            	<tr>
 				            		<th>예약 날짜/시간</th>
-				            		<td>asd</td>
+				            		<td id="reservationDate"></td>
 				            	</tr>
 				            	<tr>
 				            		<th>부위</th>
-				            		<td>asd</td>
+				            		<td id="part"></td>
 				            	</tr>
 				            	<tr>
 				            		<th>스타일</th>
-				            		<td>asd</td>
+				            		<td id="style"></td>
 				            	</tr>
 				            	<tr>
 				            		<th>타투 사이즈</th>
-				            		<td>asd</td>
+				            		<td id="tattooSize"></td>
 				            	</tr>
 				            	<tr>
 				            		<th>가격</th>
-				            		<td>asd</td>
+				            		<td id="price"></td>
 				            	</tr>
 				            </table>
+				            
+				
 				            <div class="col form-group" style="margin-top:10px;">
 				                   	디자인 사진
 				                   	<span style="padding-left: 450px;">주소</span><br>
 				                   	
-				                 <div style="float: left; width : 50%; height:50%; margin-top : 10px;">
-								<img src="" id="resImg" style=" width: 100%; heigth:100%; float: left;">   
-								</div>
-							<div id="map" style=" width: 50%; height: 395px; float: left; margin-top : 10px;">
+				             <div style="float: left; width : 50%; height:400px; margin-top : 10px;">
+								<img src="" id="resImg" style=" width: 100%;; heigth:375px; float: left;">   
+						    </div>
+							<div id="map" style=" width: 50%; height: 395.5px; float: left; margin-top : 10px;">
 							</div>	           
 				             </div>
 				                        				            
@@ -918,13 +920,13 @@ width: 800px;
 				var addr =  $("#addr"+reservationCode).val()
 				var artistProfile = $("#artistProfile"+reservationCode).val();
 				
-				$("#shopName").val(shopName);
-				$("#style").val(style);
-				$("#artistName").val(artistName);
-				$("#reservationDate").val(reservationDate +" " + reservationTime);
-				$("#price").val(price);
-				$("#tattooSize").val(tattooSize);
-				$("#part").val(part);
+				$("#shopName").text(shopName);
+				$("#style").text(style);
+				$("#artistName").text(artistName);
+				$("#reservationDate").text(reservationDate +" " + reservationTime);
+				$("#price").text(price);
+				$("#tattooSize").text(tattooSize);
+				$("#part").text(part);
 				if(originalImg =='아티스트작품' ){
 				$("#resImg").attr("src","resources/artistInfoFile/WorkFile/" + resImg);
 				}else{
@@ -1023,7 +1025,7 @@ width: 800px;
 					var reviewCode = $("#"+review).find(".reviewCode").val();
 					var reviewContents = $("#"+review).find(".reviewContents").val();
 					var reviewPhoto = $("#"+review).find(".reviewPhoto").val();
-					var path = "resources/review/${ loginCustomer.customerId }/"+reviewCode+ "/" + reviewPhoto;
+					var path = "resources/review/"+reviewCode+ "/" + reviewPhoto;
 					
 					/* modifyReviewPhoto */
 					/* resources/review/test1/3/20201217165410.jpg */
