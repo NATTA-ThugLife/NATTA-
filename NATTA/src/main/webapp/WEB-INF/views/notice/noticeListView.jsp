@@ -28,6 +28,21 @@
 #custom:hover {
 	background: #cda45e;
 }
+
+ .btn-new {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 50px;
+  transition: 0.3s;
+  line-height: 1;
+  color: #fff;
+  border: 2px solid #cda45e;
+  background: #cda45e;
+}
 </style>
 </head>
 <body>
@@ -66,7 +81,15 @@
 						</c:forEach>
 					</tbody>
 				</table>
-
+				</div>
+				<tr><td><br></td></tr>
+				
+				<c:if test="${loginCustomer.customerId eq 'admin' }">
+						<div style="float: right">
+							<button onclick="location.href='noticeWriteForm.na'" class="btn-new">새글 작성</button>
+						</div>
+				</c:if>
+				
 				<!-- 게시물 검색 -->
 				<div id="searchArea" align="center">
 					<form action="noticeSearch.na" method="get">
@@ -82,15 +105,8 @@
 							<input type="submit" value="검색">
 					</form>					
 				</div>
-				<c:if test="${loginCustomer.customerId eq 'admin' }">
-						<div align="right">
-							<button onclick="location.href='noticeWriteForm.na'">새글 작성</button>
-						</div>
-				</c:if>
 				<tr><td><br></td></tr>
-			</div>
-			
-	</section>
+			</section>
 
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>

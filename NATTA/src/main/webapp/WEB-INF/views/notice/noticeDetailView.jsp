@@ -52,8 +52,7 @@
       
       <tbody align="left">
       <tr colspan="3">
-         <td>내용</td>
-         <td colspan="2">${notice.noticeContents }</td>
+         <td colspan="3">${notice.noticeContents }</td>
       </tr>
       </tbody>
       

@@ -27,6 +27,34 @@
 #custom:hover {
    background: #cda45e;
 }
+
+ .res{
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+  background: #0c0b09;
+  border-color: #625b4b;
+  color: white;
+ }   
+ 
+ .btn-new {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 50px;
+  transition: 0.3s;
+  line-height: 1;
+  color: #fff;
+  border: 2px solid #cda45e;
+  background: #cda45e;
+}
+ .btn-new:hover {
+  background: #cda45e;
+  color: white;
+} 
 </style>
 <title>게시글 목록</title>
 </head>
@@ -74,9 +102,16 @@
          <td align="center">${qna.qnaHits }</td>
       </tr>
       </c:forEach>
-      
+        </table>
+   </div>
+   <tr><td><br></td></tr>
+   
+   <div style="float: right">
+               <button onclick="location.href='qnaWriteForm.na'" class="btn-new">새글 작성</button>
+            </div>
+            
       <!-- 페이징 처리 -->
-      <tr align="center" height="20">
+      <div align="center" height="20">
          <td colspan="6">
             <!-- 이전 -->
             <c:if test="${pi.currentPage <= 1 }">
@@ -110,14 +145,10 @@
                </c:url>
                <a href="${after }">[다음]</a>&nbsp;
             </c:if>
-            <div align="right">
-               <button onclick="location.href='qnaWriteForm.na'">새글 작성</button>
-            </div>
             </tbody>
          </td>      
-      </tr>
-   </table>
-   </div>
+      </div>
+ 
    </section>
    <br><br>
         

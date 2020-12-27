@@ -26,6 +26,21 @@
          .customDesign th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
          .customDesign td {padding: 20px;width: 800px;}
          .customDesign {border-spacing: 10px;border-top: 0.6px solid #cda45e;border-bottom: 0.6px solid #cda45e;text-align: center;}
+         
+          .btn-new {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 50px;
+  transition: 0.3s;
+  line-height: 1;
+  color: #fff;
+  border: 2px solid #cda45e;
+  background: #cda45e;
+}
       </style>
 </head>
 <body>
@@ -52,7 +67,6 @@
 
       <tbody align="left">
       <tr colspan="3">
-         <td>내용</td>
          <td>${Qna.qnaContents }</td>
       </tr>
       </tbody>
@@ -82,9 +96,9 @@
    <!-- 댓글 등록 -->
    <table align="center" width="250" >   
       <tr>
-         <td><textarea rows="3" cols="55" id="qcContents" name="qcContents"></textarea></td>
+         <td><textarea rows="2" cols="55" id="qcContents" name="qcContents"></textarea></td>
          <td>
-            <button id="qcSubmit">등록하기</button>
+            <button id="qcSubmit" class="btn-new">등록하기</button>
          </td>
       </tr>
    </table><br>   
