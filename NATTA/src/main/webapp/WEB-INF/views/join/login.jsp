@@ -30,14 +30,6 @@ position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0,
 	background: #F2CB61;
 }
 
-/*
-.contact .php-email-form input::placeholder, .contact .php-email-form textarea::placeholder {
-  color: #a49b89;
-}
-
-.contact .php-email-form input:focus, .contact .php-email-form textarea:focus {
-  border-color: #cda45e;
-} */
 @
 -webkit-keyframes animate-loading { 0% {
 	transform: rotate(0deg);
@@ -67,6 +59,15 @@ rotate(
 );
 }
 }
+
+input[type=password] {
+        font-family: "나눔스퀘어 아닐때 쓸 글꼴";
+        
+        &::placeholder {
+        	font-family: "NanumSquare";
+        }
+    }
+
 </style>
 
 <title>로그인</title>
@@ -78,7 +79,7 @@ rotate(
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 
-	<section class="about">
+	<section class="about" style='line-height:300%'>
 
 		<div class="container" data-aos="fade-up"
 			style="width: 100%; margin: 0 auto;">
@@ -112,7 +113,6 @@ rotate(
 								class="form-control" placeholder="비밀번호를 입력하세요"
 								data-rule="minlen:4" data-msg="올바른 비밀번호를 입력하세요"
 								style="height: 44px; border-radius: 5px; box-shadow: none; font-size: 14px; background: #0c0b09; border-color: #625b4b; color: white;"></td>
-
 							<td><input id="button" type="button" class="btn btn-login" 
 								onClick="location.href='customerJoinView.na'" value="회원가입"
 								style="margin-right: 30px;"></td>

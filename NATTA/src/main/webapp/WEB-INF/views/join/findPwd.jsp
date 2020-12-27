@@ -60,7 +60,7 @@
 								<td><input type="text" placeholder="이메일을 입력하세요" name="email" class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 							</tr>
 							<tr id="phone" style="display:none;">
-								<td>휴대폰</td>
+								<td>휴대폰&nbsp;&nbsp;</td>
 								<td><input type="text" name="phone" placeholder="휴대폰 번호를 입력하세요"  class="form-control" style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px;"></td>
 							</tr></tr><tr><td><br></td></tr>
 							<tr>

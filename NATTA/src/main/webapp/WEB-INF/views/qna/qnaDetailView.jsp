@@ -6,50 +6,60 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 상세조회</title>
+<style>
+		 div.replyModal { position:relative; z-index:1; display:none;}
+		 div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:-1; }
+		 div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:500px; height:400px; padding:20px 10px; background:#fff; border:2px solid #666; }
+		 div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
+		 div.modalContent button.modal_cancel { margin-left:20px; }
+
+		 #iii:hover {
+		 color:#cda45e;
+		 }
+	
+		  table {
+		    width: 70%;
+		  }
+		  .datgle{
+		  	 border-bottom: 1px solid #cda45e;
+		  }
+			.customDesign th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
+			.customDesign td {padding: 20px;width: 800px;}
+			.customDesign {border-spacing: 10px;border-top: 0.6px solid #cda45e;border-bottom: 0.6px solid #cda45e;text-align: center;}
+		</style>
 </head>
 <body>
     <header>
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 	
-	<section>
-	<section id="book-a-table" class="book-a-table">
+	<section id="testimonials" class="testimonials section-bg">
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
 				<h2>QnA</h2>
 				<p>자주하는 질문</p>
 			</div>
-		</div>
-	    </section>
-	<br>
-	<table align="center" cellpadding="10" cellspacing="0" border="1"
-		width="500">
+		
+	<div class="customDesign" align="center">	
+	<table align="center">
+	<thead>		
 		<tr>
-			<td width="80">번호</td>
-			<td>${Qna.qnaCode }</td>
+			<th>제목 : ${Qna.qnaTitle }</th>
+			<th>작성자 : ${Qna.qnaWriter }</th>
+			<th>작성날짜 : ${Qna.qnaCreateDate }</th>
 		</tr>
-		<tr>
-			<td height="15" width="70">제목</td>
-			<td>${Qna.qnaTitle }</td>
-		</tr>
-		<tr>
-			<td height="15" width="70">작성자</td>
-			<td>${Qna.qnaWriter }</td>
-		</tr>
-		<tr>
-			<td>작성날짜</td>
-			<td>${Qna.qnaCreateDate }</td>
-		</tr>
-		<tr height="300">
+	</thead>
+
+		<tbody align="left">
+		<tr colspan="3">
 			<td>내용</td>
 			<td>${Qna.qnaContents }</td>
 		</tr>
+		</tbody>
 		
-		<%-- <input type="text" value="${loginCustomer.customerId}">
-		<input type="text" value="${Qna.qnaWriter}"> --%>
 		<c:if test="${loginCustomer.customerId eq Qna.qnaWriter }">
 		<tr>
-			<td colspan="2" align="center">
+			<td colspan="4" align="center">
 				<c:url var="bUpView" value="qnaUpdateForm.na">
 					<c:param name="qnaCode" value="${Qna.qnaCode }"></c:param>
 					<c:param name="page" value="${currentPage }"></c:param>
@@ -67,22 +77,20 @@
 		</tr>
 		</c:if>
 	</table>
-	<br>
-	<br>
-
-	<!-- 댓글 등록 -->
-	<table align="center" width="500" border="1" cellspacing="0">
+	</div><br><br>
 	
+	<!-- 댓글 등록 -->
+	<table align="center" width="250" >	
 		<tr>
 			<td><textarea rows="3" cols="55" id="qcContents" name="qcContents"></textarea></td>
 			<td>
 				<button id="qcSubmit">등록하기</button>
 			</td>
 		</tr>
-	</table>
-
+	</table><br>	
+	
 	<!-- 댓글 목록 -->
-	<table align="center" width="500" border="1" cellspacing="0" id="rtb">
+	<table id="rtb" align="center" width="250">
 		<thead>
 			<tr>
 				<td colspan="2"><b id="qcCount"></b></td>
@@ -90,14 +98,13 @@
 		</thead>
 		<tbody></tbody>
 	</table>
+	</div>
 	
 	</section>
         
 	<footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
-	</footer>
-	
-
+	</footer>	
 
 	<script>
 		$(function() {

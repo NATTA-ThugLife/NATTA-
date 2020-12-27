@@ -51,12 +51,6 @@ span.error {
 	background: #d3af71;
 }
 
-/* .customDesign th {border-bottom: 0.01px solid dimgrey;width: 800px;padding: 10px;}
-.customDesign td {padding: 20px;width: 800px;}
-.customDesign {border-spacing: 10px;border-top: 0.6px solid #cda45e;border-bottom: 0.6px solid #cda45e;text-align: center;} */
-
-/* style="box-shadow: none; background: #0c0b09; border-color: #625b4b; color: white; font-size: 14px; */
-
    .form-control2 {
     box-shadow: none;
     background: #0c0b09;
@@ -66,6 +60,23 @@ span.error {
     height: calc(1.5em + .75rem + 2px);
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+input[type=password] {
+        font-family: "나눔스퀘어 아닐때 쓸 글꼴";
+        
+        &::placeholder {
+        	font-family: "NanumSquare";
+        }
+        
+input[type=button] {
+
+        }
+        
+ }
+
+.hemnmo{
+line-height:300%;
+}
 
 </style>
 </head>
@@ -74,7 +85,7 @@ span.error {
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 
-	<section id="modifyInfo" class="about" style='line-height:300%'>
+	<section id="modifyInfo" class="about" style="line-height:300%">
 		<div class="container" data-aos="fade-up" style="width: 100%; margin: 0 auto;">
 			<div class="section-title">
 				<h2>Join</h2>
@@ -91,7 +102,7 @@ span.error {
 						<tr>
 							<td>아이디</td>
 							<td><input type="text" name="customerId" id="customerId" required class="form-control2" style="border-color: #625b4b;">
-						        <input type="button" style="height: calc(1.5em + .75rem + 2px); vertical-align:middle;" value="중복 확인" onclick="checkDuplicate();">
+						        <input type="button" style="line-height:165%;" value="중복 확인" onclick="checkDuplicate();">
 						        <input type="hidden" id="idDuplicateCheck" value="0">
 						    </td>
 						</tr>
@@ -126,14 +137,14 @@ span.error {
 						<tr>
 							<td>이메일</td>
 							<td><input type="email" name="email" id="email" required class="form-control2" style="border-color: #625b4b;">
-							    <input type="button" value="중복 확인" onclick="checkEmail();">
+							    <input type="button" style="line-height:165%;" value="중복 확인" onclick="checkEmail();">
 							    <input type="hidden" id="emailDuplicateCheck" value="0">
 							</td>
 						</tr>
 						<tr>
 							<td>우편번호</td>
 							<td><input type="text" name="post" class="postcodify_postcode5 form-control2" size="6" readonly style="border-color: #625b4b;">
-								<button type="button" id="postcodify_search_button">검색</button>
+								<button type="button" style="line-height:165%;" id="postcodify_search_button">검색</button>
 							</td>
 						</tr>
 						<tr>
@@ -167,7 +178,7 @@ span.error {
 						<tr>
 							<td>아이디</td>
 							<td><input type="text" name="artistId" id="artistId" required class="form-control2" style="border-color: #625b4b;">
-								<input type="button" value="중복 확인" onclick="checkDuplicate2();">
+								<input type="button" style="line-height:165%;" value="중복 확인" onclick="checkDuplicate2();">
 								<input type="hidden" id="idDuplicateCheck2" value="0">
 						    </td>
 						</tr>
@@ -202,7 +213,7 @@ span.error {
 						<tr>
 							<td>이메일</td>
 							<td><input type="email" name="email2" id="email2" required class="form-control2" style="border-color: #625b4b;">
-							    <input type="button" value="중복 확인" onclick="checkEmail2();">
+							    <input type="button" style="line-height:165%;" value="중복 확인" onclick="checkEmail2();">
 							    <input type="hidden" id="emailDuplicateCheck2" value="0">
 							</td>
 						</tr>
@@ -210,7 +221,7 @@ span.error {
 						<tr>
 							<td>우편번호</td>
 							<td><input type="text" name="post" class="postcodify_postcode5 form-control2" size="6" readonly style="border-color: #625b4b;">
-								<button type="button" id="postcodify_search_button2">검색</button>
+								<button type="button" style="line-height:165%;" id="postcodify_search_button2">검색</button>
 							</td>
 						</tr>
 						<tr>
@@ -232,7 +243,7 @@ span.error {
 						<tr>
 							<td>사업자 등록증</td>
 							<td>
-							    <input type="file" name="uploadFile" id="businessNo" style="float: left">  
+							    <input type="file" style="line-height:165%;" name="uploadFile" id="businessNo" style="float: left">  
 							</td>
 						</tr><tr><td><hr></td></tr>
 						<tr>

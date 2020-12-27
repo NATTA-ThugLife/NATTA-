@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.natta.artist.domain.Artist;
 import com.kh.natta.customer.domain.Customer;
 import com.kh.natta.qna.domain.Pagination;
 import com.kh.natta.qna.domain.Paging;
@@ -138,6 +139,12 @@ public class QnaController {
 		Customer loginCustomer= (Customer)session.getAttribute("loginCustomer"); // 로그인 하지 않으면 Exception 발생
 		//System.out.println(loginCustomer.getCustomerId());
 		String QcWriter = loginCustomer.getCustomerId();
+		
+		/*
+		 * Artist loginArtist= (Artist)session.getAttribute("loginArtist"); String
+		 * QcWriter = loginArtist.getArtistId();
+		 */	 
+		
 		QnaComment.setQcWriter(QcWriter);
 		//System.out.println(QnaComment);
 		int result = qService.insertQnaComment(QnaComment);

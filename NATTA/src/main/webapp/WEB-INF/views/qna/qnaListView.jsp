@@ -56,17 +56,17 @@
 		<c:forEach items="${qList }" var="qna">
 		
 			
-			<!--로그인 상태에서만 상세보기 가능. 로그인 상태가 아닌 경우 제목만 출력 -->
-			<c:if test="${!empty loginCustomer }">
+			<%-- <!--로그인 상태에서만 상세보기 가능. 로그인 상태가 아닌 경우 제목만 출력 -->
+			<c:if test="${!empty loginCustomer && !empty loginArtist }"> --%>
 				<c:url var="qDetail" value="qnaDetailView.na">
 					<c:param name="qnaCode" value="${qna.qnaCode }"></c:param>
 					<c:param name="page" value="${pi.currentPage }"></c:param>
 				</c:url>
 				<tr id="custom" onclick="location.href='${qDetail}'">
-			</c:if>			
-			<c:if test="${empty loginCustomer }">
+			<%-- </c:if>			
+			<c:if test="${empty loginCustomer && !empty loginArtist}">
 			   <tr id="custom" onclick="warning();">
-			</c:if>	
+			</c:if>	 --%>
 			<td align="center">${qna.qnaCode }</td>
 			<td align="center">${qna.qnaTitle }</td>
 			<td align="center">${qna.qnaWriter }</td>
