@@ -512,7 +512,7 @@ width: 800px;
 			      <input type="hidden" value="${res.status}" id="status${res.reservationCode }">
 			      <input type="hidden" value="${res.artistId}" id="artistId${res.reservationCode }">
 			      <input type="hidden" value="${res.reservationTime}" id="reservationTime${res.reservationCode }">
-				 <input type="text" value="${res.address }" id="addr${res.reservationCode }">
+				 <input type="hidden" value="${res.address }" id="addr${res.reservationCode }">
 			 	 <input type="hidden" value="${res.artistProfile }" id="artistProfile${res.reservationCode }">
 			      <c:if test="${res.status eq 0}"><td >예약 대기</td></c:if>
 			      <c:if test="${res.status eq 1}"><td>예약 확정</td></c:if>			      
