@@ -54,7 +54,7 @@
 	            </p>
 	            <c:if test="${ artist.myReProfile eq null }">
 	              <img src="resources/artistInfoFile/Profile/NATTAprofile.png" style="width:80px; height:80px;" class="testimonial-img" alt="">
-	              Follow : ${ artist.count }  
+	              Follow : ${ artist.count }
 	            </c:if>
 	            <c:if test="${ artist.myReProfile ne null }">
 	          	  <img src="resources/artistInfoFile/Profile/${ artist.myReProfile }" style="width:80px; height:80px;" class="testimonial-img" alt="">
