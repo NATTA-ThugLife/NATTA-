@@ -62,7 +62,7 @@
 				<h2>QnA</h2>
 				<p>자주하는 질문</p>
 			</div>
-
+ 
 			<div align="center">
 				<div class="col-lg-16 mt-8 mt-lg-0">
 					<form action="qnaInsert.na" method="post">
