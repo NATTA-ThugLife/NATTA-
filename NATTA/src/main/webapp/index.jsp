@@ -11,14 +11,14 @@
 		box-sizing: board-box;
 	}
 	
-	.video-film {
-		box-shadow: rgba(0, 7, 15, 0.7) 0 0 0 9999px;
+	 .video-film {
+		box-shadow: rgba(0, 7, 15, 0.4) 0 0 0 9999px;
 		z-index: 100;
 	}
-	
+	 
 	.video-background {
 		/* background: #000; */
-		background : url("resources/assets/img/nattaBack/bg1.jpg") center center;
+		background : url("resources/assets/img/nattaBack/NATTA!!!.png") center center;
 		background-size: cover;
 		 position: fixed; 
 		 top: 0;
@@ -28,14 +28,14 @@
 		z-index: -99; 
 	}
 	
-	.video-foreground, .video-background iframe {
+	/* .video-foreground, .video-background iframe {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		pointer-events: none;
-	}
+	} */
 	
 	@media ( min-aspect-ratio : 16/9) {
 		.video-foreground {

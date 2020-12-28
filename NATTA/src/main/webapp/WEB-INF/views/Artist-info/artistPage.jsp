@@ -297,10 +297,7 @@ header {height: 215px;}
                         <li><a href="/chatting.na"><i class="bx bx-envelope"></i>
                               내 채팅</a></li>
                      </c:if>
-                     <c:if test="${ artistPageId ne loginArtist.artistId && !empty sessionScope.loginCustomer }">
-                        <li><a href="/chatting.na?artistId=${artistPageId }"><i
-                              class="bx bx-envelope"></i> 아티스트와 채팅</a></li>
-                     </c:if>
+                     
                      <!-- javascript:void(0); 꽉 찬 하트 fas-->
                      <c:if test="${follow ne null && empty sessionScope.loginArtist }">
                         <li><a href="javascript:void(0);"
@@ -324,6 +321,10 @@ header {height: 215px;}
                      <li>
                      <a href="reservation.na?artistId=${ artistInfo.artistId }"><i
                            class="icofont-calendar"></i> 예약하기</a></li>
+                     </c:if>
+                     <c:if test="${ artistPageId ne loginArtist.artistId && !empty sessionScope.loginCustomer }">
+                        <li><a href="/chatting.na?artistId=${artistPageId }"><i
+                              class="bx bx-envelope"></i> 아티스트와 채팅</a></li>
                      </c:if>
                   </ul>
                </nav>
