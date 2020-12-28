@@ -367,7 +367,7 @@ header {height: 215px;}
                   <li><i class="icofont-check-circled"></i> <font style="color:orange;">" ${ artistInfo.name } "</font> 님의 정보 <br>
                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작품이  <span style="color:orange; font-size:17px;"><b>${ wCount }</b></span> 개 등록되어 있습니다. <br> 
                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;리뷰가  <span style="color:orange; font-size:17px;"><b>${ rCount }</b></span> 개 등록되어 있습니다. <br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;후기 평균 별점 <span style="color:orange; font-size:12px;"><i class='far fa-star fa' style="color:#F75940;"></i></span><b style="color:orange;">${ starAvg }</b><br> 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;후기 평균 별점 <span style="color:orange; font-size:12px;"><i class='far fa-star fa' style="color:orange;"></i></span><b style="color:orange;"><c:if test="${ starAvg ne null}">  ${ starAvg }</c:if><c:if test="${ starAvg eq null}"> 0</c:if></b><br> 
                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 <font style="color:orange; font-size:17px;"><b> ${ fCount } </b></font> 명이 팔로우 하고있습니다.
                   </li>
                </ul>
