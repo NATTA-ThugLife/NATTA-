@@ -288,6 +288,7 @@ public class CustomDesignController {
     	String artistName = loginArtist.getArtistName();
     	customComment.setArtistId(artistId);
     	customComment.setArtistName(artistName);
+    	System.out.println(customComment);
     	int result = cService.insertCustomComment(customComment);
     	if(result>0) {
     		return "success";

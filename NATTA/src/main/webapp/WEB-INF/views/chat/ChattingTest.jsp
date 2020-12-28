@@ -81,10 +81,10 @@ input::placeholder {
 
         <div class="bg-gray px-4 py-2 bg-light">
         	<c:if test="${loginCustomer ne null }">
-        	       <a href="/customerInfo.na?customerId=${loginUser }" style="color:black;"><i class="fa fa-angle-double-left" aria-hidden="true"> 뒤로 가기  </i></a>
+        	       <a href="javascript:history.back();" style="color:black;"><i class="fa fa-angle-double-left" aria-hidden="true"> 뒤로 가기  </i></a>
         	</c:if>
 			<c:if test="${loginArtist ne null }">
-        	       <a href="artistInfoPage.na?artistId=${loginUser }" style="color:black;"><i class="fa fa-angle-double-left" aria-hidden="true"> 뒤로 가기 </i></a> 
+        	       <a href="javascript:history.back();" style="color:black;"><i class="fa fa-angle-double-left" aria-hidden="true"> 뒤로 가기 </i></a> 
         	</c:if>
           <input type="hidden" id="loginUser" value="${loginUser }"  >
 
@@ -119,9 +119,9 @@ input::placeholder {
 					     <div class="media-body">
 					       <div class="bg rounded py-2 px-3 mb-2" style="background-color:#ffd66b;">
 					        	<c:if test="${chat.chatImgPath ne null }">
-									 <p class="text-small mb-0 text-white"><img src='/resources/chat/${chat.roomCode }/${chat.chatImgPath}' style="width:250px;"></p>
+									 <p  class="text-small mb-0 text-muted"><img src='/resources/chat/${chat.roomCode }/${chat.chatImgPath}' style="width:250px;"></p>
 								</c:if>
-					            	<p class="text-small mb-0 text-white">${chat.chatContent }</p>
+					            	<p " class="text-small mb-0 text-muted">${chat.chatContent }</p>
 					       </div>
 					            <p class="small text-muted">${chat.chatChatDateFormat }</p>
 					     </div>
@@ -157,9 +157,9 @@ input::placeholder {
 				          <div class="media-body ml-3">
 				            <div class="bg rounded py-2 px-3 mb-2" style="background-color:#F0CEA0; font:white;" >
 				            	<c:if test="${chat.chatImgPath ne null }">
-									 <p class="text-small mb-0 text"><img src='/resources/chat/${chat.roomCode }/${chat.chatImgPath}' style="width:250px;"></p>
+									 <p class="text-small mb-0 text-muted"><img src='/resources/chat/${chat.roomCode }/${chat.chatImgPath}' style="width:250px;"></p>
 								</c:if>
-				            		  <p class="text-small mb-0 text">${chat.chatContent }</p>
+				            		  <p class="text-small mb-0 text-muted">${chat.chatContent }</p>
 				            </div>
 				            <p class="small text-muted">${chat.chatChatDateFormat }</p>
 				          </div>
@@ -266,7 +266,7 @@ input::placeholder {
 				            }
 
 				            if(data[i].roomCode == $("#roomCode").val()){
-				            	$("#RoomBox").append('<a style="background:#ffd66b; border:#ffd66b;" class="list-group-item list-group-item-action active text-white rounded-0"><div class="media"><img src="'+img+'" alt="user" width="50px" height="50px;" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">'+opponent+'</h6><small class="small font-weight-bold">'+data[i].chatChatDate+'</small></div><p class="font-italic mb-0 text-small">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div></div></a>');
+				            	$("#RoomBox").append('<a style="background:#ffd66b; border:#ffd66b;" class="list-group-item list-group-item-action active text-muted rounded-0"><div class="media"><img src="'+img+'" alt="user" width="50px" height="50px;" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">'+opponent+'</h6><small class="small font-weight-bold">'+data[i].chatChatDate+'</small></div><p class="font-italic mb-0 text-small">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div></div></a>');
 				            }else{
 				            	$("#RoomBox").append('<a href="chatting.na?artistId='+opponent+'" class="list-group-item list-group-item-action list-group-item-light rounded-0"><div class="media"><img src="'+img+'" alt="user" width="50px" height="50px" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">'+opponent+'</h6><small class="small font-weight-bold">'+data[i].chatChatDate+'</small></div><p class="font-italic text-muted mb-0 text-small">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div></div></a>');
 				            }
@@ -347,9 +347,9 @@ input::placeholder {
 						for( var i in data){
 							
 							if(data[i].sender == $("#loginUser").val()){
-								$("#chat-box").append('<div class="media w-50 ml-auto mb-3"><div class="media-body"><div style="background-color:#ffd66b;" class="bg rounded py-2 px-3 mb-2"><p class="text-small mb-0 text-white">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
+								$("#chat-box").append('<div class="media w-50 ml-auto mb-3"><div class="media-body"><div style="background-color:#ffd66b;" class="bg rounded py-2 px-3 mb-2"><p class="text-small mb-0 text-muted">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
 							}else{
-								$("#chat-box").append('<div class="media w-50 mb-3"><img src="'+img+'" alt="user" width="50px" height="50px" class="rounded-circle"><div class="media-body ml-3"><div style="background-color:#F0CEA0;" class="bg rounded py-2 px-3 mb-2"><p class="text-small mb-0 text">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
+								$("#chat-box").append('<div class="media w-50 mb-3"><img src="'+img+'" alt="user" width="50px" height="50px" class="rounded-circle"><div class="media-body ml-3"><div style="background-color:#F0CEA0;" class="bg rounded py-2 px-3 mb-2"><p class="text-small mb-0 text-muted">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
 							}
  							
 							if(data[i].chatImgPath != null){

@@ -38,12 +38,12 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="footer-info">
-              <h3>Restaurantly</h3>
+              <h3>NATTA</h3>
               <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
+              	서울 중구 남대문로 120 <br>
+				대일빌딩 2층,서울<br><br>
+                <strong>Phone:</strong> +82 1544-9970<br>
+                <strong>Email:</strong> thugkinghansol@gmail.com<br>
               </p>
               <div class="social-links mt-3">
                 <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -58,11 +58,11 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/main.na">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#artistRank">ARTIST</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="customDesignList.na" style="text-align: center">Customized Tattoo</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="notice.na">NOTICE</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/qna.na">Q&A</a></li>
             </ul>
           </div>
 
@@ -77,10 +77,10 @@
             </ul>
           </div>
 
-          <div class="col-lg-4 col-md-6 footer-newsletter">
+         <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
+            <p>Email About Turgraf  NATTA!</p>
+            <form action="mainMail.na" method="post">
               <input type="email" name="email"><input type="submit" value="Subscribe">
             </form>
 
@@ -95,6 +95,10 @@
         &copy; Copyright <strong><span>Restaurantly</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>

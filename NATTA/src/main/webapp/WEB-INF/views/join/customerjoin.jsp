@@ -245,7 +245,7 @@ line-height:300%;
                   </tr>
                   <tr>
                      <td>상세 주소</td>
-                     <td><input type="text" class="btn-new" name="address2" class="postcodify_extra_info form-control2" style="border-color: #625b4b;"></td>
+                     <td><input type="text" name="address2" class="postcodify_extra_info form-control2" style="border-color: #625b4b;"></td>
                   </tr>
 
                   <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>

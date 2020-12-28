@@ -19,16 +19,26 @@
 
  
 <style>
+#button {
+   background: #cda45e;
+   border: 0;
+   padding: 10px 35px;
+   color: #fff;
+   transition: 0.4s;
+   border-radius: 50px;
+   top: 50%;
+   left: 50%;
+}
+
+#button:hover {
+   background: #F2CB61;
+}
 	#preview  img{
 	width : 400px; 
 	height: 350px;
 	}
 	
-#btnr {
-   height: 55px;
-   width: 972px;
-   text-align: center;
-}
+
 .form-rrrow {
   display: -ms-flexbox;
   display: inline-flex;
@@ -67,9 +77,21 @@
 [type=radio] + img {
   cursor: pointer;
 }
-[type=radio]:checked + img {
-  outline: 2px solid #cda45e;
+[type=radio]:checked + img:hover{
+cursor:pointer;
+            -webkit-transform:scale(1.1); /*  크롬 */
+            -moz-transform:scale(1.1); /* FireFox */
+            -o-transform:scale(1.1); /* Opera */
+            transform:scale(1.1);
+            transition: transform .35s;
+            -o-transition: transform .35s;
+            -moz-transition: transform .35s;
+            -webkit-transition: transform .35s;
 }
+[type=radio]:checked + img {
+  outline: 5px solid #cda45e;
+}
+
 .aabout {
   background: url("../resources/assets/img/nattaBack/a15.jpg") center center;
   background-size: cover;
@@ -161,37 +183,46 @@
 							</div>
 							<br>
 							<div>
-							<table style="width:1000px; text-align:center;">
-								<tr>
-								<td style="width:40px;"></td>
-								<td style="width:225px;">팔</td>
-								<td style="width:225px;">어깨</td>
-								<td style="width:225px;">등</td>
-								<td style="width:225px;">다리</td>
-								<td style="width:40px;"></td>
-								</tr >
-							</table>
+							
 							</div>
 							<div style="width:1000px; text-align:center;">
 								<label>
-									
 									<input type="radio" id="part" name="part" value="팔">
-									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/arm.jpg">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/pal.PNG">
 								</label>
 								<label>
 									
 									<input type="radio" id="part" name="part" value="어깨">
-									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/sholder.jpg">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/sholder.PNG">
 								</label>
 								<label>
 									
 									<input type="radio" id="part" name="part" value="등">
-									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/back.jpg">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/back.PNG">
 								</label>
 								<label>
 									
 									<input type="radio" id="part" name="part" value="다리">
-									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/leg1.jpg">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/dari.PNG">
+								</label>
+								<label>
+									<input type="radio" id="part" name="part" value="가슴">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/gaseum.PNG">
+								</label>
+								<label>
+									
+									<input type="radio" id="part" name="part" value="쇄골">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/sagoal.PNG">
+								</label>
+								<label>
+									
+									<input type="radio" id="part" name="part" value="손등">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/sondeng.PNG">
+								</label>
+								<label>
+									
+									<input type="radio" id="part" name="part" value="발목">
+									<img style="width:225px; height: 225px;" src="../resources/images/reservationImages/balmok.PNG">
 								</label>
 							</div>
 							</div>
@@ -259,7 +290,7 @@
 						<div style="float:left">
 						요구 사항 :
 						</div>
-							<textarea class="form-control" rows="10" cols="10000" id="request" name="request"></textarea>
+							<textarea class="form-control" rows="10" cols="10000" id="request" name="request" placeholder="아티스트에게 요청할 내용을 작성해주세요"></textarea>
 						</div>
 						</div>
 							<br>
@@ -268,7 +299,7 @@
 							<br>
 							<br>
 						<div>
-							<button class="form-control" id="btnr" type="button" onclick="return validate();" >예약하기</button>
+							<button style="width:1000px;" class="btn btn-login" id="button" type="button" onclick="return validate();" >예약하기</button>
 						</div>
 						</form>
 						</div>
