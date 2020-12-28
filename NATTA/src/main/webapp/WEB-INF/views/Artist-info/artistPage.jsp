@@ -162,7 +162,7 @@ header {height: 215px;}
 </style>
 </head>
 <body>
-   <header>
+  <header>
       <div id="header" class="fixed-top">
          <!-- ======= Top Bar ======= topBar 원래 header였음 fixed고정이라 영역 변경 12.10 0141AM-->
          <div id="topbar" class="d-flex align-items-center fixed-top">
@@ -293,35 +293,6 @@ header {height: 215px;}
                                  스타일별 가격</span></a></li>
                         <li><a href="javascript:void(0);" id="rListModal"
                          data-toggle="modal"><i class="fas fa-bell"></i> <span>예약내역</span></a></li>
-                     <li><a href="modifyArtistInfo.na?artistId=${loginArtist.artistId }"><i class="bx bx-user"></i>
-                           정보 수정</a></li>
-                     <li><a href="deleteArtist.na?artistId=${loginArtist.artistId }" onclick="return deleteArtist();"><i class="icofont-crying"></i>
-                           회원 탈퇴</a></li>                                     
-                     </c:if>
-                     <c:if test="${!empty sessionScope.loginCustomer }">
-                     <li>
-                     <a href="reservation.na?artistId=${ artistInfo.artistId }"><i
-                           class="icofont-calendar"></i> 예약하기</a></li>
-                     </c:if>
-                           
-                        
-
-
-
-
-
-
-
-
-
-
-
-
-                     
-                     
-                     
-                     
-                     
                      <c:if test="${ artistPageId eq loginArtist.artistId }">
                         <li><a href="/chatting.na"><i class="bx bx-envelope"></i>
                               내 채팅</a></li>
@@ -343,10 +314,17 @@ header {height: 215px;}
                      </c:if>
                         <li><a href="#modalFollowList" data-toggle="modal"
                            onclick="" id=""><i class="fas fa-fire-alt"
-                              id="followCheck"></i> 팔로워 목록</a></li>
-
-
-
+                              id="followCheck"></i> 팔로워 목록</a></li>                         
+                     <li><a href="modifyArtistInfo.na?artistId=${loginArtist.artistId }"><i class="bx bx-user"></i>
+                           정보 수정</a></li>
+                     <li><a href="deleteArtist.na?artistId=${loginArtist.artistId }" onclick="return deleteArtist();"><i class="icofont-crying"></i>
+                           회원 탈퇴</a></li>                                     
+                     </c:if>
+                     <c:if test="${!empty sessionScope.loginCustomer }">
+                     <li>
+                     <a href="reservation.na?artistId=${ artistInfo.artistId }"><i
+                           class="icofont-calendar"></i> 예약하기</a></li>
+                     </c:if>
                   </ul>
                </nav>
                <!-- .nav-menu -->
@@ -386,12 +364,11 @@ header {height: 215px;}
                      문의하세요 !</li>
                   <li><i class="icofont-check-circled"></i> 아티스트에게 솔직한 후기를
                      남겨주세요 !</li>
-                  <li><i class="icofont-check-circled"></i> <font style="color:pink;">" ${ artistInfo.name } "</font> 님의 정보 <br>
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작품이  <span style="color:pink; font-size:20px;"><b>${ wCount }</b></span> 개 등록되어 있습니다. <br> 
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;리뷰가  <span style="color:pink; font-size:20px;"><b>${ rCount }</b></span> 개 등록되어 있습니다. <br>
-	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;후기 평균 별점은 <span style="color:pink; font-size:20px;"><b>${ starAvg }</b> </span> / <span style="color:orange; font-size:17px;">5</span> 입니다.<br> 
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 <font style="color:pink; font-size:20px;"><b> ${ fCount } </b></font> 명이 팔로우 하고있습니다.
-           
+                  <li><i class="icofont-check-circled"></i> <font style="color:orange;">" ${ artistInfo.name } "</font> 님의 정보 <br>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작품이  <span style="color:orange; font-size:17px;"><b>${ wCount }</b></span> 개 등록되어 있습니다. <br> 
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;리뷰가  <span style="color:orange; font-size:17px;"><b>${ rCount }</b></span> 개 등록되어 있습니다. <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;후기 평균 별점 <span style="color:orange; font-size:12px;"><i class='far fa-star fa' style="color:#F75940;"></i></span><b style="color:orange;">${ starAvg }</b><br> 
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 <font style="color:orange; font-size:17px;"><b> ${ fCount } </b></font> 명이 팔로우 하고있습니다.
                   </li>
                </ul>
                아티스트의 한 마디 ..<p style="color:orange;"> ${ artistInfo.myInfo }</p>
