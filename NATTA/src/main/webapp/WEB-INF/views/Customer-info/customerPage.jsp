@@ -512,12 +512,8 @@ width: 800px;
 			      <input type="hidden" value="${res.status}" id="status${res.reservationCode }">
 			      <input type="hidden" value="${res.artistId}" id="artistId${res.reservationCode }">
 			      <input type="hidden" value="${res.reservationTime}" id="reservationTime${res.reservationCode }">
-			      <c:forTokens items="${loginCustomer.address }" var="addr" delims="," varStatus="status">
-						<c:if test="${status.index eq 1}">
-						     <input type="hidden" value="${addr }" id="addr${res.reservationCode }">
-						 </c:if>
-			 	</c:forTokens>
-			 	<input type="hidden" value="${res.artistProfile }" id="artistProfile${res.reservationCode }">
+				 <input type="text" value="${res.address }" id="addr${res.reservationCode }">
+			 	 <input type="hidden" value="${res.artistProfile }" id="artistProfile${res.reservationCode }">
 			      <c:if test="${res.status eq 0}"><td >예약 대기</td></c:if>
 			      <c:if test="${res.status eq 1}"><td>예약 확정</td></c:if>			      
 			      <c:if test="${res.status eq 2}"><td>타투 완료</td></c:if>			      
@@ -819,7 +815,7 @@ width: 800px;
 					<div class="modal-body book-a-table">
 					
 					<div style="margin: 0 auto;">
-						<input type="hidden" id="reservationCode">
+						<input type="hidden" id="reservationCode" name="reservationCode">
 				          <div>
 				            <table class="detailTable">
 				            <thead>
@@ -855,15 +851,16 @@ width: 800px;
 				            	</tr>
 				            </table>
 				             
-				
+							
 				            <div class="col form-group" style="margin-top:10px;">
 				                   	디자인 사진
 				                   	<span style="padding-left: 450px;">주소</span><br>
-				                   	
-				             <div style="float: left; width : 50%; height:400px; margin-top : 10px;">
-								<img src="" id="resImg" style=" width: 100%;; heigth:375px; float: left;">   
+				            <div style="width: 1070px; height: 400px;">       	
+				             <div style="float: left; width : 530px; height:400px;">
+								<img src="" id="resImg" style="width: 530px; height:400px; float: left;">   
 						    </div>
-							<div id="map" style=" width: 50%; height: 395.5px; float: left; margin-top : 10px;">
+							<div id="map" style=" width: 530px; height: 400px; float: left; ">
+							</div>
 							</div>	           
 				             </div>
 				                        				            
@@ -917,9 +914,9 @@ width: 800px;
 				var part = $("#part"+reservationCode).val();
 				var status = $("#status"+reservationCode).val();
 				var artistId = $("#artistId"+reservationCode).val();
-				var addr =  $("#addr"+reservationCode).val()
+				var addr =  $("#addr"+reservationCode).val();
 				var artistProfile = $("#artistProfile"+reservationCode).val();
-				
+				console.log(addr);
 				$("#shopName").text(shopName);
 				$("#style").text(style);
 				$("#artistName").text(artistName);
@@ -1055,6 +1052,8 @@ width: 800px;
 					var reviewCode = $(this).val();
 					var reviewPhoto = $("#reviewPhoto"+reviewCode).val();
 					var customerId = "${loginCustomer.customerId}";
+					
+					
 					if(con == true){
  					$.ajax({
 						type: "post",
