@@ -34,44 +34,56 @@
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 	
-	<section>
-	<section id="book-a-table" class="book-a-table">
+	<section id="testimonials" class="about">
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
 				<h2>QnA</h2>
 				<p>자주하는 질문</p>
 			</div>
-		</div>
-	    </section>
-	<br>	
-	<form action="qnaUpdate.na" method="post">
-		<input type="hidden" name="page" value="${currentPage }">
-		<input type="hidden" name="qnaCode" value="${Qna.qnaCode }">				
-		<table align="center" id="tb" border="1" cellspacing="0">
-			<tr>
-				<td>제목</td>
-				<td><input type="text" name="qnaTitle" value="${Qna.qnaTitle }"></td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td><input type="text" readonly name="qnaWriter" value="${Qna.qnaWriter }"></td>
-			</tr>		
-			<tr>
-				<td>내용</td>
-				<td><textarea cols="50" rows="7" name="qnaContents">${Qna.qnaContents }</textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="수정"> &nbsp;
-					<%-- <c:url var="qnaList" value="qnaList.na">
-						<c:param name="page" value="${currentPage }"></c:param>
-					</c:url>
-					<a href="${qnaList }">목록</a>
-					<a href="javascript:history.go(-1);">이전페이지로</a> --%>
-				</td>
-			</tr>
-		</table>
-	</form>	
+	
+	<div align="center">
+				<div class="col-lg-16 mt-8 mt-lg-0">
+					<form action="qnaUpdate.na" method="post">
+					<input type="hidden" name="noticeCode" value="${Notice.noticeCode }">
+					<input type="hidden" name="page" value="${currentPage }">
+		            <input type="hidden" name="qnaCode" value="${Qna.qnaCode }">	
+						<div class="form-rrrow">
+							<div class="col-md-11 form-group">
+								<div style="width: 500px; float: left"></div>
+								<div class="col-md-7 form-group">
+									<div style="float: left">제목</div>
+									<input class="form-control" type="text" name="qnaTitle" value="${Qna.qnaTitle }" required>
+								</div>
+							</div>
+							
+							<div class="col-md-11 form-group">
+								<div style="width: 500px; float: left"></div>
+								<div class="col-md-7 form-group">
+									<div style="float: left">작성자</div>
+									<input class="form-control" type="text" name="qnaWriter" value="${loginCustomer.customerId }" readonly>
+								</div>
+							</div>
+
+							<div class="col-md-11 form-group">
+								<div style="width: 500px; float: left"></div>
+								<div class="col-md-7 form-group">
+									<div style="float: left">내용</div>
+									<textarea cols="100" rows="10" class="form-control" 
+										name="qnaContents" required>${Qna.qnaContents }</textarea>
+								</div>
+							</div>
+							<div>
+								<div colspan="2" align="center">
+									<input type="submit" class="btnl" value="수정"> &nbsp;
+									<c:url var="back" value="${header.referer }"></c:url>
+		                            <a href="${back }">취소</a> 
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			</div>
 	</section>
 	<br><br>
         

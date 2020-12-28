@@ -67,23 +67,23 @@
 					<form action="qnaInsert.na" method="post">
 						<div class="form-rrrow">
 
-							<div class="col-md-7 form-group">
+							<div class="col-md-11 form-group">
 								<div style="width: 200px; float: left"></div>
 								<div class="col-md-7 form-group">
 									<div style="float: left">제목</div>
 									<input class="form-control" type="text" name="qnaTitle" required>
 								</div>
 							</div>
-							<div class="col-md-7 form-group">
+							<!-- <div class="col-md-11 form-group">
 								<div style="width: 200px; float: left"></div>
 								<div class="col-md-7 form-group">
-									<div style="float: left">작성자</div>
-									<input class="form-control" type="text" name="qnaWriter" value="${loginCustomer.customerId }"
+									<div style="float: left" type="hidden" >작성자</div> -->
+									<input class="form-control" type="hidden" name="qnaWriter" value="${loginCustomer.customerId }"
 										readonly>
 								</div>
 							</div>
-							<div class="col-md-7 form-group">
-								<div style="width: 500px; float: left"></div>
+							<div class="col-md-11 form-group">
+								<div style="width: 800px; float: left"></div>
 								<div class="col-md-7 form-group">
 									<div style="float: left">내용</div>
 									<textarea cols="50" rows="7" class="form-control" type="text"

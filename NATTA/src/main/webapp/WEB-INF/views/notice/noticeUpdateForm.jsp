@@ -34,47 +34,48 @@
 		<jsp:include page="../common/headerNone.jsp"></jsp:include>
 	</header>
 	
-	<section>
-	<section id="book-a-table" class="book-a-table">
+	<section id="testimonials" class="about">
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
 				<h2>Notice</h2>
 				<p>공지사항 수정</p>
 			</div>
-		</div>
-	    </section>
+					
+		<div align="center">
+				<div class="col-lg-16 mt-8 mt-lg-0">
+					<form action="noticeUpdate.na" method="post">
+					<input type="hidden" name="noticeCode" value="${Notice.noticeCode }">
+						<div class="form-rrrow">
+							<div class="col-md-11 form-group">
+								<div style="width: 500px; float: left"></div>
+								<div class="col-md-7 form-group">
+									<div style="float: left">제목</div>
+									<input class="form-control" type="text" name="noticeTitle" value="${Notice.noticeTitle }" required>
+								</div>
+							</div>
 
-	<br><br>
-	
-		<form action="noticeUpdate.na" method="post">
-			<input type="hidden" name="noticeCode" value="${Notice.noticeCode }">
-			<table align="center" border="1" cellspacing="0">
-			<tr>
-				<td>제목</td>
-				<td><input type="text" size="50" name="noticeTitle" value="${Notice.noticeTitle }"></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea rows="7" cols="50" name="noticeContents">${Notice.noticeContents }</textarea></td>
-			</tr>			
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="수정">
-				   <c:url var="back" value="${header.referer }"></c:url>
+							<div class="col-md-11 form-group">
+								<div style="width: 500px; float: left"></div>
+								<div class="col-md-7 form-group">
+									<div style="float: left">내용</div>
+									<textarea cols="100" rows="10" class="form-control" 
+										name="noticeContents" required>${Notice.noticeContents }</textarea>
+								</div>
+							</div>
+							<div>
+								<div colspan="2" align="center">
+									<input type="submit" class="btnl" value="수정"> &nbsp;
+									<c:url var="back" value="${header.referer }"></c:url>
 		           <a href="${back }">취소</a> 
-				</td>
-			</tr>
-			</table>
-		</form>	
-	
-<%-- 	<p align="center">
-		<c:url var="back" value="${header.referer }"></c:url>
-		<a href="${back }">이전</a>
-	</p> --%>
-	
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+	</div>
 	</section>
-        
-	<footer>
+    <footer>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</footer>
 </body>
