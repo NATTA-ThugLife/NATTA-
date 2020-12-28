@@ -25,11 +25,7 @@ public class ArtistInfoPriceController {
 	@RequestMapping(value="artistPriceChecking.na",method=RequestMethod.POST)
 	public void selectPrice(HttpServletResponse response, String artistId, String pStyle) throws Exception {
 		ArtistInfoPrice ap = new ArtistInfoPrice(pStyle, artistId);
-		System.out.println("호에에에에에에엥?"+ap);
 		ArtistInfoPrice checkAp = ifpService.selectStylePrice(ap);
-		System.out.println(artistId + pStyle);
-		
-		System.out.println(checkAp);
 		if (checkAp != null) {
 			checkAp.setpStyle(URLEncoder.encode(checkAp.getpStyle(), "utf-8"));
 		}
@@ -41,7 +37,6 @@ public class ArtistInfoPriceController {
 	// 가격정보 수정
 	@RequestMapping(value="updateArtistPrice.na", method=RequestMethod.POST)
 	public String updatePrice(ArtistInfoPrice price, Model model) {
-		System.out.println("updatePrice 정보 : "+price);
 		int result = ifpService.updateArtistPrice(price);
 		if( result > 0 ) {
 			model.addAttribute("msg","가격 정보수정이 완료되었습니다 >_<");
@@ -58,12 +53,10 @@ public class ArtistInfoPriceController {
 	// 가격정보 등록
 	@RequestMapping(value="insertArtistPrice.na", method=RequestMethod.POST)
 	public String insertPrice(ArtistInfoPrice price, Model model) {
-		System.out.println("insertPrice 정보 : "+price);
 		int result = ifpService.insertArtistPrice(price);
 		if( result > 0 ) {
 			return "redirect:artistInfoPage.na?artistId="+price.getArtistId();
 		} else {
-			System.out.println("도랐냐");
 			return "ㅋㅋ";
 		}
 	}

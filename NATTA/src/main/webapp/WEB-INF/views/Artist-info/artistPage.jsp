@@ -227,7 +227,7 @@ header {height: 215px;}
 			<!-- 아티스트 프로필 헤더! -->
 			<div class="profile container d-flex align-items-center"
 				style="margin-top: 10px;">
-
+				
 				<c:if test="${ empty artistInfo }">
 					<img src="resources/artistInfoFile/Profile/NATTAprofile.png" class="img-fluid rounded-circle"
 						style="margin-left: 15px auto; display: block; width: 100px; height: 100px; border: 8px solid #2c2f3f;">
@@ -322,26 +322,24 @@ header {height: 215px;}
 								<li><a href="/chatting.na"><i class="bx bx-envelope"></i>
 										내 채팅</a></li>
 							</c:if>
-							<c:if test="${ artistPageId ne loginArtist.artistId }">
+							<c:if test="${ artistPageId ne loginArtist.artistId && !empty sessionScope.loginCustomer }">
 								<li><a href="/chatting.na?artistId=${artistPageId }"><i
-										class="bx bx-envelope"></i> Contact</a></li>
+										class="bx bx-envelope"></i> 아티스트와 채팅</a></li>
 							</c:if>
 							<!-- javascript:void(0); 꽉 찬 하트 fas-->
 							<c:if test="${follow ne null && empty sessionScope.loginArtist }">
 								<li><a href="javascript:void(0);"
 									onclick="deleteFollowing();" id="clickChange"><i
-										class="fas fa-heart" id="followCheck"></i>Follow</a></li>
+										class="fas fa-heart" id="followCheck"></i> 팔로잉</a></li>
 							</c:if>
 							<c:if test="${follow eq null && empty sessionScope.loginArtist }">
 								<li><a href="javascript:void(0);"
 									onclick="insertFollowing();" id="clickChange"><i
-										class="far fa-heart" id="followCheck"></i>Follow</a></li>
+										class="far fa-heart" id="followCheck"></i> 팔로잉</a></li>
 							</c:if>
-							<c:if test="${ artistPageId eq loginArtist.artistId }">
 								<li><a href="#modalFollowList" data-toggle="modal"
 									onclick="" id=""><i class="fas fa-fire-alt"
-										id="followCheck"></i> 내 팔로우 목록</a></li>
-							</c:if>
+										id="followCheck"></i> 팔로워 목록</a></li>
 
 
 
@@ -384,9 +382,11 @@ header {height: 215px;}
 							문의하세요 !</li>
 						<li><i class="icofont-check-circled"></i> 아티스트에게 솔직한 후기를
 							남겨주세요 !</li>
-						<li><i class="icofont-check-circled"></i> <font style="color:orange;">" ${ artistInfo.name } "</font> 님 <br>
-							작품은  <span style="color:orange;">${ wCount }</span> 개 등록되어 있습니다. <br> 
-							리뷰는  <span style="color:orange;">${ rCount }</span> 개 등록되어 있습니다.</li>
+						<li><i class="icofont-check-circled"></i> <font style="color:orange;">" ${ artistInfo.name } "</font> <br>
+							작품이  <span style="color:red;">${ wCount }</span> 개 등록되어 있습니다. <br> 
+							리뷰가  <span style="color:red;">${ rCount }</span> 개 등록되어 있습니다. <br>
+							회원 <font style="color:red;"> ${ fCount } </font> 명이 팔로우 하고있습니다.
+						</li>
 					</ul>
 					아티스트의 한 마디 ..<p style="color:orange;"> ${ artistInfo.myInfo }</p>
 				</div>
@@ -898,7 +898,7 @@ header {height: 215px;}
 				style="background-color: rgba(255, 255, 255, 0.4);">
 				<div class="modal-header">
 					<h5 class="modal-title" id="TEST">
-						<b>${ artistInfo.name } FollowList</b>
+						<b>${ artistInfo.name }님을 팔로우 한 사람</b>
 					</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -918,12 +918,14 @@ header {height: 215px;}
 									<h3 style="float: left; margin-left: 25px;">${ fList.customerId }
 									</h3>
 								</nav>
-								<div style="width: 20%; float: left;">
-									<button type="button" class="close followDelete"
-										value="${ fList.customerId }" aria-label="Close">
-										<i class="fas fa-user-minus" style="color: black;"></i>
-									</button>
-								</div>
+								<c:if test="${ artistInfo.artistId eq loginArtist.artistId }">
+									<div style="width: 20%; float: left;">
+										<button type="button" class="close followDelete"
+											value="${ fList.customerId }" aria-label="Close">
+											<i class="fas fa-user-minus" style="color: black;"></i>
+										</button>
+									</div>
+								</c:if>
 							</c:if>
 							<c:if test="${ fList.customerProfile ne null }">
 								<img
@@ -935,12 +937,14 @@ header {height: 215px;}
 									<h3 style="float: left; margin-left: 25px;">${ fList.customerId }
 									</h3>
 								</nav>
-								<div style="width: 20%; float: left;">
-									<button type="button" class="close followDelete"
-										value="${ fList.customerId }" aria-label="Close">
-										<i class="fas fa-user-minus" style="color: black;"></i>
-									</button>
-								</div>
+								<c:if test="${ artistInfo.artistId eq loginArtist.artistId }">
+									<div style="width: 20%; float: left;">
+										<button type="button" class="close followDelete" value="${ fList.customerId }" aria-label="Close">
+											<i class="fas fa-user-minus" style="color: black;"></i>
+										</button>
+										<!-- gggggggg -->
+									</div>
+								</c:if>
 							</c:if>					
 						</div>
 						<br>
@@ -1291,7 +1295,7 @@ header {height: 215px;}
 			console.log("삭제"+customerId2);
 			console.log("삭제"+ artistId2);
 			if( customerId2 == "") {
-				alert("로그인은 기본이다 씻팔");
+				alert("로그인 후, 이용가능합니다 ! ");
 			}else {
 				$.ajax({
 					url : "deleteArtistFollow.na",

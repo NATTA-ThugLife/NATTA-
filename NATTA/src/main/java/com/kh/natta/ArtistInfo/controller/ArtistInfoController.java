@@ -60,6 +60,7 @@ public class ArtistInfoController {
 		int currentPage = ( page != null ) ? page : 1;
 		int listCount = infoService.getWorkCount(artistId);
 		int ReviewCount = infoService.getListReviewCount(artistId);
+		int followCount = infoService.getListFollowCount(artistId);
 		PageInfo pi = WorkPagination.getPageInfo(currentPage, listCount);
 		HttpSession session = request.getSession();
 		if( session.getAttribute("loginCustomer") != null) {
@@ -76,12 +77,14 @@ public class ArtistInfoController {
 		ArrayList<ArtistInfoPrice> priceList = infoService.selectListArtistPrice(artistId);
 		ArrayList<ArtistWork> workList = infoService.selectListArtistWork(artistId, pi);
 		ArrayList<ArtistFollow> aFollow = infoService.selectArtistFollow(artistId);
+		
 			model.addAttribute("artist", artist);
 			model.addAttribute("priceList", priceList);
 			model.addAttribute("workList", workList);
 			model.addAttribute("pi", pi);
 			model.addAttribute("wCount",listCount);
 			model.addAttribute("rCount",ReviewCount);
+			model.addAttribute("fCount", followCount);
 			model.addAttribute("artistInfo", infoPage);
 			model.addAttribute("followList", aFollow);
 			// 세션id 값이랑 해당 상세페이지 아티스트 정보랑 유효성검사 채크할 때 사용하려고 넘겼음.

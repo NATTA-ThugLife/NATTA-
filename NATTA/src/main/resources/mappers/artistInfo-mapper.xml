@@ -56,6 +56,11 @@
 		<result property="myReProfile" column="MY_REPROFILE"></result>
 		<result property="reservationCode" column="RESERVATION_CODE"></result>
 	</resultMap>	
+	<select id="getFollowCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM FOLLOWING
+		WHERE ARTIST_ID = #{ artistId }
+	</select>
 	<select id="getWorkCount" resultType="int">
 		SELECT COUNT(*)
 		FROM WORK
@@ -140,7 +145,7 @@
 		LEFT JOIN
 		(SELECT ARTIST_ID,COUNT(*)
 		AS COUNT FROM FOLLOWING GROUP BY ARTIST_ID) USING(ARTIST_ID)
-		WHERE ARTIST_ID NOT IN('admin')
+		WHERE ARTIST_ID NOT IN('admin') ORDER BY COUNT DESC
 	</select>
 	
 	<!-- 아티스트 1명 조회  -->

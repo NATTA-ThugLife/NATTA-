@@ -152,6 +152,11 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 		return infoStore.getWorkCount(artistId);
 	}
 
+	@Override
+	public int getListFollowCount(String artistId) {
+		return infoStore.getListFollowCount(artistId);
+	}
+
 
 
 
