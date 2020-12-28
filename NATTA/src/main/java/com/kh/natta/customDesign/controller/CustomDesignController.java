@@ -132,7 +132,7 @@ public class CustomDesignController {
 	// 게시판 수정
 	@RequestMapping(value="customDesignModify.na",method=RequestMethod.POST)
 	public String customDesignModifyForm(CustomDesign customDesign, Model model, HttpServletRequest request) {
-		System.out.println(customDesign);
+		
 		int result = cService.modifyCustomDesign(customDesign);
 		if(result>0) {
 			return "redirect:customDesignDetail.na?customCode="+customDesign.getCustomCode();

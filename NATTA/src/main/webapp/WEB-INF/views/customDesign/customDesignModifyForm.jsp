@@ -63,11 +63,11 @@
 			</div>
 			<div align="center">
 				<div class="col-lg-16 mt-8 mt-lg-0">
-					<form action="customDesignInsert.na" method="post"
+					<form action="customDesignModify.na" method="post"
 						enctype="multipart/form-data">
 						<br><br>
 						<div class="form-rrrow">
-							
+							<input type="hidden" name="customCode" value="${customDesign.customCode }">
 								<input class="form-control" type="hidden" name="customerId"
 								value="${loginCustomer.customerId }" readonly>
 								
@@ -81,12 +81,18 @@
 										name="customTitle" value="${customDesign.customTitle }">
 								</div>
 							</div>
-
+						
+							<script>
+							$(function(){
+								$("#tattooType").val("${customDesign.tattooType }").prop("selected", true);
+								console.log("${customDesign.tattooType }")
+							});
+							</script>
 							<div class="col-md-7 form-group">
 								<div style="width: 200px; float: left"></div>
 								<div class="col-md-7 form-group">
 									<div style="float: left">타투스타일</div>
-									<select class="form-control" name="tattooType">
+									<select class="form-control" id="tattooType" name="tattooType">
 										<option value="올드스쿨">올드스쿨</option>
 										<option value="이레즈미">이레즈미</option>
 										<option value="트라이벌">트라이벌</option>
@@ -127,7 +133,7 @@
 							</script>
 
 							<div style="width:1120px; align:center;">
-								<input type="submit" class="btnl btn-default" value="게시글 작성" onclick="return validate();"> 
+								<input type="submit" class="btnl btn-default" value="게시글 수정" onclick="return validate();"> 
 								<a href="customDesignList.na">목록으로</a>
 							</div>
 						</div>

@@ -292,7 +292,11 @@ header {height: 215px;}
                            id="artistInfoPrice"><i class="fas fa-hand-holding-usd"></i><span>
                                  스타일별 가격</span></a></li>
                         <li><a href="javascript:void(0);" id="rListModal"
-                         data-toggle="modal"><i class="fas fa-bell"></i> <span>예약내역</span></a></li>                                 
+                         data-toggle="modal"><i class="fas fa-bell"></i> <span>예약내역</span></a></li>
+                     <li><a href="modifyArtistInfo.na?artistId=${loginArtist.artistId }"><i class="bx bx-user"></i>
+                           정보 수정</a></li>
+                     <li><a href="deleteArtist.na?artistId=${loginArtist.artistId }" onclick="return deleteArtist();"><i class="icofont-crying"></i>
+                           회원 탈퇴</a></li>                                     
                      </c:if>
                      <c:if test="${!empty sessionScope.loginCustomer }">
                      <li>

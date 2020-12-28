@@ -82,7 +82,7 @@
 								</c:when>
 								<c:otherwise>
 									<tr>
-										<td colspan="5" align="center">비밀글 입니다.</td>
+										<td colspan="5" align="center" style="color:#cda45e;">비밀글 입니다.</td>
 									</tr>
 								</c:otherwise>
 							</c:choose>
