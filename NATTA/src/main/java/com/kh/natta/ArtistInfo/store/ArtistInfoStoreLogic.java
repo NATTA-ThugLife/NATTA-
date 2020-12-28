@@ -169,6 +169,11 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 		return sqlSession.selectOne("ArtistInfoMapper.getWorkCount",artistId);
 	}
 
+	@Override
+	public int getListFollowCount(String artistId) {
+		return sqlSession.selectOne("ArtistInfoMapper.getFollowCount", artistId);
+	}
+
 	
 
 }

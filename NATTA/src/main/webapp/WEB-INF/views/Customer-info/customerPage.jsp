@@ -231,7 +231,7 @@ width: 800px;
           <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
             <div class="about-img">
             	<c:if test="${ loginCustomer.customerProfile ne null}">
-              <img src="resources/customerProfile/${loginCustomer.customerId }/${ loginCustomer.customerProfile }" alt="" alt="" style="width: 600px; height:500px;">
+              <img src="resources/customerProfile/${loginCustomer.customerId }/${ loginCustomer.customerProfile }" alt="" alt="" style="width: 540px; height:403px;">
               </c:if>
               <c:if test="${ loginCustomer.customerProfile eq null}">
               <img src="resources/artistInfoFile/Profile/NATTAprofile.png" alt="" style="width: 540px; height:403px;">    
