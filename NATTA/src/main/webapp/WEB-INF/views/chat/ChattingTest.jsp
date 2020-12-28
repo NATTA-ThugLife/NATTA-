@@ -56,6 +56,7 @@ input::placeholder {
   color: #999;
 }
 
+
     </style>
 </head>
 <body>
@@ -73,10 +74,10 @@ input::placeholder {
 	<input type="hidden" id="reciver" value="${chatList[0].reciver }">
 	</c:if>
 
-  <div class="row rounded-lg overflow-hidden shadow">
+  <div class="row rounded-lg overflow-hidden shadow" style="background-color: rgba( 255, 255, 255, 0.5 );">
     <!-- Users box-->
     <div class="col-5 px-0">
-      <div class="bg-white">
+      <div class="bg-white" style="background-color: rgba( 255, 255, 255, 0.5 );">
 
         <div class="bg-gray px-4 py-2 bg-light">
         	<c:if test="${loginCustomer ne null }">
@@ -99,7 +100,7 @@ input::placeholder {
     </div>
     
     <!-- Chat Box-->
-    <div class="col-7 px-0" id="chat">
+    <div style="height:740px;" class="col-7 px-0" id="chat">
       <div class="px-4 py-5 chat-box bg-white" id="chat-box">
 		     <c:forEach items="${chatList }" var="chat" varStatus="status">
 		     		<c:if test="${status.last}">
@@ -116,7 +117,7 @@ input::placeholder {
 		    	<c:if test="${chat.sender eq loginUser &&  !status.first}">
 			           <div class="media w-50 ml-auto mb-3">
 					     <div class="media-body">
-					       <div class="bg-primary rounded py-2 px-3 mb-2" style="background: skyblue">
+					       <div class="bg rounded py-2 px-3 mb-2" style="background-color:#ffd66b;">
 					        	<c:if test="${chat.chatImgPath ne null }">
 									 <p class="text-small mb-0 text-white"><img src='/resources/chat/${chat.roomCode }/${chat.chatImgPath}' style="width:250px;"></p>
 								</c:if>
@@ -152,13 +153,13 @@ input::placeholder {
 				        
 				        
 				        
-				        
+				        <!-- 받는 메세지 -->
 				          <div class="media-body ml-3">
-				            <div class="bg-light rounded py-2 px-3 mb-2" >
+				            <div class="bg rounded py-2 px-3 mb-2" style="background-color:#F0CEA0; font:white;" >
 				            	<c:if test="${chat.chatImgPath ne null }">
-									 <p class="text-small mb-0 text-muted"><img src='/resources/chat/${chat.roomCode }/${chat.chatImgPath}' style="width:250px;"></p>
+									 <p class="text-small mb-0 text"><img src='/resources/chat/${chat.roomCode }/${chat.chatImgPath}' style="width:250px;"></p>
 								</c:if>
-				            		  <p class="text-small mb-0 text-muted">${chat.chatContent }</p>
+				            		  <p class="text-small mb-0 text">${chat.chatContent }</p>
 				            </div>
 				            <p class="small text-muted">${chat.chatChatDateFormat }</p>
 				          </div>
@@ -265,7 +266,7 @@ input::placeholder {
 				            }
 
 				            if(data[i].roomCode == $("#roomCode").val()){
-				            	$("#RoomBox").append('<a class="list-group-item list-group-item-action active text-white rounded-0"><div class="media"><img src="'+img+'" alt="user" width="50px" height="50px;" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">'+opponent+'</h6><small class="small font-weight-bold">'+data[i].chatChatDate+'</small></div><p class="font-italic mb-0 text-small">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div></div></a>');
+				            	$("#RoomBox").append('<a style="background:#ffd66b; border:#ffd66b;" class="list-group-item list-group-item-action active text-white rounded-0"><div class="media"><img src="'+img+'" alt="user" width="50px" height="50px;" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">'+opponent+'</h6><small class="small font-weight-bold">'+data[i].chatChatDate+'</small></div><p class="font-italic mb-0 text-small">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div></div></a>');
 				            }else{
 				            	$("#RoomBox").append('<a href="chatting.na?artistId='+opponent+'" class="list-group-item list-group-item-action list-group-item-light rounded-0"><div class="media"><img src="'+img+'" alt="user" width="50px" height="50px" class="rounded-circle"><div class="media-body ml-4"><div class="d-flex align-items-center justify-content-between mb-1"><h6 class="mb-0">'+opponent+'</h6><small class="small font-weight-bold">'+data[i].chatChatDate+'</small></div><p class="font-italic text-muted mb-0 text-small">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div></div></a>');
 				            }
@@ -346,9 +347,9 @@ input::placeholder {
 						for( var i in data){
 							
 							if(data[i].sender == $("#loginUser").val()){
-								$("#chat-box").append('<div class="media w-50 ml-auto mb-3"><div class="media-body"><div class="bg-primary rounded py-2 px-3 mb-2"><p class="text-small mb-0 text-white">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
+								$("#chat-box").append('<div class="media w-50 ml-auto mb-3"><div class="media-body"><div style="background-color:#ffd66b;" class="bg rounded py-2 px-3 mb-2"><p class="text-small mb-0 text-white">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
 							}else{
-								$("#chat-box").append('<div class="media w-50 mb-3"><img src="'+img+'" alt="user" width="50px" height="50px" class="rounded-circle"><div class="media-body ml-3"><div class="bg-light rounded py-2 px-3 mb-2" ><p class="text-small mb-0 text-muted">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
+								$("#chat-box").append('<div class="media w-50 mb-3"><img src="'+img+'" alt="user" width="50px" height="50px" class="rounded-circle"><div class="media-body ml-3"><div style="background-color:#F0CEA0;" class="bg rounded py-2 px-3 mb-2"><p class="text-small mb-0 text">'+decodeURIComponent(data[i].chatContent.replace(/\+/g, " "))+'</p></div><p class="small text-muted">'+data[i].chatChatDateFormat+'</p></div></div>');
 							}
  							
 							if(data[i].chatImgPath != null){
@@ -430,5 +431,6 @@ input::placeholder {
 		return src;
 	}
 </script>
+<div id="preloader"></div>
 </body>
 </html>

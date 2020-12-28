@@ -106,10 +106,11 @@
         </table>
    </div>
    <tr><td><br></td></tr>
-   
-   <div style="float: right">
+   			<c:if test="${(loginCustomer.customerId eq 'admin')|| (!empty loginCustomer) || (!empty loginArtist) }">
+   			<div style="float: right">
                <button onclick="location.href='qnaWriteForm.na'" class="btn-new">새글 작성</button>
             </div>
+            </c:if>
             
       <!-- 페이징 처리 -->
       <div align="center" height="20">

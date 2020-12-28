@@ -60,7 +60,7 @@
     <header>
     	<jsp:include page="../common/headerNone.jsp"></jsp:include>
     </header>
-	<section id="testimonials" class="testimonials section-bg">
+	<section id="testimonials" class="testimonials section-bg about">
 		<div class="container" data-aos="fade-up">
 			<div class="section-title">
 				<h2>CustomDesign</h2>
@@ -112,8 +112,37 @@
 			}
 		</script>
 	</section>
-	<section id="testimonials" class="testimonials section-bg" class="replyList">
+	<section id="testimonials" class="testimonials section-bg about" class="replyList">
+    	<div class="container" data-aos="fade-up">
     	<!-- 댓글 목록 -->
+    	<!-- 댓글수정 모달창 -->
+	<div class="replyModal" style="background-color: rgba(255, 255, 255, 0.4);">
+	
+		<div class="modalContent">
+		<div>
+			<h5 class="modal-title" id="TEST">
+				<b>댓글 수정</b>
+				<br><br>
+			</h5>
+		</div>
+		<div>
+			<input type="radio" name="cOnOffModify" value="0" checked><span style="color:white;'">공개</span>
+			<input type="radio" name="cOnOffModify" value="1"><span style="color:white;'">비공개</span>
+		</div>
+		<div>
+		 <textarea class="modal_repCon" name="cContentsModify"></textarea>
+		 <script>CKEDITOR.replace('cContentsModify',{filebrowserUploadUrl:'/mine/imageUpload.na'});</script>
+		</div>
+		
+		<div align="right">
+		 <button type="button" class="modal_modify_btn btnl">수정</button>
+		 <button type="button" class="modal_cancel btnl">취소</button>
+		</div>
+		 
+		</div>
+		
+		<div class="modalBackground"></div>
+	</div>
 	<table align="center" style="width:1100px;" id="ctb">
 		<thead>
 			<tr>
@@ -124,8 +153,10 @@
 		<!-- 페이징 처리 -->
 		<tfoot></tfoot>
 	</table>
+	</div>
     </section>
-    <section id="testimonials" class="testimonials section-bg">
+    <section id="testimonials" class="testimonials section-bg about">
+    <div class="container" data-aos="fade-up">
     	<c:if test="${loginArtist ne null }">
   		<!-- 댓글 등록 -->
 
@@ -161,7 +192,7 @@
 	<input type="hidden" id=Code value="${customDesign.customCode }">
 	
 	<!-- 댓글수정 모달창 -->
-	<div class="replyModal" style="background-color: rgba(255, 255, 255, 0.4);">
+	<!-- <div class="replyModal" style="background-color: rgba(255, 255, 255, 0.4);">
 	
 		<div class="modalContent">
 		<div>
@@ -187,7 +218,7 @@
 		</div>
 		
 		<div class="modalBackground"></div>
-	</div>
+	</div> -->
 	<script>
 		
 		
@@ -323,7 +354,7 @@
 						$td.append($6);
 						}
 						else{
-						$6 = $("<a onclick='getCommentList("+i+")';>").text(i);
+						$6 = $("<a style='color: #cda45e' onclick='getCommentList("+i+")';>").text(i);
 						$td.append($6);
 						}
 						
@@ -406,6 +437,7 @@
 			
 		
 	</script>
+	</div>
     </section>
     <footer>
     	<jsp:include page="../common/footer.jsp"></jsp:include>

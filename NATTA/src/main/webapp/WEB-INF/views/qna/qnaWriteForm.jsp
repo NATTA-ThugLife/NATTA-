@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,8 +79,14 @@
 								<div style="width: 200px; float: left"></div>
 								<div class="col-md-7 form-group">
 									<div style="float: left">작성자</div>
+									<c:if test="${loginCustomer ne null }">
 									<input class="form-control" type="text" name="qnaWriter" value="${loginCustomer.customerId }"
 										readonly>
+									</c:if>
+									<c:if test="${loginArtist ne null }">
+									<input class="form-control" type="text" name="qnaWriter" value="${loginArtist.artistId }"
+										readonly>
+									</c:if>
 								</div>
 							</div>
 							<div class="col-md-7 form-group">

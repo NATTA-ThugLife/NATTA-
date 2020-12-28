@@ -95,14 +95,18 @@
    </div><br><br>
     
    <!-- 댓글 등록 -->
+   <c:if test="${loginCustomer.customerId eq 'admin'}">
    <table align="center" width="250" >   
       <tr>
          <td><textarea rows="2" cols="55" id="qcContents" name="qcContents"></textarea></td>
          <td>
+         
             <button id="qcSubmit" class="btn-new">등록하기</button>
+            
          </td>
       </tr>
    </table><br>   
+   </c:if>
    
    <!-- 댓글 목록 -->
    <table id="rtb" align="center" width="250">

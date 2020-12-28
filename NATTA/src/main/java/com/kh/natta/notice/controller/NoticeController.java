@@ -41,9 +41,9 @@ public class NoticeController {
 	public String noticeDetail(int noticeCode, Model model, HttpServletRequest request) {
 		nService.addReadCount(noticeCode);
 		HttpSession session = request.getSession();
-		Customer Customer = (Customer)session.getAttribute("loginCustomer");
+		
 		Notice notice = nService.selectOne(noticeCode);
-		if(notice!=null && Customer !=null) {
+		if(notice!=null) {
 			model.addAttribute("notice",notice);
 			return "notice/noticeDetailView";
 		}else {
