@@ -61,6 +61,7 @@ public class ArtistInfoController {
 		int listCount = infoService.getWorkCount(artistId);
 		int ReviewCount = infoService.getListReviewCount(artistId);
 		int followCount = infoService.getListFollowCount(artistId);
+		float starAvg = infoService.getStarAvg(artistId);
 		PageInfo pi = WorkPagination.getPageInfo(currentPage, listCount);
 		HttpSession session = request.getSession();
 		if( session.getAttribute("loginCustomer") != null) {
@@ -85,6 +86,7 @@ public class ArtistInfoController {
 			model.addAttribute("wCount",listCount);
 			model.addAttribute("rCount",ReviewCount);
 			model.addAttribute("fCount", followCount);
+			model.addAttribute("starAvg", starAvg);
 			model.addAttribute("artistInfo", infoPage);
 			model.addAttribute("followList", aFollow);
 			// 세션id 값이랑 해당 상세페이지 아티스트 정보랑 유효성검사 채크할 때 사용하려고 넘겼음.

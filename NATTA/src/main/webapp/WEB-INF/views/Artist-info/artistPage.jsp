@@ -31,7 +31,7 @@ header {height: 215px;}
 .artistPriceTable td {padding: 20px;width: 800px;}
 .artistPriceTable {border-spacing: 10px;border-top: 0.6px solid #cda45e;border-bottom: 0.6px solid #cda45e;text-align: center;}
 .artistPriceTable td:hover {color: #cda45e;}
-.testimonials .testimonial-item {box-sizing: content-box; min-height: 200px;}
+.testimonials .testimonial-item {box-sizing: content-box; min-height: 245px;}
 #pageArea { font-size: 30px; }
 .pageColor:hover { color : red; }
 .tattolayer > input {width:500px; vertical-align:middle;}
@@ -386,10 +386,12 @@ header {height: 215px;}
                      문의하세요 !</li>
                   <li><i class="icofont-check-circled"></i> 아티스트에게 솔직한 후기를
                      남겨주세요 !</li>
-                  <li><i class="icofont-check-circled"></i> <font style="color:orange;">" ${ artistInfo.name } "</font> <br>
-                     작품이  <span style="color:red;">${ wCount }</span> 개 등록되어 있습니다. <br> 
-                     리뷰가  <span style="color:red;">${ rCount }</span> 개 등록되어 있습니다. <br>
-                     회원 <font style="color:red;"> ${ fCount } </font> 명이 팔로우 하고있습니다.
+                  <li><i class="icofont-check-circled"></i> <font style="color:pink;">" ${ artistInfo.name } "</font> 님의 정보 <br>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작품이  <span style="color:pink; font-size:20px;"><b>${ wCount }</b></span> 개 등록되어 있습니다. <br> 
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;리뷰가  <span style="color:pink; font-size:20px;"><b>${ rCount }</b></span> 개 등록되어 있습니다. <br>
+	           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;후기 평균 별점은 <span style="color:pink; font-size:20px;"><b>${ starAvg }</b> </span> / <span style="color:orange; font-size:17px;">5</span> 입니다.<br> 
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 <font style="color:pink; font-size:20px;"><b> ${ fCount } </b></font> 명이 팔로우 하고있습니다.
+           
                   </li>
                </ul>
                아티스트의 한 마디 ..<p style="color:orange;"> ${ artistInfo.myInfo }</p>
@@ -1515,19 +1517,28 @@ header {height: 215px;}
                   for(i = 0; i < data.aReview.length; i++ ) {
                         if( data.aReview[i].reviewPhoto != null ){
                            $review += "<div class='testimonial-item' style='height:50px;' id='reviewAjax' data-aos='fade-up'>";
-                           $review += "<p><span style='color:orange;'>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' </span> 님의 후기입니다. "
-                                   + "<a href='resources/review/"+(data.aReview[i].reviewCode)+"/"+(data.aReview[i].reviewPhoto)+"' target='_blank'><i class='icofont-camera'></i></a>"
-                                  + "<br><br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
-                                  + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
-                                  + "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p>";
-                           $review += "</div>";
+                           $review += "<p><span style='color:orange;'>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' </span> 님의 후기입니다."
+                     			   + "<a href='resources/review/"+(data.aReview[i].reviewCode)+"/"+(data.aReview[i].reviewPhoto)+"' target='_blank'><i class='icofont-camera'></i></a> <span style='color:#cda45e' class='grade5'> <i class='far fa-star'></i></span>"
+                                   + "<br><br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
+                                   + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
+                                 if( data.aReview[i].customerProfile != null ) {
+	                           	   $review += "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p><img src='resources/customerProfile/"+(data.aReview[i].customerId)+"/"+(data.aReview[i].customerProfile)+"' style='width:90px; height:90px;' class='testimonial-img'>";
+                                 } else {
+                            	   $review += "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p><img src='resources/artistInfoFile/Profile/NATTAprofile.png' style='width:90px; height:90px;' class='testimonial-img'>";
+                                 }
+                                  /* 정민아 별점을 부탁해 */
+                            $review += "</div>"; 
                      } 
                         if( data.aReview[i].reviewPhoto == null ){
                         $review += "<div class='testimonial-item' style='height:50px;' id='reviewAjax' data-aos='fade-up'>";
                         $review += "<p><span style='color:orange;'>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' </span> 님의 후기입니다."
                                + "<br><br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
                                + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
-                               + "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p>";
+                                 if( data.aReview[i].customerProfile != null ) {
+	                           	   $review += "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p><img src='resources/customerProfile/"+(data.aReview[i].customerId)+"/"+(data.aReview[i].customerProfile)+"' style='width:90px; height:90px;' class='testimonial-img'>";
+                                 } else {
+                            	   $review += "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p><img src='resources/artistInfoFile/Profile/NATTAprofile.png' style='width:90px; height:90px;' class='testimonial-img'>";
+                                 }
                         $review += "</div>";                        
                      }   
                   }

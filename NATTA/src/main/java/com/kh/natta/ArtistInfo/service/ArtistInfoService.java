@@ -144,6 +144,7 @@ public interface ArtistInfoService {
 	public int getListReviewCount(String artistId);
 	public int getWorkCount(String artistId);
 	public int getListFollowCount(String artistId);
+	public float getStarAvg(String artistId);
 	public ArrayList<Review> selectListReview(String artistId, PageInfo pi);
 	
 	public ArrayList<ArtistInfo> selectListArtistInfo();

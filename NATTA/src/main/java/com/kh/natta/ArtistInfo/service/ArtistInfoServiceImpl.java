@@ -157,6 +157,11 @@ public class ArtistInfoServiceImpl implements ArtistInfoService{
 		return infoStore.getListFollowCount(artistId);
 	}
 
+	@Override
+	public float getStarAvg(String artistId) {
+		return infoStore.getStarAvg(artistId);
+	}
+
 
 
 

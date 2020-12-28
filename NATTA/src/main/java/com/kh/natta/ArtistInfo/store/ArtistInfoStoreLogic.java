@@ -174,6 +174,11 @@ public class ArtistInfoStoreLogic implements ArtistInfoStore {
 		return sqlSession.selectOne("ArtistInfoMapper.getFollowCount", artistId);
 	}
 
+	@Override
+	public float getStarAvg(String artistId) {
+		return sqlSession.selectOne("ArtistInfoMapper.getStarAvg", artistId);
+	}
+
 	
 
 }

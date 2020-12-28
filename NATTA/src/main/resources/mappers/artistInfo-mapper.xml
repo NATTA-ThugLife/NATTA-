@@ -55,7 +55,16 @@
 		<result property="myProfile" column="MY_PROFILE"></result>
 		<result property="myReProfile" column="MY_REPROFILE"></result>
 		<result property="reservationCode" column="RESERVATION_CODE"></result>
-	</resultMap>	
+		<result property="customerProfile" column="CUSTOMER_PROFILE"></result>
+	</resultMap>
+	<!-- select floor(sum(review_star/(select count(*) from review where artist_id='artist1'))) as avg from review where artist_id = 'artist1'; -->	
+	<select id="getStarAvg" resultType="float">
+		SELECT TRUNC(SUM(REVIEW_STAR/(SELECT COUNT(*) FROM REVIEW WHERE ARTIST_ID=#{ artistId })),2) AS avg 
+		FROM REVIEW 
+		WHERE ARTIST_ID = #{ artistId }
+	</select>
+	
+	
 	<select id="getFollowCount" resultType="int">
 		SELECT COUNT(*) 
 		FROM FOLLOWING
@@ -77,7 +86,7 @@
 	</select>	
 	
 	<select id="selectListReview" resultMap="ReviewResultMap">
-		SELECT * FROM REVIEW 
+		SELECT * FROM REVIEW JOIN CUSTOMER USING(CUSTOMER_ID)
 		WHERE ARTIST_ID = #{artistId} ORDER BY REVIEW_CODE DESC
 	</select>
 	
