@@ -1515,10 +1515,11 @@ header {height: 215px;}
                console.log(data);
                if( data.aReview.length > 0 ){
                   for(i = 0; i < data.aReview.length; i++ ) {
+                	 
                         if( data.aReview[i].reviewPhoto != null ){
                            $review += "<div class='testimonial-item' style='height:50px;' id='reviewAjax' data-aos='fade-up'>";
                            $review += "<p><span style='color:orange;'>' "+ decodeURIComponent(data.aReview[i].customerId.replace(/\+/g," "))+" ' </span> 님의 후기입니다."
-                     			   + "<a href='resources/review/"+(data.aReview[i].reviewCode)+"/"+(data.aReview[i].reviewPhoto)+"' target='_blank'><i class='icofont-camera'></i></a> <span style='color:#cda45e' class='grade5'> <i class='far fa-star'></i></span>"
+                     			   + "<a href='resources/review/"+(data.aReview[i].reviewCode)+"/"+(data.aReview[i].reviewPhoto)+"' target='_blank'><i class='icofont-camera'></i></a> <span id='grade"+(data.aReview[i].reviewCode)+"' style='color:#cda45e' ><span class='1'> <i class='far fa-star'></i></span><span class='2'> <i class='far fa-star'></i></span><span class='3'> <i class='far fa-star'></i></span><span class='4'> <i class='far fa-star'></i></span><span class='5'> <i class='far fa-star'></i></span></span>" //여기가 별점
                                    + "<br><br><i class='bx bxs-quote-alt-left quote-icon-left'></i>"
                                    + decodeURIComponent(data.aReview[i].reviewContents.replace(/\+/g," "))
                                  if( data.aReview[i].customerProfile != null ) {
@@ -1526,7 +1527,7 @@ header {height: 215px;}
                                  } else {
                             	   $review += "<i class='bx bxs-quote-alt-right quote-icon-right'></i></p><img src='resources/artistInfoFile/Profile/NATTAprofile.png' style='width:90px; height:90px;' class='testimonial-img'>";
                                  }
-                                  /* 정민아 별점을 부탁해 */
+                                  
                             $review += "</div>"; 
                      } 
                         if( data.aReview[i].reviewPhoto == null ){
@@ -1546,6 +1547,12 @@ header {height: 215px;}
                   $review = "<h3 style='text-align:center;'>등록된 리뷰가 없습니다.</h3>";
                }
                $("#nextReview").parent().append($review);
+               
+               // 별점 완료
+               for(i = 0; i < data.aReview.length; i++ ) {
+               $("#grade"+data.aReview[i].reviewCode).children("."+data.aReview[i].reviewStar).prevAll().children().attr("class","fas fa-star");
+               $("#grade"+data.aReview[i].reviewCode).children("."+data.aReview[i].reviewStar).children().attr("class","fas fa-star");
+               }
                
                var $span = $("<span>");
                var $1 = ' < ';
