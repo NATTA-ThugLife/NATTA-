@@ -298,20 +298,7 @@ header {height: 215px;}
                               내 채팅</a></li>
                      </c:if>
                      
-                     <!-- javascript:void(0); 꽉 찬 하트 fas-->
-                     <c:if test="${follow ne null && empty sessionScope.loginArtist }">
-                        <li><a href="javascript:void(0);"
-                           onclick="deleteFollowing();" id="clickChange"><i
-                              class="fas fa-heart" id="followCheck"></i> 팔로잉</a></li>
-                     </c:if>
-                     <c:if test="${follow eq null && empty sessionScope.loginArtist }">
-                        <li><a href="javascript:void(0);"
-                           onclick="insertFollowing();" id="clickChange"><i
-                              class="far fa-heart" id="followCheck"></i> 팔로잉</a></li>
-                     </c:if>
-                        <li><a href="#modalFollowList" data-toggle="modal"
-                           onclick="" id=""><i class="fas fa-fire-alt"
-                              id="followCheck"></i> 팔로워 목록</a></li>                         
+                                              
                      <li><a href="modifyArtistInfo.na?artistId=${loginArtist.artistId }"><i class="bx bx-user"></i>
                            정보 수정</a></li>
                      <li><a href="deleteArtist.na?artistId=${loginArtist.artistId }" onclick="return deleteArtist();"><i class="icofont-crying"></i>
@@ -326,6 +313,20 @@ header {height: 215px;}
                         <li><a href="/chatting.na?artistId=${artistPageId }"><i
                               class="bx bx-envelope"></i> 아티스트와 채팅</a></li>
                      </c:if>
+                     <!-- javascript:void(0); 꽉 찬 하트 fas-->
+                     <c:if test="${follow ne null && empty sessionScope.loginArtist }">
+                        <li><a href="javascript:void(0);"
+                           onclick="deleteFollowing();" id="clickChange"><i
+                              class="fas fa-heart" id="followCheck"></i> 팔로잉</a></li>
+                     </c:if>
+                     <c:if test="${follow eq null && empty sessionScope.loginArtist }">
+                        <li><a href="javascript:void(0);"
+                           onclick="insertFollowing();" id="clickChange"><i
+                              class="far fa-heart" id="followCheck"></i> 팔로잉</a></li>
+                     </c:if>
+                        <li><a href="#modalFollowList" data-toggle="modal"
+                           onclick="" id=""><i class="fas fa-fire-alt"
+                              id="followCheck"></i> 팔로워 목록</a></li>
                   </ul>
                </nav>
                <!-- .nav-menu -->
@@ -413,8 +414,10 @@ header {height: 215px;}
                                     <c:param name="artistId" value="${aWork.artistId }"></c:param>
                                     <c:param name="img" value="${aWork.workReImgPath }"></c:param>
                                  </c:url>
+                                 <c:if test="${!empty loginCustomer }">
                                  <a href="${workReservation }" onclick="return confirm('예약하시겠습니까 ?')"><i
                                     class="icofont-basket"></i></a> 
+                                    </c:if>
                                     <a href="resources/artistInfoFile/WorkFile/${ aWork.workReImgPath }" class="venobox" data-gall="gallery-item">
                                     <i class="icofont-camera"></i></a>
 
@@ -451,6 +454,7 @@ header {height: 215px;}
                </c:if> 
                <c:if test="${pi.currentPage >1 }">
                   <c:url var="before" value="artistInfoPage.na">
+                	 <c:param name="artistId" value="${ artistInfo.artistId }"/>
                      <c:param name="page" value="${pi.currentPage -1 }"/>
                   </c:url>
                   <a class="workhover" href="${before }"> < &nbsp; </a>

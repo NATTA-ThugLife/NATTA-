@@ -24,7 +24,7 @@ public class MailController {
 		String setfrom = "thugkinghansol@gmail.com";
 		String tomail = email; // 받는 사람 이메일
 		String title = "안녕하세요 타투사이트 NATTA입니다."; // 제목
-		String content = "2020년 KH정보교육원 F반 터그라이프(오서연,서이석,안정민,윤현모)입니다. 다들 수고하셨습니다!"; // 내용
+		String content = "2020년 KH정보교육원 F반 터그라이프(오서연,서이석,안정민,윤현모)였습니다. 다들 6개월동안 고생하셨습니다!!!"; // 내용
 
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
